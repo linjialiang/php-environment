@@ -1,0 +1,14 @@
+patch:
+  menu/page_size: 7 # 候选词数量
+  # 呼出方案选项菜单快捷键
+  switcher/hotkeys:
+    - F4
+  # 启用的输入法列表
+  schema_list:
+    - schema: rime_ice # 雾凇拼音（全拼）
+    - schema: melt_eng # 英文输入方案
+  # 快捷键绑定
+  key_binder/bindings/+:
+    # 切换全半角
+    - { when: always, toggle: full_shape, accept: Control+Shift+5 }
+    - { when: always, toggle: full_shape, accept: Control+Shift+percent }

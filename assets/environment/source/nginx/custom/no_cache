@@ -1,0 +1,8 @@
+# /server/nginx/conf/custom/no_cache
+# 如果你的站点静态文件实时变动，则应该禁用缓存
+# 禁用缓存，不区分大小写正则匹配
+location ~* \.(?:js|css|json|txt|xml|jpe?g|png|gif|ico|html?)$
+{
+    # 禁止缓存，每次都从服务器请求
+    add_header Cache-Control no-store always;
+}

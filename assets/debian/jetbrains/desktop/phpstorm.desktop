@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=PhpStorm
+Icon=/home/emad/jetbrains/app/PhpStorm/bin/phpstorm.svg
+StartupWMClass=PhpStrom
+Comment=A smart IDE for PHP and Web
+Exec="/home/emad/jetbrains/app/PhpStorm/bin/phpstorm.sh" %f %u
+Version=2024.1
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true

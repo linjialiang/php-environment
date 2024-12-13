@@ -1,0 +1,20 @@
+echo "[Unit]
+Description=nginx-1.26.x
+After=network.target
+
+[Service]
+Type=forking
+User=nginx
+Group=nginx
+RuntimeDirectory=nginx
+RuntimeDirectoryMode=0750
+ExecStartPre=/server/nginx/sbin/nginx -t
+ExecStart=/server/nginx/sbin/nginx -c /server/nginx/conf/nginx.conf
+ExecReload=/server/nginx/sbin/nginx -s reload
+ExecStop=/server/nginx/sbin/nginx -s quit
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/nginx.service

@@ -1,0 +1,14 @@
+patch:
+  # 针对个别应用单独配置选项
+  app_options/gvim.exe:
+    ascii_mode: true
+    vim_mode: true
+  app_options/sublime_text.exe:
+    ascii_mode: true
+    vim_mode: true
+  app_options/code.exe:
+    ascii_mode: true
+    vim_mode: true
+  app_options/phpstorm64.exe:
+    ascii_mode: true
+    vim_mode: true

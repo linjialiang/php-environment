@@ -1,0 +1,33 @@
+{
+  // 保存文件时，是否格式化
+  "auto_format_on_save": true,
+  // 保存文件时，自动忽略的文件
+  // 全局通常不设置，针对项目设置根目录下的 .prettierignore 文件
+  "auto_format_on_save_excludes": [],
+  // Prettier 自定义配置
+  "prettier_options": {
+    "vueIndentScriptAndStyle": true,
+    "printWidth": 120,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "bracketSameLine": true,
+    "overrides": [
+      {
+        "files": ".prettierrc",
+        "options": { "parser": "json" },
+      },
+      {
+        "files": "*.(css|md)",
+        "options": {
+          "tabWidth": 4,
+        },
+      },
+      {
+        "files": "*.(html|htm)",
+        "options": {
+          "htmlWhitespaceSensitivity": "ignore",
+        },
+      },
+    ],
+  },
+}

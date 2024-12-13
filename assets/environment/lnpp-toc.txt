@@ -1,0 +1,50 @@
+====================================================
+LNPP 环境目录
+====================================================
+├─ /server                  服务目录
+|   ├─ nginx                nginx基目录
+|   |  ├─ conf              nginx配置目录
+|   |  └─ ...
+|   |
+|   ├─ redis                redis基目录
+|   |  ├─ redis.conf        redis配置文件
+|   |  ├─ tls               redis的tls相关文件存放目录（注意安全性）
+|   |  └─ ...
+|   |
+|   ├─ postgres             pgsql基目录
+|   |  ├─ tls               pgsql的tls相关文件存放目录（注意安全性）
+|   |  └─ ...
+|   |
+|   ├─ pgData               pgsql数据目录
+|   |  ├─ postgresql.conf   pgsql服务器配置文件
+|   |  ├─ pg_hba.conf       pgsql客户访问限制配置文件
+|   |  └─ ...
+|   |
+|   ├─ php                  PHP 目录
+|   |  ├─ 83                PHP8.3基目录
+|   |  └─ ...
+|   |
+|   ├─ default             缺省站点路径
+|   |   ├─ index.php       缺省站点php首页
+|   |   └─ index.html      缺省站点html页面
+|   |
+|   ├─ sites               虚拟主机配置文件目录
+|   |
+|   ├─ logs                服务器相关日志文件目录
+|   |  ├─ nginx            nginx日志目录
+|   |  |  ├─ error.log     nginx错误日志
+|   |  |  ├─ access.log    nginx缺省访问日志
+|   |  |  └─ ...
+|   |  ├─ redis            redis日志目录
+|   |  |  ├─ redis.log     redis日志文件
+|   |  |  └─ ...
+|   |  ├─ postgres         pgsql日志目录
+|   |  |  ├─ wal_archive   pgsql预写式存放日志目录
+|   |  |  └─ ...
+|   |  ├─ php              php日志目录
+|   |  |  ├─ error-83.log  php8.3错误日志
+|   |  |  └─ ...
+|   |
+├─  ├─ ...
+|
+└─ /www                    站点基目录

@@ -1,0 +1,19 @@
+echo "[Unit]
+Description=redis-7.4.x
+After=network.target
+
+[Service]
+Type=forking
+User=redis
+Group=redis
+RuntimeDirectory=redis
+RuntimeDirectoryMode=0750
+ExecStart=/server/redis/bin/redis-server /server/redis/redis.conf
+ExecReload=/bin/kill -s HUP \$MAINPID
+ExecStop=/bin/kill -s QUIT \$MAINPID
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+" > /usr/lib/systemd/system/redis.service

@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/',
   ignoreDeadLinks: true, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
   lang: 'zh-CN',
-  title: '程序员系列教程-PHP 环境搭建',
+  title: 'PHP 环境搭建',
   description: '纯手工搭建一个完善的PHP环境',
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   lastUpdated: true,

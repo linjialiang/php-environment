@@ -1,0 +1,33 @@
+../configure --prefix=/server/php/83/ \
+--enable-fpm \
+--with-fpm-user=php-fpm \
+--with-fpm-group=php-fpm \
+--with-fpm-systemd \
+--with-openssl \
+--with-zlib \
+--with-zip \
+--enable-bcmath \
+--enable-calendar \
+--enable-intl \
+--enable-exif \
+--with-gettext \
+--with-gmp \
+--with-mhash \
+--with-sodium \
+--with-curl \
+--with-ffi \
+--enable-gd \
+--with-avif \
+--with-webp \
+--with-jpeg \
+--with-xpm \
+--with-freetype \
+--enable-mbstring \
+--with-capstone \
+--enable-mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+--enable-sockets \
+--enable-sysvmsg \
+--enable-sysvsem \
+--enable-sysvshm

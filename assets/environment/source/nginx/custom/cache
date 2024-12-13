@@ -1,0 +1,34 @@
+# /server/nginx/conf/custom/cache
+
+# html页面缓存，~* 不区分大小写
+location ~* \.(?:htm|html)$
+{
+    # 设置缓存上面定义的后缀文件缓存到浏览器的生存时间
+    expires         1d;     # 暂定缓存1天，变动频繁的页面减少缓存时间，页面基本不变的增加缓存时间
+    # access_log    off;    # 关闭访问日志，html页面需要开启访问日志
+    log_not_found   off;    # 关闭错误日志
+}
+
+# 静态资源缓存，~* 不区分大小写
+location ~* \.(?:js|css|json|txt|xml|jpe?g|png|gif|ico)$
+{
+    # 设置缓存上面定义的后缀文件缓存到浏览器的生存时间
+    expires         30d;    # 缓存30天
+    access_log      off;    # 关闭访问日志
+    log_not_found   off;    # 关闭错误日志
+}
+
+# favicon 图标缓存
+location = /favicon.ico
+{
+    expires         30d;    # 缓存30天
+    access_log      off;    # 关闭访问日志
+    log_not_found   off;    # 关闭错误日志
+}
+
+# robots 文件通常不能缓存，蜘蛛一直在爬取
+location = /robots.txt
+{
+    access_log      off;    # 关闭访问日志
+    log_not_found   off;    # 关闭错误日志
+}

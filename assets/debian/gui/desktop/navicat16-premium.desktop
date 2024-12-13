@@ -1,0 +1,11 @@
+# ~/.local/share/applications/navicat16-premium.desktop
+[Desktop Entry]
+Categories=Development
+Comment=Database Development Tool
+Exec="/home/emad/sf/navicat/navicat16-premium-cs-linux.appimage" %f %u
+Icon=/home/emad/sf/navicat/navicat16-premium.png
+Name=Navicat Premium 16
+StartupNotify=true
+StartupWMClass=Navicat Premium
+Terminal=false
+Type=Application

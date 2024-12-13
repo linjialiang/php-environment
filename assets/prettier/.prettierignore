@@ -1,0 +1,6 @@
+# Ignore artifacts:
+package.json
+pnpm-lock.yaml
+.vitepress/dist/
+.vitepress/cache/
+.vitepress/.temp/
