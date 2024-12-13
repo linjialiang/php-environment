@@ -1,5 +1,0 @@
-// Settings in here override those in "LSP/LSP.sublime-settings"
-{
-  "lsp_format_on_paste": false,
-  "lsp_format_on_save": false,
-}

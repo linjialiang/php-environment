@@ -1,5 +1,0 @@
-::: details markdown-it 的表情符号
-
-<!--@include: @/vitepress/emoji.md-->
-
-:::
