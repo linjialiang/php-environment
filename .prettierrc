@@ -1,0 +1,25 @@
+{
+  "vueIndentScriptAndStyle": true,
+  "printWidth": 120,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "bracketSameLine": true,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    },
+    {
+      "files": "*.(css|md)",
+      "options": {
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": "*.(html|htm)",
+      "options": {
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}

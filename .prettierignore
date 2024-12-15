@@ -1,0 +1,9 @@
+# Ignore artifacts:
+".travis.yml",
+"composer.json",
+"*/node_modules/*",
+"package.json",
+"pnpm-lock.yaml",
+".vitepress/dist/",
+".vitepress/cache/",
+".vitepress/.temp/"
