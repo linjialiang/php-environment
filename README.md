@@ -17,4 +17,6 @@ pnpm preview
 
 ## 关于作者
 
-我是一个纯粹的码农，主要从事 PHP 相关的开发工作，如果我的文档对你有帮助，欢迎去 [`B 站关注我 —— 地上马`](https://space.bilibili.com/473623415) ！
+我是一个纯粹的码农，主要从事 PHP 相关的开发工作，如果我的文档对你有帮助，欢迎去
+
+<span color='bule'>[**`B 站关注我 —— 地上马`**](https://space.bilibili.com/473623415) </span>！
