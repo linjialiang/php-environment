@@ -5,7 +5,7 @@ import { environment } from './sidebar/main.mts';
 
 export default defineConfig({
   base: '/php-environment/',
-  ignoreDeadLinks: true, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
+  ignoreDeadLinks: false, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
   lang: 'zh-CN',
   title: 'PHP 环境搭建',
   description: '纯手工搭建一个完善的PHP环境',
