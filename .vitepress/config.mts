@@ -4,12 +4,12 @@ import environmentNav from './nav/environment.mts';
 import { environment } from './sidebar/main.mts';
 
 export default defineConfig({
-  base: '/php-environment/',
+  base: '/',
   ignoreDeadLinks: false, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
   lang: 'zh-CN',
   title: 'PHP 环境搭建',
   description: '纯手工搭建一个完善的PHP环境',
-  head: [['link', { rel: 'icon', href: '/assets/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   lastUpdated: true,
   markdown: {
     lineNumbers: false,
