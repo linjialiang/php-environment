@@ -11,14 +11,14 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'PHP 环境搭建',
   description: '纯手工搭建一个完善的PHP环境',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/static/favicon.ico' }]],
   lastUpdated: true,
   markdown: {
     lineNumbers: false,
     math: false,
   },
   themeConfig: {
-    logo: '/assets/logo.png',
+    logo: '/static/logo.png',
     lastUpdatedText: '最近更新',
     externalLinkIcon: true,
     langMenuLabel: '切换语言',
