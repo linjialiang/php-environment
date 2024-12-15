@@ -4,7 +4,7 @@ import environmentNav from './nav/environment.mts';
 import { environment } from './sidebar/main.mts';
 
 export default defineConfig({
-  base: '/',
+  base: '/php-environment',
   ignoreDeadLinks: true, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
   lang: 'zh-CN',
   title: 'PHP 环境搭建',
