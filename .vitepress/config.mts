@@ -12,7 +12,7 @@ export default defineConfig({
   title: 'PHP 环境搭建',
   description: '纯手工搭建一个完善的PHP环境',
   head: [['link', { rel: 'icon', href: '/static/favicon.ico' }]],
-  lastUpdated: true,
+  lastUpdated: false,
   markdown: {
     lineNumbers: false,
     math: false,
