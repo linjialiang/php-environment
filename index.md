@@ -12,9 +12,12 @@ hero:
         src: '/static/wechat-pay.png'
         alt: 'PHP 环境搭建'
     actions:
-        - theme: brand
-          text: 查看详情 👉
+        - theme: alt
+          text: 查看详情
           link: /environment/
+        - theme: brand
+          text: 👉B站关注作者
+          link: https://space.bilibili.com/473623415
 
 features:
     - icon:
