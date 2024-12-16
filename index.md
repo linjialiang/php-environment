@@ -9,15 +9,12 @@ hero:
     text: 纯手工搭建一个完善的PHP环境
     tagline: 程序员系列教程-PHP 环境搭建
     image:
-        src: '/static/svg/code.svg'
+        src: '/static/wechat-pay.png'
         alt: 'PHP 环境搭建'
     actions:
-        - theme: alt
+        - theme: brand
           text: 查看详情
           link: /environment/
-        - theme: brand
-          text: 关于作者
-          link: /about
 
 features:
     - icon:
