@@ -12,10 +12,10 @@ hero:
         src: '/static/svg/code.svg'
         alt: 'PHP 环境搭建'
     actions:
-        - theme: brand
+        - theme: alt
           text: 查看详情
           link: /environment/
-        - theme: alt
+        - theme: brand
           text: 关于作者
           link: /about
 
