@@ -13,7 +13,7 @@ hero:
         alt: 'PHP 环境搭建'
     actions:
         - theme: brand
-          text: 查看详情
+          text: 查看详情 👉
           link: /environment/
 
 features:
