@@ -87,6 +87,23 @@ titleTemplate: 环境搭建教程
 
 :::
 
+::: tip 包下载地址
+
+| package    | url                                           |
+| ---------- | --------------------------------------------- |
+| SQLite3    | https://www.sqlite.org/                       |
+| Redis      | https://download.redis.io/redis-stable.tar.gz |
+| PostgreSQL | https://www.postgresql.org/                   |
+| MySQL      | https://www.mysql.com/                        |
+| PHP        | https://www.php.net/                          |
+| php 扩展   | http://pecl.php.net/                          |
+| Nginx      | http://nginx.org/                             |
+| zlib       | http://www.zlib.net/                          |
+| openssl    | https://openssl-library.org/                  |
+| pcre2      | https://github.com/PCRE2Project/pcre2         |
+
+:::
+
 ## 请求生命周期
 
 ::: details Nginx 处理一次请求的生命周期
