@@ -15,6 +15,9 @@ hero:
         - theme: brand
           text: 查看详情
           link: /environment/
+        - theme: alt
+          text: 关于作者
+          link: /about
 
 features:
     - icon:
