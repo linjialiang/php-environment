@@ -11,7 +11,7 @@ pnpm install
 pnpm dev
 # 打包构建
 pnpm build
-# 打包完成后测试占地爱你
+# 打包完成后测试站点
 pnpm preview
 ```
 
