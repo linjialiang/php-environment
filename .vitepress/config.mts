@@ -17,6 +17,10 @@ export default defineConfig({
     lineNumbers: false,
     math: false,
   },
+  sitemap: {
+    hostname: 'http://php-environment.e8so.com',
+    lastmodDateOnly: false,
+  },
   themeConfig: {
     logo: '/static/logo.png',
     lastUpdatedText: '最近更新',
