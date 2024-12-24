@@ -17,6 +17,14 @@ titleTemplate: 环境搭建教程
 apt install tcl libssl-dev pkg-config -y
 ```
 
+::: details debian12 纯净版所需完整依赖
+
+```bash
+apt install -y gcc make tcl libssl-dev pkg-config
+```
+
+:::
+
 ## 构建安装
 
 Redis 构建相对简单

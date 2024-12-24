@@ -23,6 +23,14 @@ titleTemplate: 环境搭建教程
 apt install -y gcc make
 ```
 
+::: details debian12 纯净版所需完整依赖
+
+```bash
+apt install -y gcc make zlib1g-dev gawk libedit-dev libreadline-dev
+```
+
+:::
+
 ## 构建安装
 
 由于 sqlite3 并非主要数据库，所以我们这里只做最简单的构建：
