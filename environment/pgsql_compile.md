@@ -377,7 +377,9 @@ hostssl    all      emad            192.168.0.0/16          scram-sha-256   clie
 
 2. 签名创建证书的指南来源于 [`Postgres 官方文档`](https://www.postgresql.org/docs/current/ssl-tcp.html#SSL-CERTIFICATE-CREATION)
 
-3. 虽然自签名证书可用，但在实际生产中建议使用由证书颁发机构（CA）（通常是企业范围的根 CA）签名的证书。而双向验证也必须要 `CA根证书`
+3. `一键脚本` 参考了 Redis 提供的生成工具，与 `2` 中的手工创建略有不同
+
+4. 虽然自签名证书可用，但在实际生产中建议使用由证书颁发机构（CA）（通常是企业范围的根 CA）签名的证书。而双向验证也必须要 `CA根证书`
 
 :::
 
