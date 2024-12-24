@@ -45,7 +45,7 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [lnmpp]
-1. sqlite-autoconf-3470100.tar.gz
+1. sqlite-autoconf-3470200.tar.gz
 2. redis-7.4.1.tar.gz
 3. mysql-8.4.3.tar.gz
 4. postgresql-17.2.tar.bz2

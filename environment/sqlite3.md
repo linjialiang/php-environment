@@ -29,7 +29,7 @@ apt install -y gcc make
 
 ```bash
 su - sqlite -s /bin/zsh
-cd ~/sqlite-autoconf-3470100/
+cd ~/sqlite-autoconf-3470200/
 ./configure --prefix=/server/sqlite
 make -j4
 make install
