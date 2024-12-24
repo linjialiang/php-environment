@@ -87,7 +87,7 @@ export default defineConfig({
     },
     footer: {
       message: '程序员系列教程-PHP 环境搭建',
-      copyright: 'Copyright © 2024-present linjialiang',
+      copyright: 'Copyright © 2024-present 地上马',
     },
   },
 });
