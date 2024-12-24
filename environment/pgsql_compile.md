@@ -5,7 +5,7 @@ titleTemplate: 环境搭建教程
 
 # 编译安装 pgsql
 
-学习 PostgreSQL 从编译安装开始，从官网下载制定版本的[[源码包]](https://www.postgresql.org/ftp/source/)
+学习 PostgreSQL 从编译安装开始，从官网下载指定版本的[[源码包]](https://www.postgresql.org/ftp/source/)
 
 ## 编译前准备
 
