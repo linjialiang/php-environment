@@ -140,11 +140,12 @@ tls-port 16379
 tls-cert-file /server/redis/tls/redis.crt
 tls-key-file /server/redis/tls/redis.key
 tls-ca-cert-file /server/redis/tls/ca.crt
-tls-dh-params-file /server/redis/tls/redis.dh # 启用DH参数文件验证，更加安全
 # 默认，客户端必须验证
 # optional 允许客户端验证，也可以不验证
 # no 客户端不会验证
 tls-auth-clients optional
+# 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
+# tls-dh-params-file /server/redis/tls/redis.dh
 ```
 
 ```bash [RDB配置说明]
@@ -458,8 +459,9 @@ tls-key-file /server/redis/tls/server.key
 tls-ca-cert-file /server/redis/tls/ca.crt
 tls-client-cert-file /server/redis/tls/client.crt
 tls-client-key-file /server/redis/tls/client.key
-tls-dh-params-file /server/redis/tls/redis.dh # 启用DH参数文件验证，更加安全
 tls-auth-clients optional # 允许客户端验证，也可以不验证(默认客户端必须验证)
+# 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
+# tls-dh-params-file /server/redis/tls/redis.dh
 ```
 
 ````bash [redis-cli登录]
