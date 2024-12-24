@@ -49,7 +49,7 @@ titleTemplate: 环境搭建教程
 2. redis-7.4.1.tar.gz
 3. mysql-8.4.3.tar.gz
 4. postgresql-17.2.tar.bz2
-5. php-8.4.1.tar.xz
+5. php-8.4.2.tar.xz
     - xdebug-3.4.0.tgz `动态扩展`
     - apcu-5.1.24.tgz `动态扩展`
     - mongodb-1.20.1.tgz `动态扩展`
