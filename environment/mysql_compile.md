@@ -41,6 +41,14 @@ apt install -y g++ cmake libldap-dev libsasl2-dev
 编译前系统已经存在的依赖库这里并未指出需要安装，如果系统版本不一样，需要自己根据提示安装其余部分依赖
 :::
 
+::: details debian12 纯净版所需完整依赖
+
+```bash
+apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev libncurses-dev bison pkg-config libfido2-dev
+```
+
+:::
+
 ## 编译
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
