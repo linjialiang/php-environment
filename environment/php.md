@@ -45,6 +45,25 @@ libonig-dev libsodium-dev libzip-dev libcapstone-dev -y
 
 :::
 
+::: details debian12 纯净版所需完整依赖
+
+```bash
+apt install -y xz-utils
+apt install -y make gcc g++ libcurl4-openssl-dev libpng-dev pkg-config \
+libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libgmp-dev \
+libonig-dev libcapstone-dev libsodium-dev libzip-dev libsystemd-dev libxml2-dev \
+libffi-dev
+
+# sqlite3 扩展所需依赖，已安装sqlite3则不需要
+apt install libsqlite3-dev -y
+# pgsql 扩展所需依赖，已安装PostgreSQL则不需要
+apt install libpq-dev -y
+# php 安装动态扩展所需依赖
+apt install autoconf libyaml-dev -y
+```
+
+:::
+
 ::: details sqlite3 依赖
 
 想使用最新或指定版 sqlite3 ，需自己编译好 sqlite3 后，在 `PKG_CONFIG_PATH` 环境变量中追加 sqlite3 的 `pkgconfig` 配置文件路径
