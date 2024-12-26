@@ -117,7 +117,7 @@ devUserPower(){
   echo_yellow "=================================================================="
   usermod -a -G $devUserName nginx
   usermod -a -G $devUserName php-fpm
-  usermod -a -G nginx,php-fpm,postgres,redis,mysql,sqlite $devUserName
+  usermod -a -G sqlite,redis,postgres,mysql,php,nginx $devUserName
 }
 
 #安装依赖包

@@ -525,7 +525,7 @@ setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入lnpp包用户组
-usermod -G nginx,redis,postgres,mysql,php-fpm,sqlite emad
+usermod -G sqlite,redis,postgres,mysql,php,nginx emad
 ```
 
 :::
