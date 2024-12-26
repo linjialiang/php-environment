@@ -32,7 +32,7 @@ zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev
 apt install -y bzip2
 apt install -y make clang liblz4-dev libzstd-dev bison flex libreadline-dev \
 zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev pkg-config \
-libssl-dev libxml2-utils xsltproc fop dbtoepub
+libssl-dev libxml2-dev xsltproc fop dbtoepub
 ```
 
 :::

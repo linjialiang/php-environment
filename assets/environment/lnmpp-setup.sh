@@ -131,7 +131,7 @@ installPackage(){
   echo_yellow "=================================================================="
   apt install -y gcc g++ make clang pkg-config autoconf cmake zlib1g-dev gawk \
   libedit-dev libreadline-dev tcl libssl-dev liblz4-dev libzstd-dev bison flex \
-  libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libxml2-utils xsltproc fop \
+  libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libxml2-dev xsltproc fop \
   dbtoepub libldap-dev libsasl2-dev libncurses-dev libcurl4-openssl-dev \
   libpng-dev libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev \
   libgmp-dev libonig-dev libcapstone-dev libsodium-dev libzip-dev libffi-dev \
