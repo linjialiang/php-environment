@@ -15,6 +15,15 @@ Nginx 是现如今性能最强劲的 Web 服务器及反向代理服务器
 apt install libgd-dev libgeoip-dev -y
 ```
 
+::: details debian12 纯净版所需完整依赖
+
+```bash
+apt install -y bzip2 xz-utils
+apt install -y make gcc libgd-dev libgeoip-dev libxml2-dev libxslt1-dev
+```
+
+:::
+
 ### 2. CAP_NET_BIND_SERVICE
 
 `CAP_NET_BIND_SERVICE` 是 Linux 内核中的一个能力（capability），它允许进程绑定低于 `1024` 的端口。这个能力通常用于网络服务程序，如 Web 服务器、邮件服务器等，以便它们能够监听系统保留的低端口。
