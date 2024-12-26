@@ -44,7 +44,27 @@ apt install -y g++ cmake libldap-dev libsasl2-dev
 ::: details debian12 纯净版所需完整依赖
 
 ```bash
-apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev libncurses-dev bison pkg-config libfido2-dev
+apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev \
+libncurses-dev bison pkg-config
+```
+
+::: tip FIDO 告警说明
+`FIDO` 告警无需理会，因为这是企业版才有的功能
+
+```bash
+...
+CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
+  WITH_FIDO is set to "none".  FIDO based authentication plugins will be
+  skipped.
+Call Stack (most recent call first):
+  CMakeLists.txt:1969 (MYSQL_CHECK_FIDO)
+
+...
+
+CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
+  Skipping the fido_client_common library.
+
+...
 ```
 
 :::
