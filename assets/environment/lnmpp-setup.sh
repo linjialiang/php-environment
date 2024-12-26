@@ -124,17 +124,18 @@ devUserPower(){
 installPackage(){
   echo_yellow "=================================================================="
   echo_green "安装依赖"
-  echo_green "确保 nginx + php + Postgres + MySQL + Redis 必备依赖项"
+  echo_green "确保 SQLite3/Redis/PostgreSQL/MySQL/PHP/Nginx 必备依赖项"
   echo_green "debian12 发行版，如因依赖导致部分功能异常，自行安装相应依赖包即可"
   echo_red "注意1：该lnmpp包不兼容其他发行版，因为极有可能因为依赖问题，导致整个环境无法使用"
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
   echo_yellow "=================================================================="
-  apt install -y gcc g++ clang make cmake pkg-config autoconf tcl libssl-dev \
-  liblz4-dev libzstd-dev bison flex libreadline-dev zlib1g-dev libpam0g-dev \
-  libxslt1-dev uuid-dev libsystemd-dev libldap-dev libsasl2-dev \
-  libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev libjpeg-dev \
-  libxpm-dev libfreetype-dev libgmp-dev libonig-dev libcapstone-dev \
-  libsodium-dev libzip-dev libyaml-dev libgd-dev libgeoip-dev
+  apt install -y gcc g++ make clang pkg-config autoconf cmake zlib1g-dev gawk \
+  libedit-dev libreadline-dev tcl libssl-dev liblz4-dev libzstd-dev bison flex \
+  libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libxml2-utils xsltproc fop \
+  dbtoepub libldap-dev libsasl2-dev libncurses-dev libcurl4-openssl-dev \
+  libpng-dev libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev \
+  libgmp-dev libonig-dev libcapstone-dev libsodium-dev libzip-dev libffi-dev \
+  libyaml-dev libgd-dev libgeoip-dev
 }
 
 #安装预构建包
