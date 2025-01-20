@@ -8,6 +8,7 @@ const nav = [
   { text: 'MySQL', link: `${path}mysql_compile` },
   { text: 'PHP', link: `${path}php` },
   { text: 'Nginx', link: `${path}nginx` },
+  { text: 'IIS', link: `${path}iis` },
 ];
 
 export default nav;

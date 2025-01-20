@@ -42,7 +42,8 @@ features:
       details: 最流行的开源关系型数据库
       link: /environment/mysql_compile
     - icon:
-          src: /static/svg/php.svg
+          dark: /static/svg/php-dark.svg
+          light: /static/svg/php.svg
       title: PHP 教程
       details: PHP语言解释器
       link: /environment/php
@@ -51,4 +52,10 @@ features:
       title: Nginx 教程
       details: Web服务器
       link: /environment/nginx
+    - icon:
+          dark: /static/svg/iis-dark.svg
+          light: /static/svg/iis-light.svg
+      title: IIS 篇
+      details: Web服务器
+      link: /environment/iis
 ---
