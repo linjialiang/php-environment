@@ -133,15 +133,14 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 1. `iis` : IIS 应用池用户[默认]
     - 归属用户组 `IIS_AppPool_Users`
 2. `iis_php74` : IIS 应用池用户[支持 PHP7.4 的 CGI]
-    - 归属用户组 `PHP74_CGI_Users`
+    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
 3. `iis_php84` : IIS 应用池用户[支持 PHP8.4 的 CGI]
-    - 归属用户组 `PHP84_CGI_Users`
+    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
 ```
 
 ```md [用户组]
 1. `IIS_AppPool_Users` : IIS 应用池用户组
-2. `PHP74_CGI_Users` : PHP7.4 CGI 用户组
-3. `PHP84_CGI_Users` : PHP8.4 CGI 用户组
+2. `PHP_CGI_Users` : 多版本 PHP CGI 通用用户组
 ```
 
 :::
