@@ -7,7 +7,7 @@ titleTemplate: 环境搭建教程
 
 [SQLite3](https://www.sqlite.org) 是一个轻量级的嵌入式关系数据库管理系统
 
-:::tip sqlite3 的一些特点
+::: tip sqlite3 的一些特点
 
 1. SQLite3 不需要配置，不需要安装，也不需要管理员，最牛的是它没有服务器，仅是一个文件；
 

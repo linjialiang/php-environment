@@ -81,6 +81,7 @@ export default defineConfig({
     nav: [
       { text: '主页', link: '/' },
       { text: '环境搭建', items: environmentNav },
+      { text: 'IIS 篇', link: '/iis' },
     ],
     sidebar: {
       '/environment/': environment,

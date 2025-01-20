@@ -57,5 +57,5 @@ features:
           light: /static/svg/iis-light.svg
       title: IIS 篇
       details: Web服务器
-      link: /environment/iis
+      link: /iis
 ---
