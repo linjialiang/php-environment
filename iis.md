@@ -306,3 +306,12 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
     | 站点用户           | `www`                      |
     | 应用池             | `php74`                    |
     | FastCgiModule 模块 | php 7.4 提供的 php-cgi.exe |
+
+## 五、伪静态案例
+
+::: code-group
+
+<<<@/assets/iis/php-doc/web.config{xml} [[doc.php.io]]
+<<<@/assets/iis/tp/web.config{xml} [[ThinkPHP]]
+
+:::
