@@ -7,8 +7,8 @@ titleTemplate: 环境搭建教程
 
 IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年发布)，在功能上做的比较完善。
 
-::: tip
-如果环境部署在 Windows 上，并且对权限安全有更高要求，我们推荐使用 IIS ！
+::: tip 推荐
+如果环境部署在 Windows 上，并且对权限安全有更高要求，非常推荐使用 IIS ！
 :::
 
 ## 一、权限说明
@@ -20,31 +20,51 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 
 ### 2. 创建系统用户/用户组
 
-::: code-group
+1. 用户组
 
-```md [IIS站点用户]
--   `www` : IIS 站点用户[通用]
+    | 用户组名            | 描述                      |
+    | ------------------- | ------------------------- |
+    | `IIS_AppPool_Users` | IIS 应用池用户组          |
+    | `PHP_CGI_Users`     | 多版本 PHP CGI 通用用户组 |
 
-> 通常你可以为每个站点创建 1 个独立的用户，案例创建了 1 个统一的站点用户：
-```
+    ::: warning 可以更安全
+    你可以在 `PHP_CGI_Users` 用户组存在的情况下，再为每个版本的 PHP CGI 单独创建用户组，如：
 
-```md [IIS应用池用户]
-1. `iis` : IIS 应用池用户[默认]
-    - 归属用户组 `IIS_AppPool_Users`
-2. `iis_php74` : IIS 应用池用户[支持 PHP7.4 的 CGI]
-    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
-3. `iis_php84` : IIS 应用池用户[支持 PHP8.4 的 CGI]
-    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
-```
+    | PHP CGI 用户组名 | 描述                      |
+    | ---------------- | ------------------------- |
+    | PHP_CGI_Users    | 多版本 PHP CGI 通用用户组 |
+    | PHP84_CGI_Users  | PHP8.4 CGI 用户组         |
+    | PHP74_CGI_Users  | PHP7.4 CGI 用户组         |
 
-```md [用户组]
-1. `IIS_AppPool_Users` : IIS 应用池用户组
-2. `PHP_CGI_Users` : 多版本 PHP CGI 通用用户组
-```
+    :::
 
-:::
+2. IIS 站点用户
+
+    | IIS 站点用户 | 描述               |
+    | ------------ | ------------------ |
+    | `www`        | IIS 站点用户[通用] |
+
+    ::: warning 可以更安全
+    你可以为每个站点单独创建用户，如：
+
+    | 站点用户名  | 描述              |
+    | ----------- | ----------------- |
+    | www_tp      | ThinkPHP 站点用户 |
+    | www_fastphp | FastPHP 站点用户  |
+    | www_static  | 静态站点用户      |
+
+    :::
+
+3. IIS 应用池用户
+
+    | IIS 应用池用户 | 描述                         | 归属用户组                                            |
+    | -------------- | ---------------------------- | ----------------------------------------------------- |
+    | `iis`          | IIS 应用池用户[默认]         | `IIS_AppPool_Users`                                   |
+    | `iis_php74`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP84_CGI_Users` |
+    | `iis_php84`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP74_CGI_Users` |
 
 ::: details 截图
+![创建用户和用户组](./assets/iis/create-user-and-group.gif)
 
 :::
 
