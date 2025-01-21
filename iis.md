@@ -125,7 +125,7 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 | `C:\php\tools`  | `PHP_CGI_Users`   | 基本权限-`读取和执行/列出文件夹内容/读取` |
 
 ::: details 截图
-
+![php安装包授权示意图](/assets/iis/php-authorization.gif)
 :::
 
 ## 三、安装 IIS
