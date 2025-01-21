@@ -11,7 +11,44 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 如果环境部署在 Windows 上，并且对权限安全有更高要求，我们推荐使用 IIS ！
 :::
 
-## 一、安装 IIS
+## 一、权限说明
+
+### 1. Windows 与 Linux 权限上的区别
+
+-   Linux 想要获得 `指定路径文件(或目录)` 的权限，必须确保用户对该文件的所有上级目录具备 `执行(x)` 权限；
+-   Windows 想要获得 `指定路径文件(或目录)` 的权限，只需用户对当前文件(或目录)具备对应权限即可，无需考虑上级目录权限问题。
+
+### 2. 创建系统用户/用户组
+
+::: code-group
+
+```md [IIS站点用户]
+-   `www` : IIS 站点用户[通用]
+
+> 通常你可以为每个站点创建 1 个独立的用户，案例创建了 1 个统一的站点用户：
+```
+
+```md [IIS应用池用户]
+1. `iis` : IIS 应用池用户[默认]
+    - 归属用户组 `IIS_AppPool_Users`
+2. `iis_php74` : IIS 应用池用户[支持 PHP7.4 的 CGI]
+    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
+3. `iis_php84` : IIS 应用池用户[支持 PHP8.4 的 CGI]
+    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
+```
+
+```md [用户组]
+1. `IIS_AppPool_Users` : IIS 应用池用户组
+2. `PHP_CGI_Users` : 多版本 PHP CGI 通用用户组
+```
+
+:::
+
+::: details 截图
+
+:::
+
+## 二、安装 IIS
 
 针对 PHP CGI 我们至少需要启用以下功能：
 
@@ -65,7 +102,7 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 
 -   双击 `rewrite_amd64_zh-CN.msi` 安装。
 
-## 二、PHP 解释器
+## 三、PHP 解释器
 
 案例使用了 2 个 PHP 版本的解释器：
 
@@ -108,43 +145,6 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 |   └─
 └─
 ```
-
-:::
-
-## 三、权限说明
-
-### 1. Windows 与 Linux 权限上的区别
-
--   Linux 想要获得 `指定路径文件(或目录)` 的权限，必须确保用户对该文件的所有上级目录具备 `执行(x)` 权限；
--   Windows 想要获得 `指定路径文件(或目录)` 的权限，只需用户对当前文件(或目录)具备对应权限即可，无需考虑上级目录权限问题。
-
-### 2. 创建系统用户/用户组
-
-::: code-group
-
-```md [IIS站点用户]
--   `www` : IIS 站点用户[通用]
-
-> 通常你可以为每个站点创建 1 个独立的用户，案例创建了 1 个统一的站点用户：
-```
-
-```md [IIS应用池用户]
-1. `iis` : IIS 应用池用户[默认]
-    - 归属用户组 `IIS_AppPool_Users`
-2. `iis_php74` : IIS 应用池用户[支持 PHP7.4 的 CGI]
-    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
-3. `iis_php84` : IIS 应用池用户[支持 PHP8.4 的 CGI]
-    - 归属用户组 `PHP_CGI_Users` `IIS_AppPool_Users`
-```
-
-```md [用户组]
-1. `IIS_AppPool_Users` : IIS 应用池用户组
-2. `PHP_CGI_Users` : 多版本 PHP CGI 通用用户组
-```
-
-:::
-
-::: details 截图
 
 :::
 
