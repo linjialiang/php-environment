@@ -249,7 +249,7 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 ![创建站点案例](./assets/iis/create-sites.gif)
 
 ::: warning 注意：
-在 gif 里 tp 的项目根目录授予用户 `iis_php84/iis_php74` 的权限是 `基本权限-读取+列出文件夹内容`，
+在 gif 里 tp 的项目根目录授予用户 `iis_php84/iis_php74` 的权限是 `基本权限-读取和执行`，
 
 事实上最低权限通常只需要 `基本权限-读取`
 :::
