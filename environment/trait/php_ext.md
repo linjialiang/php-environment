@@ -40,6 +40,14 @@ make -j4
 make install
 ```
 
+```bash [php7.4编译]
+cd /home/php-fpm/php_ext/xdebug-3.3.2
+phpize
+./configure --with-php-config=/server/php/74/bin/php-config
+make -j4
+make install
+```
+
 ```ini [配置]
 # 如果 Xdebug 和 OPCache 同时使用，xdebug 必须在 opcache 之后：
 zend_extension=opcache
@@ -51,6 +59,8 @@ xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.client_host=127.0.0.1
 # xdebug.client_host=192.168.66.254
 xdebug.client_port=9084
+# php-7.4.x
+xdebug.client_port=9074
 ```
 
 :::
