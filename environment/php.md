@@ -120,12 +120,22 @@ apt install libpq-dev -y
 
 ::: code-group
 
-```bash{4} [php编译选项]
-# PHP 的构建选项 OPENSSL_LIBS 常量需要指向依赖库的 lib 目录
-../configure --prefix=/server/php/84/ \
---with-openssl \
-OPENSSL_LIBS=/server/openssl-1.1.1w/lib \
-...
+```bash{2,8} [php编译选项]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path openssl,libssl,libcrypto
+
+# 成功替换展示：
+/server/openssl-1.1.1w/lib/pkgconfig/openssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libcrypto.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
 ```
 
 ```bash{5-8} [编译安装openssl]
