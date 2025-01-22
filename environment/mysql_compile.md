@@ -77,13 +77,13 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 ```bash [创建构建目录]
 su - mysql -s /bin/zsh
-mkdir ~/mysql-8.4.3/build
-cd ~/mysql-8.4.3/build
+mkdir ~/mysql-8.4.4/build
+cd ~/mysql-8.4.4/build
 ```
 
 ```bash [查看编译选项]
 # 查询有关 CMake 支持的选项的信息
-cd /home/mysql/mysql-8.4.3/build
+cd /home/mysql/mysql-8.4.4/build
 cmake .. -LH
 # 选项写入文件
 cmake .. -LH > options.list

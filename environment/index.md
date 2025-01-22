@@ -47,7 +47,7 @@ titleTemplate: 环境搭建教程
 ```md [lnmpp]
 1. sqlite-autoconf-3480000.tar.gz
 2. redis-7.4.2.tar.gz
-3. mysql-8.4.3.tar.gz
+3. mysql-8.4.4.tar.gz
 4. postgresql-17.2.tar.bz2
 5. php-8.4.2.tar.xz
     - xdebug-3.4.0.tgz `动态扩展`
@@ -79,7 +79,7 @@ titleTemplate: 环境搭建教程
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
 2. redis-7.4.2.tar.gz
-3. mysql-8.4.3.tar.gz
+3. mysql-8.4.4.tar.gz
 4. php-8.3.14.tar.xz
     - xdebug-3.4.0.tgz `动态扩展`
     - redis-6.0.2.tgz `动态扩展`
