@@ -69,7 +69,7 @@ apt install autoconf libyaml-dev -y
 
 ::: code-group
 
-```bash [编译安装sqlite3]
+```bash{4} [编译安装sqlite3]
 usermod -a -G postgres php-fpm
 
 # 构建 PHP 需将 sqlite3 的 pkgconfig 目录加入到临时环境变量里
@@ -96,7 +96,7 @@ apt install libsqlite3-dev -y
 
 ::: code-group
 
-```bash [编译安装Postgres]
+```bash{5,6} [编译安装Postgres]
 usermod -a -G postgres php-fpm
 
 # PHP 的构建选项需指定Postgres安装目录
@@ -114,26 +114,21 @@ apt install libpq-dev -y
 
 :::
 
-::: tip 提示
+::: details 依赖 openssl 特殊版本
 
-1. 本次已编译 SQLite3，无需额外使用依赖库
-    - 确保 php 用户对 SQLite3 的 pkgconfig 目录有 `读取` 和 `执行` 权限
-2. 本次已编译 Postgres，无需额外使用依赖库
-    - 确保 php 用户对 Postgres 安装目录要有 `读取` 和 `执行` 权限
-3. 不同版本所需依赖项可能不同
-4. 使用更多外部扩展，所需依赖项也会更多
-5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
+如果对 openssl 依赖库有特殊版本需求，通常需要自行编译安装
 
-通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装
-:::
+::: code-group
 
-::: danger php-7.4 重要说明
-php7.4 不支持 Debian12 自带的 opensll-3.0.x 版本，需要自行编译 [openssl-1.1.1w](https://openssl-library.org/source/old/1.1.1/index.html)
-:::
+```bash{4} [php编译选项]
+# PHP 的构建选项 OPENSSL_LIBS 常量需要指向依赖库的 lib 目录
+../configure --prefix=/server/php/84/ \
+--with-openssl \
+OPENSSL_LIBS=/server/openssl-1.1.1w/lib \
+...
+```
 
-::: details 编译 openssl-1.1.1w
-
-```bash
+```bash{5-8} [编译安装openssl]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-1.1.1w
 cd /root/openssl-1.1.1w/
@@ -146,8 +141,25 @@ zlib
 make -j4
 make test
 make install
+...
 ```
 
+::: danger 重要说明
+php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，需要自行编译 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
+
+:::
+
+::: tip 提示
+
+1. 本次已编译 SQLite3，无需额外使用依赖库
+    - 确保 php 用户对 SQLite3 的 pkgconfig 目录有 `读取` 和 `执行` 权限
+2. 本次已编译 Postgres，无需额外使用依赖库
+    - 确保 php 用户对 Postgres 安装目录要有 `读取` 和 `执行` 权限
+3. 不同版本所需依赖项可能不同
+4. 使用更多外部扩展，所需依赖项也会更多
+5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
+
+通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装
 :::
 
 ### 2. 创建并进入构建目录
