@@ -155,7 +155,8 @@ pkg-config --path openssl,libssl,libcrypto
 ```
 
 ::: danger 重要说明
-php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
+php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，
+因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
 
 :::
 
