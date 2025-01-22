@@ -542,7 +542,7 @@ chown php-fpm:php-fpm -R /server/php /server/logs/php
 find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
 find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
 # 可执行文件需要执行权限
-chmod 750 -R /server/php/84/bin /server/php/84/sbin
+chmod 750 -R /server/php/{74,84}/{bin,sbin}
 # 动态扩展库文件: 运行时需要读取权限，升级时需要写入权限，独立调用时需要执行权限(不存在独立调用)
 chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
 # composer,phpCsFixer等工具包，在独立调用时也需要执行权限
