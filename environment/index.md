@@ -50,7 +50,7 @@ titleTemplate: 环境搭建教程
 3. mysql-8.4.4.tar.gz
 4. postgresql-17.2.tar.bz2
 5. php-7.4.33.tar.xz
-6. php-8.4.2.tar.xz
+6. php-8.4.3.tar.xz
     - xdebug-3.3.2.tgz `动态扩展`
     - xdebug-3.4.1.tgz `动态扩展`
     - apcu-5.1.24.tgz `动态扩展`
