@@ -116,27 +116,9 @@ apt install libpq-dev -y
 
 ::: details 依赖 openssl 特殊版本
 
-如果对 openssl 依赖库有特殊版本需求，通常需要自行编译安装
+如果对 openssl 依赖库有特殊版本需求，需要自行编译安装
 
 ::: code-group
-
-```bash{2,8} [php编译选项]
-# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
-export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
-
-# 使用下面指令检查，是否正确替换
-pkg-config --path openssl,libssl,libcrypto
-
-# 成功替换展示：
-/server/openssl-1.1.1w/lib/pkgconfig/openssl.pc
-/server/openssl-1.1.1w/lib/pkgconfig/libssl.pc
-/server/openssl-1.1.1w/lib/pkgconfig/libcrypto.pc
-
-# 未成功替换展示：
-/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
-/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
-/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
-```
 
 ```bash{5-8} [编译安装openssl]
 # 作为公共依赖库，推荐以root用户安装它
@@ -154,8 +136,26 @@ make install
 ...
 ```
 
+```bash{2,8-10} [php编译选项]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path openssl,libssl,libcrypto
+
+# 成功替换展示：
+/server/openssl-1.1.1w/lib/pkgconfig/openssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libcrypto.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
+```
+
 ::: danger 重要说明
-php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，需要自行编译 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
+php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
 
 :::
 
