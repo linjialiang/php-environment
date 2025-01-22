@@ -127,6 +127,14 @@ apt install libpq-dev -y
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装
 :::
 
+::: danger php-7.4 重要说明
+php7.4 不支持 Debian12 自带的 opensll-3.0.x 版本，需要自行编译 [openssl-1.1.1w](https://openssl-library.org/source/old/1.1.1/index.html)
+:::
+
+::: details 编译 openssl-1.1.1w
+
+:::
+
 ### 2. 创建并进入构建目录
 
 ::: code-group

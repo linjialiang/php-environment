@@ -57,6 +57,7 @@ titleTemplate: 环境搭建教程
     - mongodb-1.20.1.tgz `动态扩展`
     - redis-6.1.0.tgz `动态扩展`
     - yaml-2.2.4.tgz `动态扩展`
+    - openssl-1.1.1w.tar.gz `php-7.4 所需依赖库`
 7. nginx-1.26.2.tar.gz
     - openssl-3.0.15.tar.gz
     - pcre2-10.44.tar.bz2
@@ -91,18 +92,19 @@ titleTemplate: 环境搭建教程
 
 ::: tip 包下载地址：
 
-| package    | url                                           |
-| ---------- | --------------------------------------------- |
-| SQLite3    | https://www.sqlite.org/                       |
-| Redis      | https://download.redis.io/redis-stable.tar.gz |
-| PostgreSQL | https://www.postgresql.org/                   |
-| MySQL      | https://www.mysql.com/                        |
-| PHP        | https://www.php.net/                          |
-| php 扩展   | http://pecl.php.net/                          |
-| Nginx      | http://nginx.org/                             |
-| zlib       | http://www.zlib.net/                          |
-| openssl    | https://openssl-library.org/                  |
-| pcre2      | https://github.com/PCRE2Project/pcre2         |
+| package       | url                                                            |
+| ------------- | -------------------------------------------------------------- |
+| SQLite3       | https://www.sqlite.org/                                        |
+| Redis         | https://download.redis.io/redis-stable.tar.gz                  |
+| PostgreSQL    | https://www.postgresql.org/                                    |
+| MySQL         | https://www.mysql.com/                                         |
+| PHP           | https://www.php.net/                                           |
+| php 扩展      | http://pecl.php.net/                                           |
+| Nginx         | http://nginx.org/                                              |
+| zlib          | http://www.zlib.net/                                           |
+| openssl       | https://openssl-library.org/                                   |
+| openssl-1.1.1 | https://github.com/openssl/openssl/releases/tag/OpenSSL_1_1_1w |
+| pcre2         | https://github.com/PCRE2Project/pcre2                          |
 
 :::
 
