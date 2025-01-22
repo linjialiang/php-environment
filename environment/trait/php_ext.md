@@ -211,3 +211,10 @@ make install
 ```
 
 :::
+
+::: warning 提示
+
+如果使用 7.4 版本的 phpize 会出现警告和报错，而新版的 phpize 不会报错，
+
+这通常是新版的 phpize 已经修复了这些问题，可以直接用户最新的 phpize.
+:::
