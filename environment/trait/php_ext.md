@@ -33,17 +33,15 @@ xdebug.client_port=9084
 ::: code-group
 
 ```bash [编译]
-cd /home/php-fpm/php_ext/xdebug-3.4.0
+cd /home/php-fpm/php_ext/xdebug-3.4.1
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
-make install
-```
 
-```bash [php7.4编译]
-cd /home/php-fpm/php_ext/xdebug-3.3.2
-phpize
-./configure --with-php-config=/server/php/74/bin/php-config
+# php-7.4.x
+# cd /home/php-fpm/php_ext/xdebug-3.3.2
+# phpize
+# ./configure --with-php-config=/server/php/74/bin/php-config
+
 make -j4
 make install
 ```
@@ -60,7 +58,7 @@ xdebug.client_host=127.0.0.1
 # xdebug.client_host=192.168.66.254
 xdebug.client_port=9084
 # php-7.4.x
-xdebug.client_port=9074
+# xdebug.client_port=9074
 ```
 
 :::
@@ -71,6 +69,7 @@ xdebug.client_port=9074
 cd /home/php-fpm/php_ext/redis-6.1.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
+# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make install
 ```
@@ -81,6 +80,7 @@ make install
 cd /home/php-fpm/php_ext/mongodb-1.20.1
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
+# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make test
 make install
@@ -95,6 +95,7 @@ apt install libyaml-dev -y
 cd /home/php-fpm/php_ext/yaml-2.2.4
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
+# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make test
 make install
@@ -106,6 +107,7 @@ make install
 cd /home/php-fpm/php_ext/apcu-5.1.24
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
+# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make test
 make install
