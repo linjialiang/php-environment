@@ -24,6 +24,21 @@ xdebug.client_host=127.0.0.1
 xdebug.client_port=9084
 ```
 
+```bash [测试扩展]
+# 加入环境变量的php版本
+php --ri xdebug
+php --ri redis
+php --ri mongodb
+php --ri yaml
+php --ri apcu
+# php-7.4
+/server/php/74/bin/php --ri xdebug
+/server/php/74/bin/php --ri redis
+/server/php/74/bin/php --ri mongodb
+/server/php/74/bin/php --ri yaml
+/server/php/74/bin/php --ri apcu
+```
+
 :::
 
 ### 1. xdebug 扩展
