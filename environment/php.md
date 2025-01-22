@@ -39,6 +39,7 @@ apt install autoconf libyaml-dev -y
 
 ```bash [74]
 # 在安装完 新版PHP所需依赖后，PHP 7.4 还需依赖如下：
+# 未发现需要其他依赖项
 ```
 
 :::
