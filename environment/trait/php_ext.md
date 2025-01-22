@@ -142,8 +142,6 @@ make install
 cd /home/php-fpm/php_ext/mongodb-1.20.1
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-# /server/php/74/bin/php /server/php/74/bin/phpize
-# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make test
 make install
@@ -151,10 +149,8 @@ make install
 
 ```bash [7.4]
 cd /home/php-fpm/php_ext/mongodb-1.20.1
-phpize
-./configure --with-php-config=/server/php/84/bin/php-config
-# /server/php/74/bin/php /server/php/74/bin/phpize
-# ./configure --with-php-config=/server/php/74/bin/php-config
+/server/php/74/bin/php /server/php/74/bin/phpize
+./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make test
 make install
