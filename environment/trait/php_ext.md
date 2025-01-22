@@ -121,6 +121,7 @@ cd /home/php-fpm/php_ext/redis-6.1.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
+make test
 make install
 ```
 
@@ -129,6 +130,7 @@ cd /home/php-fpm/php_ext/redis-6.1.0
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
+make test
 make install
 ```
 
