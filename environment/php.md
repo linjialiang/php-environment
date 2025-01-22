@@ -133,6 +133,21 @@ php7.4 不支持 Debian12 自带的 opensll-3.0.x 版本，需要自行编译 [o
 
 ::: details 编译 openssl-1.1.1w
 
+```bash
+# 作为公共依赖库，推荐以root用户安装它
+mkdir /server/openssl-1.1.1w
+cd /root/openssl-1.1.1w/
+
+./config --prefix=/server/openssl-1.1.1w \
+--openssldir=/server/openssl-1.1.1w \
+no-shared \
+zlib
+
+make -j4
+make test
+make install
+```
+
 :::
 
 ### 2. 创建并进入构建目录

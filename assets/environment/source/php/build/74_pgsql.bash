@@ -4,6 +4,7 @@
 --with-fpm-group=php-fpm \
 --with-fpm-systemd \
 --with-openssl \
+OPENSSL_LIBS=/server/openssl-1.1.1w/lib \
 --with-pcre-jit \
 --with-zlib \
 --with-zip \
