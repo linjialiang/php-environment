@@ -37,13 +37,8 @@ libsodium-dev libzip-dev -y
 apt install autoconf libyaml-dev -y
 ```
 
-```bash [83]
-apt install g++ libsystemd-dev libcurl4-openssl-dev libffi-dev libgmp-dev \
-libonig-dev libsodium-dev libzip-dev libcapstone-dev -y
-```
-
 ```bash [74]
-# 未测试
+# 在安装完 新版PHP所需依赖后，PHP 7.4 还需依赖如下：
 ```
 
 :::
