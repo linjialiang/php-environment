@@ -36,7 +36,6 @@ xdebug.client_port=9084
 cd /home/php-fpm/php_ext/xdebug-3.4.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-# ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
 make install
 ```
