@@ -543,12 +543,10 @@ find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} 
 find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
 # 可执行文件需要执行权限
 chmod 750 -R /server/php/84/bin /server/php/84/sbin
-# 动态扩展库文件: 运行时需要读取权限，升级时需要写入权限，单独调用时需要执行权限
-chmod 750 /server/php/84/lib/php/extensions/no-debug-non-zts-*/*
-# composer 单独调用是也需要执行权限
-# php composer -V php开头的形式调用就不需要执行权限
-# composer -V composer开的的形式，就必须添加执行权限
-chmod 750 /server/php/tools/composer.phar
+# 动态扩展库文件: 运行时需要读取权限，升级时需要写入权限，独立调用时需要执行权限(不存在独立调用)
+chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
+# composer,phpCsFixer等工具包，在独立调用时也需要执行权限
+chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
 ```
 
 ```bash [开发]
@@ -557,4 +555,44 @@ chmod 750 /server/php/tools/composer.phar
 usermod -G sqlite,redis,postgres,mysql,php,nginx emad
 ```
 
+:::
+
+::: details 什么是独立调用
+
+像 `{composer,php-cs-fixer}.phar` 等 phar 工具包本质上都是 php 脚本文件，
+只要终端支持 php 脚本，`php 脚本文件` 就可以象 `sh 脚本文件` 一样独立调用
+
+::: code-group
+
+```bash{1} [代码开头]
+#!/usr/bin/env php
+<?php
+/*
+ * This file is part of Composer.
+ *
+ * (c) Nils Adermann <naderman@naderman.de>
+ *     Jordi Boggiano <j.boggiano@seld.be>
+ *
+ * For the full copyright and license information, please view
+ * the license that is located at the bottom of this file.
+ */
+ ...
+```
+
+```bash [使用php调用]
+php composer [options]
+php php-cs-fixer [options]
+/server/php/74/bin/php /server/php/tools/composer.phar [options]
+/server/php/74/bin/php /server/php/tools/php-cs-fixer.phar [options]
+```
+
+```bash [独立调用]
+composer [options]
+php-cs-fixer [options]
+/server/php/tools/composer.phar [options]
+/server/php/tools/php-cs-fixer.phar [options]
+```
+
+::: danger 独立调用的条件
+php 可执行程序必须加入到对应终端的环境变量中，终端才能通过代码开头的 `#!/usr/bin/env php` 识别到。
 :::
