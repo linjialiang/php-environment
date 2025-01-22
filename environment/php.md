@@ -167,6 +167,7 @@ cd /home/php-fpm/php-7.4.33/build_php/
 ::: details 构建指令参考
 ::: code-group
 <<<@/assets/environment/source/php/build/84.bash [84]
+<<<@/assets/environment/source/php/build/74.bash [74]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -175,7 +176,6 @@ make test
 make install
 ```
 
-<<<@/assets/environment/source/php/build/74.bash [74]
 <<<@/assets/environment/source/php/build/84_pgsql.bash [84[pgsql]]
 <<<@/assets/environment/source/php/build/84_mysql.bash [84[mysql]]
 :::
