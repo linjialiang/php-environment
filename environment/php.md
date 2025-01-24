@@ -281,7 +281,7 @@ cp /server/php/84/lib/php.ini{-development,}
 ```
 
 ```bash [74]
-cp /home/php-fpm/php-7.4.33/php.ini-* /server/php/84/lib/
+cp /home/php-fpm/php-7.4.33/php.ini-* /server/php/74/lib/
 # 开发环境
 cp /server/php/74/lib/php.ini{-development,}
 # 部署环境
