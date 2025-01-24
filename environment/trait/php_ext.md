@@ -129,7 +129,7 @@ xdebug.client_port=9084
 ```
 
 ```bash [编译-7.4]
-cd /home/php-fpm/php_ext/xdebug-3.3.2
+cd /home/php-fpm/php_ext/xdebug-3.1.6
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
