@@ -235,7 +235,7 @@ make install
 
 ```bash [默认]
 cd /home/php-fpm/php_ext/apcu-5.1.24
-/server/php/74/bin/phpize
+phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
 make test
