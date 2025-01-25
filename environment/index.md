@@ -50,18 +50,21 @@ titleTemplate: 环境搭建教程
 3. mysql-8.4.4.tar.gz
 4. postgresql-17.2.tar.bz2
 5. php-7.4.33.tar.xz
-    - xdebug-3.1.6.tgz `动态扩展`
-    - apcu-5.1.24.tgz `动态扩展`
-    - mongodb-1.20.1.tgz `动态扩展`
-    - redis-6.1.0.tgz `动态扩展`
-    - yaml-2.2.4.tgz `动态扩展`
-    - openssl-1.1.1w.tar.gz `php-7.4.33 所需依赖库`
+    - 动态扩展
+        - xdebug-3.1.6.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
+    - 所需依赖库
+        - openssl-1.1.1w.tar.gz `php-7.4.33 `
 6. php-8.4.3.tar.xz
-    - xdebug-3.4.1.tgz `动态扩展`
-    - apcu-5.1.24.tgz `动态扩展`
-    - mongodb-1.20.1.tgz `动态扩展`
-    - redis-6.1.0.tgz `动态扩展`
-    - yaml-2.2.4.tgz `动态扩展`
+    - 动态扩展
+        - xdebug-3.4.1.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
 7. nginx-1.26.2.tar.gz
     - openssl-3.0.15.tar.gz
     - pcre2-10.44.tar.bz2
@@ -76,8 +79,9 @@ titleTemplate: 环境搭建教程
 2. redis-7.4.2.tar.gz
 3. postgresql-17.2.tar.bz2
 4. php-8.3.14.tar.xz
-    - xdebug-3.4.1.tgz `动态扩展`
-    - redis-6.0.2.tgz `动态扩展`
+    - 动态扩展
+        - xdebug-3.4.1.tgz
+        - redis-6.0.2.tgz
 ```
 
 ```md [lnmp]
@@ -88,8 +92,9 @@ titleTemplate: 环境搭建教程
 2. redis-7.4.2.tar.gz
 3. mysql-8.4.4.tar.gz
 4. php-8.3.14.tar.xz
-    - xdebug-3.4.1.tgz `动态扩展`
-    - redis-6.0.2.tgz `动态扩展`
+    - 动态扩展
+        - xdebug-3.4.1.tgz
+        - redis-6.0.2.tgz
 ```
 
 :::
