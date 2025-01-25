@@ -279,7 +279,7 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{mysqld-84,nginx,php83-fpm,redis}.service"
+  echo_cyan "/lib/systemd/system/{redis,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
@@ -306,7 +306,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 " >/lib/systemd/system/nginx.service
 
-  echo_cyan "[+] Create php83-fpm service..."
+  echo_cyan "[+] Create php84-fpm service..."
 
   echo "[Unit]
 Description=The PHP 8.4 FastCGI Process Manager
@@ -409,7 +409,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {mysqld-84,nginx,php83-fpm,redis}.service
+  systemctl enable --now {redis,mysqld-84,php84-fpm,nginx}.service
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmp.tar.xz"

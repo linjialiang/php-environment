@@ -387,7 +387,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 " > /lib/systemd/system/nginx.service
 
-  echo_cyan "[+] Create php83-fpm service..."
+  echo_cyan "[+] Create php84-fpm service..."
 
   echo "[Unit]
 Description=The PHP 8.4 FastCGI Process Manager
