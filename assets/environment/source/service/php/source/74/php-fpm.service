@@ -7,7 +7,7 @@ Description=The PHP FastCGI Process Manager
 After=network.target
 
 [Service]
-Type=simple
+Type=notify
 PIDFile=/server/php/74/var/run/php-fpm.pid
 ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
 ExecReload=/bin/kill -USR2 $MAINPID

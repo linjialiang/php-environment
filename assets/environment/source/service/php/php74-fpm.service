@@ -3,7 +3,7 @@ Description=The PHP 7.4 FastCGI Process Manager
 After=network.target
 
 [Service]
-Type=simple
+Type=notify
 User=php-fpm
 Group=php-fpm
 RuntimeDirectory=php74-fpm
