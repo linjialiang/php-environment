@@ -65,17 +65,17 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建nginx、php-fpm、Postgres、Redis、SQLite3的进程用户"
+  echo_green "创建 sqlite,redis,postgres,php-fpm,nginx 的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
   echo_cyan "是否支持启用zsh(1支持，默认不支持)："
   read zshState
-  createSingleUser 'nginx' $zshState
+  createSingleUser 'sqlite' $zshState
+  createSingleUser 'redis' $zshState
   createSingleUser 'postgres' $zshState
   createSingleUser 'php-fpm' $zshState
-  createSingleUser 'redis' $zshState
-  createSingleUser 'sqlite' $zshState
+  createSingleUser 'nginx' $zshState
   echo ' '
   echo_yellow "=================================================================="
   echo_green "处理php-fpm的socket文件授权问题"
