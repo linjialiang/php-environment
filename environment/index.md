@@ -21,14 +21,6 @@ titleTemplate: 环境搭建教程
 <<<@/assets/environment/lnpp-toc.txt [lnpp]
 <<<@/assets/environment/lnmp-toc.txt [lnmp]
 
-::: warning 部分包数据存储相关软件遗弃说明
-
-1. 首先精力有限，维护过多的软件，会造成不够深入；
-2. 其次，也是为了响应业内的 `一切皆用 Postgres` 趋势；
-3. 最终：MySQL、SQLite 和 MongoDB 不再积极维护！
-
-:::
-
 ## 脚本文件
 
 ::: details 我们准备了几个 bash 脚本文件：
