@@ -476,7 +476,8 @@ else
   echo ' '
   echo_yellow "=================================================================="
   echo_green "lnmp安装完成！！！"
-  echo_yellow "   - MySQL 默认有个超级管理员用户 admin 密码 1"
+  echo_yellow "   - MySQL 默认有个本地用户 admin@localhost 密码 1"
+  echo_yellow "   - MySQL 默认有个局域网用户 admin@'192.168.%.%' 密码 1"
   echo_yellow "   - Redis 默认设置了全局密码 1"
   echo_yellow "=================================================================="
   echo ' '
