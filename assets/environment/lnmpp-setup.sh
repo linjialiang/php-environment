@@ -31,8 +31,8 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {redis,postgres,nginx,php84-fpm,mysqld-84}.service
-  rm /lib/systemd/system/{redis,postgres,nginx,php84-fpm,mysqld-84}.service
+  systemctl disable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
+  rm /lib/systemd/system/{redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
@@ -372,7 +372,7 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{postgres,nginx,php84-fpm,php74-fpm,redis}.service"
+  echo_cyan "/lib/systemd/system/{redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
@@ -527,7 +527,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {postgres,nginx,php84-fpm,redis,mysqld-84}.service
+  systemctl enable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmpp.tar.xz"
@@ -616,15 +616,15 @@ else
   echo_yellow "重载 systemctl"
   echo_yellow "systemctl daemon-reload"
   echo_yellow "启用并开启服务"
-  echo_yellow "systemctl enable --now {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "systemctl enable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow "禁用并禁止服务"
-  echo_yellow "systemctl disable --now {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "systemctl disable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow "开启"
-  echo_yellow "systemctl start {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "systemctl start {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow "停止"
-  echo_yellow "systemctl stop {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "systemctl stop {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow "查看状态"
-  echo_yellow "systemctl status {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "systemctl status {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
   echo_yellow "systemctl reload nginx"
   echo_yellow "=================================================================="
