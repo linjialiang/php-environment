@@ -114,7 +114,7 @@ apt install libpq-dev -y
 
 :::
 
-::: details 依赖 openssl 特殊版本
+::: details 依赖 openssl 特殊版本 {#assign-openssl-version}
 
 如果对 openssl 依赖库有特殊版本需求，需要自行编译安装
 
@@ -156,7 +156,8 @@ pkg-config --path openssl,libssl,libcrypto
 
 ::: danger 重要说明
 php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，
-因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)
+因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)，
+安装 php 动态扩展时，如果需要 openssl 支持的话，也需要跟 PHP 编译时的 openssl 兼容，例如：[[mongodb 扩展]](#ext-mongodb)
 
 :::
 

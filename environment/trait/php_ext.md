@@ -66,7 +66,7 @@ php --ri apcu
 在测试环境（Debian12 发行版）中安装 php-7.4.33 的 PECL 扩展，需要 [使用特定版本的 Autoconf](#use-) 来生成 configure 文件！
 :::
 
-#### 使用特定版本的 Autoconf {#use-}
+#### 使用特定版本的 Autoconf
 
 测试环境（Debian12 发行版）使用 `/server/php/74/bin/phpize` 生成 configure 文件时，通常会出现警告，
 这是因为系统自带的 Autoconf 版本为 `2.71`，从 php-7.4.33 源码包的 configure 文件开头可以看到，
@@ -84,7 +84,7 @@ PHP 自身是使用 `Autoconf-2.69` 来生成 configure 文件的：
 
 ::: code-group
 
-```bash [编译]
+```bash [编译安装Autoconf]
 # 公共依赖库，请使用root账户编译
 mkdir /server/autoconf-2.69
 cd /root/autoconf-2.69
@@ -94,7 +94,7 @@ make -j4
 make install
 ```
 
-```bash [指定版本]
+```bash [指定Autoconf版本]
 # 修改 $PATH 首个检查路径
 export PATH=/server/autoconf-2.69/bin:$PATH
 ```
@@ -175,7 +175,7 @@ make install
 
 :::
 
-### 3. MongoDB 扩展
+### 3. MongoDB 扩展 {#ext-mongodb}
 
 ::: code-group
 
@@ -197,6 +197,11 @@ make test
 make install
 ```
 
+:::
+
+::: danger 重要说明
+在 Debian12 发行版中 `php-7.4.33` 在安装 mongodb 扩展时，必须使用跟编译 PHP 时兼容的 openssl 版本，
+具体操作见[[依赖 openssl 特殊版本]](/environment/php#assign-openssl-version)
 :::
 
 ### 4. yaml 扩展
