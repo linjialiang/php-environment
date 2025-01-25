@@ -20,6 +20,7 @@ titleTemplate: 环境搭建教程
 <<<@/assets/environment/lnmpp-toc.txt [lnmpp]
 <<<@/assets/environment/lnpp-toc.txt [lnpp]
 <<<@/assets/environment/lnmp-toc.txt [lnmp]
+:::
 
 ## 脚本文件
 
