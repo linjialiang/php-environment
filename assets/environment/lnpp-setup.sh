@@ -63,7 +63,7 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建nginx、php-fpm、Postgres、Redis的进程用户"
+  echo_green "创建nginx、php-fpm、Postgres、Redis、SQLite3的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
@@ -73,6 +73,7 @@ createUser(){
   createSingleUser 'postgres' $zshState
   createSingleUser 'php-fpm' $zshState
   createSingleUser 'redis' $zshState
+  createSingleUser 'sqlite' $zshState
   echo ' '
   echo_yellow "=================================================================="
   echo_green "处理php-fpm的socket文件授权问题"
@@ -90,12 +91,13 @@ createUser(){
   echo ' '
   echo_yellow "=================================================================="
   echo_green "php编译pgsql扩展，使用指定Postgres安装目录时，需要提供读取libpq相关权限："
-  echo_cyan "usermod -a -G postgres php-fpm"
-  echo_green "如果使用 apt install libpq-dev -y 依赖包则不需要"
+  echo_green "php编译sqlite3扩展，使用指定sqlite3自带的pkgconfig时，需要提供读取对应目录的权限："
+  echo_cyan "usermod -a -G postgres,sqlite php-fpm"
+  echo_green "如果使用 apt install libpq-dev libsqlite3-dev -y 依赖包则不需要"
   echo_yellow " "
-  echo_green "此版本使用指定Postgres安装目录"
+  echo_green "此版本使用指定Postgres安装目录以及自己编译的SQLite3"
   echo_yellow "=================================================================="
-  usermod -a -G postgres php-fpm
+  usermod -a -G postgres,sqlite php-fpm
 }
 
 #开发用户追加权限

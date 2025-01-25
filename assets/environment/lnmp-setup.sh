@@ -63,16 +63,17 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建nginx、php-fpm、MySQL、Redis的进程用户"
+  echo_green "创建nginx、php-fpm、Redis、SQLite3、MySQL的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
   echo_cyan "是否支持启用zsh(1支持，默认不支持)："
   read zshState
   createSingleUser 'nginx' $zshState
-  createSingleUser 'mysql' $zshState
   createSingleUser 'php-fpm' $zshState
   createSingleUser 'redis' $zshState
+  createSingleUser 'mysql' $zshState
+  createSingleUser 'sqlite' $zshState
   echo ' '
   echo_yellow "=================================================================="
   echo_green "处理php-fpm的socket文件授权问题"
@@ -87,6 +88,15 @@ createUser(){
   echo_yellow " "
   echo_green "此版本使用的是tcp转发，并不需要考虑socket文件转发相关的权限问题"
   echo_yellow "=================================================================="
+  echo ' '
+  echo_yellow "=================================================================="
+  echo_green "php编译sqlite3扩展，使用指定sqlite3自带的pkgconfig时，需要提供读取对应目录的权限："
+  echo_cyan "usermod -a -G sqlite php-fpm"
+  echo_green "如果使用 apt install libsqlite3-dev -y 依赖包则不需要"
+  echo_yellow " "
+  echo_green "此版本使用自己编译的SQLite3"
+  echo_yellow "=================================================================="
+  usermod -a -G sqlite php-fpm
 }
 
 #开发用户追加权限
