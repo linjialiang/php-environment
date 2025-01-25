@@ -362,9 +362,9 @@ modFilePower(){
   chown php-fpm:php-fpm -R /server/php /server/logs/php
   find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
   find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/php/84/bin /server/php/84/sbin
-  chmod 750 /server/php/84/lib/php/extensions/no-debug-non-zts-*/*
-  chmod 750 /server/php/tools/composer.phar
+  chmod 750 -R /server/php/{74,84}/{bin,sbin}
+  chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
+  chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
 }
 
 #安装systemctl单元
@@ -372,7 +372,7 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{postgres,nginx,php84-fpm,redis}.service"
+  echo_cyan "/lib/systemd/system/{postgres,nginx,php84-fpm,php74-fpm,redis}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
@@ -426,6 +426,35 @@ RestrictNamespaces=true
 [Install]
 WantedBy=multi-user.target
 " > /lib/systemd/system/php84-fpm.service
+
+  echo_cyan "[+] Create php74-fpm service..."
+
+  echo "[Unit]
+[Unit]
+Description=The PHP 7.4 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=notify
+User=php-fpm
+Group=php-fpm
+RuntimeDirectory=php74-fpm
+RuntimeDirectoryMode=0750
+ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+ProtectSystem=full
+PrivateDevices=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/php74-fpm.service
 
   echo_cyan "[+] Create postgres service..."
 
