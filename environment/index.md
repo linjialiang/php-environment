@@ -56,8 +56,8 @@ titleTemplate: 环境搭建教程
         - mongodb-1.20.1.tgz
         - redis-6.1.0.tgz
         - yaml-2.2.4.tgz
-    - 所需依赖库
-        - openssl-1.1.1w.tar.gz `php-7.4.33 `
+    - 依赖库
+        - openssl-1.1.1w.tar.gz
 6. php-8.4.3.tar.xz
     - 动态扩展
         - xdebug-3.4.1.tgz
