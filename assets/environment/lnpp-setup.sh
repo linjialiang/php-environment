@@ -36,15 +36,17 @@ cleanOldData(){
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
-  echo_cyan "删除旧用户 nginx,postgres,php-fpm 如果有重要数据请先备份"
-  userdel -r nginx
+  echo_cyan "删除旧用户 sqlite,redis,postgres,php-fpm,nginx 如果有重要数据请先备份"
+  userdel -r sqlite
+  userdel -r redis
   userdel -r postgres
   userdel -r php-fpm
-  userdel -r redis
-  groupdel nginx
+  userdel -r nginx
+  groupdel sqlite
+  groupdel redis
   groupdel postgres
   groupdel php-fpm
-  groupdel redis
+  groupdel nginx
 }
 
 #创建单个用户

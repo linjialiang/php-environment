@@ -31,20 +31,22 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {redis,mysqld-84,nginx,php83-fpm}.service
-  rm /lib/systemd/system/{redis,mysqld-84,nginx,php83-fpm}.service
+  systemctl disable --now {redis,mysqld-84,php74-fpm,php84-fpm,nginx}.service
+  rm /lib/systemd/system/{redis,mysqld-84,php74-fpm,php84-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
-  echo_cyan "删除旧用户 nginx,mysql,php-fpm,redis 如果有重要数据请先备份"
-  userdel -r nginx
+  echo_cyan "删除旧用户 sqlite,redis,mysql,php-fpm,nginx 如果有重要数据请先备份"
+  userdel -r sqlite
+  userdel -r redis
   userdel -r mysql
   userdel -r php-fpm
-  userdel -r redis
-  groupdel nginx
+  userdel -r nginx
+  groupdel sqlite
+  groupdel redis
   groupdel mysql
   groupdel php-fpm
-  groupdel redis
+  groupdel nginx
 }
 
 #创建单个用户
