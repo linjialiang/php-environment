@@ -625,5 +625,7 @@ else
   echo_yellow "systemctl stop {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
   echo_yellow "查看状态"
   echo_yellow "systemctl status {php74-fpm,php84-fpm,redis,mysqld-84,postgres}.service"
+  echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
+  echo_yellow "systemctl reload nginx"
   echo_yellow "=================================================================="
 fi
