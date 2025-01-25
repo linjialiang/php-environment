@@ -31,8 +31,8 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {redis,postgres,nginx,php83-fpm}.service
-  rm /lib/systemd/system/{redis,postgres,nginx,php83-fpm}.service
+  systemctl disable --now {redis,postgres,php74-fpm,php84-fpm,nginx}.service
+  rm /lib/systemd/system/{redis,postgres,php74-fpm,php84-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
@@ -346,7 +346,7 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{postgres,nginx,php83-fpm,redis}.service"
+  echo_cyan "/lib/systemd/system/{redis,postgres,php74-fpm,php84-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
@@ -376,7 +376,7 @@ WantedBy=multi-user.target
   echo_cyan "[+] Create php83-fpm service..."
 
   echo "[Unit]
-Description=The PHP 8.3 FastCGI Process Manager
+Description=The PHP 8.4 FastCGI Process Manager
 After=network.target
 
 [Service]
@@ -399,7 +399,35 @@ RestrictNamespaces=true
 
 [Install]
 WantedBy=multi-user.target
-" > /lib/systemd/system/php83-fpm.service
+" > /lib/systemd/system/php84-fpm.service
+
+  echo_cyan "[+] Create php74-fpm service..."
+
+  echo "[Unit]
+Description=The PHP 7.4 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=notify
+User=php-fpm
+Group=php-fpm
+RuntimeDirectory=php74-fpm
+RuntimeDirectoryMode=0750
+ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+ProtectSystem=full
+PrivateDevices=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/php74-fpm.service
 
   echo_cyan "[+] Create postgres service..."
 
@@ -449,7 +477,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {postgres,nginx,php83-fpm,redis}.service
+  systemctl enable --now {redis,postgres,php74-fpm,php84-fpm,nginx}.service
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnpp.tar.xz"
