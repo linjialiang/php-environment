@@ -289,16 +289,16 @@ WantedBy=multi-user.target
   echo_cyan "[+] Create php83-fpm service..."
 
   echo "[Unit]
-Description=The PHP 8.3 FastCGI Process Manager
+Description=The PHP 8.4 FastCGI Process Manager
 After=network.target
 
 [Service]
 Type=notify
 User=php-fpm
 Group=php-fpm
-RuntimeDirectory=php83-fpm
+RuntimeDirectory=php84-fpm
 RuntimeDirectoryMode=0750
-ExecStart=/server/php/83/sbin/php-fpm --nodaemonize --fpm-config /server/php/83/etc/php-fpm.conf
+ExecStart=/server/php/84/sbin/php-fpm --nodaemonize --fpm-config /server/php/84/etc/php-fpm.conf
 ExecReload=/bin/kill -USR2 \$MAINPID
 PrivateTmp=true
 ProtectSystem=full
@@ -312,7 +312,35 @@ RestrictNamespaces=true
 
 [Install]
 WantedBy=multi-user.target
-" >/lib/systemd/system/php83-fpm.service
+" >/lib/systemd/system/php84-fpm.service
+
+  echo_cyan "[+] Create php74-fpm service..."
+
+  echo "[Unit]
+Description=The PHP 7.4 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=notify
+User=php-fpm
+Group=php-fpm
+RuntimeDirectory=php74-fpm
+RuntimeDirectoryMode=0750
+ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+ProtectSystem=full
+PrivateDevices=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/php74-fpm.service
 
   echo_cyan "[+] Create MySQL service..."
 
