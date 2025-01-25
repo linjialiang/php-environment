@@ -120,7 +120,7 @@ devUserPower(){
 installPackage(){
   echo_yellow "=================================================================="
   echo_green "安装依赖"
-  echo_green "确保 nginx + php + MySQL + Redis 必备依赖项"
+  echo_green "确保 SQLite3/Redis/MySQL/PHP/Nginx  必备依赖项"
   echo_green "debian12 发行版，如因依赖导致部分功能异常，自行安装相应依赖包即可"
   echo_red "注意1：该lnmp包不兼容其他发行版，因为极有可能因为依赖问题，导致整个环境无法使用"
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
