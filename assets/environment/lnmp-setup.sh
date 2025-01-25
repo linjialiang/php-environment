@@ -126,7 +126,7 @@ installPackage(){
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
   echo_yellow "=================================================================="
   apt install -y gcc g++ make cmake autoconf pkg-config tcl libxslt1-dev \
-  libxml2-dev libgd-dev libgeoip-dev libssl-dev libsqlite3-dev libsystemd-dev \
+  libxml2-dev libgd-dev libgeoip-dev libssl-dev libsystemd-dev \
   libcurl4-openssl-dev libffi-dev libgmp-dev libonig-dev libsodium-dev libzip-dev \
   libcapstone-dev libncurses-dev libldap-dev libsasl2-dev libbison-dev
 }

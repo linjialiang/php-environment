@@ -130,7 +130,7 @@ installPackage(){
   libcurl4-openssl-dev libxslt1-dev libxml2-dev libssl-dev libpam0g-dev \
   zlib1g-dev libffi-dev libgmp-dev libonig-dev libsodium-dev libzip-dev \
   libgd-dev libgeoip-dev liblz4-dev libzstd-dev libreadline-dev \
-  libcapstone-dev libsqlite3-dev flex bison
+  libcapstone-dev flex bison
 }
 
 #安装预构建包
