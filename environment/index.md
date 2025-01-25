@@ -64,34 +64,60 @@ titleTemplate: 环境搭建教程
 ```
 
 ```md [lnpp]
-1. nginx-1.26.2.tar.gz
+1. sqlite-autoconf-3480000.tar.gz
+2. redis-7.4.2.tar.gz
+3. postgresql-17.2.tar.bz2
+4. php-7.4.33.tar.xz
+    - 动态扩展
+        - xdebug-3.1.6.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
+    - 依赖库
+        - openssl-1.1.1w.tar.gz
+5. php-8.4.3.tar.xz
+    - 动态扩展
+        - xdebug-3.4.1.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
+6. nginx-1.26.2.tar.gz
     - openssl-3.0.15.tar.gz
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
-2. redis-7.4.2.tar.gz
-3. postgresql-17.2.tar.bz2
-4. php-8.3.14.tar.xz
-    - 动态扩展
-        - xdebug-3.4.1.tgz
-        - redis-6.0.2.tgz
 ```
 
 ```md [lnmp]
-1. nginx-1.26.2.tar.gz
+1. sqlite-autoconf-3480000.tar.gz
+2. redis-7.4.2.tar.gz
+3. mysql-8.4.4.tar.gz
+4. php-7.4.33.tar.xz
+    - 动态扩展
+        - xdebug-3.1.6.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
+    - 依赖库
+        - openssl-1.1.1w.tar.gz
+5. php-8.4.3.tar.xz
+    - 动态扩展
+        - xdebug-3.4.1.tgz
+        - apcu-5.1.24.tgz
+        - mongodb-1.20.1.tgz
+        - redis-6.1.0.tgz
+        - yaml-2.2.4.tgz
+6. nginx-1.26.2.tar.gz
     - openssl-3.0.15.tar.gz
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
-2. redis-7.4.2.tar.gz
-3. mysql-8.4.4.tar.gz
-4. php-8.3.14.tar.xz
-    - 动态扩展
-        - xdebug-3.4.1.tgz
-        - redis-6.0.2.tgz
 ```
 
 :::
 
-::: tip 包下载地址：
+::: details 源码包下载地址
 
 | package        | url                                                  |
 | -------------- | ---------------------------------------------------- |
@@ -100,7 +126,7 @@ titleTemplate: 环境搭建教程
 | PostgreSQL     | https://www.postgresql.org/                          |
 | MySQL          | https://www.mysql.com/                               |
 | PHP            | https://www.php.net/                                 |
-| php 扩展       | http://pecl.php.net/                                 |
+| PHP extend     | http://pecl.php.net/                                 |
 | Nginx          | http://nginx.org/                                    |
 | zlib           | http://www.zlib.net/                                 |
 | openssl        | https://openssl-library.org/                         |
