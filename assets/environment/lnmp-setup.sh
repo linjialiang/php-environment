@@ -214,8 +214,9 @@ modFilePower(){
   echo_yellow "=================================================================="
   echo_green "/server 目录权限"
   chown root:root -R /server
-  find /server -type f -exec chmod 644 {} \;
-  find /server -type d -exec chmod 755 {} \;
+  chmod 755 /server
+  find /server/default -type f -exec chmod 644 {} \;
+  find /server/default -type d -exec chmod 755 {} \;
 
   echo_green "/www 目录权限"
   echo_red "开发环境使用emad用户（nginx/php-fpm 需加入 emad用户组）"
@@ -233,6 +234,18 @@ modFilePower(){
   echo_red "注：每次修改nginx执行文件权限，都需要重新启用该能力"
   setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 
+  echo_green "redis文件权限"
+  chown redis:redis -R /server/redis /server/logs/redis
+  find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
+  find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/redis/bin
+
+  echo_green "sqlite3文件权限"
+  chown sqlite:sqlite -R /server/sqlite
+  find /server/sqlite -type f -exec chmod 640 {} \;
+  find /server/sqlite -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/sqlite/bin
+
   echo_green "MySQL文件权限"
   chown mysql:mysql -R /server/mysql /server/data /server/logs/mysql /server/etc/mysql
   find /server/mysql /server/logs/mysql /server/etc/mysql -type f -exec chmod 640 {} \;
@@ -240,18 +253,13 @@ modFilePower(){
   chmod 700 /server/data
   chmod 750 -R /server/mysql/bin
 
-  echo_green "redis文件权限"
-  chown redis:redis -R /server/redis /server/logs/redis
-  find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
-  find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/redis/bin
-
   echo_green "php文件权限"
   chown php-fpm:php-fpm -R /server/php /server/logs/php
-  find /server/php /server/logs/php -type f -exec chmod 640 {} \;
-  find /server/php /server/logs/php -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/php/83/bin /server/php/83/sbin
-  chmod 750 /server/php/83/lib/php/extensions/no-debug-non-zts-*/*
+  find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
+  find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/php/{74,84}/{bin,sbin}
+  chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
+  chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
 }
 
 #安装systemctl单元

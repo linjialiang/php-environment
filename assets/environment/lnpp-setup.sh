@@ -300,8 +300,9 @@ modFilePower(){
   echo_yellow "=================================================================="
   echo_green "/server 目录权限"
   chown root:root -R /server
-  find /server -type f -exec chmod 644 {} \;
-  find /server -type d -exec chmod 755 {} \;
+  chmod 755 /server
+  find /server/default -type f -exec chmod 644 {} \;
+  find /server/default -type d -exec chmod 755 {} \;
 
   echo_green "/www 目录权限"
   echo_red "开发环境使用emad用户（nginx/php-fpm 需加入 emad用户组）"
@@ -325,6 +326,8 @@ modFilePower(){
   find /server/postgres /server/logs/postgres -type d -exec chmod 750 {} \;
   find /server/postgres/tls -type f -exec chmod 600 {} \;
   chmod 700 /server/pgData
+  chmod o-rwx -R /server/pgData
+  chmod g-w -R /server/pgData
   chmod 750 -R /server/postgres/bin
 
   echo_green "redis文件权限"
@@ -333,12 +336,19 @@ modFilePower(){
   find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
   chmod 750 -R /server/redis/bin
 
+  echo_green "sqlite3文件权限"
+  chown sqlite:sqlite -R /server/sqlite
+  find /server/sqlite -type f -exec chmod 640 {} \;
+  find /server/sqlite -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/sqlite/bin
+
   echo_green "php文件权限"
   chown php-fpm:php-fpm -R /server/php /server/logs/php
-  find /server/php /server/logs/php -type f -exec chmod 640 {} \;
-  find /server/php /server/logs/php -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/php/83/bin /server/php/83/sbin
-  chmod 750 /server/php/83/lib/php/extensions/no-debug-non-zts-*/*
+  find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
+  find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/php/{74,84}/{bin,sbin}
+  chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
+  chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
 }
 
 #安装systemctl单元
