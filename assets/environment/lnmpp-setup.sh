@@ -36,19 +36,19 @@ cleanOldData(){
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
-  echo_cyan "删除旧用户 nginx,postgres,php-fpm,mysql,sqlite,redis 如果有重要数据请先备份"
-  userdel -r nginx
-  userdel -r postgres
-  userdel -r php-fpm
-  userdel -r redis
-  userdel -r mysql
+  echo_cyan "删除旧用户 sqlite,redis,postgres,mysql,php-fpm,nginx 如果有重要数据请先备份"
   userdel -r sqlite
-  groupdel nginx
-  groupdel postgres
-  groupdel php-fpm
-  groupdel redis
-  groupdel mysql
+  userdel -r redis
+  userdel -r postgres
+  userdel -r mysql
+  userdel -r php-fpm
+  userdel -r nginx
   groupdel sqlite
+  groupdel redis
+  groupdel postgres
+  groupdel mysql
+  groupdel php-fpm
+  groupdel nginx
 }
 
 #创建单个用户
@@ -67,18 +67,18 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建nginx、php-fpm、Postgres、Redis、SQLite3、MySQL的进程用户"
+  echo_green "创建sqlite,redis,postgres,mysql,php-fpm,nginx的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
   echo_cyan "是否支持启用zsh(1支持，默认不支持)："
   read zshState
-  createSingleUser 'nginx' $zshState
-  createSingleUser 'postgres' $zshState
-  createSingleUser 'php-fpm' $zshState
-  createSingleUser 'redis' $zshState
-  createSingleUser 'mysql' $zshState
   createSingleUser 'sqlite' $zshState
+  createSingleUser 'redis' $zshState
+  createSingleUser 'postgres' $zshState
+  createSingleUser 'mysql' $zshState
+  createSingleUser 'php-fpm' $zshState
+  createSingleUser 'nginx' $zshState
   echo ' '
   echo_yellow "=================================================================="
   echo_green "处理php-fpm的socket文件授权问题"
@@ -117,7 +117,7 @@ devUserPower(){
   echo_yellow "=================================================================="
   usermod -a -G $devUserName nginx
   usermod -a -G $devUserName php-fpm
-  usermod -a -G sqlite,redis,postgres,mysql,php,nginx $devUserName
+  usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx $devUserName
 }
 
 #安装依赖包
