@@ -55,7 +55,7 @@ titleTemplate: 环境搭建教程
     - mongodb-1.20.1.tgz `动态扩展`
     - redis-6.1.0.tgz `动态扩展`
     - yaml-2.2.4.tgz `动态扩展`
-    - openssl-1.1.1w.tar.gz `php-7.4 所需依赖库`
+    - openssl-1.1.1w.tar.gz `php-7.4.33 所需依赖库`
 6. php-8.4.3.tar.xz
     - xdebug-3.4.1.tgz `动态扩展`
     - apcu-5.1.24.tgz `动态扩展`
