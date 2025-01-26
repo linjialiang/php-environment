@@ -130,7 +130,6 @@ installPackage(){
   libcurl4-openssl-dev libffi-dev libgmp-dev libonig-dev libsodium-dev libzip-dev \
   libcapstone-dev libncurses-dev libldap-dev libsasl2-dev libbison-dev libpq-dev
   echo_yellow "=================================================================="
-  echo_green "将 libpq-dev 的路径转移至 /server/postgres"
 }
 
 #安装预构建包
