@@ -155,9 +155,9 @@ tls-port 16379
 tls-cert-file /server/redis/tls/redis.crt
 tls-key-file /server/redis/tls/redis.key
 tls-ca-cert-file /server/redis/tls/ca.crt
-# 默认，客户端必须验证
-# optional 允许客户端验证，也可以不验证
-# no 客户端不会验证
+# 默认服务端必须验证客户端
+# optional 允许服务端验证客户端，也可以不验证
+# no 服务端不会验证客户端
 tls-auth-clients optional
 # 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
 # tls-dh-params-file /server/redis/tls/redis.dh
