@@ -26,6 +26,7 @@
 --enable-mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
+# postgres 根目录或 pg_config 路径
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
 --enable-sockets \
