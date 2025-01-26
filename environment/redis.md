@@ -99,7 +99,12 @@ chmod 750 /server/redis/rdbData
 # 控制进程是否允许使用虚拟内存
 #   - 0：进程只能使用物理内存
 #   - 1：进程可以使用比物理内存更多的虚拟内存
+
+# 追加用 >> 写法
+#   - 注：为了避免重复添加，建议手动拷贝写入
+echo "
 vm.overcommit_memory = 1
+" >> /etc/sysctl.conf
 ```
 
 ````md [内核调优]
