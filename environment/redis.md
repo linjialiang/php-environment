@@ -155,9 +155,6 @@ tls-port 16379
 tls-cert-file /server/redis/tls/redis.crt
 tls-key-file /server/redis/tls/redis.key
 tls-ca-cert-file /server/redis/tls/ca.crt
-# 默认服务端必须验证客户端
-# optional 允许服务端验证客户端，也可以不验证
-# no 服务端不会验证客户端
 tls-auth-clients optional
 # 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
 # tls-dh-params-file /server/redis/tls/redis.dh
@@ -452,7 +449,7 @@ tls-port 16379
 tls-cert-file /server/redis/tls/redis.crt
 tls-key-file /server/redis/tls/redis.key
 tls-ca-cert-file /server/redis/tls/ca.crt
-tls-auth-clients no # 客户端不会验证(默认客户端必须验证)
+tls-auth-clients no
 ```
 
 ```bash [禁用双向认证]
@@ -462,7 +459,7 @@ tls-port 6379
 tls-cert-file /server/redis/tls/redis.crt
 tls-key-file /server/redis/tls/redis.key
 tls-ca-cert-file /server/redis/tls/ca.crt
-tls-auth-clients no # 客户端不会验证(默认客户端必须验证)
+tls-auth-clients no
 ```
 
 ```bash [启用双向认证]
@@ -474,7 +471,7 @@ tls-key-file /server/redis/tls/server.key
 tls-ca-cert-file /server/redis/tls/ca.crt
 tls-client-cert-file /server/redis/tls/client.crt
 tls-client-key-file /server/redis/tls/client.key
-tls-auth-clients optional # 允许客户端验证，也可以不验证(默认客户端必须验证)
+tls-auth-clients optional
 # 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
 # tls-dh-params-file /server/redis/tls/redis.dh
 ```
@@ -488,6 +485,18 @@ redis-cli -h 192.168.66.254 -p 16379 --tls \
 
 # 客户端不做验证 - 本机可以省略ip
 redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
+```
+:::
+
+::: details tls-auth-clients 选项
+
+1. 缺省选项：`Redis服务端` 必须验证 `Redis客户端` 是否正确；
+2. 选项：`optional`
+    - `Redis客户端` 有传 `密钥/证书`，`Redis服务端` 验证 `Redis客户端` 是否正确；
+    - `Redis客户端` 没传 `密钥/证书`，`Redis服务端` 不验证 `Redis客户端`；
+3.  选项：no
+    - `Redis客户端` 不论是否有传 `密钥/证书`，一律不验证 `Redis客户端` 。
+
 :::
 
 ### 3. 分发证书
