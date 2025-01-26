@@ -26,6 +26,8 @@
 --enable-mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
+--with-pgsql \
+--with-pdo-pgsql \
 --enable-sockets \
 --enable-sysvmsg \
 --enable-sysvsem \

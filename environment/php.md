@@ -228,8 +228,8 @@ make test
 make install
 ```
 
-<<<@/assets/environment/source/php/build/84_pgsql.bash [84[pgsql]]
 <<<@/assets/environment/source/php/build/84_mysql.bash [84[mysql]]
+<<<@/assets/environment/source/php/build/74_mysql.bash [74[mysql]]
 :::
 
 ::: tip 构建指令区别：
