@@ -129,7 +129,6 @@ installPackage(){
   libxml2-dev libgd-dev libgeoip-dev libssl-dev libsystemd-dev \
   libcurl4-openssl-dev libffi-dev libgmp-dev libonig-dev libsodium-dev libzip-dev \
   libcapstone-dev libncurses-dev libldap-dev libsasl2-dev libbison-dev libpq-dev
-  echo_yellow "=================================================================="
 }
 
 #安装预构建包
