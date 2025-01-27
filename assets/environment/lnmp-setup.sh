@@ -409,7 +409,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {redis,mysqld-84,php84-fpm,nginx}.service
+  systemctl enable --now {redis,mysqld-84,php74-fpm,php84-fpm,nginx}.service
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmp.tar.xz"
