@@ -103,6 +103,13 @@ bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --c
 | `--initialize`          | 为 root 用户生成一个随机的临时密码，密码将被标记为过期，需要修改新的密码     |
 | `--initialize-insecure` | 不生成 root 密码，root 账户初始密码为空，<br>使用 `--skip-password` 直接登录 |
 
+::: tip 初始化时注意事项
+
+1. `datadir父级目录` 必须存在
+2. `datadir` 必须为空或者不存在
+
+:::
+
 ### 3. 修改密码
 
 ::: code-group
