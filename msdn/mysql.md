@@ -114,20 +114,20 @@ cd C:\mysql\product\84
 
 ::: code-group
 
-```ps1 [56]
+```ps1 [55]
 # 安装到系统服务
 C:
-cd C:\mysql\product\56\bin
-.\mysqld.exe -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
+cd C:\mysql\product\55\bin
+.\mysqld.exe -install mysql-55 --defaults-file="C:\mysql\my\my-55.ini"
 
 # 启动服务
-net start mysql-56
+net start mysql-55
 # 关闭服务
-net stop mysql-56
+net stop mysql-55
 # 系统服务设为手动启动
-sc config mysql-56 start=demand
+sc config mysql-55 start=demand
 # 从系统服务中移除
-.\mysqld.exe -remove mysql-56
+.\mysqld.exe -remove mysql-55
 ```
 
 ```ps1 [56]
