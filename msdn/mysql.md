@@ -78,22 +78,22 @@ MySQL >= 5.7 版本支持数据初始化，具体操作如下：
 
 ::: code-group
 
-```batch [57]
+```ps1 [57]
 C:
 cd C:\mysql\product\57
-bin\mysqld.exe --defaults-file="C:\mysql\my\my-57.ini" --initialize-insecure --console
+.\bin\mysqld.exe --defaults-file="C:\mysql\my\my-57.ini" --initialize-insecure --console
 ```
 
-```batch [80]
+```ps1 [80]
 C:
 cd C:\mysql\product\80
-bin\mysqld.exe --defaults-file="C:\mysql\my\my-80.ini" --initialize-insecure --console
+.\bin\mysqld.exe --defaults-file="C:\mysql\my\my-80.ini" --initialize-insecure --console
 ```
 
-```batch [84]
+```ps1 [84]
 C:
 cd C:\mysql\product\84
-bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --console
+.\bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --console
 ```
 
 :::
@@ -110,12 +110,98 @@ bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --c
 
 :::
 
-### 3. 修改密码
+### 3. 加入系统服务
 
 ::: code-group
 
-```batch [<5.7]
-REM root 用户密码为空，为了安全起见，需要设置密码
+```ps1 [56]
+# 安装到系统服务
+C:
+cd C:\mysql\product\56\bin
+.\mysqld.exe -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
+
+# 启动服务
+net start mysql-56
+# 关闭服务
+net stop mysql-56
+# 系统服务设为手动启动
+sc config mysql-56 start=demand
+# 从系统服务中移除
+.\mysqld.exe -remove mysql-56
+```
+
+```ps1 [56]
+# 安装到系统服务
+C:
+cd C:\mysql\product\56\bin
+.\mysqld.exe -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
+
+# 启动服务
+net start mysql-56
+# 关闭服务
+net stop mysql-56
+# 系统服务设为手动启动
+sc config mysql-56 start=demand
+# 从系统服务中移除
+.\mysqld.exe -remove mysql-56
+```
+
+```ps1 [57]
+# 安装到系统服务
+C:
+cd C:\mysql\product\57\bin
+.\mysqld.exe -install mysql-57 --defaults-file="C:\mysql\my\my-57.ini"
+
+# 启动服务
+net start mysql-57
+# 关闭服务
+net stop mysql-57
+# 系统服务设为手动启动
+sc config mysql-57 start=demand
+# 从系统服务中移除
+.\mysqld.exe -remove mysql-57
+```
+
+```ps1 [80]
+# 安装到系统服务
+C:
+cd C:\mysql\product\80\bin
+.\mysqld.exe -install mysql-80 --defaults-file="C:\mysql\my\my-80.ini"
+
+# 启动服务
+net start mysql-80
+# 关闭服务
+net stop mysql-80
+# 系统服务设为手动启动
+sc config mysql-80 start=demand
+# 从系统服务中移除
+.\mysqld.exe -remove mysql-80
+```
+
+```ps1 [84]
+# 安装到系统服务
+C:
+cd C:\mysql\product\84\bin
+.\mysqld.exe -install mysql-84 --defaults-file="C:\mysql\my\my-84.ini"
+
+# 启动服务
+net start mysql-84
+# 关闭服务
+net stop mysql-84
+# 系统服务设为手动启动
+sc config mysql-84 start=demand
+# 从系统服务中移除
+.\mysqld.exe -remove mysql-84
+```
+
+:::
+
+### 4. 修改密码
+
+::: code-group
+
+```ps1 [<5.7]
+# root 用户密码为空，为了安全起见，需要设置密码
 
 C:
 cd C:\mysql\product\55\bin
@@ -124,15 +210,15 @@ mysql> set password for root@localhost=password('123456');
 mysql> flush privileges;
 ```
 
-```batch [>=5.7]
+```ps1 [>=5.7]
 C:
 cd C:\mysql\product\57\bin
 
-REM 初始化使用 --initialize 有随机密码
-REM mysql -uroot -P10057 -p
-REM Enter password: 随机密码
+# 初始化使用 --initialize 有随机密码
+# mysql -uroot -P10057 -p
+# Enter password: 随机密码
 
-REM 初始化使用 --initialize-insecure 无密码
+# 初始化使用 --initialize-insecure 无密码
 mysql -uroot -P10057 --skip-password
 
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
@@ -141,96 +227,10 @@ mysql> flush privileges;
 
 :::
 
-### 4. 加入系统服务
-
-::: code-group
-
-```batch [56]
-REM 安装到系统服务
-C:
-cd C:\mysql\product\56\bin
-mysqld -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
-
-REM 启动服务
-net start mysql-56
-REM 关闭服务
-net stop mysql-56
-REM 系统服务设为手动启动
-sc config mysql-56 start=demand
-REM 从系统服务中移除
-mysqld -remove mysql-56
-```
-
-```batch [56]
-REM 安装到系统服务
-C:
-cd C:\mysql\product\56\bin
-mysqld -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
-
-REM 启动服务
-net start mysql-56
-REM 关闭服务
-net stop mysql-56
-REM 系统服务设为手动启动
-sc config mysql-56 start=demand
-REM 从系统服务中移除
-mysqld -remove mysql-56
-```
-
-```batch [57]
-REM 安装到系统服务
-C:
-cd C:\mysql\product\57\bin
-mysqld -install mysql-57 --defaults-file="C:\mysql\my\my-57.ini"
-
-REM 启动服务
-net start mysql-57
-REM 关闭服务
-net stop mysql-57
-REM 系统服务设为手动启动
-sc config mysql-57 start=demand
-REM 从系统服务中移除
-mysqld -remove mysql-57
-```
-
-```batch [80]
-REM 安装到系统服务
-C:
-cd C:\mysql\product\80\bin
-mysqld -install mysql-80 --defaults-file="C:\mysql\my\my-80.ini"
-
-REM 启动服务
-net start mysql-80
-REM 关闭服务
-net stop mysql-80
-REM 系统服务设为手动启动
-sc config mysql-80 start=demand
-REM 从系统服务中移除
-mysqld -remove mysql-80
-```
-
-```batch [84]
-REM 安装到系统服务
-C:
-cd C:\mysql\product\84\bin
-mysqld -install mysql-84 --defaults-file="C:\mysql\my\my-84.ini"
-
-REM 启动服务
-net start mysql-84
-REM 关闭服务
-net stop mysql-84
-REM 系统服务设为手动启动
-sc config mysql-84 start=demand
-REM 从系统服务中移除
-mysqld -remove mysql-84
-```
-
-:::
-
 ### 5. 创建远程用户
 
-```batch
-REM 请使用对应版本自带的MySQL客户端来操作
+```ps1
+# 请使用对应版本自带的MySQL客户端来操作
 C:
 cd C:\mysql\product\55\bin
 mysql -uroot -P10055 -p
