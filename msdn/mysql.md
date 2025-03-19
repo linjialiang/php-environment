@@ -80,19 +80,19 @@ MySQL >= 5.7 版本支持数据初始化，具体操作如下：
 
 ```batch [57]
 C:
-cd C:\mysql\57
+cd C:\mysql\product\57
 bin\mysqld.exe --defaults-file="C:\mysql\my\my-57.ini" --initialize-insecure --console
 ```
 
 ```batch [80]
 C:
-cd C:\mysql\80
+cd C:\mysql\product\80
 bin\mysqld.exe --defaults-file="C:\mysql\my\my-80.ini" --initialize-insecure --console
 ```
 
 ```batch [84]
 C:
-cd C:\mysql\84
+cd C:\mysql\product\84
 bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --console
 ```
 
@@ -100,7 +100,7 @@ bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --c
 
 | 初始化指令              | 区别                                                                         |
 | ----------------------- | ---------------------------------------------------------------------------- |
-| `--initialize`          | 为 root 用户生成一个随机的临时密码， 修改后才能操作数据                      |
+| `--initialize`          | 为 root 用户生成一个随机的临时密码，密码将被标记为过期，需要修改新的密码     |
 | `--initialize-insecure` | 不生成 root 密码，root 账户初始密码为空，<br>使用 `--skip-password` 直接登录 |
 
 ### 3. 修改密码
@@ -111,7 +111,7 @@ bin\mysqld.exe --defaults-file="C:\mysql\my\my-84.ini" --initialize-insecure --c
 REM root 用户密码为空，为了安全起见，需要设置密码
 
 C:
-cd C:\mysql\55\bin
+cd C:\mysql\product\55\bin
 mysql -uroot -P10055
 mysql> set password for root@localhost=password('123456');
 mysql> flush privileges;
@@ -119,14 +119,14 @@ mysql> flush privileges;
 
 ```batch [>=5.7]
 C:
-cd C:\mysql\57\bin
-
-REM 初始化使用 --initialize-insecure 无密码
-REM mysql -uroot -P10057 --skip-password
+cd C:\mysql\product\57\bin
 
 REM 初始化使用 --initialize 有随机密码
-mysql -uroot -P10057 -p
-Enter password: 随机密码
+REM mysql -uroot -P10057 -p
+REM Enter password: 随机密码
+
+REM 初始化使用 --initialize-insecure 无密码
+mysql -uroot -P10057 --skip-password
 
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 mysql> flush privileges;
@@ -141,7 +141,7 @@ mysql> flush privileges;
 ```batch [56]
 REM 安装到系统服务
 C:
-cd C:\mysql\56\bin
+cd C:\mysql\product\56\bin
 mysqld -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
 
 REM 启动服务
@@ -157,7 +157,7 @@ mysqld -remove mysql-56
 ```batch [56]
 REM 安装到系统服务
 C:
-cd C:\mysql\56\bin
+cd C:\mysql\product\56\bin
 mysqld -install mysql-56 --defaults-file="C:\mysql\my\my-56.ini"
 
 REM 启动服务
@@ -173,7 +173,7 @@ mysqld -remove mysql-56
 ```batch [57]
 REM 安装到系统服务
 C:
-cd C:\mysql\57\bin
+cd C:\mysql\product\57\bin
 mysqld -install mysql-57 --defaults-file="C:\mysql\my\my-57.ini"
 
 REM 启动服务
@@ -189,7 +189,7 @@ mysqld -remove mysql-57
 ```batch [80]
 REM 安装到系统服务
 C:
-cd C:\mysql\80\bin
+cd C:\mysql\product\80\bin
 mysqld -install mysql-80 --defaults-file="C:\mysql\my\my-80.ini"
 
 REM 启动服务
@@ -205,7 +205,7 @@ mysqld -remove mysql-80
 ```batch [84]
 REM 安装到系统服务
 C:
-cd C:\mysql\84\bin
+cd C:\mysql\product\84\bin
 mysqld -install mysql-84 --defaults-file="C:\mysql\my\my-84.ini"
 
 REM 启动服务
@@ -225,7 +225,7 @@ mysqld -remove mysql-84
 ```batch
 REM 请使用对应版本自带的MySQL客户端来操作
 C:
-cd C:\mysql\55\bin
+cd C:\mysql\product\55\bin
 mysql -uroot -P10055 -p
 mysql> create user 'root'@'192.168.%.%' identified by '123456';
 mysql> grant all privileges on *.* to 'root'@'192.168.%.%' WITH GRANT OPTION;
