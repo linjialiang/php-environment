@@ -335,3 +335,6 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 <<<@/assets/iis/tp/web.config{xml} [[ThinkPHP]]
 
 :::
+
+<!--@include: ./msdn/mysql.md-->
+<!--@include: ./msdn/redis.md-->
