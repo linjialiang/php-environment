@@ -10,11 +10,11 @@ Redis 官方并没有 Windows 的二进制包，我们可以使用 github 上开
 
 ### 1. 安装路径
 
-你可以随意定义安装路径，这里为了统一起见，将路径放置在 `C:\redis` 下面
+你可以随意定义安装路径，这里为了统一起见，将路径放置在 `C:\Redis` 下面
 
 ### 2. 配置
 
-1. 创建 RDB 存储目录: `C:\redis\rdbData`
+1. 创建 RDB 存储目录: `C:\Redis\rdbData`
 
 ::: details 改动配置说明
 
@@ -56,5 +56,36 @@ requirepass 1
 # - 如果设置为yes，则开启AOF持久化。
 appendonly yes
 ```
+
+:::
+
+### 3. 安装系统服务
+
+使用 sc 安装 Windows 系统服务
+
+```ps1
+sc.exe create Redis binpath="C:\Redis\RedisService.exe -c C:\Redis\redis.conf" start=demand displayName="Redis Service"
+```
+
+::: warning Redis 系统服务缺陷说明：
+
+该版本的 Redis 服务程序 `redis-server.exe` 不具备创建系统服务的能力，需要通过 RedisService.exe 程序来创建系统服务，所以会有如下问题：
+
+1. 开启守护模式缺陷
+
+    - 开启服务：服务状态正常启动，并同时启动 RedisService.exe 和 redis-server.exe 程序
+    - 停止服务：服务状态正常停止，终止 RedisService.exe 程序，但开启守护进程的 redis-server.exe 不会终止，Redis 服务正常
+    - 解决：关闭守护模式 `daemonize no`
+
+2. 配置异常缺陷
+
+    - 开启服务：服务状态正常启动， 并同时启动 RedisService.exe 程序，但配置异常导致 redis-server.exe 启动失败，无法提供 Redis 服务
+    - 停止服务：服务状态正常停止，终止 RedisService.exe 程序
+    - 解决：只能提交 bug 让开发者解决
+
+3. PID 文件无法销毁缺陷
+
+    - pid 文件里的 pid 值跟启动的 RedisService.exe 和 redis-server.exe 程序 pid 值都不一样
+    - 解决：只能提交 bug 让开发者解决
 
 :::
