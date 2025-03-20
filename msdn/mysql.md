@@ -247,7 +247,6 @@ mysql> flush privileges;
 ### 5. 创建远程用户
 
 ```ps1
-# 请使用对应版本自带的MySQL客户端来操作
 C:
 cd C:\mysql\product\55\bin
 mysql -uroot -P10055 -p
