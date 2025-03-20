@@ -11,6 +11,10 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 如果环境部署在 Windows 上，并且对权限安全有更高要求，非常推荐使用 IIS ！
 :::
 
+::: tip vc 运行库
+PHP、MySQL、Redis 都依赖 `vc++运行库`，不同的版本依赖的 `vc++运行库`版本也不一样，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
+:::
+
 ## 一、权限说明
 
 ### 1. Windows 与 Linux 权限上的区别
