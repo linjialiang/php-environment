@@ -150,6 +150,11 @@ save 3600 1 300 100 60 10000 # 如果设为 save "" 代表关闭
 # - 注意：AOF文件，也将在此目录中创建
 dir /server/redis/rdbData
 
+# 是否开启AOF持久化。
+# - 默认为no，表示关闭AOF持久化。
+# - 如果设置为yes，则开启AOF持久化。
+appendonly yes
+
 # 启用TLS，证书需自签名或购买
 tls-port 16379
 tls-cert-file /server/redis/tls/redis.crt
