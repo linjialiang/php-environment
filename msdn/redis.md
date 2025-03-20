@@ -108,3 +108,7 @@ sc.exe delete Redis
     - 解决：只能提交 bug 让开发者解决
 
 :::
+
+::: details 附录：配置案例
+<<<@/assets/iis/redis/redis.conf [配置案例]
+:::
