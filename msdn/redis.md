@@ -74,9 +74,17 @@ tls-dh-params-file ./tls/redis.dh
 
 使用 sc 安装 Windows 系统服务
 
-```ps1
+::: code-group
+
+```ps1 [安装服务]
 sc.exe create Redis binpath="C:\Redis\RedisService.exe -c C:\Redis\redis.conf" start=demand displayName="Redis Service"
 ```
+
+```ps1 [卸载服务]
+sc.exe delete Redis
+```
+
+:::
 
 ::: warning Redis 系统服务缺陷说明：
 
