@@ -54,6 +54,8 @@ requirepass 1
 # - 如果设置为yes，则开启AOF持久化。
 appendonly yes
 
+# 配置
+# port 设为 0 则禁用非tls连接
 port 6379
 tls-port 16379
 tls-cert-file ./tls/server.crt
