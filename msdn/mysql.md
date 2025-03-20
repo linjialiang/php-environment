@@ -115,10 +115,23 @@ cd C:\mysql\product\84
 | `--initialize`          | 为 root 用户生成一个随机的临时密码，密码将被标记为过期，需要修改新的密码     |
 | `--initialize-insecure` | 不生成 root 密码，root 账户初始密码为空，<br>使用 `--skip-password` 直接登录 |
 
-::: tip 初始化时注意事项
+::: tip 初始化时注意事项：
 
 1. `datadir父级目录` 必须存在
 2. `datadir` 必须为空或者不存在
+
+:::
+
+::: details MySQL 配置案例：
+::: code-group
+
+<<<@/assets/iis/mysql/my-55.ini [55]
+<<<@/assets/iis/mysql/my-56.ini [56]
+<<<@/assets/iis/mysql/my-57.ini [57]
+<<<@/assets/iis/mysql/my-80.ini [80]
+<<<@/assets/iis/mysql/init-80.sql [80-init]
+<<<@/assets/iis/mysql/my-84.ini [84]
+<<<@/assets/iis/mysql/init-84.sql [84-init]
 
 :::
 
