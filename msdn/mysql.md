@@ -2,6 +2,10 @@
 
 Windows 下使用多版本 MySQL 共存的方式
 
+::: tip 依赖
+不同 MySQL 版本依赖的 `vc++运行库` 版本不同，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
+:::
+
 ### 1. 目录结构
 
 ::: details 安装目录如下：
