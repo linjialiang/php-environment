@@ -24,11 +24,6 @@ Windows 下使用多版本 MySQL 共存的方式
 |   |  ├─ mysql-57.pid ----------- pid 文件
 |   |  ├─ mysql-80.pid ----------- pid 文件
 |   |  ├─ mysql-84.pid ----------- pid 文件
-|   |  ├─ mysql-55.sock ---------- socket 文件
-|   |  ├─ mysql-56.sock ---------- socket 文件
-|   |  ├─ mysql-57.sock ---------- socket 文件
-|   |  ├─ mysql-80.sock ---------- socket 文件
-|   |  ├─ mysql-84.sock ---------- socket 文件
 |   |  └─ ...
 |   |
 |   ├─ logs ------------------------------------------ 日志基目录
