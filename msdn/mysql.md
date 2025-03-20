@@ -218,7 +218,7 @@ sc config mysql-84 start=demand
 C:
 cd C:\mysql\product\55\bin
 mysql -uroot -P10055
-mysql> set password for root@localhost=password('123456');
+mysql> set password for root@localhost=password('1');
 mysql> flush privileges;
 ```
 
@@ -233,7 +233,7 @@ cd C:\mysql\product\57\bin
 # 初始化使用 --initialize-insecure 无密码
 mysql -uroot -P10057 --skip-password
 
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '1';
 mysql> flush privileges;
 ```
 
@@ -245,7 +245,7 @@ mysql> flush privileges;
 C:
 cd C:\mysql\product\55\bin
 mysql -uroot -P10055 -p
-mysql> create user 'root'@'192.168.%.%' identified by '123456';
+mysql> create user 'root'@'192.168.%.%' identified by '1';
 mysql> grant all privileges on *.* to 'root'@'192.168.%.%' WITH GRANT OPTION;
 mysql> flush privileges;
 ```
