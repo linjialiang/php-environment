@@ -2,11 +2,7 @@
 
 Redis 官方并没有 Windows 的二进制包，我们可以使用 github 上开源的第三方二进制包 [redis-windows](https://github.com/redis-windows/redis-windows)
 
-为方便起见我这里选择了 `msys2-with-Service` 版本，该版本通常可以一键搞定
-
-::: tip 提示
-该项目的 Redis 测试时不支持 tls 功能
-:::
+为方便起见我这里选择了 `msys2-with-Service` 版本
 
 ### 1. 安装路径
 
@@ -38,11 +34,13 @@ bind 127.0.0.1 -::1
 # - 60秒（1分钟）内有至少1万个key发生变化；
 save 3600 1 300 100 60 10000 # 如果设为 save "" 代表关闭
 # 指定工作目录
-# - 用于存放redis.conf配置上指定为相对路径的文件，如：
+# - 配置文件redis.conf上所有相对路径的父级目录，如：
 #   1. RDB文件的存储目录
 #   2. AOF文件的存储目录
-#   3. 相对路径的pid文件
-#   4. 相对路径的日志文件
+#   3. 使用了相对路径的pid文件
+#   4. 使用了相对路径的日志文件
+#   5. 使用了相对路径的tls相关文件
+#   6. 访问控制列表
 dir ./rdbData
 
 # 取消注释后，则开启ACL(访问控制列表)
@@ -55,6 +53,17 @@ requirepass 1
 # - 默认为no，表示关闭AOF持久化。
 # - 如果设置为yes，则开启AOF持久化。
 appendonly yes
+
+port 6379
+tls-port 16379
+tls-cert-file ./tls/server.crt
+tls-key-file ./tls/server.key
+tls-ca-cert-file ./tls/ca.crt
+tls-client-cert-file ./tls/client.crt
+tls-client-key-file ./tls/client.key
+# tls-auth-clients optional
+# 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置，并建议不使用DH参数文件
+tls-dh-params-file ./tls/redis.dh
 ```
 
 :::
