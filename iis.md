@@ -12,7 +12,11 @@ IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年�
 :::
 
 ::: tip vc 运行库
-PHP、MySQL、Redis 都依赖 `vc++运行库`，不同的版本依赖的 `vc++运行库`版本也不一样，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
+PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依赖的 `vc++运行库`版本也不一样，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
+:::
+
+::: tip 终端
+下面涉及的终端(`cmd.exe/pwsh.exe`)操作，基本上都需要 `以管理员身份` 打开，如无需使用或不应该 `以管理员身份` 打开的均会做说明。
 :::
 
 ## 一、权限说明
