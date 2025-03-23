@@ -53,7 +53,6 @@
 |   |  ├─ client-emad.{crt,key} -- 允许用户emad使用verify-full验证类型
 |   |  ├─ client-admin.{crt,key} - 允许用户admin使用verify-full验证类型
 |   |  ├─ pgsql.dh --------------- 在SSL/TLS握手过程中协商临时密钥，以确保通信的安全性
-|   |  |
 |   |  └─ ...
 |   |
 |   └─
