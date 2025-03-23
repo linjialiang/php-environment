@@ -95,6 +95,13 @@ cd C:\pgsql\product\17\bin
 .\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -U postgres -P "1" -S demand
 ```
 
+```ps1 [服务启停]
+# 启动
+net start pgsql-17
+# 停止
+net stop pgsql-17
+```
+
 :::
 
 ::: details pgsql 17.4 版本通过 pg_ctl 注册时的选项说明
@@ -309,6 +316,14 @@ log_rotation_size = 0               # 日志文件大小不限制
 
 ### 5. 创建账号
 
-```ps1
+默认创建了超级管理员用户 postgres，支持通过套接字和 `tcp/ip` 的方式登录，这里我们使用 postgres 账号来创建和设置
+
+::: code-group
+
+```ps1 []
+c:
+cd C:\pgsql\product\17\bin
 .\psql.exe -h C:\pgsql\temp\17 -U postgres
 ```
+
+:::
