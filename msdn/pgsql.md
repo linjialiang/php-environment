@@ -100,7 +100,7 @@ cd C:\pgsql\product\17\bin
 
 ### 3. 注册 Windows 服务
 
-Windows 版的 PgSQL 不支持 `Administrator` 账户作为服务所属账户，注册是需要指定服务所属系统账户。
+Windows 版的 PgSQL 不支持 `Administrator` 账户作为服务所属账户，注册时需要指定服务所属系统账户。
 
 ::: details 这里以 postgres 系统账户为例(系统账户名可以随便取，不一定是 postgres)
 ![创建系统用户](/assets/iis/pgsql/3.jpg)
@@ -111,7 +111,10 @@ Windows 版的 PgSQL 不支持 `Administrator` 账户作为服务所属账户，
 ```ps1 [17]
 C:
 cd C:\pgsql\product\17\bin
+# Administrator 账户登录
 .\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -U postgres -P "1" -S demand
+# 非 Administrator 账户登录
+.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -S demand
 ```
 
 ```ps1 [服务启停]
