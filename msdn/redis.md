@@ -70,7 +70,7 @@ tls-dh-params-file ./tls/redis.dh
 
 :::
 
-### 3. 安装系统服务
+### 3. 注册 Windows 服务
 
 使用 sc 安装 Windows 系统服务
 

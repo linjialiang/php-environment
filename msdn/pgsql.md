@@ -46,7 +46,7 @@
 
 :::
 
-## 2. 初始化数据库
+### 2. 初始化数据库
 
 ::: code-group
 
@@ -64,5 +64,17 @@ cd C:\pgsql\product\17\bin
 
 -   终端以超级管理员身份打开：需要 `Administrator` 用户 `读+写` 权限;
 -   终端以用户 emad 身份打开：需要 `emad` 用户 `读+写` 权限.
+
+:::
+
+### 3. 注册 Windows 服务
+
+::: code-group
+
+```ps1 [17]
+C:
+cd C:\pgsql\product\17\bin
+.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -S demand
+```
 
 :::

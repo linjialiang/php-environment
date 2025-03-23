@@ -135,7 +135,7 @@ cd C:\mysql\product\84
 
 :::
 
-### 3. 加入系统服务
+### 3. 注册 Windows 服务
 
 ::: code-group
 
