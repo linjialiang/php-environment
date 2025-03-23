@@ -342,3 +342,4 @@ PHP、MySQL、Redis 都依赖 `vc++运行库`，不同的版本依赖的 `vc++�
 
 <!--@include: ./msdn/mysql.md-->
 <!--@include: ./msdn/redis.md-->
+<!--@include: ./msdn/pgsql.md-->
