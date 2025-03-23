@@ -41,8 +41,17 @@
 
 ```ps1 [17]
 C:
-cd C:\pgsql\product\17
-.\bin\initdb.exe -D "C:\pgsql\data\17" -E UTF8 --locale=zh_CN.utf8 -U postgres -W
+cd C:\pgsql\product\17\bin
+.\initdb.exe -D "C:\pgsql\data\17" -E UTF8 --locale=Chinese_China.936 -U postgres -W
 ```
+
+:::
+
+::: tip data 目录权限说明
+
+`C:\pgsql\data` 需要拥有当前打开的终端窗口所属用户的权限全部权限，因为打开终端的用户为服务器进程的宿主：
+
+-   终端以超级管理员身份打开：需要 `Administrator` 用户 `读+写` 权限;
+-   终端以用户 emad 身份打开：需要 `emad` 用户 `读+写` 权限.
 
 :::
