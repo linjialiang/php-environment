@@ -74,7 +74,7 @@ cd C:\pgsql\product\17\bin
 ```ps1 [17]
 C:
 cd C:\pgsql\product\17\bin
-.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -S demand
+.\pg_ctl.exe register -D C:\pgsql\data\17 -N pgsql-17 -S demand
 ```
 
 :::
