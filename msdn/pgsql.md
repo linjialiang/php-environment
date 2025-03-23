@@ -277,12 +277,11 @@ lc_time = 'Chinese_China.936'
 default_text_search_config = 'pg_catalog.simple'
 
 # custom
-listen_addresses = '127.0.0.1,192.168.66.254'
+listen_addresses = '127.0.0.1,192.168.3.8'
 port = 5432
 external_pid_file = 'c:/pgsql/temp/17/process.pid'
 unix_socket_directories = 'c:/pgsql/temp/17'
 
-# TLS
 ssl = on
 ssl_ca_file = 'c:/pgsql/tls/root.crt'
 ssl_cert_file = 'c:/pgsql/tls/server.crt'
@@ -303,13 +302,13 @@ archive_command = 'test ! -f c:/pgsql/log/17/wal_archive/%f && cp %p c:/pgsql/lo
 log_destination = 'jsonlog'
 logging_collector = on
 log_directory = 'c:/pgsql/log/17'
-log_file_mode = 0600
+# 应该对windows无效，保持默认的 0640
+# log_file_mode = 0640
 # 日志保留指定天数(推荐)
 log_truncate_on_rotation = on       # on 轮换日志文件时，如文件存在，则覆盖内容
 log_filename = '%d.log'    			# %a保留一周、%d保留[01,31]
 log_rotation_age = 1d               # 每天轮换日志文件
 log_rotation_size = 0               # 日志文件大小不限制
-
 ```
 
 :::
@@ -320,10 +319,18 @@ log_rotation_size = 0               # 日志文件大小不限制
 
 ::: code-group
 
-```ps1 []
+```ps1 [登录]
 c:
 cd C:\pgsql\product\17\bin
 .\psql.exe -h C:\pgsql\temp\17 -U postgres
+psql (17.4)
+输入 "help" 来获取帮助信息.
+
+postgres=#
+```
+
+```ps1 [创建用户]
+CREATE USER admin SUPERUSER LOGIN PASSWORD '1';
 ```
 
 :::
