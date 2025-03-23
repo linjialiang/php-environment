@@ -54,27 +54,39 @@
 C:
 cd C:\pgsql\product\17\bin
 .\initdb.exe -D "C:\pgsql\data\17" -E UTF8 --locale=Chinese_China.936 -U postgres -W
+
+# 测试 开启服务
+.\pg_ctl.exe -D "C:\pgsql\data\17" -l "C:\pgsql\log\17\logFile" start
+# 测试 停止服务
+.\pg_ctl.exe -D "C:\pgsql\data\17" -l "C:\pgsql\log\17\logFile" start
 ```
 
 :::
 
 ::: tip data 目录权限说明
 
-`C:\pgsql\data` 需要拥有当前打开的终端窗口所属用户的权限全部权限，因为打开终端的用户为服务器进程的宿主：
+权限方面感觉有点奇怪：
 
--   终端以超级管理员身份打开：需要 `Administrator` 用户 `读+写` 权限;
--   终端以用户 emad 身份打开：需要 `emad` 用户 `读+写` 权限.
+1. 我的操作系统登录账户是 `Administrator`；
+2. `C:\pgsql\` 目录授权给用户组 `Administrators` 全部权限依然会报错；
+3. `C:\pgsql\` 必须授权给用户 `Administrator` 全部权限才可以正常初始化。
 
 :::
 
 ### 3. 注册 Windows 服务
+
+Windows 版的 PgSQL 不支持 `Administrator` 账户作为服务所属账户，注册是需要指定服务所属系统账户。
+
+::: details 这里以 postgres 系统账户为例(系统账户名可以随便取，不一定是 postgres)
+![创建系统用户](/assets/iis/pgsql/3.jpg)
+:::
 
 ::: code-group
 
 ```ps1 [17]
 C:
 cd C:\pgsql\product\17\bin
-.\pg_ctl.exe register -D C:\pgsql\data\17 -N pgsql-17 -S demand
+.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -U postgres -P "1" -S demand
 ```
 
 :::
