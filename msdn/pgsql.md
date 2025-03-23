@@ -89,11 +89,11 @@ cd C:\pgsql\product\17\bin
 
 :::
 
-::: details 注册参数说明
+::: details pgsql 17.4 版本通过 pg_ctl 注册时的选项说明
 
-pg_ctl 的 register 指定选项说明
-
-`pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] [-S 启动类型] [-e 源] [-W] [-t 秒数] [-s] [-o 选项]`
+```ps1
+pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] [-S 启动类型] [-e 源] [-W] [-t 秒数] [-s] [-o 选项]
+```
 
 ::: code-group
 
