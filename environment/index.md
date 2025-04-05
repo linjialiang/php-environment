@@ -44,9 +44,9 @@ titleTemplate: 环境搭建教程
 4. postgresql-17.4.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
-        - xdebug-3.1.6.tgz
+        - xdebug-3.1.6.tgz `最后支持版`
         - apcu-5.1.24.tgz
-        - mongodb-1.20.1.tgz `已最新`
+        - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
     - 依赖库
