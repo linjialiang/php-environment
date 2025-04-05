@@ -189,7 +189,7 @@ make install
 ```
 
 ```bash [7.4]
-cd /home/php-fpm/php_ext/mongodb-1.21.0
+cd /home/php-fpm/php_ext/mongodb-1.20.1
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
@@ -200,8 +200,11 @@ make install
 :::
 
 ::: danger 重要说明
-在 Debian12 发行版中 `php-7.4.33` 在安装 mongodb 扩展时，必须使用跟编译 PHP 时兼容的 openssl 版本，
-具体操作见[[依赖 openssl 特殊版本]](/environment/php#assign-openssl-version)
+
+-   mongodb 扩展包 `>1.20.1` 后的不再支持 `PHP 7.4`
+-   在 Debian12 发行版中 `php-7.4.33` 在安装 mongodb 扩展时，必须使用跟编译 PHP 时兼容的 openssl 版本，
+    具体操作见[[依赖 openssl 特殊版本]](/environment/php#assign-openssl-version)
+
 :::
 
 ### 4. yaml 扩展
