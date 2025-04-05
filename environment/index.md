@@ -59,7 +59,7 @@ titleTemplate: 环境搭建教程
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 7. nginx-1.26.2.tar.gz
-    - openssl-3.0.15.tar.gz
+    - openssl-3.0.16.tar.gz
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
@@ -85,7 +85,7 @@ titleTemplate: 环境搭建教程
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 6. nginx-1.26.2.tar.gz
-    - openssl-3.0.15.tar.gz
+    - openssl-3.0.16.tar.gz
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
@@ -111,7 +111,7 @@ titleTemplate: 环境搭建教程
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 6. nginx-1.26.2.tar.gz
-    - openssl-3.0.15.tar.gz
+    - openssl-3.0.16.tar.gz
     - pcre2-10.44.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
