@@ -46,7 +46,7 @@ titleTemplate: 环境搭建教程
     - 动态扩展
         - xdebug-3.1.6.tgz
         - apcu-5.1.24.tgz
-        - mongodb-1.21.0.tgz
+        - mongodb-1.20.1.tgz `已最新`
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
     - 依赖库
