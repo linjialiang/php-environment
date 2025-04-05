@@ -108,7 +108,7 @@ export PATH=/server/autoconf-2.69/bin:$PATH
 ::: code-group
 
 ```bash [编译-默认]
-cd /home/php-fpm/php_ext/xdebug-3.4.1
+cd /home/php-fpm/php_ext/xdebug-3.4.2
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -156,7 +156,7 @@ xdebug.client_port=9074
 ::: code-group
 
 ```bash [默认]
-cd /home/php-fpm/php_ext/redis-6.1.0
+cd /home/php-fpm/php_ext/redis-6.2.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -165,7 +165,7 @@ make install
 ```
 
 ```bash [7.4]
-cd /home/php-fpm/php_ext/redis-6.1.0
+cd /home/php-fpm/php_ext/redis-6.2.0
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
@@ -180,7 +180,7 @@ make install
 ::: code-group
 
 ```bash [默认]
-cd /home/php-fpm/php_ext/mongodb-1.20.1
+cd /home/php-fpm/php_ext/mongodb-1.21.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -189,7 +189,7 @@ make install
 ```
 
 ```bash [7.4]
-cd /home/php-fpm/php_ext/mongodb-1.20.1
+cd /home/php-fpm/php_ext/mongodb-1.21.0
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
