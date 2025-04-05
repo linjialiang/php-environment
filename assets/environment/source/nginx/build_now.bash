@@ -1,5 +1,5 @@
 ./configure --prefix=/server/nginx \
---builddir=/home/nginx/nginx-1.26.2/build_nginx \
+--builddir=/home/nginx/nginx-1.26.3/build_nginx \
 --without-select_module \
 --without-poll_module \
 --with-threads \
