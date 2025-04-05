@@ -183,8 +183,8 @@ php-7.4.33 依赖的 openssl 库版本过高问题，就不会报错
 ::: code-group
 
 ```bash [84]
-mkdir /home/php-fpm/php-8.4.3/build_php
-cd /home/php-fpm/php-8.4.3/build_php/
+mkdir /home/php-fpm/php-8.4.5/build_php
+cd /home/php-fpm/php-8.4.5/build_php/
 ```
 
 ```bash [74]
@@ -278,7 +278,7 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [84]
-cp /home/php-fpm/php-8.4.3/php.ini-* /server/php/84/lib/
+cp /home/php-fpm/php-8.4.5/php.ini-* /server/php/84/lib/
 # 开发环境
 cp /server/php/84/lib/php.ini{-development,}
 # 部署环境

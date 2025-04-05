@@ -41,7 +41,7 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3480000.tar.gz
 2. redis-7.4.2.tar.gz
 3. mysql-8.4.4.tar.gz
-4. postgresql-17.2.tar.bz2
+4. postgresql-17.4.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz
@@ -51,7 +51,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-6. php-8.4.3.tar.xz
+6. php-8.4.5.tar.xz
     - 动态扩展
         - xdebug-3.4.1.tgz
         - apcu-5.1.24.tgz
@@ -67,7 +67,7 @@ titleTemplate: 环境搭建教程
 ```md [lnpp]
 1. sqlite-autoconf-3480000.tar.gz
 2. redis-7.4.2.tar.gz
-3. postgresql-17.2.tar.bz2
+3. postgresql-17.4.tar.bz2
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz
@@ -77,7 +77,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.3.tar.xz
+5. php-8.4.5.tar.xz
     - 动态扩展
         - xdebug-3.4.1.tgz
         - apcu-5.1.24.tgz
@@ -103,7 +103,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.3.tar.xz
+5. php-8.4.5.tar.xz
     - 动态扩展
         - xdebug-3.4.1.tgz
         - apcu-5.1.24.tgz
