@@ -402,8 +402,36 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 <<<@/assets/environment/source/php/84/php-fpm.d/tp.conf{ini}
 :::
 
-::: tip
-更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
+::: warning ⚠️ 注意：
+
+在性能允许的情况下增大 `max_children` 的数值，因为子进程代表的是并发能力；
+
+如果 `max_children` 设置的过小，并发能力就很差，请求很容易发生堵塞；
+
+::: danger 下面是 max_children 设置过小，导致请求始终失败的案例
+
+-   异常流程：
+
+    1. `接口提供者-站点A` 跟 `当前项目-站点B` 处理同台服务器；
+    2. Windows 环境，IIS 默认情况下 FastCGi 最大实例数为 4（开发人员未做修改）；
+    3. 由于 2 个站点所需的 PHP 版本号一样，所以两个 PHP 网站共用同一个 FastCGI 主进程；
+    4. `站点A` 提供接口给 `站点B`；
+    5. `站点B-前端` 有个页面向 `站点B-PHP后端` 同时发起了 `5个请求`；
+    6. `这5个请求` 又是全部需要向 `站点A` 发起 CURL 请求来获得数据的；
+    7. 由于 FastCGI 的 4 个进程已经被 `站点B前端->站点B后端` 暂用，所以 `站点B->站点A` 的 CURL 请求全部被堵塞；
+    8. 这个情况，只有到请求超时返回失败 FastCGI 子进程才能被释放；
+    9. 由于 `这5个请求` 同时发出，失败几乎也是同时发生，所以这个页面的 5 请求会陷入请求失败的死循环。
+
+-   解决办法：
+
+    1. 在性能允许的情况下增大 `max_children` 的值；
+    2. `PHP当前项目站点` 不要跟 `PHP接口站点` 处于同台服务器；
+    3. Windows 下，采用每个站点单独使用一个 php-cgi 程序；
+    4. Linux 下，可以为每个站点提供一个 FastCGI
+
+:::
+
+::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
 :::
 
 ## Systemd 管理
