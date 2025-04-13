@@ -426,8 +426,8 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 
     1. 在性能允许的情况下增大 `max_children` 的值；
     2. `PHP当前项目站点` 不要跟 `PHP接口站点` 处于同台服务器；
-    3. Windows 下，采用每个站点单独使用一个 php-cgi 程序；
-    4. Linux 下，可以为每个站点提供一个 FastCGI
+    3. Windows 下，采用每个站点单独使用一个 php-cgi 程序(复制 php-cgi 重命名)；
+    4. Linux 下，可以为每个站点设置单独的 php-fpm 工作池，工作池之间是独立的（`php-fpm.d`目录下）。
 
 :::
 
