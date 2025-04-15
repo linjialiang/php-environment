@@ -402,13 +402,11 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 <<<@/assets/environment/source/php/84/php-fpm.d/tp.conf{ini}
 :::
 
-::: warning ⚠️ 注意：
+::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
+:::
 
-在性能允许的情况下增大 `max_children` 的数值，因为子进程代表的是并发能力；
+::: warning ⚠️ 下面是 FastCGI 工作进程池的资源竞争导致请求死锁的案例以及具体解决方案：
 
-如果 `max_children` 设置的过小，并发能力就很差，请求很容易发生堵塞；
-
-::: danger 下面是 max_children 设置过小，导致请求始终失败的案例
 ::: code-group
 
 ```md [发生异常场景]
@@ -446,9 +444,6 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
     - 临时应急，不能从根本上解决问题
 ```
 
-:::
-
-::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
 :::
 
 ## Systemd 管理
