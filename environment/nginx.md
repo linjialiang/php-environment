@@ -49,7 +49,7 @@ setcap -r /server/nginx/sbin/nginx
 ::: code-group
 
 ```bash [common]
-cd /home/nginx/nginx-1.26.3
+cd /home/nginx/nginx-1.28.0
 ./configure --help > help.ini
 ```
 
@@ -64,8 +64,8 @@ cd /home/nginx/nginx-1.26.3
 
 ```bash [构建目录]
 su - nginx -s /bin/zsh
-mkdir ~/nginx-1.26.3/build_nginx
-cd ~/nginx-1.26.3
+mkdir ~/nginx-1.28.0/build_nginx
+cd ~/nginx-1.28.0
 ```
 
 <<<@/assets/environment/source/nginx/build_now.bash [本次构建指令]
@@ -136,7 +136,7 @@ Nginx 可实现平滑升级，具体操作如下：
 # 先备份旧版主文件，防止意外出现
 mv /server/nginx/sbin/nginx{,.bak}
 # 拷贝新的主文件,到指定目录
-cp -p -r /home/nginx/nginx-1.26.3/build_nginx/nginx /server/nginx/sbin/
+cp -p -r /home/nginx/nginx-1.28.0/build_nginx/nginx /server/nginx/sbin/
 ```
 
 ### 3. 升级操作

@@ -1,5 +1,5 @@
 ./configure --prefix=/server/nginx \
---builddir=/home/nginx/nginx-1.26.3/build_nginx \
+--builddir=/home/nginx/nginx-1.28.0/build_nginx \
 
 # 核心功能模块
 --with-threads \
@@ -46,7 +46,7 @@
 --with-pcre=/home/nginx/pcre2-10.45 \
 --with-pcre-jit \
 --with-zlib=/home/nginx/zlib-1.3.1 \
---with-openssl=/home/nginx/openssl-3.0.16
+--with-openssl=/home/nginx/openssl-3.5.0
 
 # 开启调试，生产环境下建议禁用
 --with-debug

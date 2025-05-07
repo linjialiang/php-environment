@@ -379,7 +379,7 @@ InstallSystemctlUnit(){
   echo_cyan "[+] Create nginx service..."
 
   echo "[Unit]
-Description=nginx-1.26.x
+Description=nginx-1.28.x
 After=network.target
 
 [Service]
