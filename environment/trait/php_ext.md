@@ -180,7 +180,7 @@ make install
 ::: code-group
 
 ```bash [默认]
-cd /home/php-fpm/php_ext/mongodb-1.21.0
+cd /home/php-fpm/php_ext/mongodb-1.22.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
