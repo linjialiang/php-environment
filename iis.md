@@ -79,7 +79,7 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
 
 案例使用了 2 个 PHP 版本的解释器：
 
-1. PHP 8.4.5
+1. PHP 8.4.6
 2. PHP 7.4.33
 
 ### 1. 目录结构
