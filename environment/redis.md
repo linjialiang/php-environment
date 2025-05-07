@@ -35,8 +35,8 @@ Redis 构建相对简单
 su - redis -s /bin/zsh
 # Redis 7.4.x 在测试中发现 make 时需要通过 ../deps/** 来获取自带的依赖依赖
 # - 所以必须在子目录中构建
-mkdir ~/redis-7.4.2/build_redis
-cd ~/redis-7.4.2/build_redis
+mkdir ~/redis-7.4.3/build_redis
+cd ~/redis-7.4.3/build_redis
 make -C ../ BUILD_TLS=yes -j4
 ```
 
@@ -50,7 +50,7 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 
 ```bash [安装并指定目录]
 # 需要回到源码根目录执行安装
-cd ~/redis-7.4.2/
+cd ~/redis-7.4.3/
 make install PREFIX=/server/redis
 ```
 
@@ -83,7 +83,7 @@ redis 源码包中自带了参考配置文件，可以备份该参考配置，�
 ::: code-group
 
 ```bash [备份默认配置]
-cp -p -r ~/redis-7.4.2/redis.conf /server/redis/redis.conf.source
+cp -p -r ~/redis-7.4.3/redis.conf /server/redis/redis.conf.source
 ```
 
 ```bash [RDB存储目录]
@@ -426,10 +426,10 @@ redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TL
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh
-cd ~/redis-7.4.2/utils
+cd ~/redis-7.4.3/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
-cp -r ~/redis-7.4.2/utils/tests/tls /server/redis
+cp -r ~/redis-7.4.3/utils/tests/tls /server/redis
 ```
 
 ```bash [生成文件]
