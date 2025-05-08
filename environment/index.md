@@ -474,21 +474,18 @@ source ~/.profile
 ::: warning PostgreSQL 推荐使用 `CLANG+LLVM` 编译套件，`--with-llvm` 启用 JIT 支持，能提升查询性能；其余软件优先使用 `GCC` 编译套件。
 :::
 
-## 附录一：lnpp 预构建包一键安装脚本
+## 附录：预构建包一键安装脚本
 
 ::: code-group
 
 ```md [说明]
--   MySQL 默认有个超级管理员用户 `admin` 密码 `1`
--   PostgreSQL 默认有个超级管理员用户 `admin` 密码 `1`
+-   Postgres 默认有个超级管理员用户 `admin` 密码 `1`
+-   MySQL 默认有个本地用户 `admin@localhost` 密码 `1`
+-   MySQL 默认有个局域网用户 `admin@'192.168.%.%'` 密码 `1`
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<<@/assets/environment/lnpp-setup.sh [lnpp]
-<<<@/assets/environment/lnmp-setup.sh [lnmp]
 <<<@/assets/environment/lnmpp-setup.sh [lnmpp]
-:::
-
-::: tip 提示
-有没有可能，编译阶段安装的很多开发包，在运行阶段都是没用的呢？如果可以卸载掉这些包，就可以减少资源浪费
+<<<@/assets/environment/lnmp-setup.sh [lnmp]
+<<<@/assets/environment/lnpp-setup.sh [lnpp]
 :::
