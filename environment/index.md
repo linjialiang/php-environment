@@ -55,7 +55,7 @@ titleTemplate: 环境搭建教程
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
-        - mongodb-1.22.0.tgz
+        - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 7. nginx-1.28.0.tar.gz
@@ -81,7 +81,7 @@ titleTemplate: 环境搭建教程
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
-        - mongodb-1.22.0.tgz
+        - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 6. nginx-1.28.0.tar.gz
@@ -107,7 +107,7 @@ titleTemplate: 环境搭建教程
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
-        - mongodb-1.22.0.tgz
+        - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.4.tgz
 6. nginx-1.28.0.tar.gz
