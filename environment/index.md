@@ -51,7 +51,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-6. php-8.4.6.tar.xz
+6. php-8.4.7.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
@@ -77,7 +77,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.6.tar.xz
+5. php-8.4.7.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
@@ -103,7 +103,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.4.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.6.tar.xz
+5. php-8.4.7.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
         - apcu-5.1.24.tgz
