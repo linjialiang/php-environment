@@ -41,7 +41,7 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3490200.tar.gz
 2. redis-7.4.3.tar.gz
 3. mysql-8.4.5.tar.gz
-4. postgresql-17.4.tar.bz2
+4. postgresql-17.5.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
@@ -67,7 +67,7 @@ titleTemplate: 环境搭建教程
 ```md [lnpp]
 1. sqlite-autoconf-3490200.tar.gz
 2. redis-7.4.3.tar.gz
-3. postgresql-17.4.tar.bz2
+3. postgresql-17.5.tar.bz2
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
