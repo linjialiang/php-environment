@@ -1,5 +1,5 @@
 ---
-title: Windows下主从复制
+title: Windows 下 MySQL 主从复制
 titleTemplate: MySQL 篇
 ---
 

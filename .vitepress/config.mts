@@ -84,10 +84,7 @@ export default defineConfig({
       { text: 'IIS 篇', link: '/iis' },
       {
         text: 'MySQL 篇',
-        items: [
-          { text: '主从复制-windows', link: '/mysql/windows-master-slave-replication' },
-          { text: '主从复制-linux', link: '/mysql/linux-master-slave-replication' },
-        ],
+        items: [{ text: '主从复制', link: '/mysql/master-slave-replication/' }],
       },
     ],
     sidebar: {
