@@ -46,7 +46,7 @@
 --with-pcre=/home/nginx/pcre2-10.45 \
 --with-pcre-jit \
 --with-zlib=/home/nginx/zlib-1.3.1 \
---with-openssl=/home/nginx/openssl-3.5.0
+--with-openssl=/home/nginx/openssl-3.5.2
 
 # 开启调试，生产环境下建议禁用
 --with-debug

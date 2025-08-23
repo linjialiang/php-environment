@@ -49,80 +49,80 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [lnmpp]
-1. sqlite-autoconf-3490200.tar.gz
-2. redis-7.4.3.tar.gz
-3. mysql-8.4.5.tar.gz
-4. postgresql-17.5.tar.bz2
+1. sqlite-autoconf-3500400.tar.gz
+2. redis-8.2.1.tar.gz
+3. mysql-8.4.6.tar.gz
+4. postgresql-17.6.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.24.tgz
+        - apcu-5.1.26.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-6. php-8.4.7.tar.xz
+6. php-8.4.11.tar.xz
     - 动态扩展
-        - xdebug-3.4.2.tgz
-        - apcu-5.1.24.tgz
-        - mongodb-2.0.0.tgz
+        - xdebug-3.4.5.tgz
+        - apcu-5.1.26.tgz
+        - mongodb-2.1.1.tgz
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
 7. nginx-1.28.0.tar.gz
-    - openssl-3.5.0.tar.gz
+    - openssl-3.5.2.tar.gz
     - pcre2-10.45.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
 
 ```md [lnpp]
-1. sqlite-autoconf-3490200.tar.gz
-2. redis-7.4.3.tar.gz
-3. postgresql-17.5.tar.bz2
+1. sqlite-autoconf-3500400.tar.gz
+2. redis-8.2.1.tar.gz
+3. postgresql-17.6.tar.bz2
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.24.tgz
+        - apcu-5.1.26.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.7.tar.xz
+5. php-8.4.11.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
-        - apcu-5.1.24.tgz
+        - apcu-5.1.26.tgz
         - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
 6. nginx-1.28.0.tar.gz
-    - openssl-3.5.0.tar.gz
+    - openssl-3.5.2.tar.gz
     - pcre2-10.45.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
 
 ```md [lnmp]
-1. sqlite-autoconf-3490200.tar.gz
-2. redis-7.4.3.tar.gz
-3. mysql-8.4.5.tar.gz
+1. sqlite-autoconf-3500400.tar.gz
+2. redis-8.2.1.tar.gz
+3. mysql-8.4.6.tar.gz
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.24.tgz
+        - apcu-5.1.26.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.7.tar.xz
+5. php-8.4.11.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
-        - apcu-5.1.24.tgz
+        - apcu-5.1.26.tgz
         - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
-        - yaml-2.2.4.tgz
+        - yaml-2.2.5.tgz
 6. nginx-1.28.0.tar.gz
-    - openssl-3.5.0.tar.gz
+    - openssl-3.5.2.tar.gz
     - pcre2-10.45.tar.bz2
     - zlib-1.3.1.tar.xz
 ```

@@ -215,7 +215,7 @@ make install
 # 安装依赖库
 apt install libyaml-dev -y
 
-cd /home/php-fpm/php_ext/yaml-2.2.4
+cd /home/php-fpm/php_ext/yaml-2.2.5
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -227,7 +227,7 @@ make install
 # 安装依赖库
 apt install libyaml-dev -y
 
-cd /home/php-fpm/php_ext/yaml-2.2.4
+cd /home/php-fpm/php_ext/yaml-2.2.5
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
@@ -242,7 +242,7 @@ make install
 ::: code-group
 
 ```bash [默认]
-cd /home/php-fpm/php_ext/apcu-5.1.24
+cd /home/php-fpm/php_ext/apcu-5.1.26
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -251,7 +251,7 @@ make install
 ```
 
 ```bash [7.4]
-cd /home/php-fpm/php_ext/apcu-5.1.24
+cd /home/php-fpm/php_ext/apcu-5.1.26
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4
