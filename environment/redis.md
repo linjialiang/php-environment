@@ -9,25 +9,19 @@ titleTemplate: 环境搭建教程
 
 在 Debian 12 下构建 Redis 的详细流程如下
 
-## 安装依赖
+::: tip 注意
+redis 7.4 安装相对简单，从 redis8.2 开始这里按照 redis 源码包的 readme.md 文档来进行
+:::
 
-测试编译结果会用到 tcl
+## 7.4 之前版本
+
+### 安装依赖
 
 ```bash
 apt install tcl libssl-dev pkg-config -y
 ```
 
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y gcc make tcl libssl-dev pkg-config
-```
-
-:::
-
-## 构建安装
-
-Redis 构建相对简单
+### 编译安装
 
 ::: code-group
 
@@ -53,6 +47,8 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 cd ~/redis-8.2.1/
 make install PREFIX=/server/redis
 ```
+
+## 8.2 版本
 
 ```text [目录结构]
 ====================================================
