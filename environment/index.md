@@ -13,12 +13,12 @@ titleTemplate: 环境搭建教程
 
 ::: code-group
 
-```[debian13]
-系统 : `Debian GNU/Linux 13 (Bookworm) x86_64`
+```[debian12]
+系统 : `Debian GNU/Linux 12 (Bookworm) x86_64`
 内核 : `linux-image-6.1.0-26-amd64`
 ```
 
-```[debian12]
+```[debian13]
 系统 : `Debian GNU/Linux 13 (trixie)`
 内核 : `linux-image-6.12.41+deb13-amd64`
 ```
