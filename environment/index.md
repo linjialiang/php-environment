@@ -9,10 +9,21 @@ titleTemplate: 环境搭建教程
 
 ## 测试环境
 
-测试环境 `虚拟机` 的系统参数如下：
+::: details 测试环境的系统参数如下(`以最新版为准`)：
 
--   系统 :` Debian GNU/Linux 12 (Bookworm) x86_64`
--   内核 : `linux-image-6.1.0-26-amd64`
+::: code-group
+
+```[debian13]
+系统 : `Debian GNU/Linux 13 (Bookworm) x86_64`
+内核 : `linux-image-6.1.0-26-amd64`
+```
+
+```[debian12]
+系统 : `Debian GNU/Linux 12 (Bookworm) x86_64`
+内核 : `linux-image-6.1.0-26-amd64`
+```
+
+:::
 
 ::: details PHP 环境目录结构
 
