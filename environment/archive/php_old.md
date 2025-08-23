@@ -821,7 +821,7 @@ chmod 750 -R /server/php/83/bin /server/php/83/sbin
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入 lnpp包用户组
-usermod -G sqlite,redis,postgres,mysql,php,nginx emad
+usermod -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 ```
 
 :::
