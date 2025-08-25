@@ -20,13 +20,13 @@ titleTemplate: 环境搭建教程
 ## 依赖
 
 ```bash
-apt install -y gcc make
+apt install -y gcc make tcl
 ```
 
 ::: details debian12 纯净版所需完整依赖
 
 ```bash
-apt install -y gcc make zlib1g-dev gawk libedit-dev libreadline-dev
+apt install -y gcc make tcl zlib1g-dev gawk libedit-dev libreadline-dev
 ```
 
 :::

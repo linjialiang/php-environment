@@ -18,7 +18,7 @@ redis 7.4 安装相对简单，从 redis8.2 开始这里按照 redis 源码包�
 ### 安装依赖
 
 ```bash
-apt install tcl libssl-dev pkg-config -y
+apt install libssl-dev pkg-config -y
 ```
 
 ### 编译安装
