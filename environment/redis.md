@@ -148,11 +148,14 @@ vm.overcommit_memory = 1
     ```
 ````
 
-<<<@/assets/environment/source/redis/redis.conf{ini} [配置案例]
-<<<@/assets/environment/source/redis/redis.conf.source{ini} [自带配置]
-<<<@/assets/environment/source/redis/redis-74.conf{ini} [7.4 配置案例]
-<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [7.4 自带配置]
+:::
 
+::: details 配置案例
+::: code-group
+<<<@/assets/environment/source/redis/redis.conf{ini} [配置案例]
+<<<@/assets/environment/source/redis/redis-74.conf{ini} [7.4 配置案例]
+<<<@/assets/environment/source/redis/redis.conf.source{ini} [自带配置]
+<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [7.4 自带配置]
 :::
 
 ### 2. 配置说明
