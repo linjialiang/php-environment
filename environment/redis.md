@@ -48,6 +48,24 @@ cd ~/redis-7.4.3/
 make install PREFIX=/server/redis
 ```
 
+```text [目录结构]
+====================================================
+Redis 初始目录结构
+====================================================
+├─ /server/redis                        redis基目录
+|   ├─ bin
+|   |  ├─ redis-benchmark               Redis 压力测试工具
+|   |  ├─ redis-cli                     Redis 客户端
+|   |  ├─ redis-server                  Redis 服务器
+|   |  ├─ redis-check-aof               redis-server软链接
+|   |  ├─ redis-check-rdb               redis-server软链接
+|   |  ├─ redis-sentinel                redis-server软链接
+|   |  └─ ...
+|   |
+└─  └─  rdbData                         手动创建，快照和本地持久化文件存放路径指向此目录
+
+```
+
 :::
 
 ## 8.2 版本
@@ -66,8 +84,8 @@ apt install tcl libssl-dev pkg-config -y
 su - redis -s /bin/zsh
 # Redis 7.4.x 在测试中发现 make 时需要通过 ../deps/** 来获取自带的依赖依赖
 # - 所以必须在子目录中构建
-mkdir ~/redis-7.4.3/build_redis
-cd ~/redis-7.4.3/build_redis
+mkdir ~/redis-8.2.1/build_redis
+cd ~/redis-8.2.1/build_redis
 make -C ../ BUILD_TLS=yes -j4
 ```
 
@@ -81,7 +99,7 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 
 ```bash [安装并指定目录]
 # 需要回到源码根目录执行安装
-cd ~/redis-7.4.3/
+cd ~/redis-8.2.1/
 make install PREFIX=/server/redis
 ```
 
