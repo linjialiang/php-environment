@@ -68,61 +68,6 @@ Redis 初始目录结构
 
 :::
 
-## 8.2 版本
-
-### 安装依赖
-
-```bash
-apt install -y libssl-dev pkg-config g++
-```
-
-### 编译安装
-
-::: code-group
-
-```bash [构建指令]
-su - redis -s /bin/zsh
-# make 时需要通过 ../deps/** 来获取自带的依赖依赖
-# - 所以必须在子目录中构建
-mkdir ~/redis-8.2.1/build_redis
-cd ~/redis-8.2.1/build_redis
-make -C ../ BUILD_TLS=yes -j4
-```
-
-```bash [检测编译结果]
-make -C ../ test
-# 当出现高亮信息 `\o/ All tests passed without errors!` 证明测试通过
-# -- 低配虚拟机通常会因为AOF持久化的最大延迟（max_latency）> 40 发出异常报错
-*** [err]: Active defrag - AOF loading in tests/unit/memefficiency.tcl
-Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
-```
-
-```bash [安装并指定目录]
-# 需要回到源码根目录执行安装
-cd ~/redis-8.2.1/
-make install PREFIX=/server/redis
-```
-
-```text [目录结构]
-====================================================
-Redis 初始目录结构
-====================================================
-├─ /server/redis                        redis基目录
-|   ├─ bin
-|   |  ├─ redis-benchmark               Redis 压力测试工具
-|   |  ├─ redis-cli                     Redis 客户端
-|   |  ├─ redis-server                  Redis 服务器
-|   |  ├─ redis-check-aof               redis-server软链接
-|   |  ├─ redis-check-rdb               redis-server软链接
-|   |  ├─ redis-sentinel                redis-server软链接
-|   |  └─ ...
-|   |
-└─  └─  rdbData                         手动创建，快照和本地持久化文件存放路径指向此目录
-
-```
-
-:::
-
 ## 配置文件
 
 redis 源码包中自带了参考配置文件，可以备份该参考配置，按需增减配置，最后清除不必要的注释行
@@ -132,7 +77,7 @@ redis 源码包中自带了参考配置文件，可以备份该参考配置，�
 ::: code-group
 
 ```bash [备份默认配置]
-cp -p -r ~/redis-8.2.1/redis.conf /server/redis/redis.conf.source
+cp -p -r ~/redis-7.4.3/redis.conf /server/redis/redis.conf.source
 ```
 
 ```bash [RDB存储目录]
@@ -172,10 +117,8 @@ vm.overcommit_memory = 1
 
 ::: details 配置案例
 ::: code-group
-<<<@/assets/environment/source/redis/redis.conf{ini} [配置案例]
-<<<@/assets/environment/source/redis/redis-74.conf{ini} [7.4 配置案例]
-<<<@/assets/environment/source/redis/redis.conf.source{ini} [自带配置]
-<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [7.4 自带配置]
+<<<@/assets/environment/source/redis/redis-74.conf{ini} [配置案例]
+<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [自带配置]
 :::
 
 ### 2. 配置说明
@@ -480,10 +423,10 @@ redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TL
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh
-cd ~/redis-8.2.1/utils
+cd ~/redis-7.4.3/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
-cp -r ~/redis-8.2.1/utils/tests/tls /server/redis
+cp -r ~/redis-7.4.3/utils/tests/tls /server/redis
 ```
 
 ```bash [生成文件]
