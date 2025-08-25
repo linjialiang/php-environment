@@ -43,7 +43,7 @@ chown mysql:mysql -R /home/mysql/{.oh-my-zsh,.zshrc}
 
 # 创建 SQLite3 用户
 groupadd -g 2007 sqlite
-useradd -c 'sqlite main user' -g mysql -u 2007 -s /sbin/nologin -m sqlite
+useradd -c 'sqlite main user' -g sqlite -u 2007 -s /sbin/nologin -m sqlite
 cp -r /root/{.oh-my-zsh,.zshrc} /home/sqlite
 chown sqlite:sqlite -R /home/sqlite/{.oh-my-zsh,.zshrc}
 
