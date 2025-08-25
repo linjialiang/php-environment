@@ -13,7 +13,7 @@ titleTemplate: 环境搭建教程
 redis 7.4 安装相对简单，从 redis8.2 开始这里按照 redis 源码包的 readme.md 文档来进行
 :::
 
-## 7.4 之前版本
+## 7.4 版本
 
 ### 安装依赖
 
@@ -29,8 +29,8 @@ apt install tcl libssl-dev pkg-config -y
 su - redis -s /bin/zsh
 # Redis 7.4.x 在测试中发现 make 时需要通过 ../deps/** 来获取自带的依赖依赖
 # - 所以必须在子目录中构建
-mkdir ~/redis-8.2.1/build_redis
-cd ~/redis-8.2.1/build_redis
+mkdir ~/redis-7.4.3/build_redis
+cd ~/redis-7.4.3/build_redis
 make -C ../ BUILD_TLS=yes -j4
 ```
 
@@ -44,11 +44,44 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 
 ```bash [安装并指定目录]
 # 需要回到源码根目录执行安装
-cd ~/redis-8.2.1/
+cd ~/redis-7.4.3/
 make install PREFIX=/server/redis
 ```
 
 ## 8.2 版本
+
+### 安装依赖
+
+```bash
+apt install tcl libssl-dev pkg-config -y
+```
+
+### 编译安装
+
+::: code-group
+
+```bash [构建指令]
+su - redis -s /bin/zsh
+# Redis 7.4.x 在测试中发现 make 时需要通过 ../deps/** 来获取自带的依赖依赖
+# - 所以必须在子目录中构建
+mkdir ~/redis-7.4.3/build_redis
+cd ~/redis-7.4.3/build_redis
+make -C ../ BUILD_TLS=yes -j4
+```
+
+```bash [检测编译结果]
+make -C ../ test
+# 当出现高亮信息 `\o/ All tests passed without errors!` 证明测试通过
+# -- 低配虚拟机通常会因为AOF持久化的最大延迟（max_latency）> 40 发出异常报错
+*** [err]: Active defrag - AOF loading in tests/unit/memefficiency.tcl
+Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
+```
+
+```bash [安装并指定目录]
+# 需要回到源码根目录执行安装
+cd ~/redis-7.4.3/
+make install PREFIX=/server/redis
+```
 
 ```text [目录结构]
 ====================================================
@@ -115,8 +148,10 @@ vm.overcommit_memory = 1
     ```
 ````
 
-<<<@/assets/environment/source/redis/redis.conf{ini} [完整配置案例]
-<<<@/assets/environment/source/redis/redis.conf.source{ini} [源码自带配置]
+<<<@/assets/environment/source/redis/redis.conf{ini} [配置案例]
+<<<@/assets/environment/source/redis/redis.conf.source{ini} [自带配置]
+<<<@/assets/environment/source/redis/redis-74.conf{ini} [7.4 配置案例]
+<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [7.4 自带配置]
 
 :::
 
