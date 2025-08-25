@@ -1,40 +1,152 @@
 不同版本的参数会有差异，默认值也不会完全一样，这里以 `Redis 8.2.1` 为例：
 
-1.  `daemonize no`
+### 1. 配置示例
+
+为了读取配置文件，Redis 必须以文件路径作为第一个参数，如：
+
+```bash
+/server/redis/bin/redis-server /server/redis/redis.conf
+```
+
+### 2. 单位说明
+
+当需要内存大小时，可以以通常的形式指定它，例如 `1k` `5GB` `4M` 等
+
+| 单位 | 对应比特               |
+| ---- | ---------------------- |
+| 1k   | 1000 bytes             |
+| 1kb  | 1024 bytes             |
+| 1m   | 1000000 bytes          |
+| 1mb  | `1024*1024` bytes      |
+| 1g   | 1000000000 bytes       |
+| 1gb  | `1024*1024*1024` bytes |
+
+其中，单元不区分大小写，因此 `1GB` `1Gb` `1gB` 都是相同的。
+
+### 3. 配置文件包含
+
+1. 允许在主配置文件中引入其他配置文件；如：
+
+    ```
+    include /server/redis/conf/a.conf
+    include /server/redis/conf/b.conf
+    include /server/redis/conf/c.conf
+    ```
+
+2. 支持**嵌套包含**​​：被引入的文件可以进一步包含其他文件，形成层级化的配置结构（需谨慎使用以避免循环引用）；
+
+3. 前面的选项会被后面相同的选项覆盖；
+
+4. 可以使用 `*` 通配符引入相同目录下的多个文件，如：
+
+    ```
+    include /server/redis/conf/*.conf
+    ```
+
+### 4. 模块
+
+Redis 允许通过外部动态库（.so 文件）扩展功能，例如新增数据类型（如 JSON 支持）、命令（如全文搜索）等；
+
+loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载失败则服务会终止（abort），确保依赖模块的可用性。
+
+-   语法：`loadmodule /path/to/module.so [可选参数1 可选参数2 ...]`
+
+-   示例：
+
+    ```
+    loadmodule /opt/redis/modules/rejson.so
+    loadmodule /opt/redis/modules/rediseach.so SEARCH_THREADS=4
+    ```
+
+### 5. 网络连接
+
+这部分配置主要定义了 Redis 服务器的网络连接和安全相关配置，包括监听地址、端口、连接限制、安全模式等。
+
+1. `bind 127.0.0.1 -::1` 绑定服务要监听的网卡列表
+
+    - `bind 0.0.0.0` ：监听本机所有的 `IPv4` 网卡
+    - `bind 127.0.0.1 192.168.66.254` ：监听 1）本机客户端；2）允许通过 `192.168.66.254` 网卡访问 redis 服务的客户端
+    - `-` 前缀：表示若地址不可用（如无对应网卡），Redis 不会启动失败（但已占用或协议不支持的地址仍会报错）。
+
+2. `protected-mode yes` 保护模式
+
+    - 作用：防止未授权访问，当以下条件同时满足时，仅允许本地连接：
+
+        1. protected-mode yes
+        2. 未配置 bind 或仅绑定到本地地址（如 127.0.0.1）
+        3. 未设置密码（requirepass）
+
+    - 禁用场景：若需允许远程连接且未配置密码，必须显式关闭（protected-mode no），但强烈建议同时设置密码和防火墙规则
+
+    - 无需关注的危险参数：Redis 为了你的安全，默认锁死了某些关键配置和危险命令，如：
+
+        1. `​​enable-protected-configs`
+        2. `enable-debug-command`
+        3. `enable-module-command`
+
+3. `port 6379` tcp 监听端口
+
+    设为 0 可禁用 TCP 监听，仅通过 Unix Socket 访问
+
+4. `tcp-backlog 511` 已完成三次握手的连接队列最大数量
+
+    内核(net.core.somaxconn)需同步调整，以避免被截断
+
+5. `​​Unix Socket​​`
+
+    - 作用：通过 unixsocket 和 unixsocketperm 配置本地套接字路径及权限，提升本地通信效率。
+    - 说明：虽然 socket 效率高，但通常更加推荐 tcp 连接
+
+6. `timeout 0` 空闲超时
+
+    - 作用；客户端空闲超时时间（秒），0 表示不主动断开连接
+    - 提示：设为 `0`，配合 `tcp-keepalive 300` 是最优解
+
+7. `tcp-keepalive 300`
+
+    默认每 300 秒发送 TCP ACK 保活包，检测死连接并维持网络设备中的连接状态
+
+8. `# socket-mark-id 0` 无需理会
+
+    允许你为 Redis 服务器的监听套接字打上一个特定的标记（mark），主要用于实现复杂的网络路由和流量控制策略
+
+### TLS/SSL
+
+1. `daemonize no`
 
     Redis 默认不是以守护进程的方式运行，可以通过该配置项修改，使用 yes 启用守护进程（Windows 不支持守护线程的配置为 no ）
 
-2.  `pidfile /var/run/redis.pid`
+2. `pidfile /var/run/redis.pid`
 
     Redis 默认不是以守护进程的方式运行，可以通过该配置项修改，使用 yes 启用守护进程（Windows 不支持守护线程的配置为 no ）
 
-3.  `port 6379`
+3. `port 6379`
 
     指定 Redis 监听端口，默认端口为 6379，作者在自己的一篇博文中解释了为什么选用 6379 作为默认端口，因为 6379 在手机按键上 MERZ 对应的号码，而 MERZ 取自意大利歌女 Alessia Merz 的名字
 
-4.  `bind 127.0.0.1 -::1`
+4. `bind 127.0.0.1 -::1`
 
     绑定的主机地址，注意：是指定 Redis 服务器要监听的网卡地址，`0.0.0.0` 代表监听本机所有的 `IPv4` 地址
 
     如：`bind 127.0.0.1 192.168.66.254` 指本机客户端以及 `192.168.66.0/24` 路由器下的所有局域网客户端都能访问
 
-5.  `timeout 300`
+5. `timeout 0`
 
     当客户端闲置多长秒后关闭连接，如果指定为 0 ，表示关闭该功能
 
-6.  `loglevel notice`
+6. `loglevel notice`
 
     指定日志记录级别，Redis 总共支持四个级别：debug、verbose、notice、warning，默认为 notice
 
-7.  `logfile ""`
+7. `logfile ""`
 
     日志记录方式，默认为标准输出，如果配置 Redis 为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给 /dev/null
 
-8.  `databases 16`
+8. `databases 16`
 
     设置数据库的数量，默认数据库为 16，可以使用 SELECT 命令在连接上指定数据库 id
 
-9.  `save <seconds> <changes> [<seconds> <changes> ...]`
+9. `save <seconds> <changes> [<seconds> <changes> ...]`
 
     指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合，Redis 默认配置文件中提供了三个条件：
 
@@ -86,9 +198,9 @@
 
     指定更新日志条件，共有 3 个可选值：
 
-    -   no：表示等操作系统进行数据缓存同步到磁盘（快）
-    -   always：表示每次更新操作后手动调用 fsync() 将数据写到磁盘（慢，安全）
-    -   everysec：表示每秒同步一次（折中，默认值）
+    - no：表示等操作系统进行数据缓存同步到磁盘（快）
+    - always：表示每次更新操作后手动调用 fsync() 将数据写到磁盘（慢，安全）
+    - everysec：表示每秒同步一次（折中，默认值）
 
 21. `vm-enabled no`
 
