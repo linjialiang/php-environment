@@ -48,6 +48,8 @@ cd ~/redis-7.4.3/
 make install PREFIX=/server/redis
 ```
 
+:::
+
 ## 8.2 版本
 
 ### 安装依赖
