@@ -81,33 +81,9 @@ chown redis:redis /server/redis/rdbData
 chmod 750 /server/redis/rdbData
 ```
 
-```bash [sysctl.conf]
-# /etc/sysctl.conf
-
-# 控制进程是否允许使用虚拟内存
-#   - 0：进程只能使用物理内存
-#   - 1：进程可以使用比物理内存更多的虚拟内存
-
-# 追加用 >> 写法
-#   - 注：为了避免重复添加，建议手动拷贝写入
-echo "
-vm.overcommit_memory = 1
-" >> /etc/sysctl.conf
-```
-
-````md [内核调优]
-1. somaxconn： 通过修改 `/proc/sys/net/core/somaxconn` 的值来调整
-2. tcp_max_syn_backlog：
-
-    ```bash
-    # 查看
-    sysctl net.ipv4.tcp_max_syn_backlog
-    # 设置
-    sysctl -w net.ipv4.tcp_max_syn_backlog=新的值(如：1024)
-    ```
-````
-
 :::
+
+#### 配置案例
 
 ::: details 配置案例
 ::: code-group
@@ -372,7 +348,7 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 
 配置文件里 `aclfile /path/to/users.acl` 行取消注释后，则开启
 
-## 附录：Redis 常见配置参数
+## 附录：配置参数
 
 <!-- @include: ./trait/redis_ext_param.md -->
 

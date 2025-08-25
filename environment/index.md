@@ -485,6 +485,64 @@ source ~/.profile
 ::: warning PostgreSQL 推荐使用 `CLANG+LLVM` 编译套件，`--with-llvm` 启用 JIT 支持，能提升查询性能；其余软件优先使用 `GCC` 编译套件。
 :::
 
+## 内核调优
+
+服务器中如果存在多个主要的服务，内核调优就需要兼顾到各种服务的特性，需要理解的是：
+内核的配置仅代表这台服务器最大允许的值，软件包通常也会提供对应值。
+
+这里通过修改 sysctl 配置文件（`/etc/sysctl.d/*.conf`）来实现：
+
+1. 控制进程是否允许使用虚拟内存
+
+    - 0：进程只能使用物理内存(默认值)
+    - 1：进程可以使用比物理内存更多的虚拟内存
+
+    ```bash
+    rm /etc/sysctl.d/overcommit_memory.conf
+    echo "vm.overcommit_memory = 1" >> /etc/sysctl.d/overcommit_memory.conf
+    ```
+
+2. TCP 全连接队列(Accept 队列)最大长度，即已完成三次握手但未被应用层 accept()的连接数
+
+    - debian13 默认为 4096，通常足够
+    - 超过 65535 需确认内核是否支持
+
+    ```bash
+    rm /etc/sysctl.d/somaxconn.conf
+    echo "net.core.somaxconn = 4096" >> /etc/sysctl.d/somaxconn.conf
+    ```
+
+3. TCP 半连接队列(SYN 队列)最大长度，即处于 SYN_RECV 状态的未完成握手连接数
+
+    - debian13 默认为 512，存在高并发服务建议设为 4096
+    - 增大值会占用更多内存
+
+    ```bash
+    rm /etc/sysctl.d/tcp_max_syn_backlog.conf
+    echo "net.ipv4.tcp_max_syn_backlog = 4096" >> /etc/sysctl.d/tcp_max_syn_backlog.conf
+    ```
+
+::: warning ⚠️ 注意：
+在 Debian 13 中，sysctl 的配置文件路径发生了显著变化，从传统的单一文件 `/etc/sysctl.conf` 转向了模块化的分散配置目录。
+
+以下是 Debian13 具体的配置文件路径及其优先级规则：
+
+| 路径                             | 优先级 | 说明           |
+| -------------------------------- | ------ | -------------- |
+| `/etc/sysctl.d/*.conf`           | 1      | 优先级最高     |
+| `/run/sysctl.d/*.conf`           | 2      | 重启失效       |
+| `/usr/local/lib/sysctl.d/*.conf` | 3      | 第三方软件配置 |
+| `/usr/lib/sysctl.d/*.conf`       | 4      | 系统默认配置   |
+| `/lib/sysctl.d/*.conf`           | 5      | 兼容旧版       |
+
+```bash
+sysctl --system             # 加载所有配置文件
+sysctl -a                   # 检查所有生效参数
+sysctl vm.overcommit_memory # 查看特定参数
+```
+
+:::
+
 ## 附录：预构建包一键安装脚本
 
 ::: code-group
