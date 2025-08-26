@@ -401,4 +401,42 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
         1. `yes`：快照失败，拒绝任何写入命令，仅支持读取；直到下次快照成功，可保证快照数据准确性
         2. `no`：快照失败，写入操作不受影响；快照可能会丢失数据（大多数场景推荐）
 
-3. `rdbcompression yes`
+3. `rdbcompression yes` RDB 压缩
+
+    控制 Redis 在生成 RDB 快照时是否对字符串数据进行压缩，默认启用压缩
+
+4. `rdbchecksum yes` RDB 校验和
+
+    控制 Redis 是否在 RDB 持久化文件中添加 CRC64 校验和
+
+5. `sanitize-dump-payload no`
+
+    控制 Redis 在加载 RDB 文件或处理 RESTORE 命令时，对底层数据结构（ziplist/listpack 等）的完整性检查强度
+
+    | 值        | 检测访问                                            | 性能影响 |
+    | --------- | --------------------------------------------------- | -------- |
+    | `no`      | 不进行深度检查                                      | 无       |
+    | `yes`     | 全量检查（包括主从同步和 RDB 加载）                 | 高       |
+    | `clients` | 仅检查客户端直接请求（排除主从同步和特殊 ACL 连接） | 中       |
+
+6. `dbfilename dump.rdb` RDB 文件名
+
+    快照存储文件名
+
+7. `rdb-del-sync-files no` 复制文件清理
+
+    控制 Redis 是否自动删除用于复制的 RDB 文件，默认不自动删除
+
+8. `dir ./` 工作目录
+
+    dir 参数指定 Redis 的工作目录，用于存储：
+
+    - RDB 持久化文件 (dbfilename)
+    - AOF 文件（如果启用）
+    - 集群节点配置文件（如果启用集群模式）
+
+### 9. 主从复制
+
+不常用略过
+
+###
