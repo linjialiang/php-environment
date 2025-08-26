@@ -110,139 +110,160 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     允许你为 Redis 服务器的监听套接字打上一个特定的标记（mark），主要用于实现复杂的网络路由和流量控制策略
 
-### TLS/SSL
+### 6. TLS/SSL
 
-1. `daemonize no`
+1.  `tls-port 6379` TLS 监听端口
 
-    Redis 默认不是以守护进程的方式运行，可以通过该配置项修改，使用 yes 启用守护进程（Windows 不支持守护线程的配置为 no ）
+    -   作用：tls 传输的监听端口，端口号必须跟 `port` 不一样
 
-2. `pidfile /var/run/redis.pid`
+    ::: code-group
 
-    Redis 默认不是以守护进程的方式运行，可以通过该配置项修改，使用 yes 启用守护进程（Windows 不支持守护线程的配置为 no ）
-
-3. `port 6379`
-
-    指定 Redis 监听端口，默认端口为 6379，作者在自己的一篇博文中解释了为什么选用 6379 作为默认端口，因为 6379 在手机按键上 MERZ 对应的号码，而 MERZ 取自意大利歌女 Alessia Merz 的名字
-
-4. `bind 127.0.0.1 -::1`
-
-    绑定的主机地址，注意：是指定 Redis 服务器要监听的网卡地址，`0.0.0.0` 代表监听本机所有的 `IPv4` 地址
-
-    如：`bind 127.0.0.1 192.168.66.254` 指本机客户端以及 `192.168.66.0/24` 路由器下的所有局域网客户端都能访问
-
-5. `timeout 0`
-
-    当客户端闲置多长秒后关闭连接，如果指定为 0 ，表示关闭该功能
-
-6. `loglevel notice`
-
-    指定日志记录级别，Redis 总共支持四个级别：debug、verbose、notice、warning，默认为 notice
-
-7. `logfile ""`
-
-    日志记录方式，默认为标准输出，如果配置 Redis 为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给 /dev/null
-
-8. `databases 16`
-
-    设置数据库的数量，默认数据库为 16，可以使用 SELECT 命令在连接上指定数据库 id
-
-9. `save <seconds> <changes> [<seconds> <changes> ...]`
-
-    指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合，Redis 默认配置文件中提供了三个条件：
-
-    `save 3600 1 300 100 60 10000`: 3600 秒（1 小时）内有 1 个更改；300 秒（5 分钟）内有 100 个更改；60 秒内有 10000 个更改
-
-10. `rdbcompression yes`
-
-    指定存储至本地数据库时是否压缩数据，默认为 `yes`，Redis 采用 LZF 压缩，如果为了节省 CPU 时间，可以关闭该选项，但会导致数据库文件变的巨大
-
-11. `dbfilename dump.rdb`
-
-    指定本地数据库文件名，默认值为 `dump.rdb`
-
-12. `dir ./`
-
-    指定本地数据库存放目录
-
-13. `slaveof <masterip> <masterport>`
-
-    设置当本机为 slave 服务时，设置 master 服务的 IP 地址及端口，在 Redis 启动时，它会自动从 master 进行数据同步
-
-14. `masterauth <master-password>`
-
-    当 master 服务设置了密码保护时，slave 服务连接 master 的密码
-
-15. `requirepass foobared`
-
-    设置 Redis 连接密码，如果配置了连接密码，客户端在连接 Redis 时需要通过 `AUTH <password>` 命令提供密码，默认关闭
-
-16. `maxclients 10000`
-
-    设置同一时间最大客户端连接数，默认 10000，Redis 可以同时打开的客户端连接数为 Redis 进程可以打开的最大文件描述符数，如果设置 `maxclients 0`，表示不作限制。
-
-    当客户端连接数到达限制时，Redis 会关闭新的连接并向客户端返回 `max number of clients reached` 错误信息
-
-17. `maxmemory <bytes>`
-
-    指定 Redis 最大内存限制，Redis 在启动时会把数据加载到内存中，达到最大内存后，Redis 会先尝试清除已到期或即将到期的 Key，当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis 新的 vm 机制，会把 Key 存放内存，Value 会存放在 swap 区
-
-18. `appendonly no`
-
-    指定是否在每次更新操作后进行日志记录，Redis 在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis 本身同步数据文件是按上面 save 条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为 no
-
-19. `appendfilename appendonly.aof`
-
-    指定更新日志文件名，默认为 appendonly.aof
-
-20. `appendfsync everysec`
-
-    指定更新日志条件，共有 3 个可选值：
-
-    - no：表示等操作系统进行数据缓存同步到磁盘（快）
-    - always：表示每次更新操作后手动调用 fsync() 将数据写到磁盘（慢，安全）
-    - everysec：表示每秒同步一次（折中，默认值）
-
-21. `vm-enabled no`
-
-    指定是否启用虚拟内存机制，默认值为 no，简单的介绍一下，VM 机制将数据分页存放，由 Redis 将访问量较少的页即冷数据 swap 到磁盘上，访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析 Redis 的 VM 机制）
-
-22. `vm-swap-file /tmp/redis.swap`
-
-    虚拟内存文件路径，默认值为 /tmp/redis.swap，不可多个 Redis 实例共享
-
-23. `vm-max-memory 0`
-
-    将所有大于 vm-max-memory 的数据存入虚拟内存，无论 vm-max-memory 设置多小，所有索引数据都是内存存储的(Redis 的索引数据就是 keys)，也就是说，当 vm-max-memory 设置为 0 的时候，其实是所有 value 都存在于磁盘。默认值为 0
-
-24. `vm-page-size 32`
-
-    Redis swap 文件分成了很多的 page，一个对象可以保存在多个 page 上面，但一个 page 上不能被多个对象共享，vm-page-size 是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page 大小最好设置为 32 或者 64bytes；如果存储很大大对象，则可以使用更大的 page，如果不确定，就使用默认值
-
-25. `vm-pages 134217728`
-
-    设置 swap 文件中的 page 数量，由于页表（一种表示页面空闲或使用的 bitmap）是在放在内存中的，，在磁盘上每 8 个 pages 将消耗 1byte 的内存。
-
-26. `vm-max-threads 4`
-
-    设置访问 swap 文件的线程数,最好不要超过机器的核数,如果设置为 0,那么所有对 swap 文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为 4
-
-27. `glueoutputbuf yes`
-
-    设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启
-
-28. `hash-max-zipmap-[entries|value]`
-
-    指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法
-
-    ```txt
-    hash-max-zipmap-entries 64
-    hash-max-zipmap-value 512
+    ```ini [仅开启 tls 监听端口]
+    # port 0          # 禁用普通 tcp 监听端口
+    # tls-port 6379  # tls 监听端口设为 6379
     ```
 
-29. `activerehashing yes`
+    ```ini [同时开启普通 tcp 与 tls 监听端口]
+    # port 6379       # 普通 tcp 监听端口设为 6379
+    # tls-port 16379  # tls 监听端口设为 16379
+    ```
 
-    指定是否激活重置哈希，默认为开启（后面在介绍 Redis 的哈希算法时具体介绍）
+    :::
 
-30. `include /path/to/local.conf`
+2.  证书配置
 
-    指定包含其它的配置文件，可以在同一主机上多个 Redis 实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件
+    ::: code-group
+
+    ```ini [服务器证书]
+    # tls-cert-file redis.crt      # X.509证书(PEM格式)
+    # tls-key-file redis.key       # 私钥文件(PEM格式)
+    # tls-key-file-pass secret     # 私钥密码(如果有)
+    ```
+
+    ```ini [客户端证书]
+    # 应用于双向认证场景
+    # tls-client-cert-file client.crt # X.509证书(PEM格式)
+    # tls-client-key-file client.key  # 私钥文件(PEM格式)
+    # tls-client-key-file-pass secret # 私钥密码(如果有)
+    ```
+
+    :::
+
+3.  安全增强配置-认证机制
+
+    ::: code-group
+
+    ```ini [​​CA证书配置]
+    # tls-ca-cert-file ca.crt          # CA证书文件
+    # tls-ca-cert-dir /etc/ssl/certs   # CA证书目录
+    ```
+
+    ```ini [客户端认证]
+    # tls-auth-clients no        # 不要求客户端证书
+    # tls-auth-clients optional  # 可选客户端证书
+    ```
+
+    :::
+
+4.  密钥交换-DH 参数
+
+    `OpenSSL 3.0+` 不再需要此配置
+
+    ```ini
+    # tls-dh-params-file redis.dh
+    ```
+
+5.  协议与加密配置
+
+    ```ini
+    # 协议版本控制
+    # 安全建议​​：禁用TLSv1.0和TLSv1.1以降低攻击面
+    # tls-protocols "TLSv1.2 TLSv1.3"  # 推荐配置
+
+    # 加密套件
+    # - TLSv1.2及以下​​：
+    # tls-ciphers DEFAULT:!MEDIUM
+    # - TLSv1.3专用​​：
+    # tls-ciphersuites TLS_CHACHA20_POLY1305_SHA256
+
+    # 控制加密算法选择优先级
+    # - yes：服务端优先选择加密算法（推荐）
+    # - no：客户端优先选择加密算法（默认）
+    # tls-prefer-server-ciphers yes
+    ```
+
+6.  性能优化配置
+
+    通过会话缓存，减少 TLS 握手开销，提升连接建立速度
+
+    ```ini
+    # tls-session-caching no         # 使用此命令禁用会话缓存(默认启用)
+    # tls-session-cache-size 5000    # 缓存会话数(默认20480)
+    # tls-session-cache-timeout 60   # 会话超时(秒，默认300)
+    ```
+
+7.  特殊场景配置
+
+    ```ini
+    # 复制链路加密
+    tls-replication yes  # 启用主从复制加密
+
+    # 集群总线加密
+    tls-cluster yes      # 启用集群通信加密
+    ```
+
+### 7. 通用配置
+
+1.  `daemonize no` 守护进程模式 ​
+
+    ```
+    - 默认前台运行，设为yes转为后台守护进程
+    - 守护进程模式下会自动生成PID文件（默认/var/run/redis.pid）
+    ```
+
+2.  `supervised auto` 进程监管支持
+
+    | 选项值  | 适用场景               | 工作原理                                                                | 特殊要求                            |
+    | ------- | ---------------------- | ----------------------------------------------------------------------- | ----------------------------------- |
+    | no      | 默认值，不集成监管系统 | Redis 完全独立运行，不发送任何状态信号                                  | 无                                  |
+    | upstart | 使用 upstart 的系统    | 通过发送 SIGSTOP 信号表明服务已就绪                                     | 需在 upstart 配置中添加 expect stop |
+    | systemd | 现代 Linux             | 通过 $NOTIFY_SOCKET 发送 READY=1 信号，并定期更新状态                   | 需要正确的 systemd unit 文件        |
+    | auto    | 自动检测环境           | 检查 UPSTART_JOB 或 NOTIFY_SOCKET 环境变量决定使用 upstart 还是 systemd | 环境变量需正确设置                  |
+
+3.  `pidfile /var/run/redis_6379.pid` PID 文件
+
+    ```md
+    1. 当以 `守护进程模式` 运行（daemonize yes）时：
+        - 若未指定 pidfile，默认创建 /var/run/redis.pid
+        - 若指定 pidfile，则使用指定路径
+    2. 当以 `前台模式` 运行（daemonize no）时:
+        - 仅当显式配置 pidfile 才会创建 PID 文件
+    ```
+
+4.  `loglevel notice` 日志级别
+
+    -   作用：loglevel 参数控制 Redis 服务器的日志输出详细程度，直接影响：
+
+        1. 系统资源占用（CPU/磁盘 I/O）
+        2. 故障排查能力
+        3. 敏感信息暴露风险
+
+    -   日志级别列表：
+
+        | 级别           | 输出内容                                           | 性能影响 |
+        | -------------- | -------------------------------------------------- | -------- |
+        | debug          | 所有调试信息（包括每个命令执行细节）               | 高       |
+        | verbose        | ​ 比 debug 少内部操作日志，保留关键事件            | 中       |
+        | notice(默认值) | 生产环境推荐级别（服务启停/持久化事件/内存警告等） | 低       |
+        | warning        | 仅关键错误和警告（内存不足/持久化失败等）          | 极低     |
+        | nothing        | 完全禁用日志                                       | 无       |
+
+5.  `logfile ""` 日志文件
+
+    -   作用：`logfile` 参数控制 Redis 的日志输出目的地：
+
+        1. `""`​​：日志输出到标准输出(stdout)
+        2. `文件路径`：日志写入指定文件（如 /var/log/redis.log）
+        3. ​​ 特殊行为 ​​：当以守护进程模式运行(daemonize yes)且未指定日志文件时，日志会被重定向到 /dev/null（即丢弃）
+
+    -   推荐：使用日志轮转的方式记录日志
