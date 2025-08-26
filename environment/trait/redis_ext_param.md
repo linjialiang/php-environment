@@ -266,4 +266,83 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
         2. `文件路径`：日志写入指定文件（如 /var/log/redis.log）
         3. ​​ 特殊行为 ​​：当以守护进程模式运行(daemonize yes)且未指定日志文件时，日志会被重定向到 /dev/null（即丢弃）
 
-    -   推荐：使用日志轮转的方式记录日志
+    ::: details Redis 日志轮转配置详解
+
+    ```bash
+    /server/logs/redis/*.log {
+        daily                      # 每天轮转一次
+        rotate 30                  # 保留30个历史日志文件
+        compress                   # 启用gzip压缩历史日志
+        delaycompress              # 延迟一天压缩（压缩前一天的日志）
+        missingok                  # 如果日志文件不存在也不报错
+        notifempty                 # 空日志文件不轮转
+        create 640 redis redis     # 新日志文件权限和属主
+        sharedscripts              # 多个日志文件共用postrotate脚本
+        postrotate
+            # 向Redis发送信号重新打开日志文件
+            /usr/bin/kill -USR1 $(cat /run/redis/process.pid 2>/dev/null) 2>/dev/null || true
+        endscript
+    }
+    ```
+
+    | 参数          | 说明                                       | 推荐值                  |
+    | ------------- | ------------------------------------------ | ----------------------- |
+    | daily         | 轮转频率：daily(天)/weekly(周)/monthly(月) | 生产环境建议 daily      |
+    | rotate        | 保留的历史日志文件数量                     | 根据磁盘空间调整(15-30) |
+    | compress      | 使用 gzip 压缩历史日志                     | 建议启用                |
+    | delaycompress | 延迟压缩(压缩前一天的日志)                 | 建议启用                |
+    | create        | 新日志文件的权限和属主                     | 644 redis:redis         |
+    | postrotate    | 轮转后执行的命令                           | Redis 需要 USR1 信号    |
+
+    :::
+
+6.  系统日志（Syslog）集成配置 ​
+
+    作用 ​​：将 Redis 日志转发到系统的 syslog 服务
+
+    ```ini
+    syslog-enabled no       # 是否启用系统日志转发（默认 no）
+    syslog-ident redis      # 系统日志标识（默认"redis"）
+    syslog-facility local0  # 日志设施级别（必须为 USER 或 LOCAL0-LOCAL7）
+    ```
+
+7.  崩溃日志控制 ​
+
+    ```ini
+    # 禁用崩溃日志可获得更干净的core dump文件
+    crash-log-enabled no          # 禁用崩溃日志（默认启用）
+
+    # 禁用内存检查可让Redis更快终止（牺牲诊断信息）
+    crash-memcheck-enabled no     # 禁用崩溃时的内存检查（默认启用）
+    ```
+
+8.  `databases 16` Redis 数据库数量
+
+    databases 参数控制 Redis 实例中逻辑数据库的数量，默认值为 16。
+
+    ::: code-group
+
+    ```md [数据库标识]
+    -   数据库编号从 0 开始
+    -   最大编号为 databases-1
+    -   默认使用 DB 0
+    ```
+
+    ```bash [切换数据库]
+    SELECT <dbid>  # 切换到指定数据库
+    ```
+
+    ```md [隔离性]
+    -   不同数据库完全隔离
+    -   共享相同的 Redis 进程资源
+    ```
+
+    ::: details 数据库数量对服务器性能影响
+
+    | 数据库数量 | 内存开销 | 管理复杂度 | 使用场景   |
+    | :--------: | -------- | ---------- | ---------- |
+    |     1      | 最低     | 最简单     | 单一应用   |
+    |  16(默认)  | 中等     | 可控       | 通用场景   |
+    |    32+     | 较高     | 较复杂     | 多租户系统 |
+
+    :::
