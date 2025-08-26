@@ -90,7 +90,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
 4. `tcp-backlog 511` 已完成三次握手的连接队列最大数量
 
-    内核(net.core.somaxconn)需同步调整，以避免被截断
+    内核(sysctl 里的 net.core.somaxconn)需同步调整，以避免被截断
 
 5. `​​Unix Socket​​`
 
@@ -102,9 +102,9 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
     - 作用；客户端空闲超时时间（秒），0 表示不主动断开连接
     - 提示：设为 `0`，配合 `tcp-keepalive 300` 是最优解
 
-7. `tcp-keepalive 300`
+7. `tcp-keepalive 300` 心跳包
 
-    默认每 300 秒发送 TCP ACK 保活包，检测死连接并维持网络设备中的连接状态
+    - 作用；默认每 300 秒发送 TCP ACK 保活包，检测死连接并维持网络设备中的连接状态
 
 8. `# socket-mark-id 0` 无需理会
 
