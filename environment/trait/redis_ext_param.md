@@ -549,17 +549,59 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
         ::: code-group
 
         ```bash [debian11+]
-        # debian11 开始支持模块化控制
+        # debian11 开始支持模块化，直接覆盖对应的配置文件
         echo "redis soft nofile 65535
         redis hard nofile 65535
         " > /etc/security/limits.d/redis.conf
         ```
 
         ```bash [debian11-]
-        echo "redis soft nofile 65535" >> /etc/security/limits.conf
-        echo "redis hard nofile 65535" >> /etc/security/limits.conf
+        # debain11以下版本追加到 limits.conf 文件
+        echo "
+        redis soft nofile 65535
+        redis hard nofile 65535
+        " >> /etc/security/limits.conf
         ```
 
         :::
 
 ### 13. 存储器管理
+
+1. `maxmemory <bytes>` 最大内存限制
+
+    - 作用：设置 Redis 实例可使用的最大内存量（默认单位：字节）
+
+2. `maxmemory-policy noeviction` 内存淘汰策略
+
+    - 默认 `noeviction` 不淘汰，直接报错
+
+    ::: details 可选策略说明
+
+    | 策略            | 说明                                     | 使用场景         |
+    | --------------- | ---------------------------------------- | ---------------- |
+    | volatile-lru    | 从设置了过期时间的键中淘汰最近最少使用的 | 缓存场景，需 TTL |
+    | allkeys-lru     | 从所有键中淘汰最近最少使用的             | 纯缓存系统       |
+    | volatile-lfu    | 从设置了过期时间的键中淘汰最不经常使用的 | 热点数据缓存     |
+    | allkeys-lfu     | 从所有键中淘汰最不经常使用的             | 长期热点缓存     |
+    | volatile-random | 随机淘汰有 TTL 的键                      | 无明确访问模式   |
+    | allkeys-random  | 随机淘汰任意键                           | 无规律访问       |
+    | volatile-ttl    | 淘汰剩余生存时间最短的键                 | 时效性强的数据   |
+    | noeviction      | 不淘汰，直接报错（默认）                 | 数据不可丢失场景 |
+
+    :::
+
+3. `maxmemory-samples 5` 淘汰算法精度
+
+    - 控制 `LRU/LFU/TTL` 算法的精度与性能平衡
+
+4. `maxmemory-eviction-tenacity 10` 淘汰过程强度
+
+    - 控制内存淘汰过程的激进程度
+
+5. `replica-ignore-maxmemory yes` 从节点内存限制
+
+    - 控制从节点是否遵循 maxmemory 设置
+
+6. `active-expire-effort 1` 主动过期清理强度
+
+    - 控制后台清理过期键的强度（1-10），值越大，内存释放速度越快、延迟越明显
