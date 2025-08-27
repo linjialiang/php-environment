@@ -712,9 +712,9 @@ Redis 大多数操作仅使用单线程，但也有一些操作支持 I/O 多线
     - 三个值分别对应：
 
         ```
-        - 主节点 ​​（master）：0
-        - 从节点 ​​（replica）：200
-        - 后台子进程​​（bgsave等）：800
+        - 主节点 （master）：0
+        - 从节点 （replica）：200
+        - 后台子进程（bgsave等）：800
         ```
 
 ### 17. Redis THP 控制机制
@@ -726,3 +726,85 @@ THP(kernel Transparent Huge Pages) 是 Linux 内核的内存管理特性，自�
 ### 18. AOF 持久化机制
 
 AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有写操作命令来保证数据安全，相比 RDB 快照提供更精细的数据保护。
+
+1. `appendonly no`
+
+    - 作用：是否启用 AOF 持久化模式
+    - 选项：
+        - no：禁用（默认）
+        - yes：启用，所有写操作会被记录到 AOF 文件
+    - 建议：生产环境建议启用（yes）
+
+2. `appendfilename "appendonly.aof"`
+
+    - 作用：AOF 基础文件名（Redis 7+会扩展为多文件结构）
+    - 文件示例：
+
+        ```
+        appendonly.aof.1.base.rdb：基础快照
+        appendonly.aof.1.incr.aof：增量操作
+        ```
+
+3. `appenddirname "appendonlydir"`
+
+    - 作用：AOF 文件存储的相对目录（Redis 7+引入）
+    - 根目录：配置的 RDB 板块里的 `dir` 指令指定的工作目录作为根目录
+
+4. `appendfsync everysec` 同步策略
+
+    - 作用 ：控制数据刷盘策略
+    - 默认 ：`everysec`（推荐生产环境使用）
+    - 选项 ：
+
+        | 值       | 数据安全性 | 性能 | 可能丢失数据量 |
+        | -------- | ---------- | ---- | -------------- |
+        | always   | 最高       | 最差 | 几乎不丢失     |
+        | everysec | 中等       | 中等 | 最多 1 秒      |
+        | no       | 最低       | 最好 | 依赖 OS 刷新   |
+
+5. `no-appendfsync-on-rewrite no` 重写时同步控制
+
+    - 作用 ：AOF 重写期间是否暂停主线程的 fsync
+    - 选项 ：
+
+        - no：保持同步（最安全，可能增加延迟）
+        - yes：暂停同步（提升性能，最多丢失 30 秒数据）
+
+    - 建议 ：高负载环境可设为 yes
+
+6. 自动重写触发条件 ​
+
+    - 作用：控制 AOF 自动重写（压缩）的触发条件
+    - 规则：
+        - 当前 AOF 大小 > 上次重写大小 × (1 + percentage/100)
+        - 且当前 AOF 大小 > min-size
+    - 示例：当前 AOF 128MB 且上次重写后为 60MB 时会触发重写
+
+        ```ini
+        # 默认
+        auto-aof-rewrite-percentage 100
+        auto-aof-rewrite-min-size 64mb
+        ```
+
+7. `aof-load-truncated yes` 损坏文件处理 ​
+
+    - 作用：是否加载不完整的 AOF 文件
+    - 选项：
+        - yes：尝试加载并记录警告（默认）
+        - no：直接拒绝启动（需手动修复）
+
+8. `aof-use-rdb-preamble yes` 混合持久化
+
+    - 作用：AOF 重写时是否使用 RDB 格式存储基础数据（开启 AOF 时默认启用）
+    - 优势：
+        - 大幅减少 AOF 体积
+        - 加快重启恢复速度
+    - 建议：始终保持启用（需 Redis 4+）
+
+9. `aof-timestamp-enabled no`
+
+    - 作用：是否在 AOF 中记录时间戳
+    - 影响：
+        - 启用后支持按时间点恢复
+        - 但会破坏与旧版客户端的兼容性
+    - 默认：禁用（no）
