@@ -538,3 +538,26 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 6. `rename-command CONFIG ""` 已废弃
 
     - 作用：主要用于更改命令名称，官方强烈建议使用 ACL 来控制用户的权限
+
+### 12. 客户端
+
+1. `maxclients 10000` Redis 客户端连接数限制
+
+    - 默认同时允许 10000 个客户端连接
+    - 系统级配套设置：
+
+        ::: code-group
+
+        ```bash [debian13]
+        # debian13 开始支持模块化控制
+        echo "redis soft nofile 65535
+        redis hard nofile 65535
+        " > /etc/security/limits.d/redis.conf
+        ```
+
+        ```bash [debian12]
+        echo "redis soft nofile 65535" >> /etc/security/limits.conf
+        echo "redis hard nofile 65535" >> /etc/security/limits.conf
+        ```
+
+        :::

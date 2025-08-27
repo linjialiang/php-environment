@@ -499,7 +499,7 @@ source ~/.profile
 
     ```bash
     rm /etc/sysctl.d/overcommit_memory.conf
-    echo "vm.overcommit_memory = 1" >> /etc/sysctl.d/overcommit_memory.conf
+    echo "vm.overcommit_memory = 1" > /etc/sysctl.d/overcommit_memory.conf
     ```
 
 2. TCP 全连接队列(Accept 队列)最大长度，即已完成三次握手但未被应用层 accept()的连接数
@@ -509,7 +509,7 @@ source ~/.profile
 
     ```bash
     rm /etc/sysctl.d/somaxconn.conf
-    echo "net.core.somaxconn = 4096" >> /etc/sysctl.d/somaxconn.conf
+    echo "net.core.somaxconn = 4096" > /etc/sysctl.d/somaxconn.conf
     ```
 
 3. TCP 半连接队列(SYN 队列)最大长度，即处于 SYN_RECV 状态的未完成握手连接数
@@ -519,7 +519,7 @@ source ~/.profile
 
     ```bash
     rm /etc/sysctl.d/tcp_max_syn_backlog.conf
-    echo "net.ipv4.tcp_max_syn_backlog = 4096" >> /etc/sysctl.d/tcp_max_syn_backlog.conf
+    echo "net.ipv4.tcp_max_syn_backlog = 4096" > /etc/sysctl.d/tcp_max_syn_backlog.conf
     ```
 
 ::: warning ⚠️ 注意：
