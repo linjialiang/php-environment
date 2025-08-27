@@ -33,7 +33,7 @@
     include /server/redis/conf/c.conf
     ```
 
-2. 支持**嵌套包含**​​：被引入的文件可以进一步包含其他文件，形成层级化的配置结构（需谨慎使用以避免循环引用）；
+2. 支持**嵌套包含**：被引入的文件可以进一步包含其他文件，形成层级化的配置结构（需谨慎使用以避免循环引用）；
 
 3. 前面的选项会被后面相同的选项覆盖；
 
@@ -80,7 +80,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     - 无需关注的危险参数：Redis 为了你的安全，默认锁死了某些关键配置和危险命令，如：
 
-        1. `​​enable-protected-configs`
+        1. `enable-protected-configs`
         2. `enable-debug-command`
         3. `enable-module-command`
 
@@ -92,7 +92,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     内核(sysctl 里的 net.core.somaxconn)需同步调整，以避免被截断
 
-5. `​​Unix Socket​​`
+5. `Unix Socket`
 
     - 作用：通过 unixsocket 和 unixsocketperm 配置本地套接字路径及权限，提升本地通信效率。
     - 说明：虽然 socket 效率高，但通常更加推荐 tcp 连接
@@ -153,7 +153,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     ::: code-group
 
-    ```ini [​​CA证书配置]
+    ```ini [CA证书配置]
     # tls-ca-cert-file ca.crt          # CA证书文件
     # tls-ca-cert-dir /etc/ssl/certs   # CA证书目录
     ```
@@ -177,13 +177,13 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     ```ini
     # 协议版本控制
-    # 安全建议​​：禁用TLSv1.0和TLSv1.1以降低攻击面
+    # 安全建议：禁用TLSv1.0和TLSv1.1以降低攻击面
     # tls-protocols "TLSv1.2 TLSv1.3"  # 推荐配置
 
     # 加密套件
-    # - TLSv1.2及以下​​：
+    # - TLSv1.2及以下：
     # tls-ciphers DEFAULT:!MEDIUM
-    # - TLSv1.3专用​​：
+    # - TLSv1.3专用：
     # tls-ciphersuites TLS_CHACHA20_POLY1305_SHA256
 
     # 控制加密算法选择优先级
@@ -214,7 +214,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
 ### 7. 通用配置
 
-1.  `daemonize no` 守护进程模式 ​
+1.  `daemonize no` 守护进程模式
 
     ```
     - 默认前台运行，设为yes转为后台守护进程
@@ -253,7 +253,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
         | 级别           | 输出内容                                           | 性能影响 |
         | -------------- | -------------------------------------------------- | -------- |
         | debug          | 所有调试信息（包括每个命令执行细节）               | 高       |
-        | verbose        | ​ 比 debug 少内部操作日志，保留关键事件            | 中       |
+        | verbose        | 比 debug 少内部操作日志，保留关键事件              | 中       |
         | notice(默认值) | 生产环境推荐级别（服务启停/持久化事件/内存警告等） | 低       |
         | warning        | 仅关键错误和警告（内存不足/持久化失败等）          | 极低     |
         | nothing        | 完全禁用日志                                       | 无       |
@@ -262,9 +262,9 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     -   作用：`logfile` 参数控制 Redis 的日志输出目的地：
 
-        1. `""`​​：日志输出到标准输出(stdout)
+        1. `""`：日志输出到标准输出(stdout)
         2. `文件路径`：日志写入指定文件（如 /var/log/redis.log）
-        3. ​​ 特殊行为 ​​：当以守护进程模式运行(daemonize yes)且未指定日志文件时，日志会被重定向到 /dev/null（即丢弃）
+        3. 特殊行为 ：当以守护进程模式运行(daemonize yes)且未指定日志文件时，日志会被重定向到 /dev/null（即丢弃）
 
     ::: details Redis 日志轮转配置详解
 
@@ -296,9 +296,9 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     :::
 
-6.  系统日志（Syslog）集成配置 ​
+6.  系统日志（Syslog）集成配置
 
-    作用 ​​：将 Redis 日志转发到系统的 syslog 服务
+    作用 ：将 Redis 日志转发到系统的 syslog 服务
 
     ```ini
     syslog-enabled no       # 是否启用系统日志转发（默认 no）
@@ -306,7 +306,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
     syslog-facility local0  # 日志设施级别（必须为 USER 或 LOCAL0-LOCAL7）
     ```
 
-7.  崩溃日志控制 ​
+7.  崩溃日志控制
 
     ```ini
     # 禁用崩溃日志可获得更干净的core dump文件
@@ -453,9 +453,9 @@ Redis 的客户端缓存辅助支持系统
 
 1. `tracking-table-max-keys 1000000`
 
-    - 默认最多跟踪 ​100 万个键 ​ 的客户端缓存关系
-    - 达到限制后会触发 ​​LRU 淘汰机制
-    - 设为 ​​0​​ 表示不限制（可能消耗大量内存）
+    - 默认最多跟踪 100 万个键 的客户端缓存关系
+    - 达到限制后会触发 LRU 淘汰机制
+    - 设为 0 表示不限制（可能消耗大量内存）
 
 ### 11. 访问控制列表(ACL)系统
 
@@ -513,28 +513,28 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 
 5. `acl-pubsub-default resetchannels` Redis 新用户默认权限
 
-    - 作用：控制 Redis 新创建用户默认权限的配置规则，特别是针对 ​​Pub/Sub（发布/订阅）频道访问控制 ​​ 的默认行为。
+    - 作用：控制 Redis 新创建用户默认权限的配置规则，特别是针对 Pub/Sub（发布/订阅）频道访问控制 的默认行为。
     - 阶段：
 
         1. `<6.2`：无 Pub/Sub 频道权限控制，新用户默认可访问所有频道
-        2. `6.2+​`：引入 `&<pattern>` 语法控制频道访问，但需手动配置
-        3. `7.0+`：​​ 默认启用严格模式 ​​（acl-pubsub-default resetchannels），需显式授权频道
+        2. `6.2+`：引入 `&<pattern>` 语法控制频道访问，但需手动配置
+        3. `7.0+`： 默认启用严格模式 （acl-pubsub-default resetchannels），需显式授权频道
 
             ```bash
             # acl-pubsub-default resetchannels 等价于： user new_user off resetkeys -@all resetchannels
-            #   off​​：用户初始状态为​​禁用​​（需手动激活）
-            #   resetkeys​​：​​不匹配任何键​​（无数据访问权限）
-            #   -@all​​：​​禁止所有命令​​（无操作权限）
-            #   resetchannels​​：​​禁止访问所有Pub/Sub频道​​（需显式授权）
+            #   off：用户初始状态为禁用（需手动激活）
+            #   resetkeys：不匹配任何键（无数据访问权限）
+            #   -@all：禁止所有命令（无操作权限）
+            #   resetchannels：禁止访问所有Pub/Sub频道（需显式授权）
             ```
 
     - 可选项：
 
-        | 值            | 作用                                            | Redis 版本默认值    |
-        | ------------- | ----------------------------------------------- | ------------------- |
-        | allchannels   | 新用户默认可以 ​​ 访问所有 Pub/Sub 频道         | Redis 6.2 之前      |
-        | resetchannels | 新用户默认 ​​ 无权访问任何频道 ​​（需显式授权） | Redis 7.0+ 默认值 ​ |
+        | 值            | 作用                                      | Redis 版本默认值  |
+        | ------------- | ----------------------------------------- | ----------------- |
+        | allchannels   | 新用户默认可以访问所有 Pub/Sub 频道       | Redis 6.2 之前    |
+        | resetchannels | 新用户默认无权访问任何频道 （需显式授权） | Redis 7.0+ 默认值 |
 
-6. `rename-command CONFIG ""`
+6. `rename-command CONFIG ""` 已废弃
 
-7. ``
+    - 作用：主要用于更改命令名称，官方强烈建议使用 ACL 来控制用户的权限
