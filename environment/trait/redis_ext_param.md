@@ -439,4 +439,102 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
 不常用略过
 
-###
+### 10. 客户端缓存追踪
+
+Redis 的客户端缓存辅助支持系统
+
+::: details 主要功能是：
+
+-   服务端记录哪些客户端缓存了哪些键
+-   当键被修改时，自动通知相关客户端失效缓存
+-   通过 tracking-table-max-keys 限制内存使用
+
+:::
+
+1. `tracking-table-max-keys 1000000`
+
+    - 默认最多跟踪 ​100 万个键 ​ 的客户端缓存关系
+    - 达到限制后会触发 ​​LRU 淘汰机制
+    - 设为 ​​0​​ 表示不限制（可能消耗大量内存）
+
+### 11. 访问控制列表(ACL)系统
+
+Redis ACL 是 Access Control List 的缩写，它允许 Redis 限制连接客户端只可以使用部分命令。
+
+它的工作方式是：建立连接后，客户端还需要提供 `用户名` 和 `有效的密码` 进行身份验证。
+
+Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
+
+1. 登录方式
+
+    - default 账户无密码时建立连接即自动登录
+
+    - default 账户有密码时，建立连接并使用密码登录
+
+        ```bash
+        # 通过 requirepass 参数设置密码
+        auth <password>
+        ```
+
+    - 非 default 账户只能通过账号密码登录
+
+        ```bash
+        auth <username> <password>
+        ```
+
+2. `acllog-max-len 128` ACL 日志
+
+    - 作用：记录 ACL 相关事件
+    - 查看日志：
+
+        ```bash
+        redis-cli acl log
+        ```
+
+3. `aclfile /etc/redis/users.acl` Redis 外部 ACL 文件
+
+    如果不使用外部 ACL，用户会在
+
+    - 作用：Redis 可以使用外部文件来管理访问控制列表(ACL)，而不是直接在 `redis.conf` 中定义用户规则
+    - 特性：
+        1. 与 redis.conf 中的用户定义格式完全相同
+        2. 每行定义一个用户，支持所有 ACL 规则
+        3. 不能同时在 redis.conf 和外部文件中定义用户，如果同时配置 Redis 会拒绝启动并报错
+        4. 修改外部文件后需执行 `ACL LOAD` 或重启 Redis 生效
+
+4. `requirepass foobared`
+
+    为兼容低版本操作，默认开启了全功能账户 `default`，此账户默认无密码，可通过 `requirepass` 参数设置密码：
+
+    ```ini
+    # 将 default 账户密码设为 123456
+    requirepass 123456
+    ```
+
+5. `acl-pubsub-default resetchannels` Redis 新用户默认权限
+
+    - 作用：控制 Redis 新创建用户默认权限的配置规则，特别是针对 ​​Pub/Sub（发布/订阅）频道访问控制 ​​ 的默认行为。
+    - 阶段：
+
+        1. `<6.2`：无 Pub/Sub 频道权限控制，新用户默认可访问所有频道
+        2. `6.2+​`：引入 `&<pattern>` 语法控制频道访问，但需手动配置
+        3. `7.0+`：​​ 默认启用严格模式 ​​（acl-pubsub-default resetchannels），需显式授权频道
+
+            ```bash
+            # acl-pubsub-default resetchannels 等价于： user new_user off resetkeys -@all resetchannels
+            #   off​​：用户初始状态为​​禁用​​（需手动激活）
+            #   resetkeys​​：​​不匹配任何键​​（无数据访问权限）
+            #   -@all​​：​​禁止所有命令​​（无操作权限）
+            #   resetchannels​​：​​禁止访问所有Pub/Sub频道​​（需显式授权）
+            ```
+
+    - 可选项：
+
+        | 值            | 作用                                            | Redis 版本默认值    |
+        | ------------- | ----------------------------------------------- | ------------------- |
+        | allchannels   | 新用户默认可以 ​​ 访问所有 Pub/Sub 频道         | Redis 6.2 之前      |
+        | resetchannels | 新用户默认 ​​ 无权访问任何频道 ​​（需显式授权） | Redis 7.0+ 默认值 ​ |
+
+6. `rename-command CONFIG ""`
+
+7. ``
