@@ -548,16 +548,18 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 
         ::: code-group
 
-        ```bash [debian13]
-        # debian13 开始支持模块化控制
+        ```bash [debian11+]
+        # debian11 开始支持模块化控制
         echo "redis soft nofile 65535
         redis hard nofile 65535
         " > /etc/security/limits.d/redis.conf
         ```
 
-        ```bash [debian12]
+        ```bash [debian11-]
         echo "redis soft nofile 65535" >> /etc/security/limits.conf
         echo "redis hard nofile 65535" >> /etc/security/limits.conf
         ```
 
         :::
+
+### 13. 存储器管理
