@@ -515,8 +515,6 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 
 3. `aclfile /etc/redis/users.acl` Redis 外部 ACL 文件
 
-    如果不使用外部 ACL，用户会在
-
     - 作用：Redis 可以使用外部文件来管理访问控制列表(ACL)，而不是直接在 `redis.conf` 中定义用户规则
     - 特性：
         1. 与 redis.conf 中的用户定义格式完全相同
