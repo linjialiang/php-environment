@@ -96,6 +96,12 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     - 作用：通过 unixsocket 和 unixsocketperm 配置本地套接字路径及权限，提升本地通信效率。
     - 说明：虽然 socket 效率高，但通常更加推荐 tcp 连接
+    - 默认值：
+
+        ```ini
+        # unixsocket /run/redis.sock
+        # unixsocketperm 700
+        ```
 
 6. `timeout 0` 空闲超时
 
