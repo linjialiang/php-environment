@@ -772,7 +772,7 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
     - 建议 ：高负载环境可设为 yes
 
-6. 自动重写触发条件 ​
+6. 自动重写触发条件
 
     - 作用：控制 AOF 自动重写（压缩）的触发条件
     - 规则：
@@ -786,7 +786,7 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
         auto-aof-rewrite-min-size 64mb
         ```
 
-7. `aof-load-truncated yes` 损坏文件处理 ​
+7. `aof-load-truncated yes` 损坏文件处理
 
     - 作用：是否加载不完整的 AOF 文件
     - 选项：
@@ -895,13 +895,13 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 1. `latency-monitor-threshold 0`
 
     - 默认：关闭（单位：毫秒）
-    - 作用机制：当设置为 ​​>0​​ 时，Redis 会记录所有执行时间超过该阈值的操作
+    - 作用机制：当设置为 >0 时，Redis 会记录所有执行时间超过该阈值的操作
     - 记录的数据可通过 LATENCY 命令查看，包括：
         - 延迟事件的时间分布
         - 延迟峰值统计
         - 历史延迟图表
 
-::: details ​​ 与慢查询日志的区别
+::: details 与慢查询日志的区别
 
 | 特性     | 延迟监控     | 慢查询日志   |
 | -------- | ------------ | ------------ |
@@ -929,4 +929,175 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
 1. `notify-keyspace-events ""` 默认禁用
 
-### 27.
+### 27. 高级配置-数据结构存储优化
+
+1. 哈希表优化
+
+    - hash-max-listpack-entries 512：哈希元素 ≤512 时使用紧凑存储
+    - hash-max-listpack-value 64：哈希值 ≤64 字节时使用紧凑存储
+
+2. 列表优化
+
+    - list-max-listpack-size -2：每个列表节点 ≤8KB（-2 表示按大小限制）
+    - list-compress-depth 0：禁用列表压缩（0=不压缩，1=保留首尾节点不压缩）
+
+3. 集合优化
+
+    - set-max-intset-entries 512：纯数字集合元素 ≤512 时使用特殊编码
+    - set-max-listpack-entries 128：混合集合元素 ≤128 时使用紧凑存储
+
+4. 有序集合优化
+
+    - zset-max-listpack-entries 128：有序集合元素 ≤128 时使用紧凑存储
+
+5. HyperLogLog 内存表示策略高级调优选项
+
+    - hll-sparse-max-bytes 3000：稀疏表示最大字节数（超过转密集存储）
+
+6. Streams
+    - stream-node-max-bytes 4096：单个 Stream 节点最大字节数
+    - stream-node-max-entries 100：单个 Stream 节点最大条目数
+
+### 28. 高级配置-内存管理机制
+
+1. `activerehashing yes` 主动重哈希开关配置
+
+    - 用于控制 Redis 是否定期执行主字典表的渐进式重哈希操作
+
+2. `client-output-buffer-limit` Redis 客户端输出缓冲区限制策略
+
+    - 作用：这段配置定义了 Redis 对客户端输出缓冲区的限制策略，用于防止客户端读取速度过慢导致服务器内存耗尽。
+    - 语法详解：
+
+        ```ini
+        client-output-buffer-limit <class> <hard limit> <soft limit> <soft seconds>
+        ```
+
+        | 参数           | 含义           | 实例值                  | 作用                       |
+        | -------------- | -------------- | ----------------------- | -------------------------- |
+        | `class`        | 客户端类型     | `normal/replica/pubsub` | 指定应用规则的客户端类别   |
+        | `hard limit`   | 硬限制         | 256mb                   | 缓冲区达到此值立即断开连接 |
+        | `soft limit`   | 软限制         | 64mb                    | 缓冲区持续超过此值触发计时 |
+        | `soft seconds` | 软限制持续时间 | 60                      | 超过软限制持续此时长后断开 |
+
+    - 默认配置：
+
+        ```ini
+        client-output-buffer-limit normal 0 0 0
+        client-output-buffer-limit replica 256mb 64mb 60
+        client-output-buffer-limit pubsub 32mb 8mb 60
+        ```
+
+3. `client-query-buffer-limit 1gb` Redis 客户端输出缓冲区最大容量
+
+    - 用于限制 Redis 单个客户端查询缓冲区的最大容量，防止异常客户端消耗过多内存
+
+4. `maxmemory-clients` Redis 的 客户端内存保护机制
+
+    - maxmemory-clients 是 Redis 的客户端内存保护机制，用于限制所有客户端连接（包括 Pub/Sub 和普通客户端）消耗的总内存上限，防止因客户端连接过多导致服务器 OOM（内存溢出）。
+
+    ::: code-group
+
+    ```ini [写法]
+    # 配置以最后1个生效
+    maxmemory-clients 5%    # 客户端内存不超过总内存的5%，百分比以 maxmemory <bytes> 选项值为基数
+    maxmemory-clients 1g    # 客户端内存不超过1GB
+    maxmemory-clients 0     # 默认值，无限制
+    ```
+
+    ```ini [百分比]
+    maxmemory 16gb
+    maxmemory-clients 5%   # 客户端最多使用800MB
+    ```
+
+    :::
+
+5. `proto-max-bulk-len 512mb` Redis 大容量字符串限制
+
+    | 值    | 作用                      | 使用场景     |
+    | ----- | ------------------------- | ------------ |
+    | 512mb | 允许最大 512MB 的字符串值 | 默认         |
+    | 1gb   | 允许 1GB 超大字符串       | 大型文件缓存 |
+    | 10mb  | 严格限制                  | 高安全环境   |
+
+    - proto-max-bulk-len 参数控制 Redis 单个字符串值的最大允许长度，是 Redis 协议层面的安全限制。
+    - 影响范围：此限制影响所有涉及字符串的操作：
+        - SET key giant_string
+        - APPEND key huge_data
+        - GET key（返回值限制）
+        - LPUSH/RPUSH（单个元素限制）
+        - 事务中的批量操作
+
+### 29. 高级配置-性能调优
+
+1. `hz 10` 基准任务频率（1-500，默认 10 次/秒）
+
+    范围在 1 到 500 之间，但是超过 100 的值通常不是一个好主意。
+
+    大多数用户应该使用默认值 10，只有在需要非常低延迟的环境中才将其提高到 100。
+
+2. `dynamic-hz yes` 根据客户端数量动态调整频率
+
+    手动配置 `hz 10` 作为基线值，当客户端连接数增多时，Redis 会自动在实际配置的 hz 值基础上 按需倍增。连接数越多，实际使用的 hz 值也越高。
+
+3. `aof-rewrite-incremental-fsync yes` AOF 重写时每 4MB 刷盘一次
+
+4. `rdb-save-incremental-fsync yes` RDB 保存时每 4MB 刷盘一次
+
+5. Redis LFU 淘汰算法调优参数
+
+    这段配置详细说明了 Redis LFU（Least Frequently Used）淘汰算法的可调参数及其工作原理，用于优化内存淘汰策略。
+
+    1. `lfu-log-factor 10` LFU 对数因子
+
+        - 作用：控制访问频率计数器的增长灵敏度
+
+        - 因子影响对比：
+
+            | 因子值 | 100 次访问计数 | 1000 次访问计数 | 特点           |
+            | ------ | -------------- | --------------- | -------------- |
+            | 0      | 104            | 255             | 增长过快       |
+            | 1      | 18             | 49              | 中等增长       |
+            | 10     | 10             | 18              | 推荐值（默认） |
+            | 100    | 8              | 11              | 增长缓慢       |
+
+    2. `lfu-decay-time 1` LFU 衰减时间
+
+        - 作用 ：控制访问计数器的衰减速度
+        - 选项：
+
+            | 选项 | 说明                   |
+            | ---- | ---------------------- |
+            | 0    | 永不衰减               |
+            | 1    | 每分钟衰减一次（默认） |
+            | N    | 每 N 分钟衰减一次      |
+
+### 30. 高级配置-连接管理
+
+Redis 新连接接纳控制机制详解
+
+这段配置定义了 Redis 在单个事件循环周期内接受新连接的能力，包括普通连接和 TLS 加密连接的处理限制。
+
+1. `max-new-connections-per-cycle 10` 普通连接默认 10 个/周期
+
+    - 平衡连接建立速度与事件循环负担
+
+2. `max-new-tls-connections-per-cycle 1` TLS 连接默认 1 个/周期
+
+    - TLS 握手消耗 CPU 资源是普通连接的 5-10 倍
+
+::: code-group
+
+```ini [高并发场景]
+# 适用于短连接服务
+max-new-connections-per-cycle 50
+tcp-backlog 1024  # 配套增加系统积压队列
+```
+
+```ini [TLS密集型服务]
+# 需要强大CPU支持
+max-new-tls-connections-per-cycle 5
+tls-session-caching yes  # 启用会话缓存减少握手开销
+```
+
+:::
