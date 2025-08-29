@@ -714,7 +714,7 @@ Redis 大多数操作仅使用单线程，但也有一些操作支持 I/O 多线
 
     :::
 
-### 16. Redis OOM (Out-Of-Memory) 控制
+### 16. Redis OOM (Out-Of-Memory) 策略控制
 
 1. `oom-score-adj no` 默认不干预内核 OOM 策略
 
