@@ -801,7 +801,7 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
     - 示例：当前 AOF 128MB 且上次重写后为 60MB 时会触发重写
 
         ```ini
-        # 默认
+        # 默认(两个条件同时满足才会触发)
         auto-aof-rewrite-percentage 100
         auto-aof-rewrite-min-size 64mb
         ```
