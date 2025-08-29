@@ -843,6 +843,12 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
     通过 `shutdown-on-sigint/shutdown-on-sigterm` 两个参数来配置信号处理行为
 
+    ```ini
+    # 默认
+    # shutdown-on-sigint default
+    # shutdown-on-sigterm default
+    ```
+
     ::: details 两者区别
 
     | 特性         | shutdown-on-sigint    | shutdown-on-sigterm   |
