@@ -1101,3 +1101,51 @@ tls-session-caching yes  # 启用会话缓存减少握手开销
 ```
 
 :::
+
+### 31. Redis 主动内存碎片整理机制
+
+主动内存碎片整理（Active Defragmentation）是 Redis 4.0+ 引入的高级内存管理功能，用于在不重启服务的情况下减少内存碎片，提升内存利用率。
+
+1.  `activedefrag no`
+
+    -   主动内存碎片整理开关柜，默认禁用
+
+2.  触发阈值
+
+    1. `active-defrag-ignore-bytes 100mb`
+        - 碎片内存 ≥100MB 才启动
+    2. `active-defrag-threshold-lower 10`
+        - 碎片率 ≥10%触发整理，单位 `%`
+    3. `active-defrag-threshold-upper 100`
+        - 碎片率上限，单位 `%`
+
+3.  CPU 控制
+
+    1.  `active-defrag-cycle-min 1`
+        -   最小 CPU 使用率，单位 `%`
+    2.  `active-defrag-cycle-max 25`
+        -   最大 CPU 使用率，单位 `%`
+
+4.  `active-defrag-max-scan-fields 1000`
+
+    -   每次扫描字段数
+
+5.  `jemalloc-bg-thread yes`
+
+    -   控制 jemalloc 内存分配器后台线程的启用状态
+
+    | 值    | 说明                             |
+    | ----- | -------------------------------- |
+    | `yes` | 由专属后台线程异步处理内存回收   |
+    | `no`  | 依赖应用程序线程同步处理内存回收 |
+
+6.  `server-cpulist 0-7:2`
+    -   绑定 主线程 和 I/O 线程 （如果启用了多线程 I/O）。这些线程负责处理命令请求和返回响应。
+7.  `bio-cpulist 1,3`
+    -   绑定 后台 I/O 线程 （Background I/O threads）。这些线程负责执行一些缓慢的异步操作，例如关闭文件描述符等。
+8.  `aof-rewrite-cpulist 8-11`
+    -   绑定执行 AOF 重写 的 子进程 。AOF 重写是一个相对耗资源的操作，绑定 CPU 可以减少对主线程和其他操作的影响。
+9.  `bgsave-cpulist 1,10-11`
+    -   绑定执行 bgsave（RDB 快照持久化）的子进程 。与 AOF 重写类似，绑定 CPU 可以优化这个后台保存操作的性能。
+10. `# ignore-warnings ARM64-COW-BUG`
+    -   配置末尾提到的 ignore-warnings ARM64-COW-BUG 是用于让 Redis 忽略特定警告的配置。例如，在某些 ARM64 架构的机器内核版本中，可能存在一个写时复制（Copy-on-Write）方面的内核 Bug，Redis 在启动时检测到系统处于这个“不良状态”会发出警告甚至拒绝启动。此选项可以用于屏蔽此类已知的特定警告（用空格分隔多个警告），但 务必在确认风险可控的情况下使用 。
