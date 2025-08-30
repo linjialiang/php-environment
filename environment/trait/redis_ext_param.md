@@ -957,32 +957,85 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
 ### 27. 高级配置-数据结构存储优化
 
-1. 哈希表优化
+1.  哈希表优化
 
-    - hash-max-listpack-entries 512：哈希元素 ≤512 时使用紧凑存储
-    - hash-max-listpack-value 64：哈希值 ≤64 字节时使用紧凑存储
+    哈希表存储支持 2 种编码方式：
 
-2. 列表优化
+    | 编码方式  | 特点                                 | 使用场景               |
+    | --------- | ------------------------------------ | ---------------------- |
+    | listpack  | 内存紧凑，存储高效                   | 小型存储               |
+    | hashtable | 内存开销较大，支持高效范围查询和排序 | 存储大量数据或大键值对 |
 
-    - list-max-listpack-size -2：每个列表节点 ≤8KB（-2 表示按大小限制）
-    - list-compress-depth 0：禁用列表压缩（0=不压缩，1=保留首尾节点不压缩）
+    1. Zset 元素数量 `≤zset-max-listpack-entries` ，并且任意元素值的长度 `<=zset-max-listpack-value` 时，使用 `listpack` 编码方式存储。
+    2. Zset 元素数量或元素大小任一超过阈值，Zset 就会转换为 `skiplist` 编码方式存储。
 
-3. 集合优化
+    ```ini
+    # 默认值
+    hash-max-listpack-entries 512    # 单位：个
+    hash-max-listpack-value 64       # 默认单位：字节
+    ```
 
-    - set-max-intset-entries 512：纯数字集合元素 ≤512 时使用特殊编码
-    - set-max-listpack-entries 128：混合集合元素 ≤128 时使用紧凑存储
+    ::: warning 版本注意
+    在 Redis 7.0 之前的版本，这两条指令的名称是 hash-max-ziplist-entries 和 hash-max-ziplist-value，因为其时使用的是 ziplist 结构。Redis 7.0 及以后版本中，ziplist 被 listpack 替代，故参数名也随之更改，但作用和含义基本相同
+    :::
 
-4. 有序集合优化
+2.  列表优化
 
-    - zset-max-listpack-entries 128：有序集合元素 ≤128 时使用紧凑存储
+    -   list-max-listpack-size -2：每个列表节点 ≤8KB（-2 表示按大小限制）
+    -   list-compress-depth 0：禁用列表压缩（0=不压缩，1=保留首尾节点不压缩）
 
-5. HyperLogLog 内存表示策略高级调优选项
+3.  集合优化
 
-    - hll-sparse-max-bytes 3000：稀疏表示最大字节数（超过转密集存储）
+    Redis 会根据集合中的数据特征（元素类型、数量和大小）自动选择最有效的底层编码方式，以优化内存使用和性能。
 
-6. Streams
-    - stream-node-max-bytes 4096：单个 Stream 节点最大字节数
-    - stream-node-max-entries 100：单个 Stream 节点最大条目数
+    集合存储支持三种编码方式：
+
+    | 编码方式  | 特点                             | 使用场景                          |
+    | --------- | -------------------------------- | --------------------------------- |
+    | intset    | 内存紧凑，有序存储，支持二分查找 | 小型整数集合（如用户 ID、状态码） |
+    | listpack  | 内存连续，避免连锁更新，安全高效 | 小型字符串集合                    |
+    | hashtable | 内存开销较大，支持高效范围查询   | 大型有序集合或需要复杂查询        |
+
+    1. 当 Set 中的所有元素都是整数 ​，且元素数量 `<=set-max-intset-entries` 时，使用 `intset` 编码方式存储。
+        - 一旦加入非整数字符串 ​，或元素数量 `>set-max-intset-entries`，Set 就会转换为 `hashtable` 或 `listpack`（Redis 7.0+），且不可逆转。
+    2. Set 元素数量 `≤set-max-listpack-entries`，并且任意元素值的长度 `<=set-max-listpack-value` 时,使用 `listpack` 编码方式存储。
+    3. 当 Set 不满足上述 intset 或 listpack 的条件时（如，包含非整数、元素过多或过大），使用 `hashtable` 编码方式存储。
+
+    ```ini
+    # 默认值
+    set-max-intset-entries 512      # 单位：个
+    set-max-listpack-entries 128    # 单位：个
+    set-max-listpack-value 64       # 默认单位：字节
+    ```
+
+4.  有序集合优化
+
+    有序集合存储支持 2 种编码方式：
+
+    | 编码方式 | 特点                                 | 使用场景                   |
+    | -------- | ------------------------------------ | -------------------------- |
+    | listpack | 内存紧凑，存储高效                   | 小型有序集合（如排行榜）   |
+    | skiplist | 内存开销较大，支持高效范围查询和排序 | 大型有序集合或需要复杂查询 |
+
+    1. Zset 元素数量 `≤zset-max-listpack-entries` ，并且任意元素值的长度 `<=zset-max-listpack-value` 时，使用 `listpack` 编码方式存储。
+    2. Zset 元素数量或元素大小任一超过阈值，Zset 就会转换为 `skiplist` 编码方式存储。
+
+    ```ini
+    # 默认值
+    zset-max-listpack-entries 128   # 单位：个
+    zset-max-listpack-value 64      # 默认单位：字节
+    ```
+
+5.  HyperLogLog 内存表示策略高级调优选项
+
+    -   hll-sparse-max-bytes 3000：稀疏表示最大字节数（超过转密集存储）
+
+6.  Streams
+
+    Stream 使用基数树（Radix Tree）来存储数据，`stream-node-max-bytes` 和 `stream-node-max-entries` 任意 1 个超出阈值就创建新节点
+
+    -   stream-node-max-bytes 4096：单个 Stream 节点最大字节数，超出则创建新节点
+    -   stream-node-max-entries 100：单个 Stream 节点最大条目数，超出则创建新节点
 
 ### 28. 高级配置-内存管理机制
 
