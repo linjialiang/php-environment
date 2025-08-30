@@ -227,7 +227,7 @@ tls-auth-clients optional
 # tls-dh-params-file /server/redis/tls/redis.dh
 ```
 
-````bash [redis-cli登录]
+```bash [redis-cli登录]
 # 双向认证 - 远程需要指定ip
 redis-cli -h 192.168.66.254 -p 16379 --tls \
 --cacert /server/redis/tls/ca.crt \
@@ -237,6 +237,7 @@ redis-cli -h 192.168.66.254 -p 16379 --tls \
 # 客户端不做验证 - 本机可以省略ip
 redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 ```
+
 :::
 
 ::: details tls-auth-clients 选项
@@ -245,7 +246,7 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 2. 选项：`optional`
     - `Redis客户端` 有传 `密钥/证书`，`Redis服务端` 验证 `Redis客户端` 是否正确；
     - `Redis客户端` 没传 `密钥/证书`，`Redis服务端` 不验证 `Redis客户端`；
-3.  选项：no
+3. 选项：no
     - `Redis客户端` 不论是否有传 `密钥/证书`，一律不验证 `Redis客户端` 。
 
 :::
@@ -269,7 +270,7 @@ chown redis:redis -R /server/redis /server/logs/redis
 find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
 find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
 chmod 750 -R /server/redis/bin
-````
+```
 
 ```bash [开发]
 # 权限同部署环境

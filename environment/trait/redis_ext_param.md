@@ -1290,7 +1290,6 @@ tls-session-caching yes  # 启用会话缓存减少握手开销
 
 6.  CPU 亲和性（CPU Affinity） 调优
 
-
     通过设置 CPU 亲和性（CPU Affinity） 来优化 Redis 的性能。简单来说，它允许你将 Redis 的不同功能的线程或进程绑定到特定的 CPU 核心上运行 。
 
     通过四个配置项来分别绑定 Redis 内部不同的执行单元，下面是默认值极其解释：
