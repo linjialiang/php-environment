@@ -257,7 +257,10 @@ su - redis -s /bin/zsh
 cd ~/redis-8.2.1/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
-cp -r ~/redis-8.2.1/utils/tests/tls /server/redis
+mkdir /server/etc/redis/tls
+chmod 640 /server/etc/redis/tls
+chown redis:redis /server/etc/redis/tls
+cp -r ~/redis-8.2.1/utils/tests/tls /server/etc/redis/tls
 ```
 
 ```bash [生成文件]
