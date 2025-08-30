@@ -522,7 +522,7 @@ source ~/.profile
     echo "net.ipv4.tcp_max_syn_backlog = 4096" > /etc/sysctl.d/tcp_max_syn_backlog.conf
     ```
 
-::: warning ⚠️ 注意：
+::: warning :warning: 注意：
 在 Debian 13 中，sysctl 的配置文件路径发生了显著变化，从传统的单一文件 `/etc/sysctl.conf` 转向了模块化的分散配置目录。
 
 以下是 Debian13 具体的配置文件路径及其优先级规则：

@@ -263,6 +263,6 @@ mysql> grant all privileges on *.* to 'root'@'192.168.%.%' WITH GRANT OPTION;
 mysql> flush privileges;
 ```
 
-::: danger ⚠️ 警告：
+::: danger :warning: 警告：
 操作时，强烈建议 MySQL 客户端跟 MySQL 服务器为同个主版本，因为不同版本之间会存在兼容性问题
 :::

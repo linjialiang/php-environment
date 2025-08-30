@@ -405,7 +405,7 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 ::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
 :::
 
-::: warning ⚠️ 下面是 FastCGI 工作进程池的资源竞争导致请求死锁的案例以及具体解决方案：
+::: warning :warning: 下面是 FastCGI 工作进程池的资源竞争导致请求死锁的案例以及具体解决方案：
 
 ::: code-group
 
