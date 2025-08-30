@@ -1220,7 +1220,7 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
 ### 30. 高级配置-连接管理
 
-控制 ​​Redis 服务端在每个事件循环周期中能够接受的新客户端连接数量，并且对普通连接和 TLS (加密) 连接是分别设置的
+控制 Redis 服务端在每个事件循环周期中能够接受的新客户端连接数量，并且对普通连接和 TLS (加密) 连接是分别设置的
 
 1. `max-new-connections-per-cycle 10` 普通连接默认 10 个/周期
 
@@ -1256,45 +1256,57 @@ tls-session-caching yes  # 启用会话缓存减少握手开销
 
 2.  触发阈值
 
-    1. `active-defrag-ignore-bytes 100mb` 启动整理的碎片浪费最小量 ​​
+    1. `active-defrag-ignore-bytes 100mb` 启动整理的碎片浪费最小量
         - 碎片内存 ≥100MB 才启动
         - 当碎片内存量达到此值时才会触发整理操作
     2. `active-defrag-threshold-lower 10` 启动整理的碎片率下限百分比
         - 碎片率 ≥10%触发整理，单位 `%`
         - 当内存碎片率超过此值时，开始进行碎片整理
-    3. `active-defrag-threshold-upper 100` 最大努力程度的碎片率上限百分比 ​​
+    3. `active-defrag-threshold-upper 100` 最大努力程度的碎片率上限百分比
         - 碎片率上限，单位 `%`
         - 当碎片率达到此值时，将使用 `active-defrag-cycle-max` 设置的 CPU 最大努力进行整理
 
 3.  CPU 控制
 
-    1.  `active-defrag-cycle-min 1` 最小 CPU 努力百分比 ​​
+    1.  `active-defrag-cycle-min 1` 最小 CPU 努力百分比
         -   最小 CPU 使用率，单位 `%`
         -   当碎片率达到下限阈值时，用于碎片整理的 CPU 时间最少占比
-    2.  `active-defrag-cycle-max 25` ​​ 最大 CPU 努力百分比
+    2.  `active-defrag-cycle-max 25`最大 CPU 努力百分比
         -   最大 CPU 使用率，单位 `%`
         -   当碎片率达到上限阈值时，用于碎片整理的 CPU 时间最大占比
 
-4.  `active-defrag-max-scan-fields 1000` 主字典扫描中处理的 set/hash/zset/list 字段最大值 ​​
+4.  `active-defrag-max-scan-fields 1000` 主字典扫描中处理的 set/hash/zset/list 字段最大值
 
     -   限制每次扫描处理的复杂数据结构字段数量，避免单次操作耗时过长
 
-5.  `jemalloc-bg-thread yes` 启用 Jemalloc 的后台内存清理线程 ​
+5.  `jemalloc-bg-thread yes` 启用 Jemalloc 的后台内存清理线程
 
-    -   控制 jemalloc 内存分配器后台线程的启用状态
+    -   这有助于内存管理，通常建议启用
 
     | 值    | 说明                             |
     | ----- | -------------------------------- |
     | `yes` | 由专属后台线程异步处理内存回收   |
     | `no`  | 依赖应用程序线程同步处理内存回收 |
 
-6.  `server-cpulist 0-7:2`
-    -   绑定 主线程 和 I/O 线程 （如果启用了多线程 I/O）。这些线程负责处理命令请求和返回响应。
-7.  `bio-cpulist 1,3`
-    -   绑定 后台 I/O 线程 （Background I/O threads）。这些线程负责执行一些缓慢的异步操作，例如关闭文件描述符等。
-8.  `aof-rewrite-cpulist 8-11`
-    -   绑定执行 AOF 重写 的 子进程 。AOF 重写是一个相对耗资源的操作，绑定 CPU 可以减少对主线程和其他操作的影响。
-9.  `bgsave-cpulist 1,10-11`
-    -   绑定执行 bgsave（RDB 快照持久化）的子进程 。与 AOF 重写类似，绑定 CPU 可以优化这个后台保存操作的性能。
-10. `# ignore-warnings ARM64-COW-BUG`
+6.  CPU 亲和性（CPU Affinity） 调优
+
+
+    通过设置 CPU 亲和性（CPU Affinity） 来优化 Redis 的性能。简单来说，它允许你将 Redis 的不同功能的线程或进程绑定到特定的 CPU 核心上运行 。
+
+    通过四个配置项来分别绑定 Redis 内部不同的执行单元，下面是默认值极其解释：
+
+    1.  `server-cpulist 0-7:2`
+        -   绑定 `Redis 服务的主线程` 和 `I/O 线程（如果启用了多线程 I/O）`。
+        -   这些线程负责处理命令请求、返回响应等核心网络操作。
+    2.  `bio-cpulist 1,3`
+        -   绑定 `后台 I/O 线程 （Background I/O threads）`。
+        -   这些线程负责执行一些缓慢的、需要异步处理的任务，例如关闭文件描述符、执行 lazyfree 等。
+    3.  `aof-rewrite-cpulist 8-11`
+        -   绑定执行 AOF 重写（AOF rewrite） 的 子进程 。
+        -   AOF 重写是一个相对耗时的操作，通过 fork 产生子进程来完成。
+    4.  `bgsave-cpulist 1,10-11`
+        -   绑定执行 RDB 持久化（bgsave）的子进程 。
+        -   bgsave 也是通过 fork 子进程来生成内存快照并写入 RDB 文件。
+
+7.  `ignore-warnings ARM64-COW-BUG`
     -   配置末尾提到的 ignore-warnings ARM64-COW-BUG 是用于让 Redis 忽略特定警告的配置。例如，在某些 ARM64 架构的机器内核版本中，可能存在一个写时复制（Copy-on-Write）方面的内核 Bug，Redis 在启动时检测到系统处于这个“不良状态”会发出警告甚至拒绝启动。此选项可以用于屏蔽此类已知的特定警告（用空格分隔多个警告），但 务必在确认风险可控的情况下使用 。
