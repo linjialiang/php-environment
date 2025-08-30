@@ -140,6 +140,13 @@ echo "/server/logs/redis/redis-server.log {
 }" > /etc/logrotate.d/redis
 ```
 
+| 操作         | 命令                               | 说明                                              |
+| ------------ | ---------------------------------- | ------------------------------------------------- |
+| 手动强制运行 | `logrotate -f /etc/logrotate.conf` | 强制运行所有配置                                  |
+| 手动强制运行 | `logrotate -f /你的/配置文件路径`  | 强制运行指定的配置文件                            |
+| 调试模式     | `logrotate -d /你的/配置文件路径`  | 调试模式，验证配置语法是否正确，不会实际轮转日志  |
+| ​ 验证日志   | ​ grep logrotate /var/log/syslog   | 查看 logrotate 自身的执行记录和可能出现的错误信息 |
+
 :::
 
 ## 配置系统单元
