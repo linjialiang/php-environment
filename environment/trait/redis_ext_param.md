@@ -1040,9 +1040,9 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
     hll-sparse-max-bytes 3000       # 单位：字节
     ```
 
-6.  Streams
+6.  流
 
-    Stream 使用基数树（Radix Tree）来存储数据，`stream-node-max-bytes` 和 `stream-node-max-entries` 任意 1 个超出阈值就创建新节点
+    Stream 使用基数树（Radix Tree）来存储数据，`stream-node-max-bytes` 和 `stream-node-max-entries` 任意 1 个超出阈值就会创建新节点
 
     -   stream-node-max-bytes 4096：单个 Stream 节点最大字节数，超出则创建新节点
     -   stream-node-max-entries 100：单个 Stream 节点最大条目数，超出则创建新节点
