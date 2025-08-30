@@ -266,7 +266,7 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 ::: code-group
 
 ```bash [部署]
-chown redis:redis -R /server/redis /server/logs/redis
+chown redis:redis -R /server/redis /server/logs/redis /server/etc/redis
 find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
 find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
 chmod 750 -R /server/redis/bin
