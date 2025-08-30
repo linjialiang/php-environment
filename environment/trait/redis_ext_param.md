@@ -1149,9 +1149,11 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
     手动配置 `hz 10` 作为基线值，当客户端连接数增多时，Redis 会自动在实际配置的 hz 值基础上 按需倍增。连接数越多，实际使用的 hz 值也越高。
 
-3. `aof-rewrite-incremental-fsync yes` AOF 重写时每 4MB 刷盘一次
+3. `aof-rewrite-incremental-fsync yes` AOF 重写时每 4MB 刷盘(fsync)一次
 
-4. `rdb-save-incremental-fsync yes` RDB 保存时每 4MB 刷盘一次
+    - fsync 的作用是将内存中的数据同步到磁盘里，确保数据持久化
+
+4. `rdb-save-incremental-fsync yes` RDB 保存时每 4MB 刷盘(fsync)一次
 
 5. Redis LFU 淘汰算法调优参数
 
