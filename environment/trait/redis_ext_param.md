@@ -1101,7 +1101,7 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
     - 用于限制 Redis 单个客户端查询缓冲区的最大容量，防止异常客户端消耗过多内存
 
-4. `maxmemory-clients` Redis 的 客户端内存保护机制
+4. `maxmemory-clients` Redis 的客户端内存保护机制
 
     - maxmemory-clients 是 Redis 的客户端内存保护机制，用于限制所有客户端连接（包括 Pub/Sub 和普通客户端）消耗的总内存上限，防止因客户端连接过多导致服务器 OOM（内存溢出）。
 
