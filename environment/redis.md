@@ -9,13 +9,13 @@ titleTemplate: 环境搭建教程
 
 在 Debian 13 下构建 Redis 的详细流程如下
 
-### 安装依赖
+## 安装依赖
 
 ```bash
 apt install -y g++ libssl-dev pkg-config
 ```
 
-### 编译安装
+## 编译安装
 
 ::: code-group
 
@@ -88,34 +88,34 @@ chmod 750 /server/redis/rdbData
 ::: details 基础配置
 ::: code-group
 <<<@/assets/environment/source/redis/redis.conf{ini} [主配置]
-<<<@/assets/environment/source/redis/etc/config/source.conf{ini} [原始配置]
+<<<@/assets/environment/source/etc/redis/config/source.conf{ini} [原始配置]
 :::
 
 ::: details 自定义配置
 ::: code-group
-<<<@/assets/environment/source/redis/etc/config/custom/01-network.conf{ini} [01-network.conf]
-<<<@/assets/environment/source/redis/etc/config/custom/02-tls.conf{ini} [02-tls.conf]
-<<<@/assets/environment/source/redis/etc/config/custom/03-general.conf{ini} [03-general]
-<<<@/assets/environment/source/redis/etc/config/custom/04-rdb.conf{ini} [04-rdb]
-<<<@/assets/environment/source/redis/etc/config/custom/05-replication.conf{ini} [05-replication]
-<<<@/assets/environment/source/redis/etc/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
-<<<@/assets/environment/source/redis/etc/config/custom/07-acl.conf{ini} [07-acl]
-<<<@/assets/environment/source/redis/etc/config/custom/08-client.conf{ini} [08-client]
-<<<@/assets/environment/source/redis/etc/config/custom/09-memory-management.conf{ini} [09-memory-management]
-<<<@/assets/environment/source/redis/etc/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
-<<<@/assets/environment/source/redis/etc/config/custom/11-io.conf{ini} [11-io]
-<<<@/assets/environment/source/redis/etc/config/custom/12-oom.conf{ini} [12-oom]
-<<<@/assets/environment/source/redis/etc/config/custom/13-thp.conf{ini} [13-thp]
-<<<@/assets/environment/source/redis/etc/config/custom/14-aof.conf{ini} [14-aof]
-<<<@/assets/environment/source/redis/etc/config/custom/15-shutdown.conf{ini} [15-shutdown]
-<<<@/assets/environment/source/redis/etc/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
-<<<@/assets/environment/source/redis/etc/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
-<<<@/assets/environment/source/redis/etc/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
-<<<@/assets/environment/source/redis/etc/config/custom/19-slow-log.conf{ini} [19-slow-log]
-<<<@/assets/environment/source/redis/etc/config/custom/20-latency.conf{ini} [20-latency]
-<<<@/assets/environment/source/redis/etc/config/custom/21-event-notification.conf{ini} [21-event-notification]
-<<<@/assets/environment/source/redis/etc/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
-<<<@/assets/environment/source/redis/etc/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
+<<<@/assets/environment/source/etc/redis/config/custom/01-network.conf{ini} [01-network.conf]
+<<<@/assets/environment/source/etc/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
+<<<@/assets/environment/source/etc/redis/config/custom/03-general.conf{ini} [03-general]
+<<<@/assets/environment/source/etc/redis/config/custom/04-rdb.conf{ini} [04-rdb]
+<<<@/assets/environment/source/etc/redis/config/custom/05-replication.conf{ini} [05-replication]
+<<<@/assets/environment/source/etc/redis/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
+<<<@/assets/environment/source/etc/redis/config/custom/07-acl.conf{ini} [07-acl]
+<<<@/assets/environment/source/etc/redis/config/custom/08-client.conf{ini} [08-client]
+<<<@/assets/environment/source/etc/redis/config/custom/09-memory-management.conf{ini} [09-memory-management]
+<<<@/assets/environment/source/etc/redis/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
+<<<@/assets/environment/source/etc/redis/config/custom/11-io.conf{ini} [11-io]
+<<<@/assets/environment/source/etc/redis/config/custom/12-oom.conf{ini} [12-oom]
+<<<@/assets/environment/source/etc/redis/config/custom/13-thp.conf{ini} [13-thp]
+<<<@/assets/environment/source/etc/redis/config/custom/14-aof.conf{ini} [14-aof]
+<<<@/assets/environment/source/etc/redis/config/custom/15-shutdown.conf{ini} [15-shutdown]
+<<<@/assets/environment/source/etc/redis/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
+<<<@/assets/environment/source/etc/redis/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
+<<<@/assets/environment/source/etc/redis/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
+<<<@/assets/environment/source/etc/redis/config/custom/19-slow-log.conf{ini} [19-slow-log]
+<<<@/assets/environment/source/etc/redis/config/custom/20-latency.conf{ini} [20-latency]
+<<<@/assets/environment/source/etc/redis/config/custom/21-event-notification.conf{ini} [21-event-notification]
+<<<@/assets/environment/source/etc/redis/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
+<<<@/assets/environment/source/etc/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
 ## 配置 redis 系统单元
@@ -167,10 +167,9 @@ su - redis -s /bin/zsh
 cd ~/redis-8.2.1/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
-mkdir /server/etc/redis/tls
-chmod 640 /server/etc/redis/tls
-chown redis:redis /server/etc/redis/tls
-cp -r ~/redis-8.2.1/utils/tests/tls /server/etc/redis/tls
+cp -r ~/redis-8.2.1/utils/tests/tls/ /server/etc/redis/
+chmod 640 -R /server/etc/redis/tls
+chown redis:redis -R /server/etc/redis/tls
 ```
 
 ```bash [生成文件]
