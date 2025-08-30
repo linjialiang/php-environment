@@ -85,127 +85,37 @@ chmod 750 /server/redis/rdbData
 
 #### 配置案例
 
-::: details 配置案例
+::: details 基础配置
 ::: code-group
-<<<@/assets/environment/source/redis/redis.conf{ini} [配置案例]
-<<<@/assets/environment/source/redis/redis.conf.source{ini} [自带配置]
+<<<@/assets/environment/source/redis/redis.conf{ini} [主配置]
+<<<@/assets/environment/source/redis/etc/config/source.conf{ini} [原始配置]
 :::
 
-### 2. 配置说明
-
+::: details 自定义配置
 ::: code-group
-
-```bash [改动的配置说明]
-# 以守护进程的方式运行
-daemonize yes
-# 修改pid文件存放路径
-pidfile /run/redis/process.pid
-# 启用密码登陆
-requirepass 1
-# 日志路径
-logfile "/server/logs/redis/redis.log"
-# 开启本地和局域网
-# 提示：监听的网卡ip地址必须全部正常，否则网卡都无法正常连接
-#   - 设为 0.0.0.0 则监听服务器的全部网卡
-bind 127.0.0.1 192.168.66.254
-# 启用 RDB 持久化，后面的3组数字表示自动快照策略
-# - 3600秒（60分钟）内有至少1个key发生变化；
-# - 300秒（5分钟）内有至少100个key发生变化；
-# - 60秒（1分钟）内有至少1万个key发生变化；
-save 3600 1 300 100 60 10000 # 如果设为 save "" 代表关闭
-# 指定工作目录
-# - 配置文件redis.conf上所有相对路径的父级目录，如：
-#   1. RDB文件的存储目录
-#   2. AOF文件的存储目录
-#   3. 使用了相对路径的pid文件
-#   4. 使用了相对路径的日志文件
-#   5. 使用了相对路径的tls相关文件
-#   6. 访问控制列表
-dir /server/redis/rdbData
-
-# 是否开启AOF持久化。
-# - 默认为no，表示关闭AOF持久化。
-# - 如果设置为yes，则开启AOF持久化。
-appendonly yes
-
-# 启用TLS，证书需自签名或购买
-tls-port 16379
-tls-cert-file /server/redis/tls/redis.crt
-tls-key-file /server/redis/tls/redis.key
-tls-ca-cert-file /server/redis/tls/ca.crt
-tls-auth-clients optional
-# 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
-# tls-dh-params-file /server/redis/tls/redis.dh
-```
-
-```bash [RDB配置说明]
-# RDB是快照(Snapshotting)全量备份，只能恢复最近1次的快照
-
-# 启用 RDB 持久化，后面的3组数字表示自动快照策略
-# - 3600秒（60分钟）内有至少1个key发生变化；
-# - 300秒（5分钟）内有至少100个key发生变化；
-# - 60秒（1分钟）内有至少1万个key发生变化；
-save 3600 1 300 100 60 10000 # 如果设为 save "" 代表关闭
-# 当后台保存出错时，是否停止写入操作。
-# - 默认为yes，表示如果后台保存失败，那么Redis将停止接收写请求。
-stop-writes-on-bgsave-error yes
-# 是否开启RDB文件压缩。
-# - 默认为yes，表示Redis会在保存RDB文件时进行压缩，以节省磁盘空间。
-rdbcompression yes
-# 是否开启RDB文件校验和。
-# - 默认为yes，表示Redis会在保存RDB文件时计算校验和，用于检查RDB文件是否损坏。
-rdbchecksum yes
-# 指定RDB文件的名称。默认为 dump.rdb
-dbfilename dump.rdb
-# 是否删除旧的RDB文件。默认为no，表示Redis不会删除旧的RDB文件。
-rdb-del-sync-files no
-# 指定RDB文件的存储目录
-# - 注意：AOF文件，也将在此目录中创建
-dir /server/redis/rdbData
-```
-
-```bash [AOF配置说明]
-# AOF 全称 “APPEND ONLY MODE” 是实时记录操作，默认配置可以恢复1秒前的数据
-# -- AOF还可以通过混合持久化的方式，结合RDB的快照来提高启动效率和数据恢复的速度。
-
-# 是否开启AOF持久化。
-# - 默认为no，表示关闭AOF持久化。
-# - 如果设置为yes，则开启AOF持久化。
-appendonly yes
-# 指定AOF文件的名称。默认为 appendonly.aof
-appendfilename "appendonly.aof"
-# 指定AOF文件的存储目录。默认为当前工作目录
-appenddirname "appendonlydir"
-# 设置AOF文件同步的频率。
-# - 默认为 everysec，表示每秒同步一次。
-# - 可选值有 everysec/always/no
-appendfsync everysec
-# 在AOF重写期间是否进行同步。
-# - 默认为no，表示在AOF重写期间不进行同步。
-# - 如果设置为yes，则在AOF重写期间进行同步。
-no-appendfsync-on-rewrite no
-# 设置自动触发AOF重写的条件，即当AOF文件大小超过上一次重写后大小的百分之多少时触发。
-# - 默认为100，表示每次重写都会触发。
-auto-aof-rewrite-percentage 100
-# 设置自动触发AOF重写的最小文件大小。默认为 64Mb
-auto-aof-rewrite-min-size 64mb
-# 当AOF文件被截断时，是否加载截断后的AOF文件。
-# - 默认为yes，表示加载截断后的AOF文件。
-aof-load-truncated yes
-# 是否在AOF文件中添加RDB格式的前导部分。
-# - 默认为yes，表示添加前导部分。
-aof-use-rdb-preamble yes # yes即开启混合持久化 整体格式为：[RDB file][AOF tail]
-# 是否在AOF文件中添加时间戳。
-# - 默认为no，表示不添加时间戳。
-aof-timestamp-enabled no
-```
-
-:::
-
-::: tip 混合持久化
-Redis 的持久化是它的一大特性，可以将内存中的数据写入到硬盘中；
-
-Redis 分为 RDB 和 AOF 两种持久化，其中 `AOF` 可以结合 `RDB` 实现混合持久化。
+<<<@/assets/environment/source/redis/etc/config/custom/01-network.conf{ini} [01-network.conf]
+<<<@/assets/environment/source/redis/etc/config/custom/02-tls.conf{ini} [02-tls.conf]
+<<<@/assets/environment/source/redis/etc/config/custom/03-general.conf{ini} [03-general]
+<<<@/assets/environment/source/redis/etc/config/custom/04-rdb.conf{ini} [04-rdb]
+<<<@/assets/environment/source/redis/etc/config/custom/05-replication.conf{ini} [05-replication]
+<<<@/assets/environment/source/redis/etc/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
+<<<@/assets/environment/source/redis/etc/config/custom/07-acl.conf{ini} [07-acl]
+<<<@/assets/environment/source/redis/etc/config/custom/08-client.conf{ini} [08-client]
+<<<@/assets/environment/source/redis/etc/config/custom/09-memory-management.conf{ini} [09-memory-management]
+<<<@/assets/environment/source/redis/etc/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
+<<<@/assets/environment/source/redis/etc/config/custom/11-io.conf{ini} [11-io]
+<<<@/assets/environment/source/redis/etc/config/custom/12-oom.conf{ini} [12-oom]
+<<<@/assets/environment/source/redis/etc/config/custom/13-thp.conf{ini} [13-thp]
+<<<@/assets/environment/source/redis/etc/config/custom/14-aof.conf{ini} [14-aof]
+<<<@/assets/environment/source/redis/etc/config/custom/15-shutdown.conf{ini} [15-shutdown]
+<<<@/assets/environment/source/redis/etc/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
+<<<@/assets/environment/source/redis/etc/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
+<<<@/assets/environment/source/redis/etc/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
+<<<@/assets/environment/source/redis/etc/config/custom/19-slow-log.conf{ini} [19-slow-log]
+<<<@/assets/environment/source/redis/etc/config/custom/20-latency.conf{ini} [20-latency]
+<<<@/assets/environment/source/redis/etc/config/custom/21-event-notification.conf{ini} [21-event-notification]
+<<<@/assets/environment/source/redis/etc/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
+<<<@/assets/environment/source/redis/etc/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
 ## 配置 redis 系统单元
@@ -346,10 +256,6 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 将 CA 证书（ca.crt）分发给所有客户端，以便它们能够验证服务器的身份。
 
 如果使用了客户端证书认证，还需要将客户端证书（client.crt）分发给客户端，并将 CA 证书分发给服务器，以便服务器能够验证客户端的身份。
-
-## 开启 ACL(访问控制列表)
-
-配置文件里 `aclfile /path/to/users.acl` 行取消注释后，则开启
 
 ## 附录：配置文件说明
 
