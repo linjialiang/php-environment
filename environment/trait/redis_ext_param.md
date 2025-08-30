@@ -149,8 +149,8 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
     ```ini [客户端证书]
     # 应用于双向认证场景，作为客户端访问Redis服务时使用，如：
     #   1. redis-cli 使用tls端口对本地或远程redis建立连接时，默认使用此配置作为客户端密钥
-    #   2. 主从复制：当Redis服务器以​​副本（Replica）​​ 身份去连接主节点（Master）
-    #   3. 集群节点​​与其他节点进行安全通信时，Redis服务器本身就会作为一个​​客户端
+    #   2. 主从复制：当Redis服务器以副本（Replica） 身份去连接主节点（Master）
+    #   3. 集群节点与其他节点进行安全通信时，Redis服务器本身就会作为一个客户端
     #   4. navicat 等客户端想redis服务端建立tls连接时的使用方式于此类似
     # tls-client-cert-file client.crt # X.509证书(PEM格式)
     # tls-client-key-file client.key  # 私钥文件(PEM格式)
@@ -996,8 +996,8 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
     | listpack  | 内存连续，避免连锁更新，安全高效 | 小型字符串集合                    |
     | hashtable | 内存开销较大，支持高效范围查询   | 大型有序集合或需要复杂查询        |
 
-    1. 当 Set 中的所有元素都是整数 ​，且元素数量 `<=set-max-intset-entries` 时，使用 `intset` 编码方式存储。
-        - 一旦加入非整数字符串 ​，或元素数量 `>set-max-intset-entries`，Set 就会转换为 `hashtable` 或 `listpack`（Redis 7.0+），且不可逆转。
+    1. 当 Set 中的所有元素都是整数 ，且元素数量 `<=set-max-intset-entries` 时，使用 `intset` 编码方式存储。
+        - 一旦加入非整数字符串 ，或元素数量 `>set-max-intset-entries`，Set 就会转换为 `hashtable` 或 `listpack`（Redis 7.0+），且不可逆转。
     2. Set 元素数量 `≤set-max-listpack-entries`，并且任意元素值的长度 `<=set-max-listpack-value` 时,使用 `listpack` 编码方式存储。
     3. 当 Set 不满足上述 intset 或 listpack 的条件时（如，包含非整数、元素过多或过大），使用 `hashtable` 编码方式存储。
 
@@ -1051,7 +1051,27 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
 1. `activerehashing yes` 主动重哈希开关配置
 
-    - 用于控制 Redis 是否定期执行主字典表的渐进式重哈希操作
+    Redis 使用哈希表来存储键值对。当数据增多，哈希表需要扩容时，Redis 会创建一个更大的新哈希表，然后把旧表中的数据"重新映射"到新表中，这个过程就是 Rehashing。为了避免一次性迁移所有数据导致服务阻塞，Redis 采用了一种渐进式 Rehashing（Incremental Rehashing） 的策略。这意味着：
+
+    - Lazy Rehashing（惰性重哈希）：每次你对数据库执行命令（如查找、添加、删除）时，Redis 会「顺便」迁移一小部分（例如 1 个桶）的旧数据。
+    - Active Rehashing（主动重哈希）：如果服务器比较空闲，没有太多命令请求，惰性重哈希的进度就会很慢。为了解决这个问题，Redis 提供了一个配置选项 activerehashing，让 Redis 可以主动地在后台花费一点时间推进重哈希工作，即使没有收到用户请求。
+
+    | 配置值 | 含义           | 优缺点                              | 适用场景                   |
+    | ------ | -------------- | ----------------------------------- | -------------------------- |
+    | `yes`  | 启用主动重哈希 | 能更快释放内存，但引入毫秒级延迟    | 通用场景，无极端低延迟要求 |
+    | `no`   | 禁用主动重哈希 | 避免额外延迟， 内存释放依赖请求触发 | 对延迟极其敏感的环境       |
+
+    ```ini
+    # 默认值
+    activerehashing yes             # 启用主动重哈希
+    ```
+
+    ::: details 启用目的
+
+    - 工作原理：启用后，Redis 默认会每 100 毫秒花费 1 毫秒的 CPU 时间（即约 1% 的 CPU 时间 ）来主动推进 rehashing 过程，帮助尽快完成整个数据迁移
+    - 目的 ：主要是为了能 更快地释放旧哈希表占用的内存 。如果不启用，在服务器空闲时，旧哈希表可能会长时间占用着内存，无法被及时释放。
+
+    :::
 
 2. `client-output-buffer-limit` Redis 客户端输出缓冲区限制策略
 
