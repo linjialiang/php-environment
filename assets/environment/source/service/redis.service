@@ -1,5 +1,5 @@
 echo "[Unit]
-Description=redis-7.4.x
+Description=redis-8.2.x
 After=network.target
 
 [Service]
