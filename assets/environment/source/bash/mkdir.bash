@@ -32,6 +32,10 @@ server_array=(
     "/server/redis"
     "/server/redis/rdbData"
     "/server/logs/redis"
+    "/server/logs/etc/redis"
+    "/server/logs/etc/redis/config"
+    "/server/logs/etc/redis/config/custom"
+    "/server/logs/etc/redis/tls"
 
     "/server/mysql"
     "/server/data"

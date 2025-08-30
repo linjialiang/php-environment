@@ -52,6 +52,7 @@ chown_redis_array=(
     "/server/redis"
     "/server/redis/rdbData"
     "/server/logs/redis"
+    "/server/etc/redis"
 );
 
 chown_mysql_array=(
