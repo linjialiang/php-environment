@@ -1,30 +1,37 @@
 #!/usr/bin/env bash
 func_chown_nginx(){
     chown nginx:nginx -R $1
+    chmod 640 -R $1
 }
 
 func_chown_phpFpm(){
     chown php-fpm:php-fpm -R $1
+    chmod 640 -R $1
 }
 
 func_chown_postgres(){
     chown postgres:postgres -R $1
+    chmod 640 -R $1
 }
 
 func_chown_www(){
     chown emad:emad -R $1
+    chmod 640 -R $1
 }
 
 func_chown_redis(){
     chown redis:redis -R $1
+    chmod 640 -R $1
 }
 
 func_chown_mysql(){
     chown mysql:mysql -R $1
+    chmod 640 -R $1
 }
 
 func_chown_sqlite(){
     chown sqlite:sqlite -R $1
+    chmod 640 -R $1
 }
 
 chown_nginx_array=(
