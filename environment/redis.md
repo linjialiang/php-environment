@@ -118,6 +118,30 @@ chmod 750 /server/redis/rdbData
 <<<@/assets/environment/source/etc/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
+::: details 日志分割
+
+使用 Logrotate 包来自动分割日志
+
+```bash
+# 创建独立的 Logrotate 配置文件
+echo "/server/logs/redis/redis-server.log {
+    daily                      # 每天轮转一次
+    rotate 30                  # 保留30个历史日志文件
+    compress                   # 启用gzip压缩历史日志
+    delaycompress              # 延迟一天压缩（压缩前一天的日志）
+    missingok                  # 如果日志文件不存在也不报错
+    notifempty                 # 空日志文件不轮转
+    create 640 redis redis     # 新日志文件权限和属主
+    sharedscripts              # 多个日志文件共用postrotate脚本
+    postrotate
+        # 向Redis发送信号重新打开日志文件
+        /usr/bin/kill -USR1 $(cat /run/redis/process.pid 2>/dev/null) 2>/dev/null || true
+    endscript
+}" > /etc/logrotate.d/redis
+```
+
+:::
+
 ## 配置系统单元
 
 推荐统一使用 systemd 管理各种服务
