@@ -1250,31 +1250,36 @@ tls-session-caching yes  # 启用会话缓存减少握手开销
 
 主动内存碎片整理（Active Defragmentation）是 Redis 4.0+ 引入的高级内存管理功能，用于在不重启服务的情况下减少内存碎片，提升内存利用率。
 
-1.  `activedefrag no`
+1.  `activedefrag no` 主动内存碎片整理总开关，默认禁用
 
-    -   主动内存碎片整理开关柜，默认禁用
+    -   设置为 yes 才能启用主动碎片整理功能
 
 2.  触发阈值
 
-    1. `active-defrag-ignore-bytes 100mb`
+    1. `active-defrag-ignore-bytes 100mb` 启动整理的碎片浪费最小量 ​​
         - 碎片内存 ≥100MB 才启动
-    2. `active-defrag-threshold-lower 10`
+        - 当碎片内存量达到此值时才会触发整理操作
+    2. `active-defrag-threshold-lower 10` 启动整理的碎片率下限百分比
         - 碎片率 ≥10%触发整理，单位 `%`
-    3. `active-defrag-threshold-upper 100`
+        - 当内存碎片率超过此值时，开始进行碎片整理
+    3. `active-defrag-threshold-upper 100` 最大努力程度的碎片率上限百分比 ​​
         - 碎片率上限，单位 `%`
+        - 当碎片率达到此值时，将使用 `active-defrag-cycle-max` 设置的 CPU 最大努力进行整理
 
 3.  CPU 控制
 
-    1.  `active-defrag-cycle-min 1`
+    1.  `active-defrag-cycle-min 1` 最小 CPU 努力百分比 ​​
         -   最小 CPU 使用率，单位 `%`
-    2.  `active-defrag-cycle-max 25`
+        -   当碎片率达到下限阈值时，用于碎片整理的 CPU 时间最少占比
+    2.  `active-defrag-cycle-max 25` ​​ 最大 CPU 努力百分比
         -   最大 CPU 使用率，单位 `%`
+        -   当碎片率达到上限阈值时，用于碎片整理的 CPU 时间最大占比
 
-4.  `active-defrag-max-scan-fields 1000`
+4.  `active-defrag-max-scan-fields 1000` 主字典扫描中处理的 set/hash/zset/list 字段最大值 ​​
 
-    -   每次扫描字段数
+    -   限制每次扫描处理的复杂数据结构字段数量，避免单次操作耗时过长
 
-5.  `jemalloc-bg-thread yes`
+5.  `jemalloc-bg-thread yes` 启用 Jemalloc 的后台内存清理线程 ​
 
     -   控制 jemalloc 内存分配器后台线程的启用状态
 
