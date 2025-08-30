@@ -1028,7 +1028,17 @@ AOF（Append Only File）是 Redis 提供的持久化机制，通过记录所有
 
 5.  HyperLogLog 内存表示策略高级调优选项
 
-    -   hll-sparse-max-bytes 3000：稀疏表示最大字节数（超过转密集存储）
+    HyperLogLog（HLL）数据结构在内存中使用稀疏表示（Sparse Representation）时所允许的最大字节数，当稀疏表示的大小超过这个限制（默认是 3000 字节）时，Redis 会将其转换为密集表示（Dense Representation）
+
+    | 内存表示策略方式                          | 特点                       | 适用场景             |
+    | ----------------------------------------- | -------------------------- | -------------------- |
+    | 稀疏表示（Sparse Representation）         | 内存紧凑，存储高效         | 小数据集，低基数场景 |
+    | skipl 密集表示（Dense Representation）ist | 内存开销较大，提升操作速度 | 大数据集，高基数场景 |
+
+    ```ini
+    # 默认值
+    hll-sparse-max-bytes 3000       # 单位：字节
+    ```
 
 6.  Streams
 
