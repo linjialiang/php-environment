@@ -83,7 +83,7 @@ chmod 750 /server/redis/rdbData
 
 :::
 
-#### 配置案例
+### 2. 配置案例
 
 ::: details 基础配置
 ::: code-group
@@ -118,7 +118,7 @@ chmod 750 /server/redis/rdbData
 <<<@/assets/environment/source/etc/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
-## 配置 redis 系统单元
+## 配置系统单元
 
 推荐统一使用 systemd 管理各种服务
 
