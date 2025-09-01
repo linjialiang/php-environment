@@ -378,10 +378,6 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 
 配置文件里 `aclfile /path/to/users.acl` 行取消注释后，则开启
 
-## 附录：Redis 常见配置参数
-
-<!-- @include: ./trait/redis_ext_param.md -->
-
 ## 权限
 
 ::: code-group
