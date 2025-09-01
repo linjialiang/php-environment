@@ -553,11 +553,14 @@ Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参�
 <<<@/assets/environment/source/logrotate.d/example{bash} [带备注]
 :::
 
-| 常用指令                                    | 描述                       |
-| ------------------------------------------- | -------------------------- |
-| `logrotate -f /etc/logrotate.conf`          | 强制立即轮转所有配置文件   |
-| `logrotate -f /etc/logrotate.d/your_config` | 强制立即轮转指定的配置文件 |
-| `logrotate -d /etc/logrotate.d/your_config` | 模拟轮转过程并显示详细信息 |
+{#Logrotate-common}
+
+| 常用指令                                    | 描述                                              |
+| ------------------------------------------- | ------------------------------------------------- |
+| `logrotate -f /etc/logrotate.conf`          | 强制立即轮转所有配置文件                          |
+| `logrotate -f /etc/logrotate.d/your_config` | 强制立即轮转指定的配置文件                        |
+| `logrotate -d /etc/logrotate.d/your_config` | 模拟轮转过程并显示详细信息                        |
+| `grep logrotate /var/log/syslog`            | 查看 logrotate 自身的执行记录和可能出现的错误信息 |
 
 ::: warning :warning: `copytruncate/create` 两者区别
 

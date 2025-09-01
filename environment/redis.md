@@ -119,34 +119,12 @@ chmod 750 /server/redis/rdbData
 :::
 
 ::: details 日志分割
+使用 Logrotate 自动轮转来分割日志
 
-使用 Logrotate 包来自动分割日志
+<<<@/assets/environment/source/logrotate.d/redis{bash}
 
-```bash
-# 创建独立的 Logrotate 配置文件
-echo "/server/logs/redis/redis-server.log {
-    daily                      # 每天轮转一次
-    rotate 30                  # 保留30个历史日志文件
-    compress                   # 启用gzip压缩历史日志
-    delaycompress              # 延迟一天压缩（压缩前一天的日志）
-    missingok                  # 如果日志文件不存在也不报错
-    notifempty                 # 空日志文件不轮转
-    create 640 redis redis     # 新日志文件权限和属主
-    sharedscripts              # 多个日志文件共用postrotate脚本
-    postrotate
-        # 向Redis发送信号重新打开日志文件
-        /usr/bin/kill -USR1 $(cat /run/redis/process.pid 2>/dev/null) 2>/dev/null || true
-    endscript
-}" > /etc/logrotate.d/redis
-```
-
-| 操作         | 命令                               | 说明                                              |
-| ------------ | ---------------------------------- | ------------------------------------------------- |
-| 手动强制运行 | `logrotate -f /etc/logrotate.conf` | 强制运行所有配置                                  |
-| 手动强制运行 | `logrotate -f /你的/配置文件路径`  | 强制运行指定的配置文件                            |
-| 调试模式     | `logrotate -d /你的/配置文件路径`  | 调试模式，验证配置语法是否正确，不会实际轮转日志  |
-| ​ 验证日志   | ​ grep logrotate /var/log/syslog   | 查看 logrotate 自身的执行记录和可能出现的错误信息 |
-
+::: tip
+Logrotate 常用指令说明[[:point_right:点此查看]](index#Logrotate-common)
 :::
 
 ## 配置系统单元
