@@ -1,0 +1,17 @@
+echo "/server/logs/redis/redis-server.log {
+    daily
+    missingok
+    rotate 30
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d
+    dateyesterday
+    create 0640 redis redis
+    sharedscripts
+    postrotate
+        if [ -f /run/redis/process.pid ]; then
+           kill -USR1 $(cat /run/redis/process.pid)
+        fi
+    endscript
+}" > /etc/logrotate.d/redis
