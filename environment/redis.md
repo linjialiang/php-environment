@@ -192,7 +192,7 @@ chown redis:redis -R /server/etc/redis/tls
 :::
 
 ::: tip 文件权限
-gen-test-certs.sh 脚本生成的文件，只需要 400 即可；
+gen-test-certs.sh 脚本生成的 tls 文件，只需要 400 权限即可；
 
 开发环境：为方便修改以及 emad 用户通过 redis-cli 登录，使用 640 权限。
 :::
