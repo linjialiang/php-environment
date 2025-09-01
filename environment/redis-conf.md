@@ -505,11 +505,13 @@ ACL 持久化配置有两种方式：
 
     - 但是密码哈希需要手动生成（不推荐）
     - 此时 requirepass 设置也会失效，认证将完全由 redis.conf 文件中配置的 ACL 用户定义控制
+    - 使用 `CONFIG REWRITE` 指令将所有配置相关的修改，写入到 redis.conf 文件，以实现持久化
 
 2. 方式二：开启 aclfile 外部文件
 
     - 由 `ACL SAVE` 生成用户定义
     - 开启 aclfile 后，认证将完全由 ACL 外部文件中的用户定义控制
+    - 使用 `ACL SAVE` 指令将新增和修改的用户信息，写入到 aclfile 文件，以实现持久化
 
 :::
 
