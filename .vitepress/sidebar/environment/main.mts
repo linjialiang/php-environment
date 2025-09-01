@@ -11,6 +11,7 @@ const sidebar = [
     items: [
       { text: '8.2', link: `${path.main}redis` },
       { text: '7.4', link: `${path.main}redis-74` },
+      { text: 'Redis配置文件', link: `${path.main}redis-conf` },
     ],
   },
   { text: 'PostgreSQL', link: `${path.main}pgsql_compile` },

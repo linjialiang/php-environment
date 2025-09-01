@@ -288,10 +288,6 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 
 如果使用了客户端证书认证，还需要将客户端证书（client.crt）分发给客户端，并将 CA 证书分发给服务器，以便服务器能够验证客户端的身份。
 
-## 附录：配置文件说明
-
-<!-- @include: ./trait/redis_ext_param.md -->
-
 ## 权限
 
 ::: code-group
