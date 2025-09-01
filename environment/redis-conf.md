@@ -494,28 +494,42 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 1. 在 Redis `>=6.0` 以后 requirepass 和 aclfile 代表了 Redis ACL 身份认证的两种不同实现方式
 2. requirepass 本质是 ACL 的特例，requirepass 配置的密码，实际上就是 ACL 默认用户 default 的密码。
     - 可以这样理解：仅配置 requirepass 时，Redis 运行在一个 `简化版` 的 ACL 模式下，此时只有一个超级用户 default。
-3. 在 `Reids 8.2.1` 中，开启 aclfile 外部文件后 requirepass 会失效，认证将完全由 ACL 外部文件中的用户定义控制
-    - 原因：Redis 的 ACL 不能同时使用两种管理方式，并且以 aclfile 为准
-4. 如果不启用 aclfile，也可以在 redis.conf 文件中配置 ACL 用户规则，但是密码哈希需要手动生成（非常不推荐）
+
+::: ACL 持久化配置
+
+开启 ACL 持久化后，requirepass 配置将失效，因为 ACL 不能同时使用两种管理方式，并且以 aclfile 优先。
+
+ACL 持久化配置有两种方式：
+
+1. 方式一：不启用 aclfile，直接在 redis.conf 文件中配置 ACL 用户规则
+
+    - 但是密码哈希需要手动生成（不推荐）
     - 此时 requirepass 设置也会失效，认证将完全由 redis.conf 文件中配置的 ACL 用户定义控制
+
+2. 方式二：开启 aclfile 外部文件
+
+    - 由 `ACL SAVE` 生成用户定义
+    - 开启 aclfile 后，认证将完全由 ACL 外部文件中的用户定义控制
 
 :::
 
 1. 登录方式
 
-    - default 账户无密码时建立连接即自动登录
-
-    - default 账户有密码时，建立连接并使用密码登录
+    - 账户无密码时建立连接即自动登录
 
         ```bash
-        # 通过 requirepass 参数设置密码
-        auth <password>
+        auth <username>
+        # default 账号可省略用户名
+        auth
         ```
 
-    - 非 default 账户只能通过账号密码登录
+    - 账户有密码时，建立连接并使用密码登录
 
         ```bash
+        # 通过 ACL 配置的登录
         auth <username> <password>
+        # default 可省略用户名
+        auth <password>
         ```
 
 2. `acllog-max-len 128` ACL 日志
@@ -535,6 +549,10 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
         2. 每行定义一个用户，支持所有 ACL 规则
         3. 不能同时在 redis.conf 和外部文件中定义用户，如果同时配置 Redis 会拒绝启动并报错
         4. 修改外部文件后需执行 `ACL LOAD` 或重启 Redis 生效
+
+    ::: details ACL 指令
+
+    :::
 
 4. `requirepass foobared`
 
