@@ -489,6 +489,18 @@ Redis ACL 是 Access Control List 的缩写，它允许 Redis 限制连接客户
 
 Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 
+::: details 首先了解下 requirepass 和 aclfile 关系
+
+1. 在 Redis `>=6.0` 以后 requirepass 和 aclfile 代表了 Redis ACL 身份认证的两种不同实现方式
+2. requirepass 本质是 ACL 的特例，requirepass 配置的密码，实际上就是 ACL 默认用户 default 的密码。
+    - 可以这样理解：仅配置 requirepass 时，Redis 运行在一个 `简化版` 的 ACL 模式下，此时只有一个超级用户 default。
+3. 在 `Reids 8.2.1` 中，开启 aclfile 外部文件后 requirepass 会失效，认证将完全由 ACL 外部文件中的用户定义控制
+    - 原因：Redis 的 ACL 不能同时使用两种管理方式，并且以 aclfile 为准
+4. 如果不启用 aclfile，也可以在 redis.conf 文件中配置 ACL 用户规则，但是密码哈希需要手动生成（非常不推荐）
+    - 此时 requirepass 设置也会失效，认证将完全由 redis.conf 文件中配置的 ACL 用户定义控制
+
+:::
+
 1. 登录方式
 
     - default 账户无密码时建立连接即自动登录
@@ -517,7 +529,7 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 
 3. `aclfile /etc/redis/users.acl` Redis 外部 ACL 文件
 
-    - 作用：Redis 可以使用外部文件来管理访问控制列表(ACL)，而不是直接在 `redis.conf` 中定义用户规则
+    - 作用：aclfile 开启后，使用外部文件来管理访问控制列表(ACL)
     - 特性：
         1. 与 redis.conf 中的用户定义格式完全相同
         2. 每行定义一个用户，支持所有 ACL 规则
