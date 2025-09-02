@@ -31,7 +31,7 @@ echo "/server/logs/redis/redis-server.log {
         # 如果使用 copytruncate 无须发送信号，但有可能丢失极小量的日志
         # 通过pid文件向Redis进程发送USR1信号，使其重新打开日志文件
         if [ -f /run/redis/process.pid ]; then
-            # 这里是写入文件，需注意$符号转义
+            # 这里是写入文件，需注意“$”符号转义
             /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
         fi
     endscript
