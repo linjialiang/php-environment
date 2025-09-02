@@ -177,7 +177,8 @@ cd ~/redis-8.2.1/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
 cp -r ~/redis-8.2.1/utils/tests/tls/ /server/etc/redis/
-chmod 640 -R /server/etc/redis/tls
+chmod 750 /server/etc/redis/tls
+find /server/etc/redis/tls -type f -exec chmod 640 {} \;
 chown redis:redis -R /server/etc/redis/tls
 ```
 
