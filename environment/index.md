@@ -543,6 +543,32 @@ sysctl vm.overcommit_memory # 查看特定参数
 
 :::
 
+## ​​ 资源限制
+
+`/etc/security/limits.conf` 用于设置用户或用户组在系统上的资源限制，目的是防止单个用户或进程过度消耗系统资源（如 CPU、内存、文件打开数等），从而保障系统的稳定性和安全性
+
+| 配置文件                        | 说明               |
+| ------------------------------- | ------------------ |
+| `/etc/security/limits.conf`     | 资源限制主配置文件 |
+| `/etc/security/limits.d/*.conf` | 模块化管理配置文件 |
+
+::: details 案例
+::: code-group
+
+```bash [postgres]
+echo "postgres  soft  nofile  65535
+postgres  hard  nofile  65535
+" > /etc/security/limits.d/postgres.conf
+```
+
+```bash [redis]
+echo "redis soft nofile 65535
+redis hard nofile 65535
+" > /etc/security/limits.d/redis.conf
+```
+
+:::
+
 ## 日志管理
 
 Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参考 [[Tutorial]](http://tutorial.e8so.com/) 项目
