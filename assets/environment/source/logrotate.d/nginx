@@ -1,8 +1,8 @@
 echo "/server/logs/nginx/*.log {
-    daily
+    weekly
     maxsize 100M
     missingok
-    rotate 100
+    rotate 40
     compress
     delaycompress
     dateext

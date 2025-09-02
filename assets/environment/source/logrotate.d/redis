@@ -2,7 +2,7 @@ echo "/server/logs/redis/redis-server.log {
     monthly
     maxsize 100M
     missingok
-    rotate 36
+    rotate 12
     compress
     delaycompress
     dateext
