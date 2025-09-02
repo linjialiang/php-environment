@@ -206,9 +206,9 @@ gen-test-certs.sh 脚本生成的 tls 文件，只需要 400 权限即可；
 # 这里需要注意 非tls和tls端口不能重复
 port 6379
 tls-port 16379
-tls-cert-file /server/redis/tls/redis.crt
-tls-key-file /server/redis/tls/redis.key
-tls-ca-cert-file /server/redis/tls/ca.crt
+tls-cert-file /server/etc/redis/tls/redis.crt
+tls-key-file /server/etc/redis/tls/redis.key
+tls-ca-cert-file /server/etc/redis/tls/ca.crt
 tls-auth-clients no
 ```
 
@@ -216,9 +216,9 @@ tls-auth-clients no
 # /server/redis/redis.conf
 port 0  # port 设为 0 禁用非 tls 连接
 tls-port 6379
-tls-cert-file /server/redis/tls/redis.crt
-tls-key-file /server/redis/tls/redis.key
-tls-ca-cert-file /server/redis/tls/ca.crt
+tls-cert-file /server/etc/redis/tls/redis.crt
+tls-key-file /server/etc/redis/tls/redis.key
+tls-ca-cert-file /server/etc/redis/tls/ca.crt
 tls-auth-clients no
 ```
 
@@ -226,25 +226,25 @@ tls-auth-clients no
 # /server/redis/redis.conf
 port 0
 tls-port 6379
-tls-cert-file /server/redis/tls/server.crt
-tls-key-file /server/redis/tls/server.key
-tls-ca-cert-file /server/redis/tls/ca.crt
-tls-client-cert-file /server/redis/tls/client.crt
-tls-client-key-file /server/redis/tls/client.key
+tls-cert-file /server/etc/redis/tls/server.crt
+tls-key-file /server/etc/redis/tls/server.key
+tls-ca-cert-file /server/etc/redis/tls/ca.crt
+tls-client-cert-file /server/etc/redis/tls/client.crt
+tls-client-key-file /server/etc/redis/tls/client.key
 tls-auth-clients optional
 # 旧版本OpenSSL（<3.0）需要此配置。新版本不需要此配置并建议不使用DH参数文件
-# tls-dh-params-file /server/redis/tls/redis.dh
+# tls-dh-params-file /server/etc/redis/tls/redis.dh
 ```
 
 ```bash [redis-cli登录]
 # 双向认证 - 远程需要指定ip
-redis-cli -h 192.168.66.254 -p 16379 --tls \
---cacert /server/redis/tls/ca.crt \
---cert /server/redis/tls/client.crt \
---key /server/redis/tls/client.key
+redis-cli -p 16379 --tls \
+--cacert /server/etc/redis/tls/ca.crt \
+--cert /server/etc/redis/tls/client.crt \
+--key /server/etc/redis/tls/client.key
 
 # 客户端不做验证 - 本机可以省略ip
-redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
+redis-cli -p 16379 --tls --cacert /server/etc/redis/tls/ca.crt
 ```
 
 :::
@@ -272,8 +272,8 @@ redis-cli -p 16379 --tls --cacert /server/redis/tls/ca.crt
 
 ```bash [部署]
 chown redis:redis -R /server/redis /server/logs/redis /server/etc/redis
-find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
-find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
+find /server/redis /server/logs/redis /server/etc -type f -exec chmod 640 {} \;
+find /server/redis /server/logs/redis /server/etc -type d -exec chmod 750 {} \;
 chmod 750 -R /server/redis/bin
 ```
 
