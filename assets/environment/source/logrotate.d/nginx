@@ -6,7 +6,7 @@ echo "/server/logs/nginx/*.log {
     compress
     delaycompress
     dateext
-    dateformat -%Y%m%d
+    dateformat -%Y%m%d.%s
     notifempty
     create 0640 nginx nginx
     sharedscripts

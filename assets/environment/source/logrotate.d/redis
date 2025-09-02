@@ -6,7 +6,7 @@ echo "/server/logs/redis/redis-server.log {
     compress
     delaycompress
     dateext
-    dateformat -%Y%m%d
+    dateformat -%Y%m%d.%s
     dateyesterday
     create 0640 redis redis
     sharedscripts
