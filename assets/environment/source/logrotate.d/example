@@ -14,8 +14,8 @@ echo "/server/logs/redis/redis-server.log {
     delaycompress
     # 使用日期作为轮转文件的后缀
     dateext
-    # 可选：自定义日期格式，例如 -20250901
-    dateformat -%Y%m%d
+    # 可选：自定义日期格式，例如 -20250901.1714900000
+    dateformat -%Y%m%d.%s
     # 可选：使用前一天的日期而非轮转执行日期
     dateyesterday
     # 可选：使用前一天的日期而非轮转执行日期
