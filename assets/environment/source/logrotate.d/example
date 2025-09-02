@@ -3,7 +3,7 @@ echo "/server/logs/redis/redis-server.log {
     # 每天轮转(切割)一次
     daily
     # 若日志大小超过此值，即使未到周期也轮转
-    maxsize 10m
+    maxsize 100m
     # 日志文件不存在时忽略错误，继续执行
     missingok
     # 保留30个备份（即30天/30周/30月的日志）
