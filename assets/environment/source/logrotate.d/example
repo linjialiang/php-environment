@@ -1,7 +1,7 @@
 echo "/server/logs/redis/redis-server.log {
     # 轮转周期 daily/weekly/monthly/yearly 对应 每天/每周/每月/每年
-    # 每周轮转(切割)一次
-    weekly
+    # 每天轮转(切割)一次
+    daily
     # 若日志大小超过100M，即使未到周期也轮转
     maxsize 100M
     # 日志文件不存在时忽略错误，继续执行
