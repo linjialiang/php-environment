@@ -557,14 +557,12 @@ sysctl vm.overcommit_memory # 查看特定参数
 
 ```bash [postgres]
 echo "postgres  soft  nofile  65535
-postgres  hard  nofile  65535
-" > /etc/security/limits.d/postgres.conf
+postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
 ```
 
 ```bash [redis]
 echo "redis soft nofile 65535
-redis hard nofile 65535
-" > /etc/security/limits.d/redis.conf
+redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 ```
 
 :::
