@@ -149,11 +149,8 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
     ```
 
     ```ini [客户端证书]
-    # 应用于双向认证场景，作为客户端访问Redis服务时使用，如：
-    #   1. redis-cli 使用tls端口对本地或远程redis建立连接时，默认使用此配置作为客户端密钥
-    #   2. 主从复制：当Redis服务器以副本（Replica） 身份去连接主节点（Master）
-    #   3. 集群节点与其他节点进行安全通信时，Redis服务器本身就会作为一个客户端
-    #   4. navicat 等客户端想redis服务端建立tls连接时的使用方式于此类似
+    # Redis 默认使用同一套证书（服务器证书）来处理​​传入的连接​​（作为服务器）和​​传出的连接​​（作为客户端，例如复制或集群总线连接）
+    # 当你需要为 Redis 的传出连接（客户端功能）指定独立的证书时，可以使用以下参数：
     # tls-client-cert-file client.crt # X.509证书(PEM格式)
     # tls-client-key-file client.key  # 私钥文件(PEM格式)
     # tls-client-key-file-pass secret # 私钥密码(如果有)
