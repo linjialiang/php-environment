@@ -108,13 +108,14 @@ cd ~/postgresql-17.6/build_postgres
 # 使用postgres账户编译
 # 关于生产环境要不要添加 --enable-debug 选项问题：使用gcc编译器时可以启用debug
 # 使用 llvm+clang 编译器套件时不应该启用debug，因为llvm可以优化pgsql性能，而使用 --enable-debug 选项，通常会禁用编译器的性能优化
+# LLVM_CONFIG 的路径在不同发行版不同，如，debian12路径为：/usr/lib/llvm-14/bin/llvm-config
 ../configure --prefix=/server/postgres \
 --enable-debug \
 --enable-cassert \
 CC=clang \
 CXX=clang++ \
 --with-llvm \
-LLVM_CONFIG=/usr/lib/llvm-14/bin/llvm-config \
+LLVM_CONFIG=/usr/lib/llvm-19/bin/llvm-config \
 --with-pam \
 --with-systemd \
 --with-uuid=e2fs \
