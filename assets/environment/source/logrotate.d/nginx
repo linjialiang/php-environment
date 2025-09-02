@@ -12,7 +12,7 @@ echo "/server/logs/nginx/*.log {
     sharedscripts
     postrotate
         if [ -f /run/nginx/process.pid ]; then
-            /usr/bin/kill -USR1 `cat /run/nginx/process.pid`
+            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
         fi
     endscript
 }" > /etc/logrotate.d/nginx

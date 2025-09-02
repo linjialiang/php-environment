@@ -12,7 +12,7 @@ echo "/server/logs/redis/redis-server.log {
     sharedscripts
     postrotate
         if [ -f /run/redis/process.pid ]; then
-            /usr/bin/kill -USR1 $(cat /run/redis/process.pid)
+            /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
         fi
     endscript
 }" > /etc/logrotate.d/redis
