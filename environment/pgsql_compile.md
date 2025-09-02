@@ -92,13 +92,8 @@ libssl-dev libxml2-dev xsltproc fop dbtoepub
 # 修改操作系统打开最大文件句柄数
 # /etc/security/limits.conf 结尾添加下面两行
 # 进行这一步操作的目的是防止linux操作系统内打开文件句柄数量的限制，避免不必要的故障
-
-# 追加用 >> 写法
-#   - 注：为了避免重复添加，建议手动拷贝写入
-echo "
-postgres  soft  nofile  65535
-postgres  hard  nofile  65535
-" >> /etc/security/limits.conf
+echo "postgres  soft  nofile  65535
+postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
 ```
 
 ```bash [进入编译目录]
