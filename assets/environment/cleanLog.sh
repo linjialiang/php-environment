@@ -44,7 +44,7 @@ echo_cyan "是否清理lnpp日志(1清理/默认不清理)："
 read num1
 if [ "$num1" = "1" ]; then
   echo_green "先停止服务"
-  systemctl stop {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
+  systemctl disable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
   echo_green "开始清理lnpp日志"
   rm /server/logs/{nginx,php,redis}/*
   rm /server/logs/postgres/*.{json,log}
@@ -70,7 +70,7 @@ fi
 echo_cyan "是否启动服务(1启动/默认不启动)："
 read num2
 if [ "$num2" = "1" ]; then
-  systemctl start {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
+  systemctl enable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
   echo_green "服务已重新启动"
 else
   echo_yellow "未重启服务，请手动启动"
