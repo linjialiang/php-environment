@@ -494,19 +494,20 @@ DROP USER name1,name2;
 ```
 
 ```sql [角色属性]
+-- CREATE 和 ALTER 指令的 [WITH] 是可选的，你也可以省略
 -- 登录特权属性，创建允许登录的角色，2种方式等效
-CREATE ROLE user_a LOGIN;
+CREATE ROLE user_a WITH LOGIN;
 CREATE USER user_b;
 -- 设置 password 属性，仅pg_hba.conf对应行需要口令验证时才有意义
-CREATE ROLE user_c LOGIN PASSWORD '1'
+CREATE ROLE user_c WITH LOGIN PASSWORD '1'
 -- 超级用户特权属性，绕开除登录特权外的所有权限检查
-CREATE ROLE role_a SUPERUSER;
+CREATE ROLE role_a WITH SUPERUSER;
 -- 创建数据库特权属性
-CREATE ROLE role_b CREATEDB;
+CREATE ROLE role_b WITH CREATEDB;
 -- 授予角色特权属性
-CREATE ROLE role_c CREATEROLE;
+CREATE ROLE role_c WITH CREATEROLE;
 -- 同时赋予多个属性
-CREATE ROLE role_admin SUPERUSER CREATEDB CREATEROLE;
+CREATE ROLE role_admin WITH CREATEDB CREATEROLE;
 
 -- user_A修改密码
 ALTER USER user_a WITH PASSWORD '1';
@@ -536,6 +537,11 @@ SET ROLE role_b;
 SET ROLE role_a;
 -- 下面这步骤后，权限变成 user_c 的权限
 SET ROLE user_c;
+```
+
+```sql [案例]
+-- 创建超级管理员 admin
+CREATE USER admin WITH SUPERUSER PASSWORD '1';
 ```
 
 :::
