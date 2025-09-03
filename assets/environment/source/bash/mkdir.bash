@@ -14,6 +14,7 @@ server_array=(
 
     "/server/nginx"
     "/server/logs/nginx"
+    "/server/etc/nginx/custom"
 
     "/server/php"
     "/server/php/84"
