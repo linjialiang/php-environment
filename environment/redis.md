@@ -38,8 +38,8 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 
 ```bash [安装并指定目录]
 # 需要回到源码根目录执行安装
-cd ~/redis-8.2.1/
-make install PREFIX=/server/redis
+cd ~/redis-8.2.1/build_redis
+make -C ../ install PREFIX=/server/redis
 ```
 
 ```text [目录结构]
