@@ -498,7 +498,6 @@ source ~/.profile
     - 1：进程可以使用比物理内存更多的虚拟内存
 
     ```bash
-    rm /etc/sysctl.d/overcommit_memory.conf
     echo "vm.overcommit_memory = 1" > /etc/sysctl.d/overcommit_memory.conf
     ```
 
@@ -508,7 +507,6 @@ source ~/.profile
     - 超过 65535 需确认内核是否支持
 
     ```bash
-    rm /etc/sysctl.d/somaxconn.conf
     echo "net.core.somaxconn = 4096" > /etc/sysctl.d/somaxconn.conf
     ```
 
@@ -518,7 +516,6 @@ source ~/.profile
     - 增大值会占用更多内存
 
     ```bash
-    rm /etc/sysctl.d/tcp_max_syn_backlog.conf
     echo "net.ipv4.tcp_max_syn_backlog = 4096" > /etc/sysctl.d/tcp_max_syn_backlog.conf
     ```
 
