@@ -25,6 +25,8 @@ server_array=(
     "/server/pgData"
     "/server/logs/postgres"
     "/server/logs/postgres/wal_archive"
+    "/server/etc/postgres"
+    "/server/etc/postgres/tls"
 
     "/server/sites"
     "/server/sites/ssl"
