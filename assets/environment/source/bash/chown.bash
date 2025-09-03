@@ -44,6 +44,7 @@ func_chown_sqlite(){
 chown_nginx_array=(
     "/server/nginx"
     "/server/logs/nginx"
+    "/server/etc/nginx"
     "/server/sites"
 );
 
