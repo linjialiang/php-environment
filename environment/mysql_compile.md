@@ -167,8 +167,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 ### mysql 配置文件
 
 ::: code-group
-<<<@/assets/environment/source/mysql/init.sql [init.sql]
-<<<@/assets/environment/source/mysql/my.cnf{ini} [my.cnf]
+<<<@/assets/environment/source/etc/mysql/init.sql [init.sql]
+<<<@/assets/environment/source/etc/mysql/my.cnf{ini} [my.cnf]
 :::
 
 ### 数据初始化
