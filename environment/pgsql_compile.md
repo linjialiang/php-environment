@@ -52,6 +52,7 @@ libssl-dev libxml2-dev xsltproc fop dbtoepub libicu-dev
 | libxslt1-dev    | 包含用于开发 XSLT 应用程序的库和头文件                                |
 | uuid-dev        | 包含了用于生成和处理 UUID 的库和头文件                                |
 | libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件     |
+| libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                  |
 
 :::
 
