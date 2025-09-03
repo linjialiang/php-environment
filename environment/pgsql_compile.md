@@ -607,6 +607,8 @@ chmod 750 /server/pgData
 chmod o-rwx -R /server/pgData
 chmod g-w -R /server/pgData
 chmod 750 -R /server/postgres/bin
+# postgres 要求证书最高权限是 600
+find /server/etc/postgres/tls -type f -exec chmod 600 {} \;
 ```
 
 ```bash [开发]
