@@ -23,7 +23,7 @@ C 语言编译器主要有四种： `MSVC`/`GCC`/`MinGW`/`Clang+LLVM`
 
 ```bash
 apt install -y clang liblz4-dev libzstd-dev bison flex libreadline-dev \
-zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev
+zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libicuuc-dev
 ```
 
 ::: details debian12 纯净版所需完整依赖
@@ -32,7 +32,7 @@ zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev
 apt install -y bzip2
 apt install -y make clang liblz4-dev libzstd-dev bison flex libreadline-dev \
 zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev pkg-config \
-libssl-dev libxml2-dev xsltproc fop dbtoepub
+libssl-dev libxml2-dev xsltproc fop dbtoepub libicuuc-dev
 ```
 
 :::
