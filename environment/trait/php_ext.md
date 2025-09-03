@@ -242,7 +242,7 @@ make install
 ::: code-group
 
 ```bash [默认]
-cd /home/php-fpm/php_ext/apcu-5.1.26
+cd /home/php-fpm/php_ext/apcu-5.1.27
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4
@@ -251,7 +251,7 @@ make install
 ```
 
 ```bash [7.4]
-cd /home/php-fpm/php_ext/apcu-5.1.26
+cd /home/php-fpm/php_ext/apcu-5.1.27
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
 make -j4

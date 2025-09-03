@@ -56,16 +56,16 @@ titleTemplate: 环境搭建教程
 5. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-6. php-8.4.11.tar.xz
+6. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.5.tgz
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-2.1.1.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
@@ -82,16 +82,16 @@ titleTemplate: 环境搭建教程
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.11.tar.xz
+5. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
@@ -108,16 +108,16 @@ titleTemplate: 环境搭建教程
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-1.20.1.tgz `最后支持版`
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
-5. php-8.4.11.tar.xz
+5. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
-        - apcu-5.1.26.tgz
+        - apcu-5.1.27.tgz
         - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
