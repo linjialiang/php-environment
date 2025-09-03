@@ -437,7 +437,7 @@ chown postgres /server/logs/postgres/wal_archive/
 log_destination = 'jsonlog'
 logging_collector = on
 log_directory = '/server/logs/postgres'
-log_file_mode = 0600
+log_file_mode = 0640
 ```
 
 ```bash [方案一]
