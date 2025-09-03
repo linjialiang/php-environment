@@ -600,11 +600,10 @@ systemctl start postgres.service
 ::: code-group
 
 ```bash [部署]
-chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres
-find /server/postgres /server/logs/postgres -type f -exec chmod 640 {} \;
-find /server/postgres /server/logs/postgres -type d -exec chmod 750 {} \;
-find /server/postgres/tls -type f -exec chmod 600 {} \;
-chmod 700 /server/pgData
+chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres
+find /server/postgres /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
+find /server/postgres /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
+chmod 750 /server/pgData
 chmod o-rwx -R /server/pgData
 chmod g-w -R /server/pgData
 chmod 750 -R /server/postgres/bin
