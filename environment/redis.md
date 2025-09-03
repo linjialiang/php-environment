@@ -276,6 +276,10 @@ chown redis:redis -R /server/redis /server/logs/redis /server/etc/redis
 find /server/redis /server/logs/redis /server/etc/redis -type f -exec chmod 640 {} \;
 find /server/redis /server/logs/redis /server/etc/redis -type d -exec chmod 750 {} \;
 chmod 750 -R /server/redis/bin
+
+# 证书统一使用 600 权限
+find /server/etc/redis/tls -type f -exec chmod 600 {} \;
+find /server/etc/redis/tls -type d -exec chmod 700 {} \;
 ```
 
 ```bash [开发]

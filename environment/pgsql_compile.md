@@ -607,6 +607,7 @@ find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres 
 chmod 750 -R /server/postgres/bin
 # postgres 要求证书最高权限是 600
 find /server/etc/postgres/tls -type f -exec chmod 600 {} \;
+find /server/etc/postgres/tls -type d -exec chmod 700 {} \;
 ```
 
 ```bash [开发]
