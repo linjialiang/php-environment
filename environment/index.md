@@ -137,7 +137,7 @@ titleTemplate: 环境搭建教程
 
 1.  在 debian13 发行版中，系统自带的 openssl 是 3.5.x，而 MySQL-8.4.6 使用了该 openssl 版本中废弃的函数导致编译失败；
 
-    -   解决方式：编译安装 openssl-3.0.17.tar.gz，使用编译选项 `-DWITH_SSL='/server/openssl-3.0.17'` 指定特定版本
+    -   解决方式：编译安装 openssl-3.0.17.tar.gz，使用编译选项 `-DWITH_SSL=/server/openssl-3.0.17` 指定特定版本
 
 :::
 
