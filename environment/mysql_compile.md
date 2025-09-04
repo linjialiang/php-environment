@@ -158,6 +158,7 @@ make install
 | -DSYSCONFDIR                   | 选项文件目录                                                                                   |
 | -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                                                |
 | -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                                    |
+| -DWITH_SSL                     | 指定要使用的 SSL 库，选项 `system/yes/path_name`                                               |
 | -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                                    |
 | -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                                             |
 | -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                                   |
