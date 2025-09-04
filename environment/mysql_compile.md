@@ -90,9 +90,12 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 在 debian13 发行版中，系统自带的 openssl 是 3.5.x，而 MySQL-8.4.6 使用了该 openssl 版本中废弃的函数导致编译失败；
 
-解决方式：编译安装 openssl-3.0.17.tar.gz，使用编译选项 `-DWITH_SSL='/server/openssl-3.0.17'` 指定特定版本
+解决方式：编译安装 openssl-3.0.17，使用其中任意一种：
 
-具体请参考 [PHP 编译安装 openssl](php#assign-openssl-version)
+1. 增加编译选项 `-DWITH_SSL=/server/openssl-3.0.17` 指定特定版本
+2. 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+
+具体请参考 [PHP 编译安装 OpenSSL](php#assign-openssl-version)
 
 :::
 
@@ -117,8 +120,6 @@ cmake .. \
 -DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
 -DWITH_SYSTEMD=ON \
-# debian13 + MySQL 8.4.6 需选择手动编译的 openssl
-# -DWITH_SSL=/server/openssl-3.0.17
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=ON
