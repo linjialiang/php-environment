@@ -34,18 +34,31 @@ Boost 是一个 C++标准库，因为 mysql 主要是用 C++写的，它依赖�
 
 ```bash
 apt update
-apt install -y g++ cmake libldap-dev libsasl2-dev
+# redis8.2+ 版本需依赖 g++，编译 mysql 时 g++ 已安装（redis7.4 不依赖 g++）
+apt install -y cmake libldap-dev libsasl2-dev libtirpc-dev
 ```
 
 ::: warning 注意
 编译前系统已经存在的依赖库这里并未指出需要安装，如果系统版本不一样，需要自己根据提示安装其余部分依赖
+
+::: details debian13 编译 MySQL8.4.6 遇到的问题
+
+1. MySQL 增加 `libtirpc-dev` 依赖项
+
+2. cmake 只能识别 `systemd.pc`，无法识别 `libsystemd.pc`，需使用软链接解决
+
+    ```bash
+    # libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
+    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
+    ```
+
 :::
 
 ::: details debian12 纯净版所需完整依赖
 
 ```bash
 apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev \
-libncurses-dev bison pkg-config
+libncurses-dev bison pkg-config libtirpc-dev
 ```
 
 ::: tip FIDO 告警说明
@@ -72,6 +85,49 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 ## 编译
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
+
+::: details 编译报错处理
+
+1. 无法在计算机上检测到 systemd 支持
+
+    报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
+
+    ::: code-group
+
+    ```log [错误详情]
+    -- Enabling installation of systemd support files...
+    -- Checking for module 'systemd'
+    --   Package 'systemd', required by 'virtual:world', not found
+    CMake Error at cmake/systemd.cmake:60 (MESSAGE):
+      Unable to detect systemd support on build machine, Aborting cmake build.
+    Call Stack (most recent call first):
+      cmake/systemd.cmake:80 (MYSQL_CHECK_SYSTEMD)
+      CMakeLists.txt:1574 (INCLUDE)
+
+
+    -- Configuring incomplete, errors occurred!
+    ```
+
+    ```bash [解决方式]
+    # libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
+    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
+    ```
+
+    :::
+
+2. 提示 FIDO2 认证插件未启用
+
+    警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可
+
+    ```log
+    CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
+      WITH_FIDO is set to "none".  FIDO based authentication plugins will be
+      skipped.
+    Call Stack (most recent call first):
+      CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
+    ```
+
+:::
 
 ::: code-group
 
