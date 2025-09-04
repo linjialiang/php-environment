@@ -109,8 +109,10 @@ cmake .. \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
--DWITH_UNIT_TESTS=ON \
--DINSTALL_MYSQLTESTDIR=/server/mysql/mysql-test
+-DWITH_UNIT_TESTS=ON
+
+# -DWITH_UNIT_TESTS=ON \
+# -DINSTALL_MYSQLTESTDIR=/server/mysql/mysql-test
 
 make -j4
 make test
@@ -167,19 +169,28 @@ make install
 
 单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
 
-1. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=`
+1. `-DWITH_UNIT_TESTS=OFF` + `不添加选项-DINSTALL_MYSQLTESTDIR`
 
     - 不会生成单元测试文件，也不会生成单元测试目录
 
-2. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=`
+2. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=`
+
+    - 不会生成单元测试文件，也不会生成单元测试目录
+
+3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+
+    - 不会生成单元测试文件，也不会生成单元测试目录
+
+4. `-DWITH_UNIT_TESTS=ON` + `不添加选项-DINSTALL_MYSQLTESTDIR`
 
     - 生成的单元测试文件，保存在默认路径 `${CMAKE_INSTALL_PREFIX}/mysql-test`
 
-3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR不添加此选项`
+5. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=`
 
-    - 不会生成单元测试文件，会生成单元测试目录，路径为默认 `${CMAKE_INSTALL_PREFIX}/mysql-test`
+    - 生成的单元测试文件，保存在默认路径 `${CMAKE_INSTALL_PREFIX}/mysql-test`
 
-4. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+6. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+
     - 生成单元测试文件，保存在指定路径 `/server/mysql-test`
 
 :::
