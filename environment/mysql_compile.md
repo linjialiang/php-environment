@@ -190,6 +190,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 1. 无法在计算机上检测到 systemd 支持
 
+    包版本：MySQL 8.4.6
+
     报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
 
     ::: code-group
@@ -217,6 +219,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 2. 提示 FIDO2 认证插件未启用
 
+    包版本：MySQL 8.4.6
+
     警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可
 
     ```log
@@ -233,6 +237,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
     ```
 
 3. CMP0177 警告
+
+    包版本：MySQL 8.4.6
 
     警告分析：这通常是因为 MySQL 的 CmakeList.txt 本身存在相对路径，导致 cmake 抛出 CMP0177 警告，是 MySQL 源码不完全按 cmake 标准设计导致的
 
