@@ -109,7 +109,7 @@ cmake .. \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
--DWITH_UNIT_TESTS=OFF \
+-DWITH_UNIT_TESTS==ON \
 -DINSTALL_MYSQLTESTDIR=/server/mysql/mysql-test
 
 make -j4
@@ -230,6 +230,42 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
     CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
       Skipping the fido_client_common library.
+    ```
+
+3. CMP0177 警告
+
+    警告分析：这通常是因为 MySQL 的 CmakeList.txt 本身存在相对路径，导致 cmake 抛出 CMP0177 警告，是 MySQL 源码不完全按 cmake 标准设计导致的
+
+    ```log
+    CMake Warning (dev) at scripts/CMakeLists.txt:579 (INSTALL):
+      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+      command to set the policy and suppress this warning.
+    This warning is for project developers.  Use -Wno-dev to suppress it.
+
+    CMake Warning (dev) at scripts/CMakeLists.txt:584 (INSTALL):
+      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+      command to set the policy and suppress this warning.
+    This warning is for project developers.  Use -Wno-dev to suppress it.
+
+    CMake Warning (dev) at scripts/CMakeLists.txt:589 (INSTALL):
+      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+      command to set the policy and suppress this warning.
+    This warning is for project developers.  Use -Wno-dev to suppress it.
+
+    CMake Warning (dev) at scripts/CMakeLists.txt:601 (INSTALL):
+      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+      command to set the policy and suppress this warning.
+    This warning is for project developers.  Use -Wno-dev to suppress it.
+
+    CMake Warning (dev) at scripts/CMakeLists.txt:610 (INSTALL):
+      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+      command to set the policy and suppress this warning.
+    This warning is for project developers.  Use -Wno-dev to suppress it.
     ```
 
 ## 配置
