@@ -165,12 +165,22 @@ make install
 
 ::: details 关于单元测试
 
-| `WITH_UNIT_TESTS`值 | `INSTALL_MYSQLTESTDIR`值 | 是否单元测试文件 | 存放路径                             |
-| :-----------------: | :----------------------: | :--------------: | ------------------------------------ |
-|        `=ON`        |           `=`            |        是        | `${CMAKE_INSTALL_PREFIX}/mysql-test` |
-|        `=ON`        |    `=/opt/mysql-test`    |        是        | `/opt/mysql-test`                    |
-|       `=OFF`        |           `=`            |        否        | 不生成单元测试目录                   |
-|       `=OFF`        |    `=/opt/mysql-test`    |        否        | `/opt/mysql-test`                    |
+单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
+
+1. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=`
+
+    - 不会生成单元测试文件，也不会生成单元测试目录
+
+2. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=`
+
+    - 生成的单元测试文件，保存在默认路径 `${CMAKE_INSTALL_PREFIX}/mysql-test`
+
+3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR不添加此选项`
+
+    - 不会生成单元测试文件，会生成单元测试目录，路径为默认 `${CMAKE_INSTALL_PREFIX}/mysql-test`
+
+4. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+    - 生成单元测试文件，保存在指定路径 `/server/mysql-test`
 
 :::
 
