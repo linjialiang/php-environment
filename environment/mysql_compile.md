@@ -86,7 +86,107 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
 
-::: details 编译报错处理
+::: code-group
+
+```bash [创建构建目录]
+su - mysql -s /bin/zsh
+mkdir ~/mysql-8.4.6/build
+cd ~/mysql-8.4.6/build
+```
+
+```bash [查看编译选项]
+# 查询有关 CMake 支持的选项的信息
+cd /home/mysql/mysql-8.4.6/build
+cmake .. -LH
+# 选项写入文件
+cmake .. -LH > options.list
+```
+
+```bash [构建指令]
+cmake .. \
+-DWITH_DEBUG=ON \
+-DCMAKE_INSTALL_PREFIX=/server/mysql \
+-DWITH_SYSTEMD=ON \
+-DFORCE_COLORED_OUTPUT=ON \
+-DWITH_MYSQLX=OFF \
+-DWITH_UNIT_TESTS=OFF \
+-DINSTALL_MYSQLTESTDIR=/server/mysql/mysql-test
+
+make -j4
+make test
+make install
+```
+
+:::
+
+::: tip 注意事项
+
+-   如果 cmake 错误，可删除 build 目录中的文件，即可清楚 cache，然后重新 cmake
+-   如果 make 错误，可以执行 `make clean` 后再 make
+-   如果 make 没有错误，而是由于 CPU、内存等不够，或者人为 `ctrl+C` 中断的，可以直接 make，不需要再 `make clean`
+    -- 由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
+    -- 内存不足容易出现如下代码：
+
+    ```bash
+    c++: fatal error: Killed signal terminated program cc1plus
+    compilation terminated.
+    make[2]: *** [sql/CMakeFiles/sql_gis.dir/build.make:146: sql/CMakeFiles/sql_gis.dir/gis/difference_functor.cc.o] Error 1
+    make[1]: *** [CMakeFiles/Makefile2:28998: sql/CMakeFiles/sql_gis.dir/all] Error 2
+    make: *** [Makefile:166: all] Error 2
+    ```
+
+:::
+
+### cmake 选项说明
+
+| commom                         | note                                                                                           |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| -DWITH_DEBUG                   | 是否开启调式模式，开启的同时会禁用优化                                                         |
+| -DCMAKE_INSTALL_PREFIX         | MySQL 安装基目录                                                                               |
+| -DMYSQL_DATADIR                | MySQL 数据目录                                                                                 |
+| -DSYSCONFDIR                   | 选项文件目录                                                                                   |
+| -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                                                |
+| -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                                    |
+| -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                                    |
+| -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                                             |
+| -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                                   |
+| -DWITH_MYSQLX                  | 是否启用 X 协议，默认开启                                                                      |
+| -DWITH_UNIT_TESTS              | 是否使用单元测试编译 MySQL，设为 `OFF`，就算 `-DINSTALL_MYSQLTESTDIR` 指定了目录，内容也是空的 |
+| -DINSTALL_MYSQLTESTDIR         | 是否安装单元测试目录(mysql-test)，不需要就设为空值(-DINSTALL_MYSQLTESTDIR=)                    |
+| -DTMPDIR                       | 临时文件的位置(指定目录必须存在)                                                               |
+| ~~-DDEFAULT_CHARSET~~          | 默认字符集，默认使用 `utf8mb4` 字符集                                                          |
+| ~~-DDEFAULT_COLLATION~~        | 默认排序规则，默认使用 `utf8mb4_0900_ai_ci`                                                    |
+| ~~-DMYSQL_TCP_PORT~~           | TCP/IP 端口号，默认值为 `3306`                                                                 |
+| ~~-DWITH_SSL~~                 | SSL 支持类型，默认 system ，使用系统自带 openssl                                               |
+| ~~-DSYSTEMD_PID_DIR~~          | systemd 下的 PID 文件的目录，指定无效，会被 INSTALL_LAYOUT 值隐式更改                          |
+| ~~-DWITH_BOOST~~               | 构建 MySQL 需要 Boost 库（8.3.0 后不存在此选项）                                               |
+| ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                        |
+| ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                                                |
+
+::: details 关于单元测试
+
+| `WITH_UNIT_TESTS`值 | `INSTALL_MYSQLTESTDIR`值 | 是否单元测试文件 | 存放路径                             |
+| :-----------------: | :----------------------: | :--------------: | ------------------------------------ |
+|        `=ON`        |           `=`            |        是        | `${CMAKE_INSTALL_PREFIX}/mysql-test` |
+|        `=ON`        |    `=/opt/mysql-test`    |        是        | `/opt/mysql-test`                    |
+|       `=OFF`        |           `=`            |        否        | 不生成单元测试目录                   |
+|       `=OFF`        |    `=/opt/mysql-test`    |        否        | `/opt/mysql-test`                    |
+
+:::
+
+### 启用 systemd 支持文件
+
+选项 `-DWITH_SYSTEMD=ON` 用于启用 systemd 支持文件；
+
+启用后将安装 systemd 支持文件，并且不再安装 `mysqld_safe` 和 `System V 初始化` 等脚本；
+
+在 systemd 不可用的平台上，启用 WITH_SYSTEMD 会导致 CMake 出错。
+
+### 什么是 X Plugin
+
+MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行，为 Python 和 JavaScript 等编程语言提供 API 接口。
+
+### 编译报错与警告处理
 
 1. 无法在计算机上检测到 systemd 支持
 
@@ -125,98 +225,12 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
       skipped.
     Call Stack (most recent call first):
       CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
+
+    ...
+
+    CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
+      Skipping the fido_client_common library.
     ```
-
-:::
-
-::: code-group
-
-```bash [创建构建目录]
-su - mysql -s /bin/zsh
-mkdir ~/mysql-8.4.6/build
-cd ~/mysql-8.4.6/build
-```
-
-```bash [查看编译选项]
-# 查询有关 CMake 支持的选项的信息
-cd /home/mysql/mysql-8.4.6/build
-cmake .. -LH
-# 选项写入文件
-cmake .. -LH > options.list
-```
-
-```bash [构建指令]
-cmake .. \
--DWITH_DEBUG=ON \
--DCMAKE_INSTALL_PREFIX=/server/mysql \
--DWITH_SYSTEMD=ON \
--DFORCE_COLORED_OUTPUT=ON \
--DWITH_MYSQLX=OFF \
--DWITH_UNIT_TESTS=OFF \
--DINSTALL_MYSQLTESTDIR=
-
-make -j4
-make test
-make install
-```
-
-:::
-
-::: tip 注意事项
-
--   如果 cmake 错误，可删除 build 目录中的文件，即可清楚 cache，然后重新 cmake
--   如果 make 错误，可以执行 `make clean` 后在 make
--   如果 make 没有错误，而是由于 CPU、内存等不够，或者人为 `ctrl+C` 中断的，可以直接 make，不需要再 `make clean`
-    -- 由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
-    -- 内存不足容易出现如下代码：
-
-    ```bash
-    c++: fatal error: Killed signal terminated program cc1plus
-    compilation terminated.
-    make[2]: *** [sql/CMakeFiles/sql_gis.dir/build.make:146: sql/CMakeFiles/sql_gis.dir/gis/difference_functor.cc.o] Error 1
-    make[1]: *** [CMakeFiles/Makefile2:28998: sql/CMakeFiles/sql_gis.dir/all] Error 2
-    make: *** [Makefile:166: all] Error 2
-    ```
-
-:::
-
-### cmake 选项说明
-
-| commom                         | note                                                                        |
-| ------------------------------ | --------------------------------------------------------------------------- |
-| -DWITH_DEBUG                   | 是否开启调式模式，开启的同时会禁用优化                                      |
-| -DCMAKE_INSTALL_PREFIX         | MySQL 安装基目录                                                            |
-| -DMYSQL_DATADIR                | MySQL 数据目录                                                              |
-| -DSYSCONFDIR                   | 选项文件目录                                                                |
-| -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                             |
-| -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                 |
-| -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                 |
-| -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                          |
-| -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                |
-| -DWITH_MYSQLX                  | 是否启用 X 协议，默认开启                                                   |
-| -DWITH_UNIT_TESTS              | 是否使用单元测试编译 MySQL                                                  |
-| -DINSTALL_MYSQLTESTDIR         | 是否安装单元测试目录(mysql-test)，不需要就设为空值(-DINSTALL_MYSQLTESTDIR=) |
-| -DTMPDIR                       | 临时文件的位置(指定目录必须存在)                                            |
-| ~~-DDEFAULT_CHARSET~~          | 默认字符集，默认使用 `utf8mb4` 字符集                                       |
-| ~~-DDEFAULT_COLLATION~~        | 默认排序规则，默认使用 `utf8mb4_0900_ai_ci`                                 |
-| ~~-DMYSQL_TCP_PORT~~           | TCP/IP 端口号，默认值为 `3306`                                              |
-| ~~-DWITH_SSL~~                 | SSL 支持类型，默认 system ，使用系统自带 openssl                            |
-| ~~-DSYSTEMD_PID_DIR~~          | systemd 下的 PID 文件的目录，指定无效，会被 INSTALL_LAYOUT 值隐式更改       |
-| ~~-DWITH_BOOST~~               | 构建 MySQL 需要 Boost 库（8.3.0 后不存在此选项）                            |
-| ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                     |
-| ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                             |
-
-### 启用 systemd 支持文件
-
-选项 `-DWITH_SYSTEMD=ON` 用于启用 systemd 支持文件；
-
-启用后将安装 systemd 支持文件，并且不再安装 `mysqld_safe` 和 `System V 初始化` 等脚本；
-
-在 systemd 不可用的平台上，启用 WITH_SYSTEMD 会导致 CMake 出错。
-
-### 什么是 X Plugin
-
-MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行，为 Python 和 JavaScript 等编程语言提供 API 接口。
 
 ## 配置
 
