@@ -111,9 +111,6 @@ cmake .. \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=ON
 
-# -DWITH_UNIT_TESTS=ON \
-# -DINSTALL_MYSQLTESTDIR=/server/mysql/mysql-test
-
 make -j4
 make test
 make install
