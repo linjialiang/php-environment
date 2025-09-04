@@ -52,6 +52,8 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3500400.tar.gz
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
+    - 依赖库
+        - openssl-3.0.17.tar.gz
 4. postgresql-17.6.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
@@ -105,6 +107,8 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3500400.tar.gz
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
+    - 依赖库
+        - openssl-3.0.17.tar.gz
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
@@ -126,6 +130,14 @@ titleTemplate: 环境搭建教程
     - pcre2-10.45.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
+
+:::
+
+::: warning :warning: 注意
+
+1.  在 debian13 发行版中，系统自带的 openssl 是 3.5.x，而 MySQL-8.4.6 使用了该 openssl 版本中废弃的函数导致编译失败；
+
+    -   解决方式：编译安装 openssl-3.0.17.tar.gz，使用编译选项 `-DWITH_SSL='/server/openssl-3.0.17'` 指定特定版本
 
 :::
 
