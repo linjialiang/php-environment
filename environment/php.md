@@ -136,6 +136,23 @@ make install
 ...
 ```
 
+```bash{6-9} [编译3.0.17]
+# debian 13+MySQL8.4.6时需要此版本的openssl
+# 作为公共依赖库，推荐以root用户安装它
+mkdir /server/openssl-3.0.17
+cd /root/openssl-3.0.17/
+
+./config --prefix=/server/openssl-3.0.17 \
+--openssldir=/server/openssl-3.0.17 \
+no-shared \
+zlib
+
+make -j4
+make test
+make install
+...
+```
+
 ```bash{2,8-10} [php编译选项]
 # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
 export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
