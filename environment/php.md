@@ -149,7 +149,7 @@ make test
 make install
 ```
 
-```bash{2,8-10} [设置pkg-config]
+```bash{2,8-10} [1.1.1w配置]
 # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
 export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -160,6 +160,24 @@ pkg-config --path openssl,libssl,libcrypto
 /server/openssl-1.1.1w/lib/pkgconfig/openssl.pc
 /server/openssl-1.1.1w/lib/pkgconfig/libssl.pc
 /server/openssl-1.1.1w/lib/pkgconfig/libcrypto.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
+```
+
+```bash{2,8-10} [3.0.17配置]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path openssl,libssl,libcrypto
+
+# 成功替换展示：
+/server/openssl-3.0.17/lib/pkgconfig/openssl.pc
+/server/openssl-3.0.17/lib/pkgconfig/libssl.pc
+/server/openssl-3.0.17/lib/pkgconfig/libcrypto.pc
 
 # 未成功替换展示：
 /usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc

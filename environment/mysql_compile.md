@@ -92,8 +92,16 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 解决方式：编译安装 openssl-3.0.17，使用其中任意一种：
 
-1. 增加编译选项 `-DWITH_SSL=/server/openssl-3.0.17` 指定特定版本
+1. 增加编译选项指定特定的 openssl 版本
+
+    - `-DWITH_SSL=/server/openssl-3.0.17`
+
 2. 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+
+    ```bash
+    # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+    export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
+    ```
 
 具体请参考 [PHP 编译安装 OpenSSL](php#assign-openssl-version)
 
