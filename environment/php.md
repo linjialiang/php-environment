@@ -120,7 +120,7 @@ apt install libpq-dev -y
 
 ::: code-group
 
-```bash{5-8} [1.1.1w编译选项]
+```bash{5-11} [1.1.1w编译选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-1.1.1w
 cd /root/openssl-1.1.1w/
@@ -128,10 +128,13 @@ cd /root/openssl-1.1.1w/
 ./config --prefix=/server/openssl-1.1.1w \
 --openssldir=/server/openssl-1.1.1w \
 no-shared \
+-static \
+--with-zlib-include=/usr/include \
+--with-zlib-lib=/usr/lib/x86_64-linux-gnu/libz.a \
 zlib
 ```
 
-```bash{6-9} [3.0.17编译选项]
+```bash{6-12} [3.0.17编译选项]
 # debian 13+MySQL8.4.6时需要此版本的openssl
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-3.0.17
@@ -140,6 +143,9 @@ cd /root/openssl-3.0.17/
 ./config --prefix=/server/openssl-3.0.17 \
 --openssldir=/server/openssl-3.0.17 \
 no-shared \
+-static \
+--with-zlib-include=/usr/include \
+--with-zlib-lib=/usr/lib/x86_64-linux-gnu/libz.a \
 zlib
 ```
 
