@@ -612,8 +612,7 @@ no-shared \
 zlib
 ```
 
-```bash{6-12} [3.0.17编译选项]
-# debian 13+MySQL8.4.6时需要此版本的openssl
+```bash{5-11} [3.0.17编译选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-3.0.17
 cd /root/openssl-3.0.17/
