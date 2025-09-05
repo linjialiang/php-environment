@@ -52,8 +52,6 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3500400.tar.gz
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
-    - 依赖库
-        - openssl-3.0.17.tar.gz `特殊情况`
 4. postgresql-17.6.tar.bz2
 5. php-7.4.33.tar.xz
     - 动态扩展
@@ -107,8 +105,6 @@ titleTemplate: 环境搭建教程
 1. sqlite-autoconf-3500400.tar.gz
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
-    - 依赖库
-        - openssl-3.0.17.tar.gz
 4. php-7.4.33.tar.xz
     - 动态扩展
         - xdebug-3.1.6.tgz `最后支持版`
