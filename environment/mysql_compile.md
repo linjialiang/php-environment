@@ -50,17 +50,11 @@ libncurses-dev bison pkg-config libtirpc-dev
 
 :::
 
-## 特定版本问题说明
+## 特定版本问题
 
-### 一、Debian13+MySQL8.4.6
+### Debian13+MySQL8.4.6
 
-1. 问题：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败；
-
-    ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
-    <<<@/assets/environment/source/mysql/src/tls_client_context.cc{c}
-    :::
-
-2. 问题：debian13 发行版的 pkg-config 的 pc 文件名为 libsystemd.pc，而 cmake 编译 MySQL 8.4.6 时只能正确识别 `systemd.pc` 的路径
+1. 问题 1：debian13 发行版的 pkg-config 的 pc 文件名为 libsystemd.pc，而 cmake 编译 MySQL 8.4.6 时只能正确识别 `systemd.pc` 的路径。
 
     ::: details 解决方式：为 `libsystemd.pc` 文件建立软链接
 
@@ -69,6 +63,12 @@ libncurses-dev bison pkg-config libtirpc-dev
     ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
     ```
 
+    :::
+
+2. 问题 2：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败。
+
+    ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
+    <<<@/assets/environment/source/mysql/src/tls_client_context.cc{c}
     :::
 
 ## 编译安装
