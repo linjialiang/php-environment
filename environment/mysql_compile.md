@@ -111,13 +111,16 @@ cmake \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
 -DINSTALL_MYSQLTESTDIR= \
-..
+.. > stdout.log
 ```
 
 ```bash [构建选项带调试]
 cmake \
+# 详情
 --debug-output \
---trace \
+# 比 --debug-output 更详细
+# --trace \
+# 未定义的变量警告
 --warn-uninitialized \
 -DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
