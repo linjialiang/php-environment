@@ -61,26 +61,7 @@ apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev \
 libncurses-dev bison pkg-config libtirpc-dev
 ```
 
-::: tip FIDO 告警说明
-`FIDO` 告警无需理会，因为这是企业版才有的功能
-
-```bash
-...
-CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
-  WITH_FIDO is set to "none".  FIDO based authentication plugins will be
-  skipped.
-Call Stack (most recent call first):
-  CMakeLists.txt:1969 (MYSQL_CHECK_FIDO)
-
-...
-
-CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
-  Skipping the fido_client_common library.
-
-...
-```
-
-:::
+## 特定版本问题说明
 
 ## 编译
 
@@ -140,23 +121,22 @@ make install
 
 :::
 
-::: tip 注意事项
+### 注意事项
 
 -   如果 cmake 错误，可删除 build 目录中的文件，即可清楚 cache，然后重新 cmake
 -   如果 make 错误，可以执行 `make clean` 后再 make
 -   如果 make 没有错误，而是由于 CPU、内存等不够，或者人为 `ctrl+C` 中断的，可以直接 make，不需要再 `make clean`
-    -- 由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
-    -- 内存不足容易出现如下代码：
 
-    ```bash
-    c++: fatal error: Killed signal terminated program cc1plus
-    compilation terminated.
-    make[2]: *** [sql/CMakeFiles/sql_gis.dir/build.make:146: sql/CMakeFiles/sql_gis.dir/gis/difference_functor.cc.o] Error 1
-    make[1]: *** [CMakeFiles/Makefile2:28998: sql/CMakeFiles/sql_gis.dir/all] Error 2
-    make: *** [Makefile:166: all] Error 2
-    ```
+    -   由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
+    -   内存不足容易出现如下代码：
 
-:::
+        ```bash
+        c++: fatal error: Killed signal terminated program cc1plus
+        compilation terminated.
+        make[2]: *** [sql/CMakeFiles/sql_gis.dir/build.make:146: sql/CMakeFiles/sql_gis.dir/gis/difference_functor.cc.o] Error 1
+        make[1]: *** [CMakeFiles/Makefile2:28998: sql/CMakeFiles/sql_gis.dir/all] Error 2
+        make: *** [Makefile:166: all] Error 2
+        ```
 
 ### cmake 选项说明
 
@@ -184,7 +164,7 @@ make install
 | ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                        |
 | ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                                                |
 
-::: details 关于单元测试
+#### 关于单元测试
 
 单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
 
@@ -212,8 +192,6 @@ make install
 
     - 生成单元测试文件，保存在指定路径 `/server/mysql-test`
 
-:::
-
 ### 启用 systemd 支持文件
 
 选项 `-DWITH_SYSTEMD=ON` 用于启用 systemd 支持文件；
@@ -228,91 +206,91 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 编译报错与警告处理
 
-1. 无法在计算机上检测到 systemd 支持
+#### 1. 无法在计算机上检测到 systemd 支持
 
-    包版本：MySQL 8.4.6
+包版本：MySQL 8.4.6
 
-    报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
+报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
 
-    ::: code-group
+::: code-group
 
-    ```log [错误详情]
-    -- Enabling installation of systemd support files...
-    -- Checking for module 'systemd'
-    --   Package 'systemd', required by 'virtual:world', not found
-    CMake Error at cmake/systemd.cmake:60 (MESSAGE):
-      Unable to detect systemd support on build machine, Aborting cmake build.
-    Call Stack (most recent call first):
-      cmake/systemd.cmake:80 (MYSQL_CHECK_SYSTEMD)
-      CMakeLists.txt:1574 (INCLUDE)
+```log [错误详情]
+-- Enabling installation of systemd support files...
+-- Checking for module 'systemd'
+--   Package 'systemd', required by 'virtual:world', not found
+CMake Error at cmake/systemd.cmake:60 (MESSAGE):
+  Unable to detect systemd support on build machine, Aborting cmake build.
+Call Stack (most recent call first):
+  cmake/systemd.cmake:80 (MYSQL_CHECK_SYSTEMD)
+  CMakeLists.txt:1574 (INCLUDE)
 
 
-    -- Configuring incomplete, errors occurred!
-    ```
+-- Configuring incomplete, errors occurred!
+```
 
-    ```bash [解决方式]
-    # libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
-    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
-    ```
+```bash [解决方式]
+# libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
+ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
+```
 
-    :::
+:::
 
-2. 提示 FIDO2 认证插件未启用
+#### 2. 提示 FIDO2 认证插件未启用
 
-    包版本：MySQL 8.4.6
+包版本：MySQL 8.4.6
 
-    警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可
+警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可，并且仅企业版才有此功能
 
-    ```log
-    CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
-      WITH_FIDO is set to "none".  FIDO based authentication plugins will be
-      skipped.
-    Call Stack (most recent call first):
-      CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
+```log
+CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
+  WITH_FIDO is set to "none".  FIDO based authentication plugins will be
+  skipped.
+Call Stack (most recent call first):
+  CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
 
-    ...
+...
 
-    CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
-      Skipping the fido_client_common library.
-    ```
+CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
+  Skipping the fido_client_common library.
+```
 
-3. CMP0177 警告
+#### 3. CMP0177 警告
 
-    包版本：MySQL 8.4.6
+包版本：MySQL 8.4.6
 
-    警告分析：这通常是因为 MySQL 的 CmakeList.txt 本身存在相对路径，导致 cmake 抛出 CMP0177 警告，是 MySQL 源码不完全按 cmake 标准设计导致的
+警告分析：这通常是因为 MySQL 的 CmakeList.txt 本身存在相对路径，导致 cmake 抛出 CMP0177 警告，是 MySQL 源码不完全按 cmake 标准设计导致的
 
-    ```log
-    CMake Warning (dev) at scripts/CMakeLists.txt:579 (INSTALL):
-      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
-      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
-      command to set the policy and suppress this warning.
-    This warning is for project developers.  Use -Wno-dev to suppress it.
+```log
+CMake Warning (dev) at scripts/CMakeLists.txt:579 (INSTALL):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
 
-    CMake Warning (dev) at scripts/CMakeLists.txt:584 (INSTALL):
-      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
-      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
-      command to set the policy and suppress this warning.
-    This warning is for project developers.  Use -Wno-dev to suppress it.
+CMake Warning (dev) at scripts/CMakeLists.txt:584 (INSTALL):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
 
-    CMake Warning (dev) at scripts/CMakeLists.txt:589 (INSTALL):
-      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
-      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
-      command to set the policy and suppress this warning.
-    This warning is for project developers.  Use -Wno-dev to suppress it.
+CMake Warning (dev) at scripts/CMakeLists.txt:589 (INSTALL):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
 
-    CMake Warning (dev) at scripts/CMakeLists.txt:601 (INSTALL):
-      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
-      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
-      command to set the policy and suppress this warning.
-    This warning is for project developers.  Use -Wno-dev to suppress it.
+CMake Warning (dev) at scripts/CMakeLists.txt:601 (INSTALL):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
 
-    CMake Warning (dev) at scripts/CMakeLists.txt:610 (INSTALL):
-      Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
-      "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
-      command to set the policy and suppress this warning.
-    This warning is for project developers.  Use -Wno-dev to suppress it.
-    ```
+CMake Warning (dev) at scripts/CMakeLists.txt:610 (INSTALL):
+  Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
+  "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+```
 
 ## 配置
 
