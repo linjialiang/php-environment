@@ -90,7 +90,7 @@ mkdir /server/autoconf-2.69
 cd /root/autoconf-2.69
 
 ./configure --prefix=/server/autoconf-2.69
-make -j4
+make -j4 > make.log
 make install
 ```
 
@@ -111,7 +111,7 @@ export PATH=/server/autoconf-2.69/bin:$PATH
 cd /home/php-fpm/php_ext/xdebug-3.4.2
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
+make -j4 > make.log
 make install
 ```
 
@@ -132,7 +132,7 @@ xdebug.client_port=9084
 cd /home/php-fpm/php_ext/xdebug-3.1.6
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
-make -j4
+make -j4 > make.log
 make install
 ```
 
@@ -159,7 +159,7 @@ xdebug.client_port=9074
 cd /home/php-fpm/php_ext/redis-6.2.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -168,7 +168,7 @@ make install
 cd /home/php-fpm/php_ext/redis-6.2.0
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -183,7 +183,7 @@ make install
 cd /home/php-fpm/php_ext/mongodb-2.0.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -192,7 +192,7 @@ make install
 cd /home/php-fpm/php_ext/mongodb-1.20.1
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -218,7 +218,7 @@ apt install libyaml-dev -y
 cd /home/php-fpm/php_ext/yaml-2.2.5
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -230,7 +230,7 @@ apt install libyaml-dev -y
 cd /home/php-fpm/php_ext/yaml-2.2.5
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -245,7 +245,7 @@ make install
 cd /home/php-fpm/php_ext/apcu-5.1.27
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```
@@ -254,7 +254,7 @@ make install
 cd /home/php-fpm/php_ext/apcu-5.1.27
 /server/php/74/bin/phpize
 ./configure --with-php-config=/server/php/74/bin/php-config
-make -j4
+make -j4 > make.log
 make test
 make install
 ```

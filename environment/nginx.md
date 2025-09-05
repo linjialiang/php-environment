@@ -72,7 +72,7 @@ cd ~/nginx-1.28.0
 
 ```bash [编译安装]
 # 4核以上可以使用 make -j4 编译
-make -j4
+make -j4 > make.log
 # 不挂起，后台执行
 nohup make -j4 &
 # 安装

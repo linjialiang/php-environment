@@ -130,8 +130,8 @@ cmake \
 ```
 
 ```bash [编译安装]
-make -j4
-make test
+make -j4 > make.log
+make test > make.log
 make install
 ```
 
