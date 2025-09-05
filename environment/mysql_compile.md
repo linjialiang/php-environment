@@ -102,8 +102,9 @@ cmake -LH ..
 cmake -LH .. > options.list
 ```
 
-```bash [构建指令]
-cmake -DWITH_DEBUG=ON \
+```bash [构建选项]
+cmake \
+-DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
@@ -113,7 +114,22 @@ cmake -DWITH_DEBUG=ON \
 ..
 ```
 
-```bash [安装指令]
+```bash [构建选项带调试]
+cmake \
+--debug-output \
+--trace \
+--warn-uninitialized \
+-DWITH_DEBUG=ON \
+-DCMAKE_INSTALL_PREFIX=/server/mysql \
+-DWITH_SYSTEMD=ON \
+-DFORCE_COLORED_OUTPUT=ON \
+-DWITH_MYSQLX=OFF \
+-DWITH_UNIT_TESTS=OFF \
+-DINSTALL_MYSQLTESTDIR= \
+.. 2>&1 | tee cmake_debug.log
+```
+
+```bash [编译安装]
 make -j4
 make test
 make install
