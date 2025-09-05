@@ -149,7 +149,6 @@ make install
 | -DSYSCONFDIR                   | 选项文件目录                                                                                   |
 | -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                                                |
 | -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                                    |
-| -DWITH_SSL                     | 指定要使用的 SSL 库，选项 `system/yes/path_name`                                               |
 | -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                                    |
 | -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                                             |
 | -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                                   |
@@ -160,7 +159,7 @@ make install
 | ~~-DDEFAULT_CHARSET~~          | 默认字符集，默认使用 `utf8mb4` 字符集                                                          |
 | ~~-DDEFAULT_COLLATION~~        | 默认排序规则，默认使用 `utf8mb4_0900_ai_ci`                                                    |
 | ~~-DMYSQL_TCP_PORT~~           | TCP/IP 端口号，默认值为 `3306`                                                                 |
-| ~~-DWITH_SSL~~                 | SSL 支持类型，默认 system ，使用系统自带 openssl                                               |
+| ~~-DWITH_SSL~~                 | 指定要使用的 SSL 库类型，默认 system ，使用系统自带 openssl，可选值 `system/yes/path_name`     |
 | ~~-DSYSTEMD_PID_DIR~~          | systemd 下的 PID 文件的目录，指定无效，会被 INSTALL_LAYOUT 值隐式更改                          |
 | ~~-DWITH_BOOST~~               | 构建 MySQL 需要 Boost 库（8.3.0 后不存在此选项）                                               |
 | ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                        |
