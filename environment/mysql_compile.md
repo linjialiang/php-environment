@@ -99,6 +99,7 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 2. 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
 
     ```bash
+    # 这一步没有意义
     # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
     export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
     ```
