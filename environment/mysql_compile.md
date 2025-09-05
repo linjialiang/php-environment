@@ -41,19 +41,6 @@ apt install -y cmake libldap-dev libsasl2-dev libtirpc-dev dpkg-dev
 ::: warning 注意
 编译前系统已经存在的依赖库这里并未指出需要安装，如果系统版本不一样，需要自己根据提示安装其余部分依赖
 
-::: details debian13 编译 MySQL8.4.6 遇到的问题
-
-1. MySQL 增加 `libtirpc-dev` 依赖项
-
-2. cmake 只能识别 `systemd.pc`，无法识别 `libsystemd.pc`，需使用软链接解决
-
-    ```bash
-    # libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
-    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
-    ```
-
-:::
-
 ::: details debian12 纯净版所需完整依赖
 
 ```bash
@@ -67,37 +54,22 @@ libncurses-dev bison pkg-config libtirpc-dev
 
 ### 一、Debian13+MySQL8.4.6
 
--   问题说明：debian13 的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码 tls_client_context.cc 文件中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败；
+1. 问题：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败；
 
--   解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
+    ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
+    <<<@/assets/environment/source/mysql/src/tls_client_context.cc{c}
+    :::
 
-    ```c
-    // 修改 mysql-8.4.6/router/src/harness/src/tls_client_context.cc 第220行
-    stdx::expected<SSL_SESSION *, std::error_code> TlsClientContext::get_session() {
-      // sessions_ will be nullptr if caching is off
-      if (sessions_) {
-        std::lock_guard lk(sessions_->mtx_);
-        auto &sessions = sessions_->sessions_;
-        for (auto it = sessions.cbegin(); it != sessions.cend();) {
-          const auto sess = it->second.get();
-          const auto sess_start = SSL_SESSION_get_time(sess); // [!code --]
-          const auto sess_start = SSL_SESSION_get_time_ex(sess); // [!code ++]
-          if (time(nullptr) - sess_start > session_cache_timeout_.count()) {
-            // session expired, remove from cache
-            sessions.erase(it++);
-            continue;
-          }
-          if (SSL_SESSION_is_resumable_wrapper(sess)) {
-            return sess;
-          }
-          ++it;
-        }
-      }
+2. 问题：debian13 发行版的 pkg-config 的 pc 文件名为 libsystemd.pc，而 cmake 编译 MySQL 8.4.6 时只能正确识别 `systemd.pc` 的路径
 
-      return stdx::unexpected(
-          make_error_code(std::errc::no_such_file_or_directory));
-    }
+    ::: details 解决方式：为 `libsystemd.pc` 文件建立软链接
+
+    ```bash
+    # libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
+    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
     ```
+
+    :::
 
 ## 编译安装
 
