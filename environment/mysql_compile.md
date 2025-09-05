@@ -123,12 +123,12 @@ make install
 
 ### 注意事项
 
--   如果 cmake 错误，可删除 build 目录中的文件，即可清楚 cache，然后重新 cmake
--   如果 make 错误，可以执行 `make clean` 后再 make
--   如果 make 没有错误，而是由于 CPU、内存等不够，或者人为 `ctrl+C` 中断的，可以直接 make，不需要再 `make clean`
+1. 如果 cmake 错误，可删除 build 目录中的文件，即可清楚 cache，然后重新 cmake
+2. 如果 make 错误，可以执行 `make clean` 后再 make
+3. 如果 make 没有错误，而是由于 CPU、内存等不够，或者人为 `ctrl+C` 中断的，可以直接 make，不需要再 `make clean`
 
-    -   由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
-    -   内存不足容易出现如下代码：
+    - 由于 mysql 编译过程需要花费很多时间，如果全部重新 make，需要很多时间
+    - 内存不足容易出现如下代码：
 
         ```bash
         c++: fatal error: Killed signal terminated program cc1plus
