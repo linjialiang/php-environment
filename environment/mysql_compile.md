@@ -86,28 +86,6 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
 
-::: warning :warning: 依赖 openssl 特殊版本安装
-
-在 debian13 发行版中，系统自带的 openssl 是 3.5.x，而 MySQL-8.4.6 使用了该 openssl 版本中废弃的函数导致编译失败；
-
-解决方式：编译安装 openssl-3.0.17，使用以下方式：
-
-1. 增加编译选项指定特定的 openssl 版本
-
-    - `-DWITH_SSL=/server/openssl-3.0.17`
-
-2. 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
-
-    ```bash
-    # 这一步没有意义
-    # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
-    export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
-    ```
-
-具体请参考 [PHP 编译安装 OpenSSL](php#assign-openssl-version)
-
-:::
-
 ::: code-group
 
 ```bash [创建构建目录]
@@ -129,7 +107,6 @@ cmake .. \
 -DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
 -DWITH_SYSTEMD=ON \
--DWITH_SSL=/server/openssl-3.0.17 \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
