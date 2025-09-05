@@ -599,6 +599,79 @@ Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参�
 
 :::
 
+## 编译 OpenSSL 特定版本 {#assign-openssl-version}
+
+如果对 openssl 依赖库有特殊版本需求，需要自行编译安装
+
+::: code-group
+
+```bash{5-11} [1.1.1w编译选项]
+# 作为公共依赖库，推荐以root用户安装它
+mkdir /server/openssl-1.1.1w
+cd /root/openssl-1.1.1w/
+
+./config --prefix=/server/openssl-1.1.1w \
+--openssldir=/server/openssl-1.1.1w \
+no-shared \
+zlib
+```
+
+```bash{6-12} [3.0.17编译选项]
+# debian 13+MySQL8.4.6时需要此版本的openssl
+# 作为公共依赖库，推荐以root用户安装它
+mkdir /server/openssl-3.0.17
+cd /root/openssl-3.0.17/
+
+./config --prefix=/server/openssl-3.0.17 \
+--openssldir=/server/openssl-3.0.17 \
+no-shared \
+zlib
+```
+
+```bash [编译安装]
+make -j4
+make test
+make install
+```
+
+```bash{2,8-10} [1.1.1w配置]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path openssl,libssl,libcrypto
+
+# 成功替换展示：
+/server/openssl-1.1.1w/lib/pkgconfig/openssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libssl.pc
+/server/openssl-1.1.1w/lib/pkgconfig/libcrypto.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
+```
+
+```bash{2,8-10} [3.0.17配置]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
+export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path openssl,libssl,libcrypto
+
+# 成功替换展示：
+/server/openssl-3.0.17/lib/pkgconfig/openssl.pc
+/server/openssl-3.0.17/lib/pkgconfig/libssl.pc
+/server/openssl-3.0.17/lib/pkgconfig/libcrypto.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/openssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libssl.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
+```
+
+:::
+
 ## 附录：预构建包一键安装脚本
 
 ::: code-group
