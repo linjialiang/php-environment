@@ -186,7 +186,7 @@ cd /home/php-fpm/php-7.4.33/build_php/
 ```bash [编译&安装]
 # nohup make -j4 &
 make -j4 > make.log
-make test > make.log
+make test > make-test.log
 make install
 ```
 

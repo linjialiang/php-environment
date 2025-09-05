@@ -625,7 +625,7 @@ zlib
 
 ```bash [编译安装]
 make -j4 > make.log
-make test > make.log
+make test > make-test.log
 make install
 ```
 
