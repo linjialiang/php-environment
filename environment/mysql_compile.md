@@ -61,11 +61,15 @@ apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev \
 libncurses-dev bison pkg-config libtirpc-dev
 ```
 
+:::
+
 ## 特定版本问题说明
 
-## 编译
+## 编译安装
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
+
+### 编译指令
 
 ::: code-group
 
@@ -214,7 +218,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ::: code-group
 
-```log [错误详情]
+```bash [错误详情]
 -- Enabling installation of systemd support files...
 -- Checking for module 'systemd'
 --   Package 'systemd', required by 'virtual:world', not found
@@ -241,7 +245,7 @@ ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gn
 
 警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可，并且仅企业版才有此功能
 
-```log
+```bash
 CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
   WITH_FIDO is set to "none".  FIDO based authentication plugins will be
   skipped.
@@ -260,7 +264,7 @@ CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
 
 警告分析：这通常是因为 MySQL 的 CmakeList.txt 本身存在相对路径，导致 cmake 抛出 CMP0177 警告，是 MySQL 源码不完全按 cmake 标准设计导致的
 
-```log
+```bash
 CMake Warning (dev) at scripts/CMakeLists.txt:579 (INSTALL):
   Policy CMP0177 is not set: install() DESTINATION paths are normalized.  Run
   "cmake --help-policy CMP0177" for policy details.  Use the cmake_policy
