@@ -97,20 +97,20 @@ cd ~/mysql-8.4.6/build
 ```bash [查看编译选项]
 # 查询有关 CMake 支持的选项的信息
 cd /home/mysql/mysql-8.4.6/build
-cmake .. -LH
+cmake -LH ..
 # 选项写入文件
-cmake .. -LH > options.list
+cmake -LH .. > options.list
 ```
 
 ```bash [构建指令]
-cmake .. \
--DWITH_DEBUG=ON \
+cmake -DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
--DINSTALL_MYSQLTESTDIR=
+-DINSTALL_MYSQLTESTDIR= \
+..
 ```
 
 ```bash [安装指令]
