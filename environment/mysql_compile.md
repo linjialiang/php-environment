@@ -65,6 +65,40 @@ libncurses-dev bison pkg-config libtirpc-dev
 
 ## 特定版本问题说明
 
+### 一、Debian13+MySQL8.4.6
+
+-   问题说明：debian13 的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码 tls_client_context.cc 文件中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败；
+
+-   解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
+
+    ```c
+    // 修改 mysql-8.4.6/router/src/harness/src/tls_client_context.cc 第220行
+    stdx::expected<SSL_SESSION *, std::error_code> TlsClientContext::get_session() {
+      // sessions_ will be nullptr if caching is off
+      if (sessions_) {
+        std::lock_guard lk(sessions_->mtx_);
+        auto &sessions = sessions_->sessions_;
+        for (auto it = sessions.cbegin(); it != sessions.cend();) {
+          const auto sess = it->second.get();
+          const auto sess_start = SSL_SESSION_get_time(sess); // [!code --]
+          const auto sess_start = SSL_SESSION_get_time_ex(sess); // [!code ++]
+          if (time(nullptr) - sess_start > session_cache_timeout_.count()) {
+            // session expired, remove from cache
+            sessions.erase(it++);
+            continue;
+          }
+          if (SSL_SESSION_is_resumable_wrapper(sess)) {
+            return sess;
+          }
+          ++it;
+        }
+      }
+
+      return stdx::unexpected(
+          make_error_code(std::errc::no_such_file_or_directory));
+    }
+    ```
+
 ## 编译安装
 
 在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
