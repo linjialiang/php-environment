@@ -714,3 +714,35 @@ pkg-config --path openssl,libssl,libcrypto
 | `2>&1` | 将 stderr 重定向到 stdout（覆盖）        | command `2>&1` file        |
 |  `\|`  | 管道符号，传递信息给另 1 个命令 ​​       | `ls -l / \| grep 'server'` |
 | `tee`  | 将数据同时写入到文件和终端               | command `\|` `tee` file    |
+
+#### 案例展示
+
+::: code-group
+
+```bash [仅显示stderr]
+# 终端输出错误和警告，文件记录正常信息
+cmake \
+-DWITH_DEBUG=ON \
+-DCMAKE_INSTALL_PREFIX=/server/mysql \
+-DWITH_SYSTEMD=ON \
+-DFORCE_COLORED_OUTPUT=ON \
+-DWITH_MYSQLX=OFF \
+-DWITH_UNIT_TESTS=OFF \
+-DINSTALL_MYSQLTESTDIR= \
+.. > cmake_info.log
+```
+
+```bash [仅记录stderr]
+# 终端输出正常信息，文件记录错误和警告
+cmake \
+-DWITH_DEBUG=ON \
+-DCMAKE_INSTALL_PREFIX=/server/mysql \
+-DWITH_SYSTEMD=ON \
+-DFORCE_COLORED_OUTPUT=ON \
+-DWITH_MYSQLX=OFF \
+-DWITH_UNIT_TESTS=OFF \
+-DINSTALL_MYSQLTESTDIR= \
+.. 2> cmake_debug.log
+```
+
+:::
