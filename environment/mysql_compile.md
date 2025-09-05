@@ -131,7 +131,9 @@ cmake .. \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=ON
+```
 
+```bash [安装指令]
 make -j4
 make test
 make install
