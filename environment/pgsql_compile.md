@@ -124,7 +124,7 @@ LLVM_CONFIG=/usr/lib/llvm-19/bin/llvm-config \
 --with-zstd \
 --with-openssl \
 --with-libxml \
---with-libxslt
+--with-libxslt > stdout.log
 ```
 
 ```bash [安装指令]

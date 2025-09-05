@@ -38,7 +38,7 @@ apt install -y gcc make tcl zlib1g-dev gawk libedit-dev libreadline-dev
 ```bash
 su - sqlite -s /bin/zsh
 cd ~/sqlite-autoconf-3500400/
-./configure --prefix=/server/sqlite
+./configure --prefix=/server/sqlite > stdout.log
 make -j4
 make install
 ```

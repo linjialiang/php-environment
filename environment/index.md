@@ -729,7 +729,7 @@ cmake \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
 -DINSTALL_MYSQLTESTDIR= \
-.. > cmake_info.log
+.. > stdout.log
 ```
 
 ```bash [仅记录stderr]
@@ -742,7 +742,7 @@ cmake \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
 -DINSTALL_MYSQLTESTDIR= \
-.. 2> cmake_debug.log
+.. 2> stdout.log
 ```
 
 :::

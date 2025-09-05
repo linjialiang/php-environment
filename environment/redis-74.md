@@ -31,7 +31,7 @@ su - redis -s /bin/zsh
 # - 所以必须在子目录中构建
 mkdir ~/redis-7.4.3/build_redis
 cd ~/redis-7.4.3/build_redis
-make -C ../ BUILD_TLS=yes -j4
+make -C ../ BUILD_TLS=yes -j4 > stdout.log
 ```
 
 ```bash [检测编译结果]

@@ -126,7 +126,7 @@ cmake \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=OFF \
 -DINSTALL_MYSQLTESTDIR= \
-.. > cmake_debug.log
+.. > stdout.log
 ```
 
 ```bash [编译安装]

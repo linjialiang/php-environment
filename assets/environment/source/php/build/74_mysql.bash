@@ -31,4 +31,4 @@
 --enable-sockets \
 --enable-sysvmsg \
 --enable-sysvsem \
---enable-sysvshm
+--enable-sysvshm > stdout.log
