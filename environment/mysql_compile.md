@@ -35,7 +35,7 @@ Boost 是一个 C++标准库，因为 mysql 主要是用 C++写的，它依赖�
 ```bash
 apt update
 # redis8.2+ 版本需依赖 g++，编译 mysql 时 g++ 已安装（redis7.4 不依赖 g++）
-apt install -y cmake libldap-dev libsasl2-dev libtirpc-dev
+apt install -y cmake libldap-dev libsasl2-dev libtirpc-dev dpkg-dev
 ```
 
 ::: warning 注意
