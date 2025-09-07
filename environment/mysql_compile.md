@@ -328,9 +328,14 @@ bin/mysqld --initialize --user=mysql --basedir=/server/mysql --datadir=/server/d
 bin/mysqld --initialize-insecure --user=mysql --basedir=/server/mysql --datadir=/server/data
 ```
 
-::: auth_socket 认证插件与密码关系
-开启 auth_socket 插件与密码认证没有关联，如果 root 使用了此认证方式，就算 root 设置了密码，登录时也无须密码登录，值得注意的是：
-auth_socket 认证登录环境必须是 `unix/linux` 本机中的系统用户，并且只能是跟 mysql 账户同名的系统用户或唯一的别名系统用户
+::: tip :warning: auth_socket 认证插件与密码关系
+开启 auth_socket 插件，如果 root 使用了 socket 认证方式并且设置了密码，登录时也必须使用密码登录，如：
+
+```bash
+➜ ~ mysql --socket=/run/mysql/mysqld-84.sock -u root -p
+Enter password: 输入密码
+```
+
 :::
 
 ### systemd 单元
@@ -466,17 +471,16 @@ DROP USER 'admin'@'192.168.%.%';
 新版 MySQL 使用 `authentication_string` 字段替换了之前的 `password` 字段
 
 ```sql
-select user, host, plugin, authentication_string from mysql.user;
-
--- +------------------+-----------+-----------------------+------------------------------------------------------------------------+
--- | user             | host      | plugin                | authentication_string                                                  |
--- +------------------+-----------+-----------------------+------------------------------------------------------------------------+
--- | mysql.infoschema | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED |
--- | mysql.session    | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED |
--- | mysql.sys        | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED |
--- | root             | localhost | auth_socket           | emad                                                                   |
--- +------------------+-----------+-----------------------+------------------------------------------------------------------------+
-
+mysql> SELECT user, host, plugin, authentication_string, account_locked FROM mysql.user;
++------------------+-----------+-----------------------+------------------------------------------------------------------------+----------------+
+| user             | host      | plugin                | authentication_string                                                  | account_locked |
++------------------+-----------+-----------------------+------------------------------------------------------------------------+----------------+
+| mysql.infoschema | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | Y              |
+| mysql.session    | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | Y              |
+| mysql.sys        | localhost | caching_sha2_password | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | Y              |
+| root             | localhost | auth_socket           | mysql                                                                  | N              |
++------------------+-----------+-----------------------+------------------------------------------------------------------------+----------------+
+4 rows in set (0.00 sec)
 ```
 
 :::
