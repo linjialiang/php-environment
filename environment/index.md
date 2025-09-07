@@ -691,9 +691,11 @@ cd icu/source/
 make -j4 > make.log
 make check > make-check.log
 make install
-
-
 ```
+
+::: danger :warning:警告
+debian13 编译 libicu-72.1 后，使用 `make check` 检测是存在报错情况的，这说明依赖环境并不能完全满足，正确的部署环境应该是，使用尽可能符合要求的系统发行版安装环境，像 debian13 发行版对 php7.4 的环境支持度已经很低，如果 php5.x 还要安装到 debian13 上，可能支持度会更差，你需要解决大量的依赖问题，这完全不可取的。从下个发行版开始我们将移除对 `php7.4` 的支持工作
+:::
 
 ## 附录：
 
