@@ -408,7 +408,7 @@ mysql> SELECT PLUGIN_NAME, PLUGIN_STATUS FROM INFORMATION_SCHEMA.PLUGINS WHERE P
 1 row in set (0.02 sec)
 ```
 
-```sql [使用用户]
+```sql [案例]
 -- 创建用户，采用 CREATE USER
 CREATE USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
 -- 创建用户，'root'@'localhost' 用户除了系统root登录外还支持mysql用户登录
