@@ -195,11 +195,15 @@ make install
 :::
 
 ::: tip 构建指令区别：
-php8.1 默认已经对 openssl 启用 `pcre-jit` 实现正则即时编译
 
-php8.1 的 gd 扩展增加的 `--with-avif` 选项
+1. `>=8.1.0` 默认已经对 OpenSSL 启用 `pcre-jit` 实现正则即时编译
 
-php8.4 增加 `--with-capstone` 选项
+2. `>=8.1.0` 的 gd2 扩展增加的 `--with-avif` 选项
+
+3. `>=8.1.0` 后对 `--with-mhash` 选项标记为已弃用，如果没有旧项目需要向后兼容，不要添加此选项
+
+4. `>=8.4.0` 增加 `--with-capstone` 选项
+
 :::
 
 ## PHP 配置

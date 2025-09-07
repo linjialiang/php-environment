@@ -12,7 +12,6 @@
 --enable-exif \
 --with-gettext \
 --with-gmp \
---with-mhash \
 --with-sodium \
 --with-curl \
 --with-ffi \
