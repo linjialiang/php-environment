@@ -321,7 +321,7 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 
 ::: code-group
 
-```bash [密码]
+```bash [随机密码]
 cd /server/mysql
 # root 账户生成随机初始root密码，且标记为过期，您必须选择一个新密码进行修改后才能正常使用
 # - 未修改密码前只能登录和使用 ALTER USER 指令修改自身
