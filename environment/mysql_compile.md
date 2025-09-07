@@ -150,6 +150,8 @@ make install
 
 ### cmake 选项说明
 
+::: details 图表说明
+
 | commom                         | note                                                                                           |
 | ------------------------------ | ---------------------------------------------------------------------------------------------- |
 | -DWITH_DEBUG                   | 是否开启调式模式，开启的同时会禁用优化                                                         |
@@ -174,9 +176,11 @@ make install
 | ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                        |
 | ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                                                |
 
+:::
+
 #### 关于单元测试
 
-单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
+::: details 单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
 
 1. `-DWITH_UNIT_TESTS=OFF` + `不添加选项-DINSTALL_MYSQLTESTDIR`
 
@@ -201,6 +205,8 @@ make install
 6. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
 
     - 生成单元测试文件，保存在指定路径 `/server/mysql-test`
+
+:::
 
 ### 启用 systemd 支持文件
 
