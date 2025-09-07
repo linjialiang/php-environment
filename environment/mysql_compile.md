@@ -322,11 +322,16 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 ```bash
 cd /server/mysql
 
-# root 有密码，并且标记为过期，非系统 root 用户登录，必须创建一个新密码
+# root 生成随机初始root密码，且标记为过期，您必须选择一个新密码进行修改后才能正登录
 bin/mysqld --initialize --user=mysql --basedir=/server/mysql --datadir=/server/data
-# root 没有密码，如果要开启可插拔认证，选择没有密码
+# root 没有密码，仅建议在开发环境使用
 bin/mysqld --initialize-insecure --user=mysql --basedir=/server/mysql --datadir=/server/data
 ```
+
+::: auth_socket 认证插件与密码关系
+开启 auth_socket 插件与密码认证没有关联，如果 root 使用了此认证方式，就算 root 设置了密码，登录时也无须密码登录，值得注意的是：
+auth_socket 认证登录环境必须是 `unix/linux` 本机中的系统用户，并且只能是跟 mysql 账户同名的系统用户或唯一的别名系统用户
+:::
 
 ### systemd 单元
 
