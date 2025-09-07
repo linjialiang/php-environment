@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/cache
+# /server/etc/nginx/custom/cache
 
 # html页面缓存，~* 不区分大小写
 location ~* \.(?:htm|html)$

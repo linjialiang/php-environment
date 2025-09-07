@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/php_forward
+# /server/etc/nginx/custom/php_forward
 
 location ~* \.php$
 {

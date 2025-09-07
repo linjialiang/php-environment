@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/no_access
+# /server/etc/nginx/custom/no_access
 
 # 禁止访问所有以 . 开始的文件和目录
 location ~ /\..+

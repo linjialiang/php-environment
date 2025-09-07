@@ -1,3 +1,4 @@
+/server/etc/nginx/custom/cross_domain
 # 跨域请求没有单独文件，按需写入对应站点的 location 区块
 # ====== 设置跨域配置 Start ====== #
 

@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/gzip
+# /server/etc/nginx/custom/gzip
 
 # == ngx_http_gzip_static_module ==
 # 允许发送带有.gz文件扩展名的预压缩文件，而不是常规文件

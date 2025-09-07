@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/default.nginx
+# /server/etc/nginx/custom/default.nginx
 
 # 默认站点
 server

@@ -1,4 +1,4 @@
-# /server/nginx/conf/custom/limit_req_http
+# /server/etc/nginx/custom/limit_req_http
 # === http 区块设定加载请求限制，需server区块配合 === #
 # 限制请求：针对相同客户端ip（这条最重要，其它的看实际情况添加）
 #  - 默认，每秒可处理5条请求，生成1个标识为 with_ip ，容量为 10M 的内存区域，用来存储访问的频次信息
