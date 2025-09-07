@@ -685,7 +685,12 @@ Debian/Ubuntu 系统仓库中对 `ICU4C` 库的命名约定为 `libicu`。
 mkdir /server/icu4c-72_1
 wget https://github.com/unicode-org/icu/releases/download/release-72-1/icu4c-72_1-src.tgz
 tar - xzf icu4c-72_1-src.tgz
-cd icu4c-72_1-src
+cd icu/source/
+./configure --prefix=/server/icu4c-72.1 \
+--enable-static
+make -j4 > make.log
+make check > make-check.log
+make install
 
 
 ```
