@@ -681,7 +681,9 @@ Debian/Ubuntu 系统仓库中对 `ICU4C` 库的命名约定为 `libicu`。
 
 下面以 Debin13 编译安装 `ICU4C-72.1` 为例：
 
-```bash
+::: code-group
+
+```bash [编译安装]
 mkdir /server/icu4c-72_1
 wget https://github.com/unicode-org/icu/releases/download/release-72-1/icu4c-72_1-src.tgz
 tar - xzf icu4c-72_1-src.tgz
@@ -691,6 +693,24 @@ cd icu/source/
 make -j4 > make.log
 make check > make-check.log
 make install
+```
+
+```bash [配置]
+# 设置新的 PKG_CONFIG_PATH，排除系统默认的 icu 库路径
+export PKG_CONFIG_PATH=/server/icu4c-72.1/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# 使用下面指令检查，是否正确替换
+pkg-config --path icu-i18n, icu-io, icu-uc
+
+# 成功替换展示：
+/server/icu4c-72.1/lib/pkgconfig/icu-i18n.pc
+/server/icu4c-72.1/lib/pkgconfig/icu-io.pc
+/server/icu4c-72.1/lib/pkgconfig/icu-uc.pc
+
+# 未成功替换展示：
+/usr/lib/x86_64-linux-gnu/pkgconfig/icu-i18n.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/icu-io.pc
+/usr/lib/x86_64-linux-gnu/pkgconfig/icu-uc.pc
 ```
 
 ::: danger :warning:警告
