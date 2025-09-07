@@ -319,22 +319,39 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 
 ### 数据初始化
 
-```bash
+::: code-group
+
+```bash [密码]
 cd /server/mysql
-
-# root 生成随机初始root密码，且标记为过期，您必须选择一个新密码进行修改后才能正登录
+# root 账户生成随机初始root密码，且标记为过期，您必须选择一个新密码进行修改后才能正常使用
+# - 未修改密码前只能登录和使用 ALTER USER 指令修改自身
 bin/mysqld --initialize --user=mysql --basedir=/server/mysql --datadir=/server/data
-# root 没有密码，仅建议在开发环境使用
-bin/mysqld --initialize-insecure --user=mysql --basedir=/server/mysql --datadir=/server/data
-```
-
-::: tip :warning: auth_socket 认证插件与密码关系
-开启 auth_socket 插件，如果 root 使用了 socket 认证方式并且设置了密码，登录时也必须使用密码登录，如：
-
-```bash
+# 终端登录方式
 ➜ ~ mysql --socket=/run/mysql/mysqld-84.sock -u root -p
-Enter password: 输入密码
+Enter password: 输入自动生成的随机密码
+# 修改认证方式为socket，并允许mysql系统用户可登录
+ALTER USER root@localhost IDENTIFIED WITH auth_socket AS 'mysql';
 ```
+
+```bash [无密码]
+cd /server/mysql
+# root 账户没有密码，仅建议在使用 auto_socker 认证或者开发环境时使用
+bin/mysqld --initialize-insecure --user=mysql --basedir=/server/mysql --datadir=/server/data
+# 终端登录方式
+➜ ~ mysql --socket=/run/mysql/mysqld-84.sock -u root
+# 修改认证方式为socket，并允许mysql系统用户可登录
+ALTER USER root@localhost IDENTIFIED WITH auth_socket AS 'mysql';
+```
+
+:::
+
+::: warning :warning: `Unix Domain Socket 连接方式` 与 `auth_socket 认证插件` 关系
+
+1.  `Unix Domain Socket` 是一种本地连接方式（不能向远程建立连接），不论 MySQL 是通过 `tcp/ip` 还是 `Unix Domain Socket` 建立连接均只会影响传输性能和安全性，后续操作仅与 MySQL 自身有关，比如：
+
+    -   `Unix Domain Socket` 建立的连接，允许使用 `caching_sha2_password` 认证方式登录
+
+2.  `auth_socket` 认证插件只支持通过本地 `Unix Domain Socket` 连接，是不需要密码的，如果使用 `tcp/ip` 建立连接，MySQL 是不允许 `auto_socket` 认证方式的账号登录的
 
 :::
 
@@ -367,11 +384,11 @@ mysql --socket=/run/mysql/mysqld-84.sock -u root
 
 MySQL 常用的身份验证插件有 3 种：
 
-| plugin                 | note |
-| ---------------------- | ---- |
-| auth_socket            | 本地 |
-| caching_sha2_password  | 新的 |
-| mysql_native_password​ | 旧的 |
+| plugin                   | 是否需要密码 | 是否推荐         |
+| ------------------------ | ------------ | ---------------- |
+| `auth_socket`            | 无需密码     | 推荐本地使用     |
+| `caching_sha2_password`  | 需要密码     | 推荐 TCP/IP 使用 |
+| `mysql_native_password​` | 需要密码     | 密码安全弱       |
 
 ### auth_socket
 
