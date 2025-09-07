@@ -62,6 +62,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
+        - icu4c-72_1-src.tgz
 6. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.5.tgz
@@ -88,6 +89,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
+        - icu4c-72_1-src.tgz
 5. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
@@ -114,6 +116,7 @@ titleTemplate: 环境搭建教程
         - yaml-2.2.5.tgz
     - 依赖库
         - openssl-1.1.1w.tar.gz
+        - icu4c-72_1-src.tgz
 5. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.2.tgz
@@ -666,6 +669,25 @@ pkg-config --path openssl,libssl,libcrypto
 ```
 
 :::
+
+## 编译 `ICU4C` 特定版本 {#assign-icu-version}
+
+Debian/Ubuntu 系统仓库中对 `ICU4C` 库的命名约定为 `libicu`。
+
+系统自带的 libicu 版本如果不能满足编译环境需求，就需要通过手动编译特定版本来满足需求。
+
+比如：debian13 自带的是 libicu-76.x，而 php7.4.33 需要 libicu-72.1 版本，此时我们就必须手动编译 `libicu-72.1` 。
+
+下面以 Debin13 编译安装 `ICU4C-72.1` 为例：
+
+```bash
+mkdir /server/icu4c-72_1
+wget https://github.com/unicode-org/icu/releases/download/release-72-1/icu4c-72_1-src.tgz
+tar - xzf icu4c-72_1-src.tgz
+cd icu4c-72_1-src
+
+
+```
 
 ## 附录：
 
