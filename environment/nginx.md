@@ -177,7 +177,8 @@ nginx 配置仅有一个入口文件，统一称做 `主配置文件`
 
 ::: details 1. 主配置文件 {#main-conf}
 ::: code-group
-<<<@/assets/environment/source/nginx/nginx.conf{nginx} [主配置]
+<<<@/assets/environment/source/nginx/nginx.conf{nginx} [配置文件]
+<<<@/assets/environment/source/etc/nginx/main.nginx{nginx} [主配置]
 <<<@/assets/environment/source/etc/nginx/custom/default.nginx [默认站点]
 <<<@/assets/environment/source/etc/nginx/custom/php_forward{nginx} [php 文件转发]
 :::
