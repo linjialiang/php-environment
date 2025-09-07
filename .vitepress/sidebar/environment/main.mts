@@ -38,16 +38,16 @@ const sidebar = [
       { text: 'MySQL', link: `${path.mainOld}mysql_compile` },
       { text: 'PHP', link: `${path.mainOld}php` },
       { text: 'Nginx', link: `${path.mainOld}nginx` },
-    ],
-  },
-  {
-    text: '存档(不再积极维护)',
-    collapsed: true,
-    items: [
-      { text: 'PostgreSQL(apt)', link: `${path.mainOld}archive/pgsql` },
-      { text: 'MySQL(apt)', link: `${path.mainOld}archive/mysql` },
-      { text: 'MongoDB', link: `${path.mainOld}archive/mongodb` },
-      { text: 'PHP旧版', link: `${path.mainOld}archive/php_old` },
+      {
+        text: '不再积极维护',
+        collapsed: true,
+        items: [
+          { text: 'PostgreSQL(apt)', link: `${path.mainOld}archive/pgsql` },
+          { text: 'MySQL(apt)', link: `${path.mainOld}archive/mysql` },
+          { text: 'MongoDB', link: `${path.mainOld}archive/mongodb` },
+          { text: 'PHP旧版', link: `${path.mainOld}archive/php_old` },
+        ],
+      },
     ],
   },
 ];
