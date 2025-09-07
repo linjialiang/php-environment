@@ -1,5 +1,5 @@
 const path = {
-  main: '/environment/',
+  main: '/environment-new/',
   mainOld: '/environment/',
 };
 
