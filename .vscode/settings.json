@@ -1,5 +1,15 @@
 {
   "path-intellisense.mappings": {
     "/static/": "${workspaceFolder}/public/static/"
-  }
+  },
+  "editor.rulers": [
+    {
+      "column": 76,
+      "color": "rgba(255, 255, 0, .3)"
+    },
+    {
+      "column": 80,
+      "color": "rgba(255, 255, 255, .3)"
+    }
+  ]
 }
