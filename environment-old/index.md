@@ -28,9 +28,9 @@ titleTemplate: 环境搭建教程
 ::: details PHP 环境目录结构
 
 ::: code-group
-<<<@/assets/environment/lnmpp-toc.txt [lnmpp]
-<<<@/assets/environment/lnpp-toc.txt [lnpp]
-<<<@/assets/environment/lnmp-toc.txt [lnmp]
+<<<@/assets/environment-old/lnmpp-toc.txt [lnmpp]
+<<<@/assets/environment-old/lnpp-toc.txt [lnpp]
+<<<@/assets/environment-old/lnmp-toc.txt [lnmp]
 :::
 
 ## 脚本文件
@@ -38,10 +38,10 @@ titleTemplate: 环境搭建教程
 ::: details 我们准备了几个 bash 脚本文件：
 
 ::: code-group
-<<<@/assets/environment/source/bash/user.bash [用户]
-<<<@/assets/environment/source/bash/mkdir.bash [创建]
-<<<@/assets/environment/source/bash/tar.bash [解压]
-<<<@/assets/environment/source/bash/chown.bash [授权]
+<<<@/assets/environment-old/source/bash/user.bash [用户]
+<<<@/assets/environment-old/source/bash/mkdir.bash [创建]
+<<<@/assets/environment-old/source/bash/tar.bash [解压]
+<<<@/assets/environment-old/source/bash/chown.bash [授权]
 :::
 
 ## 安装包列表
@@ -573,9 +573,9 @@ redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参考 [[Tutorial]](http://tutorial.e8so.com/) 项目
 
 ::: code-group
-<<<@/assets/environment/source/logrotate.d/redis{bash} [redis]
-<<<@/assets/environment/source/logrotate.d/nginx{bash} [nginx]
-<<<@/assets/environment/source/logrotate.d/example{bash} [带备注]
+<<<@/assets/environment-old/source/logrotate.d/redis{bash} [redis]
+<<<@/assets/environment-old/source/logrotate.d/nginx{bash} [nginx]
+<<<@/assets/environment-old/source/logrotate.d/example{bash} [带备注]
 :::
 
 {#Logrotate-common}
@@ -730,9 +730,9 @@ debian13 编译安装 php7.4 遇到很多问题，存在大量问题需要解决
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<<@/assets/environment/lnmpp-setup.sh [lnmpp]
-<<<@/assets/environment/lnmp-setup.sh [lnmp]
-<<<@/assets/environment/lnpp-setup.sh [lnpp]
+<<<@/assets/environment-old/lnmpp-setup.sh [lnmpp]
+<<<@/assets/environment-old/lnmp-setup.sh [lnmp]
+<<<@/assets/environment-old/lnpp-setup.sh [lnpp]
 :::
 
 ### 二、输出重定向说明

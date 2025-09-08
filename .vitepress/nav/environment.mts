@@ -1,5 +1,5 @@
 // PHP环境搭建
-const path = '/environment-new/';
+const path = '/environment/';
 const nav = [
   { text: '概述', link: path },
   { text: 'SQLite3', link: `${path}sqlite3` },

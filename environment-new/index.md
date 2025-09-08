@@ -16,7 +16,7 @@ titleTemplate: 环境搭建教程
 内核 : `linux-image-6.12.41+deb13-amd64`
 ```
 
-<<<@/assets/environment-new/lnmpp-toc.txt [环境目录结构]
+<<<@/assets/environment/lnmpp-toc.txt [环境目录结构]
 :::
 
 ## 脚本文件
@@ -24,10 +24,10 @@ titleTemplate: 环境搭建教程
 ::: details 我们准备了几个 bash 脚本文件：
 
 ::: code-group
-<<<@/assets/environment-new/source/bash/user.bash [用户]
-<<<@/assets/environment-new/source/bash/mkdir.bash [创建]
-<<<@/assets/environment-new/source/bash/tar.bash [解压]
-<<<@/assets/environment-new/source/bash/chown.bash [授权]
+<<<@/assets/environment/source/bash/user.bash [用户]
+<<<@/assets/environment/source/bash/mkdir.bash [创建]
+<<<@/assets/environment/source/bash/tar.bash [解压]
+<<<@/assets/environment/source/bash/chown.bash [授权]
 :::
 
 ## 安装包列表
@@ -495,9 +495,9 @@ redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参考 [[Tutorial]](http://tutorial.e8so.com/) 项目
 
 ::: code-group
-<<<@/assets/environment-new/source/logrotate.d/redis{bash} [redis]
-<<<@/assets/environment-new/source/logrotate.d/nginx{bash} [nginx]
-<<<@/assets/environment-new/source/logrotate.d/example{bash} [带备注]
+<<<@/assets/environment/source/logrotate.d/redis{bash} [redis]
+<<<@/assets/environment/source/logrotate.d/nginx{bash} [nginx]
+<<<@/assets/environment/source/logrotate.d/example{bash} [带备注]
 :::
 
 {#Logrotate-common}
@@ -652,9 +652,9 @@ debian13 编译 libicu-72.1 后，使用 `make check` 检测是存在报错情�
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<<@/assets/environment-new/lnmpp-setup.sh [lnmpp]
-<<<@/assets/environment-new/lnmp-setup.sh [lnmp]
-<<<@/assets/environment-new/lnpp-setup.sh [lnpp]
+<<<@/assets/environment/lnmpp-setup.sh [lnmpp]
+<<<@/assets/environment/lnmp-setup.sh [lnmp]
+<<<@/assets/environment/lnpp-setup.sh [lnpp]
 :::
 
 ### 二、输出重定向说明

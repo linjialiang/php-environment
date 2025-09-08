@@ -1,6 +1,6 @@
 const path = {
-  main: '/environment-new/',
-  mainOld: '/environment/',
+  main: '/environment/',
+  mainOld: '/environment-old/',
 };
 
 const sidebar = [

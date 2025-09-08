@@ -117,8 +117,8 @@ vm.overcommit_memory = 1
 
 ::: details 配置案例
 ::: code-group
-<<<@/assets/environment-new/source/redis/redis-74.conf{ini} [配置案例]
-<<<@/assets/environment-new/source/redis/redis-74.conf.source{ini} [自带配置]
+<<<@/assets/environment/source/redis/redis-74.conf{ini} [配置案例]
+<<<@/assets/environment/source/redis/redis-74.conf.source{ini} [自带配置]
 :::
 
 ### 2. 配置说明
@@ -244,7 +244,7 @@ Redis 分为 RDB 和 AOF 两种持久化，其中 `AOF` 可以结合 `RDB` 实�
 
 ::: code-group
 
-<<<@/assets/environment-new/source/service/redis.service{ini} [系统单元配置]
+<<<@/assets/environment/source/service/redis.service{ini} [系统单元配置]
 
 ```bash [重载配置]
 # 重新载入 Systemd 配置
@@ -280,7 +280,7 @@ Redis 支持通过 SSL/TLS 协议进行加密通信，可以提供更高的安�
 redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TLS 相关证书和密钥：
 
 ::: code-group
-<<<@/assets/environment-new/source/redis/gen-test-certs.sh [脚本]
+<<<@/assets/environment/source/redis/gen-test-certs.sh [脚本]
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh

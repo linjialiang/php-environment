@@ -34,9 +34,9 @@ dpkg -i ./mysql-apt-config_0.8.25-1_all.deb
 ```
 
 ::: details 选择 MySQL 服务器
-![选择 MySQL 服务器和集群](/assets/environment/images/mysql-apt-config.png)
-![选择 mysql-8.0](/assets/environment/images/mysql-8.0.png)
-![选择 ok](/assets/environment/images/mysql-apt-config-ok.png)
+![选择 MySQL 服务器和集群](/assets/environment-old/images/mysql-apt-config.png)
+![选择 mysql-8.0](/assets/environment-old/images/mysql-8.0.png)
+![选择 ok](/assets/environment-old/images/mysql-apt-config-ok.png)
 :::
 
 ::: tip 可以考虑国内源
@@ -84,8 +84,8 @@ apt install mysql-server
 ```
 
 ::: details 配置详情
-![将密码留空，以启用UNIX套接字登录验证](/assets/environment/images/mysql-01.png)
-![将密码留空，以启用UNIX套接字登录验证](/assets/environment/images/mysql-02.png)
+![将密码留空，以启用UNIX套接字登录验证](/assets/environment-old/images/mysql-01.png)
+![将密码留空，以启用UNIX套接字登录验证](/assets/environment-old/images/mysql-02.png)
 :::
 
 ## Unit 单元
@@ -96,7 +96,7 @@ MySQL 安装成功后，自动配置好 Unit 单元服务器
 -   创建链接：`/etc/systemd/system/multi-user.target.wants/mysql.service`
 
 ::: details MySQL 系统单元配置文件：
-<<<@/assets/environment/source/service/mysqld-84.service{ini}
+<<<@/assets/environment-old/source/service/mysqld-84.service{ini}
 :::
 
 > MySQL 系统单元管理：
