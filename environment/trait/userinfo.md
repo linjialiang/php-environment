@@ -74,27 +74,31 @@ master 进程用户需要有 worker 进程用户的全部权限，master 进程�
 ```md [套接字权限]
 > nginx 站点代理转发 php 请求时：
 
--   Nginx 主进程用户不需要对 PHP-FPM 的 socket 文件拥有任何权限，处理请求的是工作进程
--   Nginx 工作进程用户需要对 PHP-FPM 的 socket 文件具有 `读+写` 权限
-    1.  读取权限：Nginx 工作进程需要读取 socket 文件以发送请求到 PHP-FPM
-    2.  写入权限：Nginx 工作进程也需要写入权限，以便接收来自 PHP-FPM 的响应
--   PHP-FPM 主进程用户需要对 sock 文件具有全部权限
-    1. 创建/删除 pool 进程的 sock 文件
+-   Nginx 主进程用户不需要对 PHP-FPM 的 socket 文件拥有任何权限，
+    处理请求的是工作进程；
+-   Nginx 工作进程用户需要对 PHP-FPM 的 socket 文件具有 `读+写` 权限；
+
+    1. `r` 权限：Nginx 工作进程需要读取 socket 文件以发送请求到 PHP-FPM。
+    2. `w` 权限：Nginx 工作进程也需要写入权限，以便接收来自 PHP-FPM 的响应。
+
+-   PHP-FPM 主进程用户需要对 sock 文件具有全部权限；
+
+    1. 创建/删除 pool 进程的 sock 文件。
     2. 监听指定的端口或 Unix 套接字文件，以便接收来自 Web 服务器（如 Nginx）的请求。
 
 > PHP-FPM 的套接字文件：
 
--   pool 进程的 sock 文件监听用户: `php-fpm`
--   pool 进程的 sock 文件监听用户组: `nginx`
--   pool 进程的 sock 文件监听权限: `0660`
--   用户 php-fpm 的附属用户组增加 `nginx`
+-   pool 进程的 sock 文件监听用户: `php-fpm`；
+-   pool 进程的 sock 文件监听用户组: `nginx`；
+-   pool 进程的 sock 文件监听权限: `0660`；
+-   用户 php-fpm 的附属用户组增加 `nginx`。
 ```
 
 ```md [TCP/IP权限]
-> 当使用 tcp/ip 的方式建立代理转发通道时，nginx 站点代理转发 php 请求时：
+> 使用 tcp/ip 的方式建立代理转发通道时，nginx 站点代理转发 php 请求时：
 
--   nginx 的主进程和工作进程均不需要拥有 PHP-FPM 相关的权限
--   PHP-FPM 主进程和工作进程同样不需要拥有 Nginx 相关的权限
+-   Nginx 的主进程和工作进程均不需要拥有 php-fpm 相关的权限；
+-   PHP-FPM 主进程和工作进程同样不需要拥有 nginx 相关的权限。
 ```
 
 :::
