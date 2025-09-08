@@ -38,18 +38,6 @@ apt update
 apt install -y cmake libldap-dev libsasl2-dev libtirpc-dev dpkg-dev
 ```
 
-::: warning 注意
-编译前系统已经存在的依赖库这里并未指出需要安装，如果系统版本不一样，需要自己根据提示安装其余部分依赖
-
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y make cmake gcc g++ libldap-dev libsasl2-dev libssl-dev \
-libncurses-dev bison pkg-config libtirpc-dev
-```
-
-:::
-
 ## 特定版本问题
 
 ### Debian13+MySQL8.4.6
