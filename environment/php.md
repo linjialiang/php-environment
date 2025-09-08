@@ -17,7 +17,7 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 -   从 2025/01/22 开始重新启用 `php-7.4.33` 以支撑旧项目；
 -   从 2025/01/22 开始正式移除 `php-8.3.x` 版本，其相关内容请阅读[[PHP旧版]](./archive/php_old)；
--   由于发行版的兼容性问题，计划在 debian13 以后移除对 `php-7.4.3`的支持；
+-   由于发行版的兼容性问题，debian13 以后移除对 `php-7.4.3`的支持；
 
 :::
 
@@ -41,25 +41,6 @@ apt install autoconf libyaml-dev -y
 ```bash [74]
 # 在安装完 新版PHP所需依赖后，PHP 7.4 还需依赖如下：
 # 未发现需要其他依赖项
-```
-
-:::
-
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y xz-utils
-apt install -y make gcc g++ libcurl4-openssl-dev libpng-dev pkg-config \
-libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libgmp-dev \
-libonig-dev libcapstone-dev libsodium-dev libzip-dev libsystemd-dev libxml2-dev \
-libffi-dev
-
-# sqlite3 扩展所需依赖，已安装sqlite3则不需要
-apt install libsqlite3-dev -y
-# pgsql 扩展所需依赖，已安装PostgreSQL则不需要
-apt install libpq-dev -y
-# php 安装动态扩展所需依赖
-apt install autoconf libyaml-dev -y
 ```
 
 :::
