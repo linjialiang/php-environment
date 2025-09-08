@@ -14,7 +14,7 @@ hero:
     actions:
         - theme: alt
           text: 查看详情
-          link: /environment/
+          link: /environment-new/
         - theme: brand
           text: 👉B站关注作者
           link: https://space.bilibili.com/473623415
@@ -25,33 +25,33 @@ features:
           light: /static/svg/sqlite-light.svg
       title: SQLite3 教程
       details: 轻量级关系型数据库
-      link: /environment/sqlite3
+      link: /environment-new/sqlite3
     - icon:
           src: /static/svg/redis.svg
       title: Redis 教程
       details: 最流行的键值型数据库(内存型)
-      link: /environment/redis
+      link: /environment-new/redis
     - icon:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 教程
       details: 最强大的开源关系型数据库
-      link: /environment/pgsql_compile
+      link: /environment-new/pgsql_compile
     - icon:
           src: /static/svg/mysql.svg
       title: MySQL 教程
       details: 最流行的开源关系型数据库
-      link: /environment/mysql_compile
+      link: /environment-new/mysql_compile
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
       title: PHP 教程
       details: PHP语言解释器
-      link: /environment/php
+      link: /environment-new/php
     - icon:
           src: /static/svg/nginx.svg
       title: Nginx 教程
       details: Web服务器
-      link: /environment/nginx
+      link: /environment-new/nginx
     - icon:
           dark: /static/svg/iis-dark.svg
           light: /static/svg/iis-light.svg
