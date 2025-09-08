@@ -17,31 +17,26 @@ titleTemplate: 环境搭建教程
 
 :::
 
-## 依赖
+## 编译安装
 
-```bash
+::: code-group
+
+```bash [依赖项]
 apt install -y gcc make tcl
 ```
 
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y gcc make tcl zlib1g-dev gawk libedit-dev libreadline-dev
-```
-
-:::
-
-## 构建安装
-
-由于 sqlite3 并非主要数据库，所以我们这里只做最简单的构建：
-
-```bash
+```bash [构建选项]
 su - sqlite -s /bin/zsh
 cd ~/sqlite-autoconf-3500400/
 ./configure --prefix=/server/sqlite > stdout.log
+```
+
+```bash [编译安装]
 make -j4 > make.log
 make install
 ```
+
+:::
 
 ## 权限
 
