@@ -145,6 +145,6 @@ master 进程用户需要有 worker 进程用户的全部权限，master 进程�
 
 :::
 
-::: tip
-新版 lnmpp 将采用 `TCP/IP` 代理转发方式，所以 socket 文件权限不需要过多考虑
+::: tip 提示
+新版 lnmpp 环境将采用 `TCP/IP` 代理转发方式，所以 socket 文件权限不需要过多考虑
 :::
