@@ -91,15 +91,6 @@ apt install libpq-dev -y
 
 :::
 
-::: details 依赖 openssl 特殊版本 {#assign-openssl-version}
-
-::: danger 重要说明
-php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，因此这里自行编译安装了 [[openssl-1.1.1w]](https://openssl-library.org/source/old/1.1.1/index.html)，安装 php 动态扩展时，如果需要 openssl 支持的话，也需要跟 PHP 编译时的 openssl 兼容，例如：[[mongodb 扩展]](#ext-mongodb)
-
-点击 👉[[查看详情](index#assign-openssl-version)]
-
-:::
-
 ::: tip 提示
 
 1. 本次已编译 SQLite3，无需额外使用依赖库
@@ -111,11 +102,6 @@ php-7.4 不支持 Debian12 自带的 openssl-3.0.x 版本，因此这里自行�
 5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
 
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
-
-::: warning 更复杂的情况
-对于过时的 php 版本，安装在较新的 linux 发行版中，有些依赖会由于版本过高导致出错，但是 `configure` 检测并不会报错的情况，例如：
-php-7.4.33 依赖的 openssl 库版本过高问题，就不会报错
-:::
 
 ### 2. 创建并进入构建目录
 
