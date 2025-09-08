@@ -1,0 +1,5 @@
+/* .vitepress/theme/styles/custom.css */
+.vp-doc div[class*='language-'] {
+    max-height: 400px; /* 设置最大高度 */
+    overflow-y: auto; /* 超出部分显示滚动条 */
+}
