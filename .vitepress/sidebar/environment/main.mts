@@ -11,12 +11,11 @@ const sidebar = [
     collapsed: true,
     items: [
       { text: '8.2', link: `${path.main}redis` },
-      { text: '7.4', link: `${path.main}redis-74` },
       { text: 'Redis配置文件', link: `${path.main}redis-conf` },
     ],
   },
-  { text: 'PostgreSQL', link: `${path.main}pgsql_compile` },
-  { text: 'MySQL', link: `${path.main}mysql_compile` },
+  { text: 'PostgreSQL', link: `${path.main}pgsql` },
+  { text: 'MySQL', link: `${path.main}mysql` },
   { text: 'PHP', link: `${path.main}php` },
   { text: 'Nginx', link: `${path.main}nginx` },
   {

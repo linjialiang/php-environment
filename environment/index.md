@@ -21,20 +21,20 @@ titleTemplate: 环境搭建教程
 
 ## 脚本文件
 
-::: details 我们准备了几个 bash 脚本文件：
+我们准备了几个 bash 脚本文件：
 
 ::: code-group
-<<<@/assets/environment/source/bash/user.bash [用户]
-<<<@/assets/environment/source/bash/mkdir.bash [创建]
-<<<@/assets/environment/source/bash/tar.bash [解压]
-<<<@/assets/environment/source/bash/chown.bash [授权]
+<<<@/assets/environment/source/bash/user.bash [创建用户]
+<<<@/assets/environment/source/bash/mkdir.bash [创建目录]
+<<<@/assets/environment/source/bash/chown.bash [目录授权]
+<<<@/assets/environment/source/bash/tar.bash [解压参考]
 :::
 
-## 安装包列表
+## 包列表
 
 ::: code-group
 
-```md [lnmpp]
+```md [包列表]
 1. sqlite-autoconf-3500400.tar.gz
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
@@ -52,24 +52,22 @@ titleTemplate: 环境搭建教程
     - zlib-1.3.1.tar.xz
 ```
 
-:::
-
-::: details 源码包下载地址
-
-| package        | url                                                                                                        |
-| -------------- | ---------------------------------------------------------------------------------------------------------- |
-| SQLite3        | https://www.sqlite.org/                                                                                    |
-| Redis          | https://download.redis.io/redis-stable.tar.gz                                                              |
-| PostgreSQL     | https://www.postgresql.org/                                                                                |
-| MySQL          | https://www.mysql.com/                                                                                     |
-| PHP            | https://www.php.net/                                                                                       |
-| PHP extend     | http://pecl.php.net/                                                                                       |
-| Nginx          | http://nginx.org/                                                                                          |
-| zlib           | http://www.zlib.net/                                                                                       |
-| openssl        | https://openssl-library.org/                                                                               |
-| openssl-1.1.1w | https://www.openssl.org/source/openssl-1.1.1w.tar.gz                                                       |
-| pcre2          | https://github.com/PCRE2Project/pcre2                                                                      |
-| icu4c-72.1     | [icu4c-72_1-src.tgz](https://github.com/unicode-org/icu/releases/download/release-72-1/icu4c-72_1-src.tgz) |
+```md [包下载]
+| package        | url                                                  |
+| -------------- | ---------------------------------------------------- |
+| SQLite3        | https://www.sqlite.org/                              |
+| Redis          | https://download.redis.io/redis-stable.tar.gz        |
+| PostgreSQL     | https://www.postgresql.org/                          |
+| MySQL          | https://www.mysql.com/                               |
+| PHP            | https://www.php.net/                                 |
+| PHP extend     | http://pecl.php.net/                                 |
+| Nginx          | http://nginx.org/                                    |
+| zlib           | http://www.zlib.net/                                 |
+| openssl        | https://openssl-library.org/                         |
+| openssl-1.1.1w | https://www.openssl.org/source/openssl-1.1.1w.tar.gz |
+| pcre2          | https://github.com/PCRE2Project/pcre2                |
+| icu4c          | https://github.com/unicode-org/icu/releases/         |
+```
 
 :::
 
