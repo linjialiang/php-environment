@@ -31,8 +31,8 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ```bash [84]
 apt install libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
-libjpeg-dev libxpm-dev libfreetype-dev libgmp-dev libonig-dev libcapstone-dev \
-libsodium-dev libzip-dev -y
+libjpeg-dev libxpm-dev libfreetype-dev libgmp-dev libonig-dev \
+libcapstone-dev libsodium-dev libzip-dev -y
 
 # php 扩展所需额外依赖
 apt install autoconf libyaml-dev -y
