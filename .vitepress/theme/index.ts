@@ -32,6 +32,7 @@ export default {
       navbar: true, // 显示底部缩略图导航
       title: true, // 可根据需要决定是否显示图片标题（通常VitePress文档中不需要）
       keyboard: true, // 启用键盘支持
+      loop: true, // 是否允许循环查看​​
     });
   },
 };
