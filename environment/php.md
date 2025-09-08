@@ -38,14 +38,9 @@ libsodium-dev libzip-dev -y
 apt install autoconf libyaml-dev -y
 ```
 
-```bash [74]
-# 在安装完 新版PHP所需依赖后，PHP 7.4 还需依赖如下：
-# 未发现需要其他依赖项
-```
-
 :::
 
-::: details sqlite3 依赖
+#### SQLite3 依赖
 
 想使用最新或指定版 sqlite3 ，需自己编译好 sqlite3 后，在 `PKG_CONFIG_PATH` 环境变量中追加 sqlite3 的 `pkgconfig` 配置文件路径
 
@@ -72,7 +67,7 @@ apt install libsqlite3-dev -y
 
 :::
 
-::: details pgsql 依赖
+#### pgsql 依赖
 
 想使用最新或指定版 pgsql，需自己编译好 libpq 库后，在 php 构建选项里指定目录路径
 
