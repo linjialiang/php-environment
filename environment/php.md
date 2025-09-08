@@ -102,6 +102,7 @@ apt install libpq-dev -y
 5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
 
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
+:::
 
 ### 2. 创建并进入构建目录
 
@@ -110,11 +111,6 @@ apt install libpq-dev -y
 ```bash [84]
 mkdir /home/php-fpm/php-8.4.12/build_php
 cd /home/php-fpm/php-8.4.12/build_php/
-```
-
-```bash [74]
-mkdir /home/php-fpm/php-7.4.33/build_php
-cd /home/php-fpm/php-7.4.33/build_php/
 ```
 
 :::
@@ -136,7 +132,6 @@ cd /home/php-fpm/php-7.4.33/build_php/
 ```
 
 <<<@/assets/environment/source/php/configure/84.ini [8.4 选项]
-<<<@/assets/environment/source/php/configure/74.ini [7.4 选项]
 :::
 
 ### 4. 构建指令参考
@@ -144,7 +139,6 @@ cd /home/php-fpm/php-7.4.33/build_php/
 ::: details 构建指令参考
 ::: code-group
 <<<@/assets/environment/source/php/build/84.bash [84]
-<<<@/assets/environment/source/php/build/74.bash [74]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -153,8 +147,6 @@ make test > make-test.log
 make install
 ```
 
-<<<@/assets/environment/source/php/build/84_mysql.bash [84[mysql]]
-<<<@/assets/environment/source/php/build/74_mysql.bash [74[mysql]]
 :::
 
 ::: tip 构建指令区别：
