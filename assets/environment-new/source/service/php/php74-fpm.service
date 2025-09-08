@@ -1,0 +1,26 @@
+echo "[Unit]
+Description=The PHP 7.4 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=notify
+User=php-fpm
+Group=php-fpm
+RuntimeDirectory=php74-fpm
+RuntimeDirectoryMode=0750
+# RuntimeDirectoryPreserve=yes #如果存在多个php版本并且都指向同一目录，则必须设为yes，否则停止其中一个服务，目录就会自动删除
+ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+ProtectSystem=full
+PrivateDevices=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/php74-fpm.service

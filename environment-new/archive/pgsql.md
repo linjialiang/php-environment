@@ -42,7 +42,7 @@ cp /etc/postgresql/15/main/postgresql.conf{,.bak}
 vim /etc/postgresql/15/main/postgresql.conf
 ```
 
-<<<@/assets/environment/source/pgsql-apt/postgresql.conf{ini} [新配置]
+<<<@/assets/environment-new/source/pgsql-apt/postgresql.conf{ini} [新配置]
 
 ```bash [权限]
 # 数据目录
@@ -63,15 +63,15 @@ su - postgres
 /usr/lib/postgresql/15/bin/initdb -D /server/pgsql --auth-local peer --auth-host scram-sha-256 --no-instructions
 ```
 
-<<<@/assets/environment/source/pgsql-apt/postgresql.conf.bak{ini} [原始配置]
+<<<@/assets/environment-new/source/pgsql-apt/postgresql.conf.bak{ini} [原始配置]
 :::
 
 ## 修改 systemctl 单元文件
 
 ::: code-group
-<<<@/assets/environment/source/service/pgsql-apt/postgresql@.service{ini} [新]
-<<<@/assets/environment/source/service/pgsql-apt/postgresql.service.bak{ini} [原始 1]
-<<<@/assets/environment/source/service/pgsql-apt/postgresql@.service.bak{ini} [原始 2]
+<<<@/assets/environment-new/source/service/pgsql-apt/postgresql@.service{ini} [新]
+<<<@/assets/environment-new/source/service/pgsql-apt/postgresql.service.bak{ini} [原始 1]
+<<<@/assets/environment-new/source/service/pgsql-apt/postgresql@.service.bak{ini} [原始 2]
 :::
 
 ## 创建角色
@@ -98,7 +98,7 @@ ALTER ROLE admin_group SUPERUSER;
 SET ROLE admin_group;
 ```
 
-<<<@/assets/environment/source/pgsql-apt/pg_hba/pg_hba_1.conf{7-8 ini} [修改 pg_hba 配置]
+<<<@/assets/environment-new/source/pgsql-apt/pg_hba/pg_hba_1.conf{7-8 ini} [修改 pg_hba 配置]
 
 ```sql [登录]
 # 本地 unix_socket 通过密码登录
