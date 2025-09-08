@@ -114,13 +114,18 @@ master 进程用户需要有 worker 进程用户的全部权限，master 进程�
 ::: code-group
 
 ```md [nginx]
--   对静态文件需提供 `读` 的权限
--   对 php-fpm 的 `unix socket` 文件提供了读写的权限
+1. 对静态文件需提供 `读` 的权限
+2. 对 php-fpm 的 `unix socket` 文件提供了读写的权限
+```
 
-浏览器等客户端使用 nginx 用户浏览网站：1)加载静态文件; 2) php-fpm 的 `unix socket` 文件传输
+```md [客户端]
+客户端（如浏览器）使用 nginx 用户浏览网站：
 
-1. 使用 socket 转发，nginx 用户可作为 FPM 的监听用户，如：监听 socket、连接 web 服务器，权限设为 660
-2. 使用 IP 转发，FPM 无需监听用户
+1. 加载静态文件;
+2. php-fpm 的 `unix socket` 文件传输
+    - 使用 socket 转发，nginx 用户可作为 FPM 的监听用户，
+      如：监听 socket、连接 web 服务器，权限设为 `660`
+    - 使用 TCP/IP 转发是，PHP-FPM 无需监听用户
 ```
 
 ```md [php-fpm]
