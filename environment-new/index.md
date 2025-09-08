@@ -9,28 +9,14 @@ titleTemplate: 环境搭建教程
 
 ## 测试环境
 
-::: details 测试环境的系统参数如下(`内容将以最新版为准进行调整`)：
-
 ::: code-group
-
-```[debian12]
-系统 : `Debian GNU/Linux 12 (Bookworm) x86_64`
-内核 : `linux-image-6.1.0-26-amd64`
-```
 
 ```[debian13]
 系统 : `Debian GNU/Linux 13 (trixie)`
 内核 : `linux-image-6.12.41+deb13-amd64`
 ```
 
-:::
-
-::: details PHP 环境目录结构
-
-::: code-group
-<<<@/assets/environment-new/lnmpp-toc.txt [lnmpp]
-<<<@/assets/environment-new/lnpp-toc.txt [lnpp]
-<<<@/assets/environment-new/lnmp-toc.txt [lnmp]
+<<<@/assets/environment-new/lnmpp-toc.txt [环境目录结构]
 :::
 
 ## 脚本文件
@@ -53,75 +39,11 @@ titleTemplate: 环境搭建教程
 2. redis-8.2.1.tar.gz
 3. mysql-8.4.6.tar.gz
 4. postgresql-17.6.tar.bz2
-5. php-7.4.33.tar.xz
-    - 动态扩展
-        - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.27.tgz
-        - mongodb-1.20.1.tgz `最后支持版`
-        - redis-6.2.0.tgz
-        - yaml-2.2.5.tgz
-    - 依赖库
-        - openssl-1.1.1w.tar.gz
-        - icu4c-72_1-src.tgz
-6. php-8.4.12.tar.xz
+5. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.5.tgz
         - apcu-5.1.27.tgz
         - mongodb-2.1.1.tgz
-        - redis-6.2.0.tgz
-        - yaml-2.2.5.tgz
-7. nginx-1.28.0.tar.gz
-    - openssl-3.5.2.tar.gz
-    - pcre2-10.45.tar.bz2
-    - zlib-1.3.1.tar.xz
-```
-
-```md [lnpp]
-1. sqlite-autoconf-3500400.tar.gz
-2. redis-8.2.1.tar.gz
-3. postgresql-17.6.tar.bz2
-4. php-7.4.33.tar.xz
-    - 动态扩展
-        - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.27.tgz
-        - mongodb-1.20.1.tgz `最后支持版`
-        - redis-6.2.0.tgz
-        - yaml-2.2.5.tgz
-    - 依赖库
-        - openssl-1.1.1w.tar.gz
-        - icu4c-72_1-src.tgz
-5. php-8.4.12.tar.xz
-    - 动态扩展
-        - xdebug-3.4.2.tgz
-        - apcu-5.1.27.tgz
-        - mongodb-2.0.0.tgz
-        - redis-6.2.0.tgz
-        - yaml-2.2.5.tgz
-6. nginx-1.28.0.tar.gz
-    - openssl-3.5.2.tar.gz
-    - pcre2-10.45.tar.bz2
-    - zlib-1.3.1.tar.xz
-```
-
-```md [lnmp]
-1. sqlite-autoconf-3500400.tar.gz
-2. redis-8.2.1.tar.gz
-3. mysql-8.4.6.tar.gz
-4. php-7.4.33.tar.xz
-    - 动态扩展
-        - xdebug-3.1.6.tgz `最后支持版`
-        - apcu-5.1.27.tgz
-        - mongodb-1.20.1.tgz `最后支持版`
-        - redis-6.2.0.tgz
-        - yaml-2.2.5.tgz
-    - 依赖库
-        - openssl-1.1.1w.tar.gz
-        - icu4c-72_1-src.tgz
-5. php-8.4.12.tar.xz
-    - 动态扩展
-        - xdebug-3.4.2.tgz
-        - apcu-5.1.27.tgz
-        - mongodb-2.0.0.tgz
         - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
 6. nginx-1.28.0.tar.gz
