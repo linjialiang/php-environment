@@ -125,7 +125,7 @@ master 进程用户需要有 worker 进程用户的全部权限，master 进程�
 2. php-fpm 的 `unix socket` 文件传输
     - 使用 socket 转发，nginx 用户可作为 FPM 的监听用户，
       如：监听 socket、连接 web 服务器，权限设为 `660`
-    - 使用 TCP/IP 转发是，PHP-FPM 无需监听用户
+    - 使用 `TCP/IP` 转发是，PHP-FPM 无需监听用户
 ```
 
 ```md [php-fpm]
@@ -146,5 +146,5 @@ master 进程用户需要有 worker 进程用户的全部权限，master 进程�
 :::
 
 ::: tip
-新版 lnpp 将采用 tcp 代理转发方式，所以 socket 文件权限不需要过多考虑
+新版 lnmpp 将采用 `TCP/IP` 代理转发方式，所以 socket 文件权限不需要过多考虑
 :::
