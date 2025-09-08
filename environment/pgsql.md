@@ -9,8 +9,6 @@ titleTemplate: 环境搭建教程
 
 ## 编译前准备
 
-下面是 `Debian 12.x` 发行版编译 PostgreSQL 16.1 需要的依赖项。
-
 ::: tip 必要说明
 PostgreSql 官方推荐使用 GCC 最新版编译器来构建，但为了支持 JIT 这里用的是 `llvm+clang` 编译器套件；
 
@@ -26,18 +24,7 @@ apt install -y clang liblz4-dev libzstd-dev bison flex libreadline-dev \
 zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libicu-dev
 ```
 
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y bzip2
-apt install -y make clang liblz4-dev libzstd-dev bison flex libreadline-dev \
-zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev pkg-config \
-libssl-dev libxml2-dev xsltproc fop dbtoepub libicu-dev
-```
-
-:::
-
-::: details 依赖包说明
+### 依赖包说明
 
 | package         | note                                                                  |
 | --------------- | --------------------------------------------------------------------- |
@@ -54,9 +41,7 @@ libssl-dev libxml2-dev xsltproc fop dbtoepub libicu-dev
 | libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件     |
 | libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                  |
 
-:::
-
-::: details 编译选项说明
+### 编译选项说明
 
 | commom                | note                                                 |
 | --------------------- | ---------------------------------------------------- |
@@ -82,8 +67,6 @@ libssl-dev libxml2-dev xsltproc fop dbtoepub libicu-dev
 -   编译器：`llvm+clang` 跟 `gcc` 是两个编译器，是互斥的，如果要启用 `--with-llvm` 就要使用 `clang`
 -   安装部分依赖包时，可能会自动安装 `gcc` 编译器包
 -   `--with-ossp`: uuid 支持 3 种方式 `ossp-uuid(维护不积极)` `bsd(跨平台支持)` `e2fs(兼容linux，性能高)`
-
-:::
 
 ## 编译
 
