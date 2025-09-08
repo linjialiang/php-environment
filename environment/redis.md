@@ -43,9 +43,9 @@ make -C ../ install PREFIX=/server/redis
 ```
 
 ```text [目录结构]
-====================================================
+============================================================================
 Redis 初始目录结构
-====================================================
+============================================================================
 ├─ /server/redis                        redis基目录
 |   ├─ bin
 |   |  ├─ redis-benchmark               Redis 压力测试工具
@@ -56,8 +56,7 @@ Redis 初始目录结构
 |   |  ├─ redis-sentinel                redis-server软链接
 |   |  └─ ...
 |   |
-└─  └─  rdbData                         手动创建，快照和本地持久化文件存放路径指向此目录
-
+└─  └─  rdbData                         手动创建，快照和本地持久化文件存放路径
 ```
 
 :::
@@ -85,13 +84,15 @@ chmod 750 /server/redis/rdbData
 
 ### 2. 配置案例
 
-::: details 基础配置
+#### 基础配置
+
 ::: code-group
 <<<@/assets/environment/source/redis/redis.conf{ini} [主配置]
 <<<@/assets/environment/source/etc/redis/config/source.conf{ini} [原始配置]
 :::
 
-::: details 自定义配置
+#### 自定义配置
+
 ::: code-group
 <<<@/assets/environment/source/etc/redis/config/custom/01-network.conf{ini} [01-network.conf]
 <<<@/assets/environment/source/etc/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
@@ -118,14 +119,11 @@ chmod 750 /server/redis/rdbData
 <<<@/assets/environment/source/etc/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
-::: details 日志分割
-使用 Logrotate 自动轮转来分割日志
+### 日志分割
+
+Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明[[:point_right:点此查看]](index#Logrotate-common)
 
 <<<@/assets/environment/source/logrotate.d/redis{bash}
-
-::: tip
-Logrotate 常用指令说明[[:point_right:点此查看]](index#Logrotate-common)
-:::
 
 ## 配置系统单元
 
