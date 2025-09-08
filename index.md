@@ -35,12 +35,12 @@ features:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 教程
       details: 最强大的开源关系型数据库
-      link: /environment/pgsql_compile
+      link: /environment/pgsql
     - icon:
           src: /static/svg/mysql.svg
       title: MySQL 教程
       details: 最流行的开源关系型数据库
-      link: /environment/mysql_compile
+      link: /environment/mysql
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
