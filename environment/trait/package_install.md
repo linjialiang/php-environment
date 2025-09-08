@@ -32,13 +32,13 @@
 
 :::
 
-## 编译 OpenSSL 特定版本 {#assign-openssl-version}
+### 编译安装 OpenSSL {#build-install-openssl}
 
-如果对 openssl 依赖库有特殊版本需求，需要自行编译安装
+如果对 openssl 依赖库版本有特殊需求，需自行编译安装特定版本
 
 ::: code-group
 
-```bash{5-11} [1.1.1w编译选项]
+```bash{5-11} [1.1.1w构建选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-1.1.1w
 cd /root/openssl-1.1.1w/
@@ -49,7 +49,7 @@ no-shared \
 zlib
 ```
 
-```bash{5-11} [3.0.17编译选项]
+```bash{5-11} [3.0.17构建选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-3.0.17
 cd /root/openssl-3.0.17/
@@ -104,25 +104,24 @@ pkg-config --path openssl,libssl,libcrypto
 
 :::
 
-## 编译 `ICU4C` 特定版本 {#assign-icu-version}
+## 编译安装 ICU4C {#bulid-install-icu4c}
 
 Debian/Ubuntu 系统仓库中对 `ICU4C` 库的命名约定为 `libicu`。
 
 系统自带的 libicu 版本如果不能满足编译环境需求，就需要通过手动编译特定版本来满足需求。
 
-比如：debian13 自带的是 libicu-76.x，而 php7.4.33 需要 libicu-72.1 版本，此时我们就必须手动编译 `libicu-72.1` 。
-
-下面以 Debin13 编译安装 `ICU4C-72.1` 为例：
-
 ::: code-group
 
-```bash [编译安装]
+```bash [构建选项]
 mkdir /server/icu4c-72_1
 wget https://github.com/unicode-org/icu/releases/download/release-72-1/icu4c-72_1-src.tgz
 tar - xzf icu4c-72_1-src.tgz
 cd icu/source/
 ./configure --prefix=/server/icu4c-72.1 \
 --enable-static
+```
+
+```bash [编译安装]
 make -j4 > make.log
 make check > make-check.log
 make install
@@ -145,7 +144,3 @@ pkg-config --path icu-i18n, icu-io, icu-uc
 /usr/lib/x86_64-linux-gnu/pkgconfig/icu-io.pc
 /usr/lib/x86_64-linux-gnu/pkgconfig/icu-uc.pc
 ```
-
-::: danger :warning:警告
-debian13 编译 libicu-72.1 后，使用 `make check` 检测是存在报错情况的，这说明依赖环境并不能完全满足，正确的部署环境应该是，使用尽可能符合要求的系统发行版安装环境，像 debian13 发行版对 php7.4 的环境支持度已经很低，如果 php5.x 还要安装到 debian13 上，可能支持度会更差，你需要解决大量的依赖问题，这完全不可取的。从下个发行版开始我们将移除对 `php7.4` 的支持工作
-:::
