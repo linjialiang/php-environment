@@ -131,9 +131,10 @@ source ~/.profile
 <!-- 引入手动安装依赖 -->
 <!-- @include: ./trait/package_install.md -->
 
-## 附录：
+<!-- 引入输出重定向 -->
+<!-- @include: ./trait/output.md -->
 
-### 一、预构建包一键安装脚本
+## 附录二、预构建包一键安装脚本
 
 ::: code-group
 
@@ -146,6 +147,3 @@ source ~/.profile
 
 <<<@/assets/environment/lnmpp-setup.sh [lnmpp]
 :::
-
-<!-- 引入输出重定向 -->
-<!-- @include: ./trait/output.md -->
