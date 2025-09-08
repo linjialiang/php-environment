@@ -653,8 +653,6 @@ debian13 编译 libicu-72.1 后，使用 `make check` 检测是存在报错情�
 ```
 
 <<<@/assets/environment/lnmpp-setup.sh [lnmpp]
-<<<@/assets/environment/lnmp-setup.sh [lnmp]
-<<<@/assets/environment/lnpp-setup.sh [lnpp]
 :::
 
 ### 二、输出重定向说明
