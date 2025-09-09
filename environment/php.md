@@ -294,16 +294,13 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 
 1. 针对单独站点 : 跟 nginx 站点配置文件命名一致
 2. 根据工作池性质 :
-    - 接收 tp6 站点，命名 `tp.conf`；
-    - 接收其它站点，命名 `default.conf`
+    - 接收通用站点，命名 `default.conf`
+    - 单独接收 ThinkPHP 站点，命名 `tp.conf`；
 
-::: details 通用工作池案例
 ::: code-group
-<<<@/assets/environment/source/php/84/php-fpm.d/default.conf{ini} [8.4]
-:::
-
-::: details ThinkPHP 项目专用工作池案例
-<<<@/assets/environment/source/php/84/php-fpm.d/tp.conf{ini}
+<<<@/assets/environment/source/php/84/php-fpm.d/default.conf{ini} [84-default]
+<<<@/assets/environment/source/php/84/php-fpm.d/tp.conf{ini} [tp]
+<<<@/assets/environment/source/php/84/php-fpm.d/example/default.conf{ini} [案例说明]
 :::
 
 ::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
