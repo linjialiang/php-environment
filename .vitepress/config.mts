@@ -89,6 +89,7 @@ export default defineConfig({
     ],
     sidebar: {
       '/environment/': environment,
+      '/environment-old/': environment,
       '/mysql/': mysql,
     },
     footer: {
