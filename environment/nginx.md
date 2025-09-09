@@ -15,15 +15,6 @@ Nginx 是现如今性能最强劲的 Web 服务器及反向代理服务器
 apt install libgd-dev libgeoip-dev -y
 ```
 
-::: details debian12 纯净版所需完整依赖
-
-```bash
-apt install -y bzip2 xz-utils
-apt install -y make gcc libgd-dev libgeoip-dev libxml2-dev libxslt1-dev
-```
-
-:::
-
 ### 2. CAP_NET_BIND_SERVICE
 
 `CAP_NET_BIND_SERVICE` 是 Linux 内核中的一个能力（capability），它允许进程绑定低于 `1024` 的端口。这个能力通常用于网络服务程序，如 Web 服务器、邮件服务器等，以便它们能够监听系统保留的低端口。
@@ -44,7 +35,9 @@ setcap -r /server/nginx/sbin/nginx
 
 :::
 
-### 3. 查看构建参数
+## 开始构建
+
+### 查看构建参数
 
 ::: code-group
 
@@ -56,9 +49,7 @@ cd /home/nginx/nginx-1.28.0
 <<<@/assets/environment/source/nginx/help.ini [全部参数]
 :::
 
-## 开始构建
-
-### 1. 构建指令
+### 编译安装
 
 ::: code-group
 
@@ -68,7 +59,7 @@ mkdir ~/nginx-1.28.0/build_nginx
 cd ~/nginx-1.28.0
 ```
 
-<<<@/assets/environment/source/nginx/build_now.bash [本次构建指令]
+<<<@/assets/environment/source/nginx/build_now.bash [构建选项]
 
 ```bash [编译安装]
 # 4核以上可以使用 make -j4 编译
@@ -79,11 +70,11 @@ nohup make -j4 &
 make install
 ```
 
-<<<@/assets/environment/source/nginx/build_all.bash [全部构建指令]
+<<<@/assets/environment/source/nginx/build_all.bash [全部构建选项]
 
 :::
 
-### 2. 测试
+### 测试安装结果
 
 使用 curl 检测是否成功
 
@@ -112,12 +103,6 @@ curl: (7) Failed to connect to 127.0.0.1 port 80: 拒绝连接
 
 :::
 
-::: tip 构建说明
-`Debian11发行版` 下 `nginx-1.22.1` 完成了上面两套指令的构建
-
-`debian12+发行版` 只针对当前 nginx 版本的 `本次构建指令` 进行构建
-:::
-
 ## 平滑升级
 
 Nginx 可实现平滑升级，具体操作如下：
@@ -136,7 +121,7 @@ Nginx 可实现平滑升级，具体操作如下：
 # 先备份旧版主文件，防止意外出现
 mv /server/nginx/sbin/nginx{,.bak}
 # 拷贝新的主文件,到指定目录
-cp -p -r /home/nginx/nginx-1.28.0/build_nginx/nginx /server/nginx/sbin/
+cp -p -r /home/nginx/nginx-1.26.3/build_nginx/nginx /server/nginx/sbin/
 ```
 
 ### 3. 升级操作
