@@ -50,7 +50,7 @@ php --ri apcu
 
 ::: code-group
 
-```bash [编译]
+```bash [84编译]
 cd /home/php-fpm/php_ext/xdebug-3.4.5
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
@@ -58,7 +58,7 @@ make -j4 > make.log
 make install
 ```
 
-```ini [配置]
+```ini [84配置]
 # 如果 Xdebug 和 OPCache 同时使用，xdebug 必须在 opcache 之后：
 zend_extension=opcache
 zend_extension=xdebug
@@ -77,7 +77,7 @@ xdebug.client_port=9084
 
 ::: code-group
 
-```bash [默认]
+```bash [84]
 cd /home/php-fpm/php_ext/redis-6.2.0
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
@@ -92,7 +92,7 @@ make install
 
 ::: code-group
 
-```bash [默认]
+```bash [84]
 cd /home/php-fpm/php_ext/mongodb-2.1.1
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
@@ -107,7 +107,7 @@ make install
 
 ::: code-group
 
-```bash [默认]
+```bash [84]
 # 安装依赖库
 apt install libyaml-dev -y
 
@@ -125,7 +125,7 @@ make install
 
 ::: code-group
 
-```bash [默认]
+```bash [84]
 cd /home/php-fpm/php_ext/apcu-5.1.27
 phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
