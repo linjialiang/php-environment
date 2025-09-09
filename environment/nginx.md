@@ -322,7 +322,7 @@ nginx 的用户身份认证，仅区分登录用户和非登录用户的访问�
 
 `ngx_http_auth_basic_module` 模块，只有 2 条配置指令：
 
-::: details 1. auth_basic 指令
+#### auth_basic 指令
 
 该指令，用于控制 nginx 是否开启 `HTTP 基本身份验证` 功能
 
@@ -345,7 +345,7 @@ nginx 的用户身份认证，仅区分登录用户和非登录用户的访问�
 在同一区块，仅一个 `auth_basic` 生效，后面覆盖前面
 :::
 
-::: details 2. auth_basic_user_file 指令
+#### auth_basic_user_file 指令
 
 该指令，用于指定保存用户名和密码的文件
 
@@ -478,14 +478,6 @@ server
 ```
 
 :::
-
-### 4. 相关指令说明
-
-| common    | info           |
-| --------- | -------------- |
-| `echo -n` | 不换行输出     |
-| `>>`      | 追加输出重定向 |
-| `>`       | 覆盖输出重定向 |
 
 ## 权限
 
