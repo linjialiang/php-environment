@@ -11,7 +11,8 @@ server
     server_name example.com www.example.com;
     root /www/www_example_com;
 
-    access_log /server/logs/nginx/www_example_com.log;
+    access_log      off;    # 关闭访问日志
+    log_not_found   off;    # 关闭错误日志
     index index.html index.htm;
 
     # 静态站点支持的请求方式仅限 get或post

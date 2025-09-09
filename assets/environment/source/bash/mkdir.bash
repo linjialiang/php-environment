@@ -14,6 +14,7 @@ server_array=(
 
     "/server/nginx"
     "/server/logs/nginx"
+    "/server/logs/nginx/access"
     "/server/etc/nginx"
     "/server/etc/nginx/custom"
 

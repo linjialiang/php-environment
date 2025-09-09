@@ -5,7 +5,7 @@ server
     server_name core.qyphp.com;
     root /www/qyphp/core/public;
 
-    access_log /server/logs/nginx/qyphp_core.log;
+    access_log /server/logs/nginx/access/qyphp_core.log;
     index index.php;
 
     # 设置站点仅至允许 GET、POST 请求

@@ -22,7 +22,7 @@ http
 {
     # debug info notice warn error crit alert emerg
     error_log /server/logs/nginx/error.log error;
-    access_log /server/logs/nginx/access.log;
+    access_log /server/logs/nginx/access/all.log;
 
     include mime.types;
     default_type application/octet-stream;

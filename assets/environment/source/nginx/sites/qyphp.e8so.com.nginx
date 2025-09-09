@@ -17,7 +17,7 @@ server
     ssl_prefer_server_ciphers on;
 
     root /www/qyphp/public;
-    access_log /server/logs/nginx/qyphp_e8so_com.log;
+    access_log /server/logs/nginx/access/qyphp_e8so_com.log;
     index index.php;
 
     if ($request_method !~* GET|POST|OPTIONS)
