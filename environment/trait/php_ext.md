@@ -8,7 +8,7 @@ apt install autoconf -y
 ```
 
 ```ini [84配置扩展]
-# /server/php/84/lib/php.ini
+; /server/php/84/lib/php.ini
 extension=redis
 extension=mongodb
 extension=yaml
@@ -18,22 +18,28 @@ extension=apcu
 zend_extension=xdebug
 
 [xdebug]
-# xdebug.mode=off
+; xdebug.mode=off
 xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.client_host=127.0.0.1
-# xdebug.client_host=192.168.66.254
+; xdebug.client_host=192.168.66.254
 xdebug.client_port=9084
+
+[apcu]
+; 虽然手册里写的默认开启，但实测时 apcu-5.1.27 版本默认是禁用的
+apc.enabled=1
+; 将为 CLI 版本的PHP启用APC。主要用于测试和调试。
+apc.enable_cli=1
 ```
 
 ```bash [测试扩展]
-# 加入环境变量的 PHP 版本
+# 测试加入环境变量的 PHP 版本的扩展
 php --ri xdebug
 php --ri redis
 php --ri mongodb
 php --ri yaml
 php --ri apcu
 
-# PHP 8.4 测试扩展
+# 测试指定PHP版本的扩展
 /server/php/84/bin/php --ri xdebug
 /server/php/84/bin/php --ri redis
 /server/php/84/bin/php --ri mongodb
