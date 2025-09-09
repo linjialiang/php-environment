@@ -82,14 +82,26 @@ limits 主要分主配置文件和模块化配置文件，这里推荐使用模�
 
 ::: code-group
 
-```bash [postgres]
+```bash [debian11+]
+# 针对 postgres 用户
 echo "postgres  soft  nofile  65535
 postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
-```
 
-```bash [redis]
+# 针对 redis 用户
 echo "redis soft nofile 65535
 redis hard nofile 65535" > /etc/security/limits.d/redis.conf
+```
+
+```bash [debian11-]
+echo "
+# 针对 postgres 用户
+postgres  soft  nofile  65535
+postgres  hard  nofile  65535
+
+# 针对 redis 用户
+echo "redis soft nofile 65535
+redis hard nofile 65535
+" >> /etc/security/limits.conf
 ```
 
 :::
