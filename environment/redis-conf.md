@@ -596,26 +596,7 @@ ACL 持久化配置有两种方式：
 1. `maxclients 10000` Redis 客户端连接数限制
 
     - 默认同时允许 10000 个客户端连接
-    - 系统级配套设置：
-
-        ::: code-group
-
-        ```bash [debian11+]
-        # debian11 开始支持模块化，直接覆盖对应的配置文件
-        echo "redis soft nofile 65535
-        redis hard nofile 65535
-        " > /etc/security/limits.d/redis.conf
-        ```
-
-        ```bash [debian11-]
-        # debain11以下版本追加到 limits.conf 文件
-        echo "
-        redis soft nofile 65535
-        redis hard nofile 65535
-        " >> /etc/security/limits.conf
-        ```
-
-        :::
+    - 系统级配套设置，请参考 [[👉 资源管理]](./trait/kernel#resourc_management)
 
 ## 13. 存储器管理
 
