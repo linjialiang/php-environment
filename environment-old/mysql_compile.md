@@ -521,7 +521,7 @@ chmod 750 -R /server/mysql/bin
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入lnpp包用户组
-usermod -G php-fpm,nginx,postgres,mysql,redis emad
+usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 ```
 
 :::

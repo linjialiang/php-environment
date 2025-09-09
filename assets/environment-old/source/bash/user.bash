@@ -51,4 +51,4 @@ chown sqlite:sqlite -R /home/sqlite/{.oh-my-zsh,.zshrc}
 # - 部署环境不需要开发用户，可直接使用 nginx 用户作为 ftp、ssh 等上传工具的用户
 usermod -a -G emad nginx
 usermod -a -G emad php-fpm
-usermod -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
+usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad

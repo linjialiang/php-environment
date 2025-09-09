@@ -285,7 +285,7 @@ find /server/etc/redis/tls -type d -exec chmod 700 {} \;
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入 lnpp包用户组
-usermod -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
+usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 ```
 
 :::
