@@ -7,7 +7,7 @@
 apt install autoconf -y
 ```
 
-```ini [配置文件-默认]
+```ini [84配置扩展]
 # /server/php/84/lib/php.ini
 extension=redis
 extension=mongodb
@@ -25,16 +25,15 @@ xdebug.client_host=127.0.0.1
 xdebug.client_port=9084
 ```
 
-```bash [测试扩展-默认]
-# 加入环境变量的php版本
+```bash [测试扩展]
+# 加入环境变量的 PHP 版本
 php --ri xdebug
 php --ri redis
 php --ri mongodb
 php --ri yaml
 php --ri apcu
-```
 
-```bash [测试8.4扩展]
+# PHP 8.4 测试扩展
 /server/php/84/bin/php --ri xdebug
 /server/php/84/bin/php --ri redis
 /server/php/84/bin/php --ri mongodb
@@ -46,8 +45,6 @@ php --ri apcu
 
 ### 1. xdebug 扩展
 
-[xdebug](https://xdebug.org/download) 扩展安装案例：
-
 ::: code-group
 
 ```bash [84编译]
@@ -56,19 +53,6 @@ phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make install
-```
-
-```ini [84配置]
-# 如果 Xdebug 和 OPCache 同时使用，xdebug 必须在 opcache 之后：
-zend_extension=opcache
-zend_extension=xdebug
-
-[xdebug]
-# xdebug.mode=off
-xdebug.mode=develop,coverage,debug,gcstats,profile,trace
-xdebug.client_host=127.0.0.1
-# xdebug.client_host=192.168.66.254
-xdebug.client_port=9084
 ```
 
 :::
