@@ -221,11 +221,11 @@ server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr
 ### 8. 站点配置案例
 
 ::: code-group
+<<<@/assets/environment/source/nginx/sites/example.nginx [配置说明]
 <<<@/assets/environment/source/nginx/sites/static.nginx [静态站点]
 <<<@/assets/environment/source/nginx/sites/tp.nginx [tp 站点]
 <<<@/assets/environment/source/nginx/sites/qy.nginx [qy 站点]
 <<<@/assets/environment/source/nginx/sites/laravel.nginx [laravel 站点]
-<<<@/assets/environment/source/nginx/sites/example.nginx [ssl 站点案例]
 :::
 
 ### 9. SSL 证书权限
