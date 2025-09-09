@@ -351,26 +351,19 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 
 PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会在构建目录下生成 Systemd Unit 文件
 
-::: details 默认模板
-
 ::: code-group
-<<<@/assets/environment/source/service/php/source/84/php-fpm.service{ini} [php8.4]
-:::
+<<<@/assets/environment/source/service/php/php84-fpm.service{bash} [84]
 
-::: details 案例参考
-
-::: code-group
-<<<@/assets/environment/source/service/php/php84-fpm.service{bash} [php8.4]
-:::
-
-```bash
-# 创建单元文件
-mv /path/php*-fpm.service /usr/lib/systemd/system/
+```bash [重载]
 # 重载Systemd
 systemctl daemon-reload
 # 加入systemctl服务，并立即开启
 systemctl enable --now php84-fpm
 ```
+
+<<<@/assets/environment/source/service/php/source/84/php-fpm.service{ini} [84 默认]
+
+:::
 
 ::: tip 注意事项：
 
