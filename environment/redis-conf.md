@@ -467,10 +467,11 @@ Redis 从 `≥6.0` 开始支持，统一使用访问控制列表(ACL)系统。
 ::: details 首先了解下 requirepass 和 aclfile 关系
 
 1. 在 Redis `>=6.0` 以后 requirepass 和 aclfile 代表了 Redis ACL 身份认证的两种不同实现方式
-2. requirepass 本质是 ACL 的特例，requirepass 配置的密码，实际上就是 ACL 默认用户 default 的密码。
-    - 可以这样理解：仅配置 requirepass 时，Redis 运行在一个 `简化版` 的 ACL 模式下，此时只有一个超级用户 default。
+2. requirepass 本质是 ACL 的特例，requirepass 配置的密码，实际上就是 ACL 默认用户 default 的密码。 - 可以这样理解：仅配置 requirepass 时，Redis 运行在一个 `简化版` 的 ACL 模式下，此时只有一个超级用户 default。
 
-::: ACL 持久化配置
+:::
+
+::: details ACL 持久化配置
 
 开启 ACL 持久化后，requirepass 配置将失效，因为 ACL 不能同时使用两种管理方式，并且以 aclfile 优先。
 
