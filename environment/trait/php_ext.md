@@ -8,7 +8,7 @@ apt install autoconf -y
 ```
 
 ```ini [84配置扩展]
-; /server/php/84/lib/php.ini
+; path /server/php/84/lib/php.ini
 extension=redis
 extension=mongodb
 extension=yaml
