@@ -1,4 +1,4 @@
-## 日志管理
+## 日志管理 {#Logrotate-common}
 
 Linux/Unix 系统使用 `Logrotate` 来管理日志文件。
 
@@ -7,8 +7,6 @@ Linux/Unix 系统使用 `Logrotate` 来管理日志文件。
 <<<@/assets/environment/source/logrotate.d/nginx{bash} [nginx]
 <<<@/assets/environment/source/logrotate.d/example{bash} [带备注]
 :::
-
-{#Logrotate-common}
 
 | 常用指令                                     | 描述                                              |
 | -------------------------------------------- | ------------------------------------------------- |
