@@ -11,13 +11,12 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 开始之前我们需要先使用预先准备好的 bash 脚本，解压文件和授权目录，具体参考 [脚本文件](./index#脚本文件)
 
-本次编译安装 PHP 的方式，允许同时构建多个 php 版本，如: `php-7.4.33` + `php-8.4.x`
+编译安装 PHP 的方式，允许同时构建多个 php 版本，如: `php-7.4` + `php-8.4`
 
 ::: tip 变更说明
 
--   从 2025/01/22 开始重新启用 `php-7.4.33` 以支撑旧项目；
--   从 2025/01/22 开始正式移除 `php-8.3.x` 版本，其相关内容请阅读[[PHP旧版]](./archive/php_old)；
--   由于发行版的兼容性问题，debian13 以后移除对 `php-7.4.3`的支持；
+-   `2025/09/09` : 正式移除 `php-7.4` 支持，因 `debian13` 编译安装该版本需要解决非常多的兼容性问题，其相关内容请阅读[[旧版]](../environment-old/php)；
+-   `2025/01/22` : 正式移除 `php-8.3` 支持，由 `php-8.4` 取代，其相关内容请阅读[[旧版]](../environment-old/archive/php_old)；
 
 :::
 
@@ -179,15 +178,11 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [使用 php 程序]
-# php7.4
-/server/php/74/bin/php --ini
 # php8.4
 /server/php/84/bin/php --ini
 ```
 
 ```bash [使用 php-config 程序]
-# php7.4
-/server/php/74/bin/php-config --ini-path
 # php8.4
 /server/php/84/bin/php-config --ini-path
 ```
@@ -206,14 +201,6 @@ cp /server/php/84/lib/php.ini{-development,}
 # cp /server/php/84/lib/php.ini{-production,}
 ```
 
-```bash [74]
-cp /home/php-fpm/php-7.4.33/php.ini-* /server/php/74/lib/
-# 开发环境
-cp /server/php/74/lib/php.ini{-development,}
-# 部署环境
-# cp /server/php/74/lib/php.ini{-production,}
-```
-
 :::
 
 ### 4. 检测配置文件
@@ -221,8 +208,6 @@ cp /server/php/74/lib/php.ini{-development,}
 使用 php 程序，快速检测配置文件使用加载成功
 
 ```bash
-# php7.4
-/server/php/74/bin/php --ini
 # php8.4
 /server/php/84/bin/php --ini
 ```
@@ -301,7 +286,6 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 ::: details php 主配置文件案例
 ::: code-group
 <<<@/assets/environment/source/php/84/php-fpm.conf{ini} [8.4]
-<<<@/assets/environment/source/php/74/php-fpm.conf{ini} [7.4]
 :::
 
 ### 3. 工作池配置文件
@@ -316,7 +300,6 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 ::: details 通用工作池案例
 ::: code-group
 <<<@/assets/environment/source/php/84/php-fpm.d/default.conf{ini} [8.4]
-<<<@/assets/environment/source/php/74/php-fpm.d/default.conf{ini} [7.4]
 :::
 
 ::: details ThinkPHP 项目专用工作池案例
@@ -375,14 +358,12 @@ PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会
 
 ::: code-group
 <<<@/assets/environment/source/service/php/source/84/php-fpm.service{ini} [php8.4]
-<<<@/assets/environment/source/service/php/source/74/php-fpm.service{ini} [php7.4]
 :::
 
 ::: details 案例参考
 
 ::: code-group
 <<<@/assets/environment/source/service/php/php84-fpm.service{bash} [php8.4]
-<<<@/assets/environment/source/service/php/php74-fpm.service{ini} [php7.4]
 :::
 
 ```bash
@@ -392,7 +373,6 @@ mv /path/php*-fpm.service /usr/lib/systemd/system/
 systemctl daemon-reload
 # 加入systemctl服务，并立即开启
 systemctl enable --now php84-fpm
-systemctl enable --now php74-fpm
 ```
 
 ::: tip 注意事项：
@@ -508,9 +488,9 @@ chown php-fpm:php-fpm -R /server/php /server/logs/php
 find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
 find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
 # 可执行文件需要执行权限
-chmod 750 -R /server/php/{74,84}/{bin,sbin}
+chmod 750 -R /server/php/{84}/{bin,sbin}
 # 动态扩展库文件: 运行时需要读取权限，升级时需要写入权限，独立调用时需要执行权限(不存在独立调用)
-chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
+chmod 640 /server/php/{84}/lib/php/extensions/no-debug-non-zts-*/*
 # composer,phpCsFixer等工具包，在独立调用时也需要执行权限
 chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
 ```
@@ -548,8 +528,8 @@ usermod -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 ```bash [使用php调用]
 php composer [options]
 php php-cs-fixer [options]
-/server/php/74/bin/php /server/php/tools/composer.phar [options]
-/server/php/74/bin/php /server/php/tools/php-cs-fixer.phar [options]
+/server/php/84/bin/php /server/php/tools/composer.phar [options]
+/server/php/84/bin/php /server/php/tools/php-cs-fixer.phar [options]
 ```
 
 ```bash [独立调用]
