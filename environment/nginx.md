@@ -191,7 +191,6 @@ nginx+php-fpm 不论如何配置，PATH_INFO 始终为空，暂无法解决，�
 nginx 支持对文件开启 gzip 压缩，以加快网络传输速度，下面是 html 缓存模板案例：
 
 <<<@/assets/environment/source/etc/example/nginx/custom/gzip{nginx}
-:::
 
 ### 5. 限制请求数量
 
@@ -212,14 +211,12 @@ server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr
 `nginx server` 可以对特定文件和目录进行访问限制
 
 <<<@/assets/environment/source/etc/example/nginx/custom/no_access{nginx}
-:::
 
 ### 7. 跨域请求
 
 `nginx server` 可以配置跨域请求，跨域请求没有单独文件，按需写入对应站点的 `location 区块`
 
 <<<@/assets/environment/source/etc/example/nginx/custom/cross_domain{nginx}
-:::
 
 ### 8. 站点配置案例
 
