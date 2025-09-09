@@ -225,7 +225,7 @@ server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr
 <<<@/assets/environment/source/nginx/sites/tp.nginx [tp 站点]
 <<<@/assets/environment/source/nginx/sites/qy.nginx [qy 站点]
 <<<@/assets/environment/source/nginx/sites/laravel.nginx [laravel 站点]
-<<<@/assets/environment/source/nginx/sites/qyphp.e8so.com.nginx [ssl 站点案例]
+<<<@/assets/environment/source/nginx/sites/example.nginx [ssl 站点案例]
 :::
 
 ### 9. SSL 证书权限
