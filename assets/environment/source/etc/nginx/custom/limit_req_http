@@ -1,13 +1,3 @@
-# /server/etc/nginx/custom/limit_req_http
-# === http 区块设定加载请求限制，需server区块配合 === #
-# 限制请求：针对相同客户端ip（这条最重要，其它的看实际情况添加）
-#  - 默认，每秒可处理5条请求，生成1个标识为 with_ip ，容量为 10M 的内存区域，用来存储访问的频次信息
 limit_req_zone $binary_remote_addr zone=with_ip:10m rate=5r/s;
-
-# 限制请求：针对相同客户端ip、相同访问文件路径
-#  - 默认，每秒可处理 1 条请求，生成1个标识为 with_ip_request ，容量为 5M 的内存区域，用来存储访问的频次信息
 limit_req_zone $binary_remote_addr$uri zone=with_ip_request:5m rate=1r/s;
-
-# 限制请求：针对相同客户端ip、相同访问文件路径、相同请求参数
-#  - 默认，每秒可处理 1 条请求，生成1个标识为 with_ip_request_param ，容量为 5M 的内存区域，用来存储访问的频次信息
 limit_req_zone $binary_remote_addr$request_uri zone=with_ip_request_param:5m rate=1r/s;

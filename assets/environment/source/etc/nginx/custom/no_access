@@ -1,13 +1,10 @@
-# /server/etc/nginx/custom/no_access
-
-# 禁止访问所有以 . 开始的文件和目录
-location ~ /\..+
+location ~ /\.
 {
     deny all;
+    return 404;
 }
-
-# 禁止访问的文件，不区分大小写正则匹配
 location ~* /(?:LICENSE|README\.md)
 {
     deny all;
+    return 404;
 }
