@@ -297,8 +297,8 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 ### mysql 配置文件
 
 ::: code-group
-<<<@/assets/environment/source/etc/mysql/init.sql [init.sql]
-<<<@/assets/environment/source/etc/mysql/my.cnf{ini} [my.cnf]
+<<<@/assets/environment/source/etc/example/mysql/init.sql [init.sql]
+<<<@/assets/environment/source/etc/example/mysql/my.cnf{ini} [my.cnf]
 :::
 
 ### 数据初始化
