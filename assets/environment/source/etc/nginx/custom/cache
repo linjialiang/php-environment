@@ -3,18 +3,21 @@ location ~* \.(?:htm|html)$
     expires         1d;
     log_not_found   off;
 }
+
 location ~* \.(?:js|css|json|txt|xml|jpe?g|png|gif|ico)$
 {
     expires         30d;
     access_log      off;
     log_not_found   off;
 }
+
 location = /favicon.ico
 {
     expires         30d;
     access_log      off;
     log_not_found   off;
 }
+
 location = /robots.txt
 {
     access_log      off;

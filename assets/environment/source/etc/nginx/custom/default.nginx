@@ -3,6 +3,10 @@ server
     listen 80 default;
     root /server/default;
     index index.html;
+
+    access_log      off;
+    log_not_found   off;
+
     location ~* \.(?!jpe?g$|png$|html?$|css$|js$|ico$|gif$|txt$)[a-zA-Z0-9_\-]+$
     {
         deny all;
@@ -14,31 +18,16 @@ server
     server_name 84.php.io;
     root /server/default;
     index index.php;
+
     location /
     {
         access_log      off;
         log_not_found   off;
     }
+
     location ~* \.php$
     {
         fastcgi_pass        127.0.0.1:9684;
-        include             fastcgi.conf;
-    }
-}
-server
-{
-    listen 80;
-    server_name 74.php.io;
-    root /server/default;
-    index index.php;
-    location /
-    {
-        access_log      off;
-        log_not_found   off;
-    }
-    location ~* \.php$
-    {
-        fastcgi_pass        127.0.0.1:9674;
         include             fastcgi.conf;
     }
 }
