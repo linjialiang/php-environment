@@ -82,37 +82,13 @@ chown_www_array=(
     "/www"
 );
 
-echo "-----开始设置nginx用户权限目录-----"
-for((i=0;i<${#chown_nginx_array[*]};i++));
+echo "-----开始设置 sqlite 用户权限目录-----"
+for((i=0;i<${#chown_sqlite_array[*]};i++));
 do
-   echo ${chown_nginx_array[i]}
-   func_chown_nginx ${chown_nginx_array[i]}
+   echo ${chown_sqlite_array[i]}
+   func_chown_sqlite ${chown_sqlite_array[i]}
 done
-echo "-----nginx用户权限目录设置结束-----"
-
-echo "-----开始设置 php-fpm 用户权限目录-----"
-for((i=0;i<${#chown_phpFpm_array[*]};i++));
-do
-   echo ${chown_phpFpm_array[i]}
-   func_chown_phpFpm ${chown_phpFpm_array[i]}
-done
-echo "-----php-fpm 用户权限目录设置结束-----"
-
-echo "-----开始设置 postgres 用户权限目录-----"
-for((i=0;i<${#chown_postgres_array[*]};i++));
-do
-   echo ${chown_postgres_array[i]}
-   func_chown_postgres ${chown_postgres_array[i]}
-done
-echo "-----postgres 用户权限目录设置结束-----"
-
-echo "-----开始设置 开发者 用户权限目录-----"
-for((i=0;i<${#chown_www_array[*]};i++));
-do
-   echo ${chown_www_array[i]}
-   func_chown_www ${chown_www_array[i]}
-done
-echo "-----开发者 用户权限目录设置结束-----"
+echo "-----sqlite 用户权限目录设置结束-----"
 
 echo "-----开始设置 redis 用户权限目录-----"
 for((i=0;i<${#chown_redis_array[*]};i++));
@@ -122,6 +98,14 @@ do
 done
 echo "-----redis 用户权限目录设置结束-----"
 
+echo "-----开始设置 postgres 用户权限目录-----"
+for((i=0;i<${#chown_postgres_array[*]};i++));
+do
+   echo ${chown_postgres_array[i]}
+   func_chown_postgres ${chown_postgres_array[i]}
+done
+echo "-----postgres 用户权限目录设置结束-----"
+
 echo "-----开始设置 mysql 用户权限目录-----"
 for((i=0;i<${#chown_mysql_array[*]};i++));
 do
@@ -130,10 +114,26 @@ do
 done
 echo "-----mysql 用户权限目录设置结束-----"
 
-echo "-----开始设置 sqlite 用户权限目录-----"
-for((i=0;i<${#chown_sqlite_array[*]};i++));
+echo "-----开始设置 php-fpm 用户权限目录-----"
+for((i=0;i<${#chown_phpFpm_array[*]};i++));
 do
-   echo ${chown_sqlite_array[i]}
-   func_chown_sqlite ${chown_sqlite_array[i]}
+   echo ${chown_phpFpm_array[i]}
+   func_chown_phpFpm ${chown_phpFpm_array[i]}
 done
-echo "-----sqlite 用户权限目录设置结束-----"
+echo "-----php-fpm 用户权限目录设置结束-----"
+
+echo "-----开始设置nginx用户权限目录-----"
+for((i=0;i<${#chown_nginx_array[*]};i++));
+do
+   echo ${chown_nginx_array[i]}
+   func_chown_nginx ${chown_nginx_array[i]}
+done
+echo "-----nginx用户权限目录设置结束-----"
+
+echo "-----开始设置 开发者 用户权限目录-----"
+for((i=0;i<${#chown_www_array[*]};i++));
+do
+   echo ${chown_www_array[i]}
+   func_chown_www ${chown_www_array[i]}
+done
+echo "-----开发者 用户权限目录设置结束-----"
