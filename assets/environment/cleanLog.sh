@@ -39,7 +39,7 @@ else
 fi
 
 echo_red "警告⚠️：请谨慎执行此脚本！！！"
-echo_yellow "清理日志需停止服务，二进制日志也会被删除，"
+echo_yellow "清理日志需停止服务"
 echo_cyan "是否清理lnmpp日志(1清理/默认不清理)："
 read num1
 if [ "$num1" = "1" ]; then
@@ -53,11 +53,23 @@ if [ "$num1" = "1" ]; then
   find /server/logs/nginx/ -type f -exec rm {} \
   find /server/logs/nginx/ -type f -exec rm {} \
   find /server/nginx/logs/ -type f -exec {} \
-  echo_green "清理lnpp日志完成"
-
-  find /server/logs/postgres/wal_archive/ -type f -exec rm {} \
+  echo_green "清理lnmpp日志完成"
 else
-  echo_yellow "不清理lnpp日志"
+  echo_yellow "不清理lnmpp日志"
+fi
+
+echo_red "警告⚠️：请谨慎执行此脚本！！！"
+echo_cyan "是否清理MySQL的二进制日志以及PostgreSQL的预写式日志："
+read num2
+if [ "$num2" = "1" ]; then
+  echo_green "先停止服务"
+  systemctl stop {redis,postgres,mysqld-84,php84-fpm,nginx}.service
+  echo_green "开始清理数据库二进制日志"
+  rm /server/logs/postgres/wal_archive/*
+  rm /server/logs/mysql/binlog/*
+  echo_green "清理lnpp日志完成"
+else
+  echo_yellow "不清理数据库二进制日志"
 fi
 
 echo_cyan "是否清理Redis本地存储(1清理/默认不清理)："
