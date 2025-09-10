@@ -68,6 +68,7 @@ apt install -y libldap-dev libsasl2-dev libtirpc-dev dpkg-dev
 
 ```bash [创建构建目录]
 su - mysql -s /bin/zsh
+tar -xzf mysql-8.4.6.tar.gz
 mkdir ~/mysql-8.4.6/build
 cd ~/mysql-8.4.6/build
 ```
