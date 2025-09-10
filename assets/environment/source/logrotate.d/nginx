@@ -22,7 +22,7 @@ echo "
     monthly
     maxsize 100M
     missingok
-    rotate 30
+    rotate 12
     compress
     delaycompress
     dateext
