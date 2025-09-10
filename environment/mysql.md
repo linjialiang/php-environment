@@ -33,8 +33,7 @@ Boost 是一个 C++标准库，因为 mysql 主要是用 C++写的，它依赖�
 9. bison 2.1 或更高版本
 
 ```bash
-apt update
-apt install -y libldap-dev libsasl2-dev libtirpc-dev dpkg-dev
+apt install -y cmake libtirpc-dev
 ```
 
 ## 特定版本问题
@@ -88,7 +87,7 @@ cmake \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
--DWITH_UNIT_TESTS=OFF \
+-DWITH_UNIT_TESTS=ON \
 -DINSTALL_MYSQLTESTDIR= \
 .. > stdout.log
 ```
