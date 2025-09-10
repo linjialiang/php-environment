@@ -78,7 +78,6 @@ zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libicu-dev
 
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
-wget https://ftp.postgresql.org/pub/source/v17./postgresql-17.6.tar.bz2
 tar -xjf postgresql-17.6.tar.bz2
 mkdir ~/postgresql-17.6/build_postgres
 cd ~/postgresql-17.6/build_postgres
