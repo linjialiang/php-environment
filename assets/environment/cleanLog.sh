@@ -46,13 +46,13 @@ if [ "$num1" = "1" ]; then
   echo_green "先停止服务"
   systemctl stop {redis,postgres,mysqld-84,php84-fpm,nginx}.service
   echo_green "开始清理lnpp日志"
-  find /server/logs/redis/ -type f -exec rm {} \
-  find /server/logs/postgres/ -type f -exec rm {} \
-  find /server/logs/mysql/ -type f -exec rm {} \
-  find /server/logs/php/ -type f -exec rm {} \
-  find /server/logs/nginx/ -type f -exec rm {} \
-  find /server/logs/nginx/ -type f -exec rm {} \
-  find /server/nginx/logs/ -type f -exec {} \
+  find /server/logs/redis/ -type f -exec rm {} \;
+  find /server/logs/postgres/ -type f -exec rm {} \;
+  find /server/logs/mysql/ -type f -exec rm {} \;
+  find /server/logs/php/ -type f -exec rm {} \;
+  find /server/logs/nginx/ -type f -exec rm {} \;
+  find /server/logs/nginx/ -type f -exec rm {} \;
+  find /server/nginx/logs/ -type f -exec {} \;
   echo_green "清理lnmpp日志完成"
 else
   echo_yellow "不清理lnmpp日志"
@@ -76,8 +76,8 @@ echo_cyan "是否清理Redis本地存储(1清理/默认不清理)："
 read num3
 if [[ "$num3" = "1" ]]; then
   echo_yellow "开始清理Redis本地存储"
-  find /server/redis/rdbData/ -type f -exec rm {} \
-  find /server/redis/rdbData/appendonlydir/ -type f -exec rm {} \
+  find /server/redis/rdbData/ -type f -exec rm {} \;
+  find /server/redis/rdbData/appendonlydir/ -type f -exec rm {} \;
   echo_yellow "清理Redis本地存储结束"
 else
   echo_yellow "不清理Redis本地存储"
