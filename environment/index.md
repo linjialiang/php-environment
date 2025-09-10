@@ -28,6 +28,8 @@ titleTemplate: 环境搭建教程
 <<<@/assets/environment/source/bash/mkdir.bash [创建目录]
 <<<@/assets/environment/source/bash/chown.bash [目录授权]
 <<<@/assets/environment/source/bash/tar.bash [解压参考]
+<<<@/assets/environment/source/bash/cleanLog.sh [一键清理]
+<<<@/assets/environment/source/bash/clean.sh [简单清理]
 :::
 
 ## 包列表
