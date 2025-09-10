@@ -22,7 +22,7 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```bash [编译套件]
-# 推荐安装通用的编译套件
+# 开始前推荐安装通用的编译套件
 apt install -y build-essential autoconf, libtool, pkg-config
 ```
 
