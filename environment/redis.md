@@ -12,7 +12,7 @@ titleTemplate: 环境搭建教程
 ## 安装依赖
 
 ```bash
-apt install -y g++ libssl-dev pkg-config
+apt install -y libssl-dev
 ```
 
 ## 编译安装
@@ -21,6 +21,7 @@ apt install -y g++ libssl-dev pkg-config
 
 ```bash [构建指令]
 su - redis -s /bin/zsh
+tar -xzf redis-8.2.1.tar.gz
 # make 时需要通过 ../deps/** 来获取自带的依赖依赖
 # - 所以必须在子目录中构建
 mkdir ~/redis-8.2.1/build_redis
