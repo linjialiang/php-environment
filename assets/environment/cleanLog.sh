@@ -76,8 +76,8 @@ echo_cyan "是否清理Redis本地存储(1清理/默认不清理)："
 read num3
 if [[ "$num3" = "1" ]]; then
   echo_yellow "开始清理Redis本地存储"
-  rm /server/redis/rdbData/dump.rdb
-  rm /server/redis/rdbData/appendonlydir/*
+  find /server/redis/rdbData/ -type f -exec rm {} \
+  find /server/redis/rdbData/appendonlydir/ -type f -exec rm {} \
   echo_yellow "清理Redis本地存储结束"
 else
   echo_yellow "不清理Redis本地存储"
