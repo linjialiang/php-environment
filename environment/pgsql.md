@@ -68,17 +68,13 @@ zlib1g-dev libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libicu-dev
 -   安装部分依赖包时，可能会自动安装 `gcc` 编译器包
 -   `--with-ossp`: uuid 支持 3 种方式 `ossp-uuid(维护不积极)` `bsd(跨平台支持)` `e2fs(兼容linux，性能高)`
 
+### 资源限制
+
+修改操作系统打开最大文件句柄数，具体请参考[[系统级优化-资源管理]](./trait/kernel#resourc_management)
+
 ## 编译
 
 ::: code-group
-
-```bash [资源限制]
-# 修改操作系统打开最大文件句柄数
-# /etc/security/limits.conf 结尾添加下面两行
-# 进行这一步操作的目的是防止linux操作系统内打开文件句柄数量的限制，避免不必要的故障
-echo "postgres  soft  nofile  65535
-postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
-```
 
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
