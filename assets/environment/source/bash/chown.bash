@@ -1,24 +1,6 @@
 #!/usr/bin/env bash
-func_chown_nginx(){
-    chown nginx:nginx -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
-func_chown_phpFpm(){
-    chown php-fpm:php-fpm -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
-func_chown_postgres(){
-    chown postgres:postgres -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
-func_chown_www(){
-    chown emad:emad -R $1
+func_chown_sqlite(){
+    chown sqlite:sqlite -R $1
     find $1 -type f -exec chmod 640 {} \;
     find $1 -type d -exec chmod 750 {} \;
 }
@@ -29,39 +11,38 @@ func_chown_redis(){
     find $1 -type d -exec chmod 750 {} \;
 }
 
+func_chown_postgres(){
+    chown postgres:postgres -R $1
+    find $1 -type f -exec chmod 640 {} \;
+    find $1 -type d -exec chmod 750 {} \;
+}
+
 func_chown_mysql(){
     chown mysql:mysql -R $1
     find $1 -type f -exec chmod 640 {} \;
     find $1 -type d -exec chmod 750 {} \;
 }
 
-func_chown_sqlite(){
-    chown sqlite:sqlite -R $1
+func_chown_phpFpm(){
+    chown php-fpm:php-fpm -R $1
     find $1 -type f -exec chmod 640 {} \;
     find $1 -type d -exec chmod 750 {} \;
 }
 
-chown_nginx_array=(
-    "/server/nginx"
-    "/server/logs/nginx"
-    "/server/etc/nginx"
-    "/server/sites"
-);
+func_chown_nginx(){
+    chown nginx:nginx -R $1
+    find $1 -type f -exec chmod 640 {} \;
+    find $1 -type d -exec chmod 750 {} \;
+}
 
-chown_phpFpm_array=(
-    "/server/php"
-    "/server/logs/php"
-);
+func_chown_www(){
+    chown emad:emad -R $1
+    find $1 -type f -exec chmod 640 {} \;
+    find $1 -type d -exec chmod 750 {} \;
+}
 
-chown_postgres_array=(
-    "/server/postgres"
-    "/server/pgData"
-    "/server/logs/postgres"
-    "/server/etc/postgres"
-);
-
-chown_www_array=(
-    "/www"
+chown_sqlite_array=(
+    "/server/sqlite"
 );
 
 chown_redis_array=(
@@ -71,6 +52,13 @@ chown_redis_array=(
     "/server/etc/redis"
 );
 
+chown_postgres_array=(
+    "/server/postgres"
+    "/server/pgData"
+    "/server/logs/postgres"
+    "/server/etc/postgres"
+);
+
 chown_mysql_array=(
     "/server/mysql"
     "/server/data"
@@ -78,8 +66,20 @@ chown_mysql_array=(
     "/server/etc/mysql"
 );
 
-chown_sqlite_array=(
-    "/server/sqlite"
+chown_phpFpm_array=(
+    "/server/php"
+    "/server/logs/php"
+);
+
+chown_nginx_array=(
+    "/server/nginx"
+    "/server/logs/nginx"
+    "/server/etc/nginx"
+    "/server/sites"
+);
+
+chown_www_array=(
+    "/www"
 );
 
 echo "-----开始设置nginx用户权限目录-----"
