@@ -12,26 +12,7 @@ server_array=(
     "/server/logs"
     "/server/etc"
 
-    "/server/nginx"
-    "/server/logs/nginx"
-    "/server/logs/nginx/access"
-    "/server/etc/nginx"
-    "/server/etc/nginx/custom"
-
-    "/server/php"
-    "/server/php/84"
-    "/server/php/tools"
-    "/server/logs/php"
-
-    "/server/postgres"
-    "/server/pgData"
-    "/server/logs/postgres"
-    "/server/logs/postgres/wal_archive"
-    "/server/etc/postgres"
-    "/server/etc/postgres/tls"
-
-    "/server/sites"
-    "/server/sites/ssl"
+    "/server/sqlite"
 
     "/server/redis"
     "/server/redis/rdbData"
@@ -41,12 +22,32 @@ server_array=(
     "/server/etc/redis/config"
     "/server/etc/redis/config/custom"
 
+    "/server/postgres"
+    "/server/pgData"
+    "/server/logs/postgres"
+    "/server/logs/postgres/wal_archive"
+    "/server/etc/postgres"
+    "/server/etc/postgres/tls"
+
     "/server/mysql"
     "/server/data"
     "/server/logs/mysql"
+    "/server/logs/mysql/binlog"
     "/server/etc/mysql"
 
-    "/server/sqlite"
+    "/server/php"
+    "/server/php/84"
+    "/server/php/tools"
+    "/server/logs/php"
+
+    "/server/nginx"
+    "/server/logs/nginx"
+    "/server/logs/nginx/access"
+    "/server/etc/nginx"
+    "/server/etc/nginx/custom"
+
+    "/server/sites"
+    "/server/sites/ssl"
 )
 
 echo "-----开始创建server目录-----"
