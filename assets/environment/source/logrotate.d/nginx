@@ -17,6 +17,7 @@ echo "
         fi
     endscript
 }
+
 /server/logs/nginx/*.log {
     monthly
     maxsize 100M
