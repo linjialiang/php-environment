@@ -23,7 +23,7 @@ titleTemplate: 环境搭建教程
 
 ```bash [编译套件]
 # 开始前推荐安装通用的编译套件
-apt install -y build-essential autoconf, libtool, pkg-config
+apt install -y build-essential autoconf libtool pkg-config
 ```
 
 ```bash [依赖项]
