@@ -203,57 +203,83 @@ make install
 
 MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行，为 Python 和 JavaScript 等编程语言提供 API 接口。
 
-### 编译报错与警告处理
+## 编译报错与警告处理
 
-#### 1. 无法在计算机上检测到 systemd 支持
+### 1. 无法在计算机上检测到 systemd 支持
 
-包版本：MySQL 8.4.6
+-   版本：MySQL 8.4.6
 
-报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
+-   报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
 
-::: code-group
+-   告警信息：
 
-```bash [错误详情]
--- Enabling installation of systemd support files...
--- Checking for module 'systemd'
---   Package 'systemd', required by 'virtual:world', not found
-CMake Error at cmake/systemd.cmake:60 (MESSAGE):
-  Unable to detect systemd support on build machine, Aborting cmake build.
-Call Stack (most recent call first):
-  cmake/systemd.cmake:80 (MYSQL_CHECK_SYSTEMD)
-  CMakeLists.txt:1574 (INCLUDE)
+    ```bash
+    -- Enabling installation of systemd support files...
+    -- Checking for module 'systemd'
+    --   Package 'systemd', required by 'virtual:world', not found
+    CMake Error at cmake/systemd.cmake:60 (MESSAGE):
+      Unable to detect systemd support on build machine, Aborting cmake build.
+    Call Stack (most recent call first):
+      cmake/systemd.cmake:80 (MYSQL_CHECK_SYSTEMD)
+      CMakeLists.txt:1574 (INCLUDE)
 
 
--- Configuring incomplete, errors occurred!
-```
+    -- Configuring incomplete, errors occurred!
+    ```
 
-```bash [解决方式]
-# libsystemd.pc 软链接到 systemd.pc，让旧版 MySQL 编译支持
-ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
-```
+-   告警修复：`libsystemd.pc` 软链接到 `systemd.pc`
 
-:::
+    ```bash
+    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
+    ```
 
-#### 2. 提示 FIDO2 认证插件未启用
+### 2. FIDO 认证功能被跳过
 
-包版本：MySQL 8.4.6
+-   版本：MySQL 8.4.6
+-   警告分析：FIDO 认证功能仅企业版才有
+-   告警信息：
 
-警告分析：大多数情况下不需要此认证插件，MySQL 使用传统密码认与 SSL 认证即可，并且仅企业版才有此功能
+    ```bash
+    CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
+      WITH_FIDO is set to "none".  FIDO based authentication plugins will be
+      skipped.
+    Call Stack (most recent call first):
+      CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
 
-```bash
-CMake Warning at cmake/fido2.cmake:188 (MESSAGE):
-  WITH_FIDO is set to "none".  FIDO based authentication plugins will be
-  skipped.
-Call Stack (most recent call first):
-  CMakeLists.txt:2035 (MYSQL_CHECK_FIDO)
 
-...
+    CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
+      Skipping the fido_client_common library.
+    ```
 
-CMake Warning at libmysql/fido_client/common/CMakeLists.txt:26 (MESSAGE):
-  Skipping the fido_client_common library.
-```
+### 3. 无法使用 SASL 认证
 
-#### 3. CMP0177 警告
+-   版本：MySQL 8.4.6
+-   警告分析：不用处理，通常只会用到 `​​密码认证` `SSL/TLS 证书认证​` `​PAM 认证|` 这 3 种认证方式
+-   告警信息：
+
+    ```bash
+    CMake Warning at cmake/sasl.cmake:283 (MESSAGE):
+      Could not find SASL
+    Call Stack (most recent call first):
+      CMakeLists.txt:1905 (MYSQL_CHECK_SASL)
+    ```
+
+### 4. 无法使用 LDAP 认证
+
+-   版本：MySQL 8.4.6
+
+-   警告分析：不用处理，通常只会用到 `​​密码认证` `SSL/TLS 证书认证​` `​PAM 认证|` 这 3 种认证方式
+
+-   告警信息：
+
+    ```bash
+    CMake Warning at cmake/ldap.cmake:159 (MESSAGE):
+      Could not find LDAP
+    Call Stack (most recent call first):
+      CMakeLists.txt:1909 (MYSQL_CHECK_LDAP)
+    ```
+
+### 5. CMP0177 警告
 
 包版本：MySQL 8.4.6
 
