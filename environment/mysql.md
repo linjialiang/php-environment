@@ -82,30 +82,20 @@ cmake -LH .. > options.list
 
 ```bash [构建选项]
 cmake \
+## ===== 让输出更详细 start
+# 详细度+1
+# --debug-output \
+# 详细度+2
+# --trace \
+# 输出未定义的变量警告
+# --warn-uninitialized \
+## ===== 让输出更详细 end
 -DWITH_DEBUG=ON \
 -DCMAKE_INSTALL_PREFIX=/server/mysql \
 -DWITH_SYSTEMD=ON \
 -DFORCE_COLORED_OUTPUT=ON \
 -DWITH_MYSQLX=OFF \
 -DWITH_UNIT_TESTS=ON \
--DINSTALL_MYSQLTESTDIR= \
-.. > stdout.log
-```
-
-```bash [构建选项带调试]
-cmake \
-# 详情
---debug-output \
-# 比 --debug-output 更详细
-# --trace \
-# 未定义的变量警告
---warn-uninitialized \
--DWITH_DEBUG=ON \
--DCMAKE_INSTALL_PREFIX=/server/mysql \
--DWITH_SYSTEMD=ON \
--DFORCE_COLORED_OUTPUT=ON \
--DWITH_MYSQLX=OFF \
--DWITH_UNIT_TESTS=OFF \
 -DINSTALL_MYSQLTESTDIR= \
 .. > stdout.log
 ```
