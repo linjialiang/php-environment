@@ -21,12 +21,18 @@ titleTemplate: 环境搭建教程
 
 ::: code-group
 
+```bash [编译套件]
+# 推荐安装通用的编译套件
+apt install -y build-essential autoconf, libtool, pkg-config
+```
+
 ```bash [依赖项]
-apt install -y gcc make tcl
+apt install -y tcl
 ```
 
 ```bash [构建选项]
 su - sqlite -s /bin/zsh
+tar -xzf sqlite-autoconf-3500400.tar.gz
 cd ~/sqlite-autoconf-3500400/
 ./configure --prefix=/server/sqlite > stdout.log
 ```
