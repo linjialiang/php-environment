@@ -109,7 +109,7 @@ LLVM_CONFIG=/usr/lib/llvm-19/bin/llvm-config \
 ```bash [安装指令]
 # 使用postgres账户安装
 make -j4 > make.log
-make check > make.log
+make check > makeTest.log
 make install
 # 编译安装完后记得移除源码包，节省空间
 rm -rf ~/postgresql-17.6 ~/postgresql-17.6.tar.bz2
