@@ -283,7 +283,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 -   版本：MySQL 8.4.6
 
--   警告分析：虽然不影响编译，但建议在后续的 CMake 命令中加入 `-Wno-dev` 参数，以使输出日志更清晰。
+-   警告分析：虽然不影响编译，但可以的 CMake 命令中加入 `-Wno-dev` 参数，以使输出日志更清晰。
 
     ```bash
     CMake Warning (dev) at scripts/CMakeLists.txt:579 (INSTALL):
