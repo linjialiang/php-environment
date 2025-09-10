@@ -38,8 +38,7 @@ TCP 半连接队列(SYN 队列)最大长度，即处于 SYN_RECV 状态的未完
 -   增大值会占用更多内存
 
 ```bash
-echo "net.ipv4.tcp_max_syn_backlog = 4096" \
-> /etc/sysctl.d/tcp_max_syn_backlog.conf
+echo "net.ipv4.tcp_max_syn_backlog = 4096" > /etc/sysctl.d/tcp_max_syn_backlog.conf
 ```
 
 ::: warning :warning: 注意：
