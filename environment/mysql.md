@@ -171,6 +171,12 @@ make install
 
 :::
 
+::: info `WITH_UNIT_TESTS` 使用场景
+
+大多数情况下需要开启，编译结果总该测试后才能放心使用
+
+:::
+
 ### 启用 systemd 支持文件
 
 选项 `-DWITH_SYSTEMD=ON` 用于启用 systemd 支持文件；
