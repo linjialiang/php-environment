@@ -18,9 +18,11 @@ extension=yaml
 extension=apcu
 
 ;zend_extension=opcache
+;部署环境请注释掉 xdebug
 zend_extension=xdebug
 
 [xdebug]
+;部署环境请关闭 xdebug
 ; xdebug.mode=off
 xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.client_host=127.0.0.1
