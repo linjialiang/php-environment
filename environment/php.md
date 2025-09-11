@@ -480,6 +480,10 @@ chmod 640 /server/php/84/lib/php/extensions/no-debug-non-zts-*/*
 chmod 750 -R /server/php/84/{bin,sbin}
 # composer,phpCsFixer等工具包，在独立调用时也需要执行权限
 chmod 750 /server/php/tools/{composer,php-cs-fixer-v3}.phar
+
+# 创建快捷方式
+ln -s /server/php/tools/composer.phar /usr/local/bin/composer
+ln -s /server/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 ```
 
 ```bash [开发]
