@@ -90,7 +90,7 @@ cd /home/php-fpm/php_ext/mongodb-2.1.1
 /server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
-make test
+make test > makeTest.log
 make install
 ```
 
