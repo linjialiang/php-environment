@@ -37,12 +37,6 @@ setcap -r /server/nginx/sbin/nginx
 
 ## 开始构建
 
-### 查看构建参数
-
-::: code-group
-
-:::
-
 ### 编译安装
 
 ::: code-group
