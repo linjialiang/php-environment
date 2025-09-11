@@ -127,60 +127,47 @@ make install
 
 ### cmake 选项说明
 
-| commom                         | note                                                                                           |
-| ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| -DWITH_DEBUG                   | 是否开启调式模式，开启的同时会禁用优化                                                         |
-| -DCMAKE_INSTALL_PREFIX         | MySQL 安装基目录                                                                               |
-| -DMYSQL_DATADIR                | MySQL 数据目录                                                                                 |
-| -DSYSCONFDIR                   | 选项文件目录                                                                                   |
-| -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                                                |
-| -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                                    |
-| -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                                    |
-| -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                                             |
-| -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                                   |
-| -DWITH_MYSQLX                  | 是否启用 X 协议，默认开启                                                                      |
-| -DWITH_UNIT_TESTS              | 是否使用单元测试编译 MySQL，设为 `OFF`，就算 `-DINSTALL_MYSQLTESTDIR` 指定了目录，内容也是空的 |
-| -DINSTALL_MYSQLTESTDIR         | 是否安装单元测试目录(mysql-test)，不需要就设为空值(-DINSTALL_MYSQLTESTDIR=)                    |
-| -DTMPDIR                       | 临时文件的位置(指定目录必须存在)                                                               |
-| ~~-DDEFAULT_CHARSET~~          | 默认字符集，默认使用 `utf8mb4` 字符集                                                          |
-| ~~-DDEFAULT_COLLATION~~        | 默认排序规则，默认使用 `utf8mb4_0900_ai_ci`                                                    |
-| ~~-DMYSQL_TCP_PORT~~           | TCP/IP 端口号，默认值为 `3306`                                                                 |
-| ~~-DWITH_SSL~~                 | 指定要使用的 SSL 库类型，默认 system ，使用系统自带 openssl，可选值 `system/yes/path_name`     |
-| ~~-DSYSTEMD_PID_DIR~~          | systemd 下的 PID 文件的目录，指定无效，会被 INSTALL_LAYOUT 值隐式更改                          |
-| ~~-DWITH_BOOST~~               | 构建 MySQL 需要 Boost 库（8.3.0 后不存在此选项）                                               |
-| ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                        |
-| ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                                                |
+| commom                         | note                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| -DWITH_DEBUG                   | 是否开启调式模式，开启的同时会禁用优化                                                     |
+| -DCMAKE_INSTALL_PREFIX         | MySQL 安装基目录                                                                           |
+| -DMYSQL_DATADIR                | MySQL 数据目录                                                                             |
+| -DSYSCONFDIR                   | 选项文件目录                                                                               |
+| -DMYSQL_UNIX_ADDR              | Unix 套接字文件                                                                            |
+| -DWITH_SYSTEMD                 | 启用 systemd 支持文件的安装                                                                |
+| -DSYSTEMD_SERVICE_NAME         | systemd 下的 MySQL 服务名称                                                                |
+| -DENABLED_LOCAL_INFILE         | 是否支持将本地文件转换为数据库数据                                                         |
+| -DFORCE_COLORED_OUTPUT         | 编译时是否为 gcc 和 clang 启用彩色编译器输出                                               |
+| -DWITH_MYSQLX                  | 是否启用 X 协议，默认开启                                                                  |
+| -DWITH_UNIT_TESTS              | 是否使用单元测试编译 MySQL，默认 `ON`                                                      |
+| -DINSTALL_MYSQLTESTDIR         | 是否安装功能测试套件，默认 `	PREFIX/mysql-test`                                             |
+| -DTMPDIR                       | 临时文件的位置(指定目录必须存在)                                                           |
+| ~~-DDEFAULT_CHARSET~~          | 默认字符集，默认使用 `utf8mb4` 字符集                                                      |
+| ~~-DDEFAULT_COLLATION~~        | 默认排序规则，默认使用 `utf8mb4_0900_ai_ci`                                                |
+| ~~-DMYSQL_TCP_PORT~~           | TCP/IP 端口号，默认值为 `3306`                                                             |
+| ~~-DWITH_SSL~~                 | 指定要使用的 SSL 库类型，默认 system ，使用系统自带 openssl，可选值 `system/yes/path_name` |
+| ~~-DSYSTEMD_PID_DIR~~          | systemd 下的 PID 文件的目录，指定无效，会被 INSTALL_LAYOUT 值隐式更改                      |
+| ~~-DWITH_BOOST~~               | 构建 MySQL 需要 Boost 库（8.3.0 后不存在此选项）                                           |
+| ~~-DDOWNLOAD_BOOST~~           | boost 查不到，是否下载 Boost 库（8.3.0 后不存在此选项）                                    |
+| ~~`-DDOWNLOAD_BOOST_TIMEOUT`~~ | 下载 Boost 库的超时秒数（8.3.0 后不存在此选项）                                            |
 
-#### 关于单元测试
+#### 关于两个测试选项说明
 
-::: details 单元测试相关的选项通常包括 `-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR`
+`-DWITH_UNIT_TESTS` 和 `-DINSTALL_MYSQLTESTDIR` 这两个 CMake 选项在 MySQL 编译配置中没有直接的关联性，它们分别控制着编译和安装过程中两个不同的方面。
 
-1. `-DWITH_UNIT_TESTS=OFF` + `不添加选项-DINSTALL_MYSQLTESTDIR`
+| 特性     | `-DWITH_UNIT_TESTS`            | `-DINSTALL_MYSQLTESTDIR`               |
+| -------- | ------------------------------ | -------------------------------------- |
+| 控制阶段 | 编译阶段                       | 安装阶段                               |
+| 作用     | 控制是否编译单元测试代码本身 ​ | 控制 `mysql-test` 功能测试套件安装位置 |
+| 选项值   | `ON/OFF`                       | 路径定义                               |
+| 默认值   | `ON`                           | `PREFIX/mysql-test`                    |
+| 禁用方式 | `-DWITH_UNIT_TESTS=OFF`        | `-DINSTALL_MYSQLTESTDIR=`              |
+| 最终结果 | 是否支持`make test`            | 是否安装功能测试套件到特定位置         |
 
-    - `make -j4` 构建时，不会生成单元测试文件
+::: info `INSTALL_MYSQLTESTDIR` 使用场景
 
-2. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=`
-
-    - `make -j4` 构建时，不会生成单元测试文件
-
-3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=/server/customTestDir`
-
-    - `make -j4` 构建时，不会生成单元测试文件
-
-4. `-DWITH_UNIT_TESTS=ON` + `不添加选项-DINSTALL_MYSQLTESTDIR`
-
-    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
-    - `make install` 时，拷贝单元测试文件到 `${PREFIX}/mysql-test` 目录
-
-5. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=`
-
-    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
-    - `make install` 时，`不会拷贝` 单元测试文件到安装目录
-
-6. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/customTestDir`
-
-    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
-    - `make install` 时，拷贝单元测试文件到 `/server/customTestDir` 目录
+1. 正式环境不应该安装功能测试套件
+2. 普通程序开发者不需要关注这些内容，所以开发环境也是看需求选择是否安装
 
 :::
 
