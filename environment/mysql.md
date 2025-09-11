@@ -157,27 +157,30 @@ make install
 
 1. `-DWITH_UNIT_TESTS=OFF` + `不添加选项-DINSTALL_MYSQLTESTDIR`
 
-    - 不会生成单元测试文件，也不会生成单元测试目录
+    - `make -j4` 构建时，不会生成单元测试文件
 
 2. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=`
 
-    - 不会生成单元测试文件，也不会生成单元测试目录
+    - `make -j4` 构建时，不会生成单元测试文件
 
-3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+3. `-DWITH_UNIT_TESTS=OFF` + `-DINSTALL_MYSQLTESTDIR=/server/customTestDir`
 
-    - 不会生成单元测试文件，也不会生成单元测试目录
+    - `make -j4` 构建时，不会生成单元测试文件
 
 4. `-DWITH_UNIT_TESTS=ON` + `不添加选项-DINSTALL_MYSQLTESTDIR`
 
-    - 生成的单元测试文件，保存在默认路径 `${CMAKE_INSTALL_PREFIX}/mysql-test`
+    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
+    - `make install` 时，拷贝单元测试文件到 `${PREFIX}/mysql-test` 目录
 
 5. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=`
 
-    - 生成的单元测试文件，保存在默认路径 `${CMAKE_INSTALL_PREFIX}/mysql-test`
+    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
+    - `make install` 时，`不会拷贝` 单元测试文件到安装目录
 
-6. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/mysql-test`
+6. `-DWITH_UNIT_TESTS=ON` + `-DINSTALL_MYSQLTESTDIR=/server/customTestDir`
 
-    - 生成单元测试文件，保存在指定路径 `/server/mysql-test`
+    - `make -j4` 构建时，生成单元测试文件到构建根目录的子目录 `mysql-test`
+    - `make install` 时，拷贝单元测试文件到 `/server/customTestDir` 目录
 
 :::
 
