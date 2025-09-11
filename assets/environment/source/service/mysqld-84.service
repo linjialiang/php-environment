@@ -17,7 +17,6 @@ RestartPreventExitStatus=1
 PrivateTmp=false
 RuntimeDirectory=mysql
 RuntimeDirectoryMode=0750
-PrivateTmp=false
 
 [Install]
 WantedBy=multi-user.target
