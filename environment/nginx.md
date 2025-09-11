@@ -41,12 +41,6 @@ setcap -r /server/nginx/sbin/nginx
 
 ::: code-group
 
-```bash [common]
-cd /home/nginx/nginx-1.28.0
-./configure --help > help.ini
-```
-
-<<<@/assets/environment/source/nginx/help.ini [全部参数]
 :::
 
 ### 编译安装
@@ -71,6 +65,13 @@ make install
 ```
 
 <<<@/assets/environment/source/nginx/build_all.bash [全部构建选项]
+
+```bash [查看帮助]
+cd /home/nginx/nginx-1.28.0
+./configure --help > help.ini
+```
+
+<<<@/assets/environment/source/nginx/help.ini [全部参数]
 
 :::
 

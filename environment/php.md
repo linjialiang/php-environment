@@ -131,7 +131,7 @@ make test > make-test.log
 make install
 ```
 
-```bash [查看构建可选项]
+```bash [查看帮助]
 # 全部构建选项
 ./configure -h
 
