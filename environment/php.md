@@ -118,11 +118,19 @@ apt install libpq-dev -y
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
 :::
 
-### 3. 查看构建选项
+### 3. 构建选项
 
 ::: code-group
+<<<@/assets/environment/source/php/build/84.bash [84]
 
-```bash [common]
+```bash [编译&安装]
+# nohup make -j4 &
+make -j4 > make.log
+make test > make-test.log
+make install
+```
+
+```bash [查看构建可选项]
 # 全部构建选项
 ./configure -h
 
@@ -135,21 +143,6 @@ apt install libpq-dev -y
 ```
 
 <<<@/assets/environment/source/php/configure/84.ini [8.4 选项]
-:::
-
-### 4. 构建指令参考
-
-::: details 构建指令参考
-::: code-group
-<<<@/assets/environment/source/php/build/84.bash [84]
-
-```bash [编译&安装]
-# nohup make -j4 &
-make -j4 > make.log
-make test > make-test.log
-make install
-```
-
 :::
 
 ::: tip 构建指令区别：
