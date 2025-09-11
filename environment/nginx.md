@@ -490,19 +490,14 @@ server
 ```bash [部署]
 chown nginx:nginx -R /server/{nginx,sites}
 chown nginx:nginx -R /server/etc/nginx
+chown nginx:nginx -R /server/logs/nginx
 find /server/{nginx,sites} -type f -exec chmod 640 {} \;
 find /server/{nginx,sites} -type d -exec chmod 750 {} \;
 find /server/etc/nginx -type f -exec chmod 640 {} \;
 find /server/etc/nginx -type d -exec chmod 750 {} \;
-# conf和sbin目录下的内容权限 nginx 640
-# 其他的*_temp不是很重要
+chmod 750 /server/logs/nginx
 # 可执行文件需要执行权限
 chmod 750 -R /server/nginx/sbin
-
-chown nginx:nginx -R /server/logs/nginx
-chmod 750 /server/logs/nginx
-# -- 因为日志文件权限是 nginx 644
-
 # 每次对 sbin 修改权限后，都需要重新启用CAP_NET_BIND_SERVICE能力
 setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 ```
