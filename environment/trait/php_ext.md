@@ -2,9 +2,12 @@
 
 ::: code-group
 
-```bash [依赖库]
-# 使用 phpize 初始化 configure 配置文件时，需要 autoconf 依赖库
-apt install autoconf -y
+```bash [解压扩展包]
+tar -xzf apcu-5.1.27.tgz
+tar -xzf mongodb-2.1.1.tgz
+tar -xzf redis-6.2.0.tgz
+tar -xzf xdebug-3.4.5.tgz
+tar -xzf yaml-2.2.5.tgz
 ```
 
 ```ini [84配置扩展]
