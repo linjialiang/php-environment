@@ -18,7 +18,7 @@ extension=yaml
 extension=apcu
 
 ;zend_extension=opcache
-;部署环境请注释掉 xdebug
+;部署环境请关闭 xdebug
 zend_extension=xdebug
 
 [xdebug]
