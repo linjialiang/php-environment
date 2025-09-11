@@ -49,4 +49,4 @@
 --with-openssl=/home/nginx/openssl-3.5.2
 
 # 开启调试，生产环境下建议禁用
---with-debug > stdout.log
+--with-debug
