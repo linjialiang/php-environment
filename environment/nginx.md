@@ -489,8 +489,7 @@ server
 
 ```bash [部署]
 chown nginx:nginx -R /server/{nginx,sites}
-chown nginx:nginx -R /server/etc/nginx
-chown nginx:nginx -R /server/logs/nginx
+chown nginx:nginx -R /server/{etc,logs}/nginx
 find /server/{nginx,sites} -type f -exec chmod 640 {} \;
 find /server/{nginx,sites} -type d -exec chmod 750 {} \;
 find /server/etc/nginx -type f -exec chmod 640 {} \;
