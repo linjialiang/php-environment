@@ -58,7 +58,7 @@ php --ri apcu
 
 ```bash [84编译]
 cd /home/php-fpm/php_ext/xdebug-3.4.5
-/server/php/84/phpize
+/server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make install
@@ -72,7 +72,7 @@ make install
 
 ```bash [84]
 cd /home/php-fpm/php_ext/redis-6.2.0
-/server/php/84/phpize
+/server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make test
@@ -87,7 +87,7 @@ make install
 
 ```bash [84]
 cd /home/php-fpm/php_ext/mongodb-2.1.1
-/server/php/84/phpize
+/server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make test
@@ -105,7 +105,7 @@ make install
 apt install libyaml-dev -y
 
 cd /home/php-fpm/php_ext/yaml-2.2.5
-/server/php/84/phpize
+/server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make test
@@ -120,7 +120,7 @@ make install
 
 ```bash [84]
 cd /home/php-fpm/php_ext/apcu-5.1.27
-/server/php/84/phpize
+/server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
 make -j4 > make.log
 make test
