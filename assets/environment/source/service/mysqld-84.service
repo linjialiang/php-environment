@@ -10,10 +10,11 @@ User=mysql
 Group=mysql
 Type=notify
 TimeoutSec=0
-LimitNOFILE=10000
 ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
+LimitNOFILE=10000
 Restart=on-failure
 RestartPreventExitStatus=1
+PrivateTmp=false
 RuntimeDirectory=mysql
 RuntimeDirectoryMode=0750
 PrivateTmp=false
