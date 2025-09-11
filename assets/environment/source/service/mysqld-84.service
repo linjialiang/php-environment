@@ -6,13 +6,16 @@ Wants=network-online.target
 After=syslog.target
 
 [Service]
-Type=notify
 User=mysql
 Group=mysql
-RuntimeDirectory=mysql
-RuntimeDirectoryMode=0750
+Type=notify
+TimeoutSec=0
+LimitNOFILE=10000
 ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
 Restart=on-failure
+RestartPreventExitStatus=1
+RuntimeDirectory=mysql
+RuntimeDirectoryMode=0750
 PrivateTmp=false
 
 [Install]
