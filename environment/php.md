@@ -127,7 +127,7 @@ apt install libpq-dev -y
 ```bash [编译&安装]
 # nohup make -j4 &
 make -j4 > make.log
-make test > make-test.log
+make test > makeTest.log
 make install
 ```
 
