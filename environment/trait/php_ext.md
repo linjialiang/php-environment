@@ -101,9 +101,6 @@ make install
 ::: code-group
 
 ```bash [84]
-# 安装依赖库
-apt install libyaml-dev -y
-
 cd /home/php-fpm/php_ext/yaml-2.2.5
 /server/php/84/bin/phpize
 ./configure --with-php-config=/server/php/84/bin/php-config
