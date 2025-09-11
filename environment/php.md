@@ -49,7 +49,7 @@ libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libcapstone-dev \
 libsodium-dev libzip-dev -y
 
 # php 扩展所需额外依赖
-apt install autoconf libyaml-dev -y
+apt install -y libyaml-dev
 ```
 
 :::
