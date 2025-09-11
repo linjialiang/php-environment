@@ -30,7 +30,7 @@ xdebug.client_host=127.0.0.1
 xdebug.client_port=9084
 
 [apcu]
-; 虽然手册里写的默认开启，但实测时 apcu-5.1.27 版本默认是禁用的
+; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
 apc.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
