@@ -28,3 +28,4 @@
 --with-pcre-jit \
 --with-zlib=/home/nginx/zlib-1.3.1 \
 --with-openssl=/home/nginx/openssl-3.5.2
+# 由于nginx错误和警告均使用正常输出结果，所以 nginx 不建议使用 > stdout.log

@@ -50,3 +50,4 @@
 
 # 开启调试，生产环境下建议禁用
 --with-debug
+# 由于nginx错误和警告均使用正常输出结果，所以 nginx 不建议使用 > stdout.log
