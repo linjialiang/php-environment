@@ -22,9 +22,24 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ## 构建 PHP
 
-### 1. 安装依赖
+### 1. 解压源码包
+
+::: code-group
+
+```bash [84]
+su - php-fpm -s /bin/zsh
+tar -xJf php-8.4.12.tar.xz
+mkdir /home/php-fpm/php-8.4.12/build_php
+cd /home/php-fpm/php-8.4.12/build_php/
+```
+
+:::
+
+### 2. 安装依赖项
 
 本次 PHP 编译过程中，在系统原有扩展存在下，还需安装如下依赖项：
+
+#### apt 自带依赖库安装
 
 ::: code-group
 
@@ -51,11 +66,11 @@ usermod -a -G sqlite php-fpm
 # 构建 PHP 需将 sqlite3 的 pkgconfig 目录加入到临时环境变量里
 export PKG_CONFIG_PATH=/server/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
 
-# 使用下面指令检查，sqlite3 是否正确加入
-pkg-config --list-all | grep sqlite3
+# 使用下面指令检查 sqlite3 是否正确
+pkg-config --path sqlite3
 
-# 加入成功显示：
-sqlite3          SQLite - SQL database engine
+# 成功展示：
+/server/sqlite/lib/pkgconfig/sqlite3.pc
 ```
 
 ```bash [使用依赖库]
@@ -101,17 +116,6 @@ apt install libpq-dev -y
 5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
 
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
-:::
-
-### 2. 创建并进入构建目录
-
-::: code-group
-
-```bash [84]
-mkdir /home/php-fpm/php-8.4.12/build_php
-cd /home/php-fpm/php-8.4.12/build_php/
-```
-
 :::
 
 ### 3. 查看构建选项
