@@ -489,8 +489,11 @@ server
 
 ```bash [部署]
 chown nginx:nginx -R /server/{nginx,sites}
+chown nginx:nginx -R /server/etc/nginx
 find /server/{nginx,sites} -type f -exec chmod 640 {} \;
 find /server/{nginx,sites} -type d -exec chmod 750 {} \;
+find /server/etc/nginx -type f -exec chmod 640 {} \;
+find /server/etc/nginx -type d -exec chmod 750 {} \;
 # conf和sbin目录下的内容权限 nginx 640
 # 其他的*_temp不是很重要
 # 可执行文件需要执行权限
