@@ -500,6 +500,75 @@ WantedBy=multi-user.target
   systemctl enable --now {redis,postgres,mysqld-84,php84-fpm,nginx}.service
 }
 
+#日志管理
+LogManagement(){
+  echo_yellow "=================================================================="
+  echo_green "Redis/Nginx 使用 Logrotate 来管理日志文件"
+  echo_yellow " "
+  echo_yellow "=================================================================="
+  echo_cyan "[+] 创建 redis 的 Logrotate 脚本"
+  echo "/server/logs/redis/redis-server.log {
+    monthly
+    maxsize 100M
+    missingok
+    rotate 12
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    dateyesterday
+    create 0640 redis redis
+    sharedscripts
+    postrotate
+        if [ -f /run/redis/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
+        fi
+    endscript
+}" > /etc/logrotate.d/redis
+
+  echo_cyan "[+] 创建 nginx 的 Logrotate 脚本"
+  echo "
+/server/logs/nginx/access/*.log {
+    daily
+    maxsize 100M
+    missingok
+    rotate 30
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    notifempty
+    create 0640 nginx nginx
+    sharedscripts
+    postrotate
+        if [ -f /run/nginx/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+        fi
+    endscript
+}
+
+/server/logs/nginx/*.log {
+    monthly
+    maxsize 100M
+    missingok
+    rotate 12
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    notifempty
+    create 0640 nginx nginx
+    sharedscripts
+    postrotate
+        if [ -f /run/nginx/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+        fi
+    endscript
+}
+" > /etc/logrotate.d/nginx
+
+}
+
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmpp.tar.xz"
 echo_cyan "是否退出(1退出/默认继续)："
 read isExit
