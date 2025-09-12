@@ -543,7 +543,7 @@ su - php-fpm -s /bin/zsh
 
 ## 动态安装 PECL 扩展
 
-<!-- @include: ./trait/php_ext.md -->
+<!--@include: ./trait/php_ext.md-->
 
 ## 权限
 

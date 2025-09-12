@@ -74,13 +74,13 @@ titleTemplate: 环境搭建教程
 :::
 
 <!-- 引入请求生命周期 -->
-<!-- @include: ./trait/lifecycle.md -->
+<!--@include: ./trait/lifecycle.md-->
 
 <!-- 引入用户说明 -->
-<!-- @include: ./trait/userinfo.md -->
+<!--@include: ./trait/userinfo.md-->
 
 <!-- 引入用户权限 -->
-<!-- @include: ./trait/user_power.md -->
+<!--@include: ./trait/user_power.md-->
 
 ## umask 权限
 
@@ -125,16 +125,16 @@ source ~/.profile
 :::
 
 <!-- 引入系统优化 -->
-<!-- @include: ./trait/kernel.md -->
+<!--@include: ./trait/kernel.md-->
 
 <!-- 引入日志管理 -->
-<!-- @include: ./trait/log_management.md -->
+<!--@include: ./trait/log_management.md-->
 
 <!-- 引入手动安装依赖 -->
-<!-- @include: ./trait/package_install.md -->
+<!--@include: ./trait/package_install.md-->
 
 <!-- 引入输出重定向 -->
-<!-- @include: ./trait/output.md -->
+<!--@include: ./trait/output.md-->
 
 ## 附录二、预构建包一键安装脚本
 
