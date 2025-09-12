@@ -26,7 +26,7 @@ log_format json_log_common escape=json
       '"request_time": $request_time'
     '},'
     '"tags": {'
-      "#type": "common"'
+      '"#type": "common"'
     '}'
   '}';
 
@@ -58,7 +58,7 @@ log_format json_log_assets escape=json
       '"request_time": $request_time'
     '},'
     '"tags": {'
-      "#type": "assets"'
+      '"#type": "assets"'
     '}'
   '}';
 
@@ -94,7 +94,7 @@ log_format json_log_api escape=json
       '"upstream_response_time": "$upstream_response_time"'
     '},'
     '"tags": {'
-      "#type": "api"'
+      '"#type": "api"'
     '}'
   '}';
 
@@ -129,7 +129,7 @@ log_format json_log_lb escape=json
       '"request_time": $request_time'
     '},'
     '"tags": {'
-      "#type": "load_balancer"'
+      '"#type": "load_balancer"'
     '}'
   '}';
 
@@ -172,5 +172,5 @@ log_format json_log_debug escape=json
     '},'
     '"tags": {'
       "#type": "debug"'
-    '}'
+    ''}'
   '}';

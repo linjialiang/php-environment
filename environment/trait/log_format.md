@@ -133,8 +133,6 @@ log_format combined '$remote_addr - $remote_user [$time_local] '
 
 ::: code-group
 
-```[]
-
-```
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_common{nginx}
 
 :::
