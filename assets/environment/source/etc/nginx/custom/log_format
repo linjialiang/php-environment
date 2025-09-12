@@ -123,7 +123,6 @@ log_format json_log_lb escape=json
       '"connect_time": "$upstream_connect_time",'
       '"header_time": "$upstream_header_time",'
       '"cache_status": "$upstream_cache_status",'
-      '"queue_time": "$upstream_queue_time"'
     '},'
     '"timings": {'
       '"request_time": $request_time'

@@ -31,8 +31,8 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
-  rm /lib/systemd/system/{redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
+  systemctl disable --now {redis,postgres,mysqld-84,php84-fpm,nginx}.service
+  rm /lib/systemd/system/{redis,postgres,mysqld-84,php84-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
@@ -129,13 +129,7 @@ installPackage(){
   echo_red "注意1：该lnmpp包不兼容其他发行版，因为极有可能因为依赖问题，导致整个环境无法使用"
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
   echo_yellow "=================================================================="
-  apt install -y gcc g++ make clang pkg-config autoconf cmake zlib1g-dev gawk \
-  libedit-dev libreadline-dev tcl libssl-dev liblz4-dev libzstd-dev bison flex \
-  libpam0g-dev libxslt1-dev uuid-dev libsystemd-dev libxml2-dev xsltproc fop \
-  dbtoepub libldap-dev libsasl2-dev libncurses-dev libcurl4-openssl-dev \
-  libpng-dev libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev \
-  libgmp-dev libonig-dev libcapstone-dev libsodium-dev libzip-dev libffi-dev \
-  libyaml-dev libgd-dev libgeoip-dev
+  apt install -y build-essential autoconf libtool pkg-config libssl-dev
 }
 
 #安装预构建包

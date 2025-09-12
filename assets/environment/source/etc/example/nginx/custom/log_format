@@ -140,7 +140,6 @@ log_format json_log_lb escape=json
       '"connect_time": "$upstream_connect_time",'
       '"header_time": "$upstream_header_time",'
       '"cache_status": "$upstream_cache_status",' # 核心新增字段
-      '"queue_time": "$upstream_queue_time"'    # 核心新增字段
     '},'
     '"timings": {'
       '"request_time": $request_time'
