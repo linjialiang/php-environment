@@ -22,6 +22,7 @@ http
 {
     # debug info notice warn error crit alert emerg
     error_log /server/logs/nginx/error.log error;
+    include /server/etc/nginx/custom/log_format;
     access_log /server/logs/nginx/access/all.log json_log_common;
 
     include mime.types;
