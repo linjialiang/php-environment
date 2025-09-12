@@ -133,6 +133,10 @@ log_format combined '$remote_addr - $remote_user [$time_local] '
 
 ::: code-group
 
-<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_common{nginx}
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_common{nginx} [通用]
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_assets{nginx} [静态资源]
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_api{nginx} [代理]
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_lb{nginx} [负载均衡]
+<<< @/assets/environment/source/etc/example/nginx/custom/log_format#json_log_debug{nginx} [调试]
 
 :::
