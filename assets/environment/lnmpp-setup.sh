@@ -103,9 +103,6 @@ createUser(){
   echo_green "此版本使用指定Postgres安装目录以及自己编译的SQLite3"
   echo_yellow "=================================================================="
   usermod -a -G postgres,sqlite php-fpm
-  usermod -a -G emad nginx
-  usermod -a -G emad php-fpm
-  usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 }
 
 #开发用户追加权限
