@@ -16,7 +16,7 @@ titleTemplate: 环境搭建教程
 内核 : `linux-image-6.12.41+deb13-amd64`
 ```
 
-<<<@/assets/environment/lnmpp-toc.txt [环境目录结构]
+<<< @/assets/environment/lnmpp-toc.txt [环境目录结构]
 :::
 
 ## 脚本文件
@@ -24,12 +24,12 @@ titleTemplate: 环境搭建教程
 我们准备了几个 bash 脚本文件：
 
 ::: code-group
-<<<@/assets/environment/source/bash/user.bash [创建用户]
-<<<@/assets/environment/source/bash/mkdir.bash [创建目录]
-<<<@/assets/environment/source/bash/chown.bash [目录授权]
-<<<@/assets/environment/source/bash/tar.bash [解压参考]
-<<<@/assets/environment/source/bash/cleanLog.sh [一键清理]
-<<<@/assets/environment/source/bash/clean.sh [简单清理]
+<<< @/assets/environment/source/bash/user.bash [创建用户]
+<<< @/assets/environment/source/bash/mkdir.bash [创建目录]
+<<< @/assets/environment/source/bash/chown.bash [目录授权]
+<<< @/assets/environment/source/bash/tar.bash [解压参考]
+<<< @/assets/environment/source/bash/cleanLog.sh [一键清理]
+<<< @/assets/environment/source/bash/clean.sh [简单清理]
 :::
 
 ## 包列表
@@ -147,5 +147,5 @@ source ~/.profile
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<<@/assets/environment/lnmpp-setup.sh [lnmpp]
+<<< @/assets/environment/lnmpp-setup.sh [lnmpp]
 :::

@@ -339,8 +339,8 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
 
 ::: code-group
 
-<<<@/assets/iis/php-doc/web.config{xml} [[doc.php.io]]
-<<<@/assets/iis/tp/web.config{xml} [[ThinkPHP]]
+<<< @/assets/iis/php-doc/web.config{xml} [[doc.php.io]]
+<<< @/assets/iis/tp/web.config{xml} [[ThinkPHP]]
 
 :::
 

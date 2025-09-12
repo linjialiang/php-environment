@@ -110,5 +110,5 @@ sc.exe delete Redis
 :::
 
 ::: details 附录：配置案例
-<<<@/assets/iis/redis/redis.conf{ini}
+<<< @/assets/iis/redis/redis.conf{ini}
 :::

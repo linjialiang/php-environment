@@ -259,8 +259,8 @@ pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] 
 ### 4. 配置文件案例
 
 ::: code-group
-<<<@/assets/iis/pgsql/pg_hba.conf{ini} [pg_hba.conf]
-<<<@/assets/iis/pgsql/postgresql.conf{ini} [postgresql.conf]
+<<< @/assets/iis/pgsql/pg_hba.conf{ini} [pg_hba.conf]
+<<< @/assets/iis/pgsql/postgresql.conf{ini} [postgresql.conf]
 :::
 
 ### 5. 创建账号

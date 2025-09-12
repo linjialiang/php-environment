@@ -125,13 +125,13 @@ cd C:\mysql\product\84
 ::: details MySQL 配置案例：
 ::: code-group
 
-<<<@/assets/iis/mysql/my-55.ini [55]
-<<<@/assets/iis/mysql/my-56.ini [56]
-<<<@/assets/iis/mysql/my-57.ini [57]
-<<<@/assets/iis/mysql/my-80.ini [80]
-<<<@/assets/iis/mysql/init-80.sql [80-init]
-<<<@/assets/iis/mysql/my-84.ini [84]
-<<<@/assets/iis/mysql/init-84.sql [84-init]
+<<< @/assets/iis/mysql/my-55.ini [55]
+<<< @/assets/iis/mysql/my-56.ini [56]
+<<< @/assets/iis/mysql/my-57.ini [57]
+<<< @/assets/iis/mysql/my-80.ini [80]
+<<< @/assets/iis/mysql/init-80.sql [80-init]
+<<< @/assets/iis/mysql/my-84.ini [84]
+<<< @/assets/iis/mysql/init-84.sql [84-init]
 
 :::
 

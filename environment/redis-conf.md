@@ -279,7 +279,7 @@ loadmodule 指令用于在 Redis 服务启动时自动加载模块，若加载�
 
     ::: details Redis 日志轮转配置详解
 
-    <<<@/assets/environment/source/logrotate.d/redis{bash}
+    <<< @/assets/environment/source/logrotate.d/redis{bash}
 
     具体的参数说明请参考 [[👉日志管理]](./trait/log_management)
 

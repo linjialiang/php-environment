@@ -96,7 +96,7 @@ MySQL 安装成功后，自动配置好 Unit 单元服务器
 -   创建链接：`/etc/systemd/system/multi-user.target.wants/mysql.service`
 
 ::: details MySQL 系统单元配置文件：
-<<<@/assets/environment-old/source/service/mysqld-84.service{ini}
+<<< @/assets/environment-old/source/service/mysqld-84.service{ini}
 :::
 
 > MySQL 系统单元管理：

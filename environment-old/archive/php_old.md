@@ -238,8 +238,8 @@ sqlite3          SQLite - SQL database engine
 
 ::: details 构建选项预览
 ::: code-group
-<<<@/assets/environment-old/source/php/configure/74.ini [7.4]
-<<<@/assets/environment-old/source/php/configure/83.ini [8.3]
+<<< @/assets/environment-old/source/php/configure/74.ini [7.4]
+<<< @/assets/environment-old/source/php/configure/83.ini [8.3]
 :::
 
 ### 5. 进入构建目录
@@ -255,8 +255,8 @@ cd /home/php-fpm/php-8.3.12/build_php/
 
 ::: details 构建指令参考
 ::: code-group
-<<<@/assets/environment-old/source/php/build/83.bash [8.3]
-<<<@/assets/environment-old/source/php/build/74.bash [7.4]
+<<< @/assets/environment-old/source/php/build/83.bash [8.3]
+<<< @/assets/environment-old/source/php/build/74.bash [7.4]
 :::
 
 ::: tip 构建指令区别：
@@ -415,8 +415,8 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 
 ::: details php 主配置文件案例
 ::: code-group
-<<<@/assets/environment-old/source/php/83/php-fpm.conf{ini} [8.3]
-<<<@/assets/environment-old/source/php/74/php-fpm.conf{ini} [7.4]
+<<< @/assets/environment-old/source/php/83/php-fpm.conf{ini} [8.3]
+<<< @/assets/environment-old/source/php/74/php-fpm.conf{ini} [7.4]
 :::
 
 ### 3. 工作池配置文件
@@ -430,12 +430,12 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 
 ::: details 通用工作池案例
 ::: code-group
-<<<@/assets/environment-old/source/php/83/php-fpm.d/default.conf{ini} [8.3]
-<<<@/assets/environment-old/source/php/74/php-fpm.d/default.conf{ini} [7.4]
+<<< @/assets/environment-old/source/php/83/php-fpm.d/default.conf{ini} [8.3]
+<<< @/assets/environment-old/source/php/74/php-fpm.d/default.conf{ini} [7.4]
 :::
 
 ::: details ThinkPHP 项目专用工作池案例
-<<<@/assets/environment-old/source/php/83/php-fpm.d/tp.conf{ini}
+<<< @/assets/environment-old/source/php/83/php-fpm.d/tp.conf{ini}
 :::
 
 ::: tip
@@ -449,15 +449,15 @@ PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会
 ::: details 默认模板
 
 ::: code-group
-<<<@/assets/environment-old/source/service/php/source/83/php-fpm.service{ini} [php8.3]
-<<<@/assets/environment-old/source/service/php/source/74/php-fpm.service{ini} [php7.4]
+<<< @/assets/environment-old/source/service/php/source/83/php-fpm.service{ini} [php8.3]
+<<< @/assets/environment-old/source/service/php/source/74/php-fpm.service{ini} [php7.4]
 :::
 
 ::: details 案例参考
 
 ::: code-group
-<<<@/assets/environment-old/source/service/php/php83-fpm.service{bash} [php8.3]
-<<<@/assets/environment-old/source/service/php/php74-fpm.service{ini} [php7.4]
+<<< @/assets/environment-old/source/service/php/php83-fpm.service{bash} [php8.3]
+<<< @/assets/environment-old/source/service/php/php74-fpm.service{ini} [php7.4]
 :::
 
 ```bash
@@ -584,7 +584,7 @@ phpMyAdmin 需要配置
     ```
 
     ::: details 配置文件内容
-    <<<@/assets/environment-old/source/php/config.inc.php
+    <<< @/assets/environment-old/source/php/config.inc.php
     :::
 
     ::: tip

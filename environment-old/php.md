@@ -173,16 +173,16 @@ cd /home/php-fpm/php-7.4.33/build_php/
 ./configure -h > configure.txt
 ```
 
-<<<@/assets/environment-old/source/php/configure/84.ini [8.4 选项]
-<<<@/assets/environment-old/source/php/configure/74.ini [7.4 选项]
+<<< @/assets/environment-old/source/php/configure/84.ini [8.4 选项]
+<<< @/assets/environment-old/source/php/configure/74.ini [7.4 选项]
 :::
 
 ### 4. 构建指令参考
 
 ::: details 构建指令参考
 ::: code-group
-<<<@/assets/environment-old/source/php/build/84.bash [84]
-<<<@/assets/environment-old/source/php/build/74.bash [74]
+<<< @/assets/environment-old/source/php/build/84.bash [84]
+<<< @/assets/environment-old/source/php/build/74.bash [74]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -191,8 +191,8 @@ make test > make-test.log
 make install
 ```
 
-<<<@/assets/environment-old/source/php/build/84_mysql.bash [84[mysql]]
-<<<@/assets/environment-old/source/php/build/74_mysql.bash [74[mysql]]
+<<< @/assets/environment-old/source/php/build/84_mysql.bash [84[mysql]]
+<<< @/assets/environment-old/source/php/build/74_mysql.bash [74[mysql]]
 :::
 
 ::: tip 构建指令区别：
@@ -346,8 +346,8 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 
 ::: details php 主配置文件案例
 ::: code-group
-<<<@/assets/environment-old/source/php/84/php-fpm.conf{ini} [8.4]
-<<<@/assets/environment-old/source/php/74/php-fpm.conf{ini} [7.4]
+<<< @/assets/environment-old/source/php/84/php-fpm.conf{ini} [8.4]
+<<< @/assets/environment-old/source/php/74/php-fpm.conf{ini} [7.4]
 :::
 
 ### 3. 工作池配置文件
@@ -361,12 +361,12 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 
 ::: details 通用工作池案例
 ::: code-group
-<<<@/assets/environment-old/source/php/84/php-fpm.d/default.conf{ini} [8.4]
-<<<@/assets/environment-old/source/php/74/php-fpm.d/default.conf{ini} [7.4]
+<<< @/assets/environment-old/source/php/84/php-fpm.d/default.conf{ini} [8.4]
+<<< @/assets/environment-old/source/php/74/php-fpm.d/default.conf{ini} [7.4]
 :::
 
 ::: details ThinkPHP 项目专用工作池案例
-<<<@/assets/environment-old/source/php/84/php-fpm.d/tp.conf{ini}
+<<< @/assets/environment-old/source/php/84/php-fpm.d/tp.conf{ini}
 :::
 
 ::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
@@ -420,15 +420,15 @@ PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会
 ::: details 默认模板
 
 ::: code-group
-<<<@/assets/environment-old/source/service/php/source/84/php-fpm.service{ini} [php8.4]
-<<<@/assets/environment-old/source/service/php/source/74/php-fpm.service{ini} [php7.4]
+<<< @/assets/environment-old/source/service/php/source/84/php-fpm.service{ini} [php8.4]
+<<< @/assets/environment-old/source/service/php/source/74/php-fpm.service{ini} [php7.4]
 :::
 
 ::: details 案例参考
 
 ::: code-group
-<<<@/assets/environment-old/source/service/php/php84-fpm.service{bash} [php8.4]
-<<<@/assets/environment-old/source/service/php/php74-fpm.service{ini} [php7.4]
+<<< @/assets/environment-old/source/service/php/php84-fpm.service{bash} [php8.4]
+<<< @/assets/environment-old/source/service/php/php74-fpm.service{ini} [php7.4]
 :::
 
 ```bash

@@ -170,7 +170,7 @@ psql -h 192.168.66.254 -U admin -d postgres -W
 
 ::: code-group
 
-<<<@/assets/environment/source/service/postgres.service{bash} [unit]
+<<< @/assets/environment/source/service/postgres.service{bash} [unit]
 
 ```bash [开机启动]
 systemctl enable postgres
@@ -195,8 +195,8 @@ PostgreSQL 主要有以下几个配置文件：
 ::: details 配置案例
 
 ::: code-group
-<<<@/assets/environment/source/postgres/postgresql.conf{ini} [服务端配置文件]
-<<<@/assets/environment/source/postgres/pg_hba.conf{ini} [客户访问限制配置文件]
+<<< @/assets/environment/source/postgres/postgresql.conf{ini} [服务端配置文件]
+<<< @/assets/environment/source/postgres/pg_hba.conf{ini} [客户访问限制配置文件]
 :::
 
 ### 1. 基本配置
@@ -322,7 +322,7 @@ openssl x509 -req -in client-admin.csr -text -days 365 \
 chmod 600 client-*  # 客户端证书是提供给特定客户的，安全起见，全部设为仅属主可见
 ```
 
-<<<@/assets/environment/source/postgres/gen-test-certs.sh [一键脚本]
+<<< @/assets/environment/source/postgres/gen-test-certs.sh [一键脚本]
 
 ```bash [吊销证书]
 # 证书吊销比较复杂，放到后面再处理

@@ -54,7 +54,7 @@ apt install -y cmake libtirpc-dev
 2. 问题 2：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败。
 
     ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
-    <<<@/assets/environment/source/mysql/src/tls_client_context.cc{c}
+    <<< @/assets/environment/source/mysql/src/tls_client_context.cc{c}
     :::
 
 ## 编译安装
@@ -308,8 +308,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 ### mysql 配置文件
 
 ::: code-group
-<<<@/assets/environment/source/etc/example/mysql/init.sql [init.sql]
-<<<@/assets/environment/source/etc/example/mysql/my.cnf{ini} [my.cnf]
+<<< @/assets/environment/source/etc/example/mysql/init.sql [init.sql]
+<<< @/assets/environment/source/etc/example/mysql/my.cnf{ini} [my.cnf]
 :::
 
 ### 数据初始化
@@ -353,7 +353,7 @@ ALTER USER root@localhost IDENTIFIED WITH auth_socket AS 'mysql';
 ### systemd 单元
 
 ::: code-group
-<<<@/assets/environment/source/service/mysqld-84.service{bash} [mysqld-84.service]
+<<< @/assets/environment/source/service/mysqld-84.service{bash} [mysqld-84.service]
 
 ```bash [启用单元]
 systemctl enable mysqld-84.service
