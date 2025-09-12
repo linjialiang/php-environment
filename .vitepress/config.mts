@@ -16,6 +16,9 @@ export default defineConfig({
   markdown: {
     lineNumbers: false,
     math: false,
+    image: {
+      lazyLoading: true,
+    },
   },
   sitemap: {
     hostname: 'http://php-environment.e8so.com',
