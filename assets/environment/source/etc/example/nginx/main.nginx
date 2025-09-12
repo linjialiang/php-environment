@@ -10,7 +10,7 @@ worker_rlimit_nofile 10240;
 
 working_directory /tmp/;
 
-pid /run/nginx/nginx.pid;
+pid /run/nginx/process.pid;
 
 events
 {

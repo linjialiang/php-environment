@@ -148,12 +148,12 @@ cp -p -r /home/nginx/nginx-1.28.0/build_nginx/nginx /server/nginx/sbin/
 ps -ef|grep -E "nginx|PID" |grep -v grep
 ps aux|grep -E "nginx|PID" |grep -v grep
 # 通过 cat 查看 pid 文件，并记录进程 id 号
-cat /run/nginx/nginx.pid
+cat /run/nginx/process.pid
 ```
 
 ```bash [2.启动新版主文件]
 # 通过 `kill -USR2 <pid>` 启动新版 nginx 可执行文件
-kill -USR2 `cat /run/nginx/nginx.pid`
+kill -USR2 `cat /run/nginx/process.pid`
 ```
 
 ```bash [3.关闭旧版进程]

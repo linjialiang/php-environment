@@ -3,7 +3,7 @@ worker_rlimit_core 50M;
 worker_shutdown_timeout 30s;
 worker_rlimit_nofile 10240;
 working_directory /tmp/;
-pid /run/nginx/nginx.pid;
+pid /run/nginx/process.pid;
 
 events
 {
