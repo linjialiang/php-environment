@@ -8,6 +8,7 @@ stdx::expected<SSL_SESSION *, std::error_code> TlsClientContext::get_session() {
     auto &sessions = sessions_->sessions_;
     for (auto it = sessions.cbegin(); it != sessions.cend();) {
       const auto sess = it->second.get();
+      // [!code focus:2]
       const auto sess_start = SSL_SESSION_get_time(sess); // [!code --]
       const auto sess_start = SSL_SESSION_get_time_ex(sess); // [!code ++]
       if (time(nullptr) - sess_start > session_cache_timeout_.count()) {

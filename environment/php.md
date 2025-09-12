@@ -87,11 +87,13 @@ apt install libsqlite3-dev -y
 
 ::: code-group
 
-```bash {5-6} [编译安装Postgres]
+```bash [编译安装Postgres]
 usermod -a -G postgres php-fpm
 
 # PHP 的构建选项需指定Postgres安装目录或其pkgconfig路径
 ../configure --prefix=/server/php/84/ \
+# [!code error:2]
+# [!code focus:2]
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
 # --with-pdo-pgsql=/server/postgres/lib/pkgconfig \
