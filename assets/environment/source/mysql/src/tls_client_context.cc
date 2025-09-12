@@ -1,6 +1,4 @@
 // 修改 mysql-8.4.6/router/src/harness/src/tls_client_context.cc 第220行
-...
-
 stdx::expected<SSL_SESSION *, std::error_code> TlsClientContext::get_session() {
   // sessions_ will be nullptr if caching is off
   if (sessions_) {
