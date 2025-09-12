@@ -13,12 +13,12 @@ echo "
     sharedscripts
     postrotate
         if [ -f /run/nginx/process.pid ]; then
-            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+            /usr/bin/kill -USR1 `/bin/cat /run/nginx/process.pid`
         fi
     endscript
 }
 
-/server/logs/nginx/*.log {
+/server/logs/nginx/error.log {
     monthly
     maxsize 100M
     missingok
@@ -32,7 +32,7 @@ echo "
     sharedscripts
     postrotate
         if [ -f /run/nginx/process.pid ]; then
-            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+            /usr/bin/kill -USR1 `/bin/cat /run/nginx/process.pid`
         fi
     endscript
 }
