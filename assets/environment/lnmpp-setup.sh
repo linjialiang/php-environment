@@ -317,38 +317,27 @@ modFilePower(){
   echo_red "部署环境通常是www用户（nginx/php-fpm 需加入 www用户组）"
   chmod 750 /www
 
-  echo_green "nginx文件权限"
-  chown nginx:nginx -R /server/{nginx,sites}
-  find /server/{nginx,sites} -type f -exec chmod 640 {} \;
-  find /server/{nginx,sites} -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/nginx/sbin
-  chown nginx:nginx -R /server/logs/nginx
-  chmod 750 /server/logs/nginx
-  echo_green "为nginx启用CAP_NET_BIND_SERVICE能力"
-  echo_red "注：每次修改nginx执行文件权限，都需要重新启用该能力"
-  setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
-
-  echo_green "postgres文件权限"
-  chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres
-  find /server/postgres /server/logs/postgres -type f -exec chmod 640 {} \;
-  find /server/postgres /server/logs/postgres -type d -exec chmod 750 {} \;
-  find /server/postgres/tls -type f -exec chmod 600 {} \;
-  chmod 700 /server/pgData
-  chmod o-rwx -R /server/pgData
-  chmod g-w -R /server/pgData
-  chmod 750 -R /server/postgres/bin
-
-  echo_green "redis文件权限"
-  chown redis:redis -R /server/redis /server/logs/redis
-  find /server/redis /server/logs/redis -type f -exec chmod 640 {} \;
-  find /server/redis /server/logs/redis -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/redis/bin
-
   echo_green "sqlite3文件权限"
   chown sqlite:sqlite -R /server/sqlite
   find /server/sqlite -type f -exec chmod 640 {} \;
   find /server/sqlite -type d -exec chmod 750 {} \;
   chmod 750 -R /server/sqlite/bin
+
+  echo_green "redis文件权限"
+  chown redis:redis -R /server/redis /server/logs/redis /server/etc/redis
+  find /server/redis /server/logs/redis /server/etc/redis -type f -exec chmod 640 {} \;
+  find /server/redis /server/logs/redis /server/etc/redis -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/redis/bin
+  find /server/etc/redis/tls -type f -exec chmod 600 {} \;
+  find /server/etc/redis/tls -type d -exec chmod 700 {} \;
+
+  echo_green "postgres文件权限"
+  chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres
+  find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
+  find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/postgres/bin
+  find /server/etc/postgres/tls -type f -exec chmod 600 {} \;
+  find /server/etc/postgres/tls -type d -exec chmod 700 {} \;
 
   echo_green "MySQL文件权限"
   chown mysql:mysql -R /server/mysql /server/data /server/logs/mysql /server/etc/mysql
@@ -359,11 +348,24 @@ modFilePower(){
 
   echo_green "php文件权限"
   chown php-fpm:php-fpm -R /server/php /server/logs/php
-  find /server/php /server/logs/php /server/php/tools/ -type f -exec chmod 640 {} \;
-  find /server/php /server/logs/php /server/php/tools/ -type d -exec chmod 750 {} \;
-  chmod 750 -R /server/php/{74,84}/{bin,sbin}
-  chmod 640 /server/php/{84,74}/lib/php/extensions/no-debug-non-zts-*/*
-  chmod 750 /server/php/tools/{composer,php-cs-fixer}.phar
+  find /server/php /server/logs/php -type f -exec chmod 640 {} \;
+  find /server/php /server/logs/php -type d -exec chmod 750 {} \;
+  chmod 640 /server/php/84/lib/php/extensions/no-debug-non-zts-*/*
+  chmod 750 -R /server/php/84/{bin,sbin}
+  chmod 750 /server/php/tools/{composer,php-cs-fixer-v3}.phar
+
+  echo_green "nginx文件权限"
+  chown nginx:nginx -R /server/{nginx,sites}
+  chown nginx:nginx -R /server/{etc,logs}/nginx
+  find /server/{nginx,sites} -type f -exec chmod 640 {} \;
+  find /server/{nginx,sites} -type d -exec chmod 750 {} \;
+  find /server/etc/nginx -type f -exec chmod 640 {} \;
+  find /server/etc/nginx -type d -exec chmod 750 {} \;
+  chmod 750 /server/logs/nginx
+  chmod 750 -R /server/nginx/sbin
+  echo_green "为nginx启用CAP_NET_BIND_SERVICE能力"
+  echo_red "注：每次修改nginx执行文件权限，都需要重新启用该能力"
+  setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 }
 
 #安装systemctl单元
@@ -371,161 +373,44 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_cyan "/lib/systemd/system/{redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
-  echo_cyan "[+] Create nginx service..."
+  echo_cyan "[+] Create redis service..."
 
   echo "[Unit]
-Description=nginx-1.28.x
-After=network.target
 
-[Service]
-Type=forking
-User=nginx
-Group=nginx
-RuntimeDirectory=nginx
-RuntimeDirectoryMode=0750
-ExecStartPre=/server/nginx/sbin/nginx -t
-ExecStart=/server/nginx/sbin/nginx -c /server/nginx/conf/nginx.conf
-ExecReload=/server/nginx/sbin/nginx -s reload
-ExecStop=/server/nginx/sbin/nginx -s quit
-Restart=on-failure
-PrivateTmp=true
-
-[Install]
-WantedBy=multi-user.target
-" > /lib/systemd/system/nginx.service
-
-  echo_cyan "[+] Create php84-fpm service..."
-
-  echo "[Unit]
-Description=The PHP 8.4 FastCGI Process Manager
-After=network.target
-
-[Service]
-Type=notify
-User=php-fpm
-Group=php-fpm
-RuntimeDirectory=php84-fpm
-RuntimeDirectoryMode=0750
-ExecStart=/server/php/84/sbin/php-fpm --nodaemonize --fpm-config /server/php/84/etc/php-fpm.conf
-ExecReload=/bin/kill -USR2 \$MAINPID
-PrivateTmp=true
-ProtectSystem=full
-PrivateDevices=true
-ProtectKernelModules=true
-ProtectKernelTunables=true
-ProtectControlGroups=true
-RestrictRealtime=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
-RestrictNamespaces=true
-
-[Install]
-WantedBy=multi-user.target
-" > /lib/systemd/system/php84-fpm.service
-
-  echo_cyan "[+] Create php74-fpm service..."
-
-  echo "[Unit]
-Description=The PHP 7.4 FastCGI Process Manager
-After=network.target
-
-[Service]
-Type=notify
-User=php-fpm
-Group=php-fpm
-RuntimeDirectory=php74-fpm
-RuntimeDirectoryMode=0750
-ExecStart=/server/php/74/sbin/php-fpm --nodaemonize --fpm-config /server/php/74/etc/php-fpm.conf
-ExecReload=/bin/kill -USR2 $MAINPID
-PrivateTmp=true
-ProtectSystem=full
-PrivateDevices=true
-ProtectKernelModules=true
-ProtectKernelTunables=true
-ProtectControlGroups=true
-RestrictRealtime=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
-RestrictNamespaces=true
-
-[Install]
-WantedBy=multi-user.target
-" > /lib/systemd/system/php74-fpm.service
+" > /lib/systemd/system/redis.service
 
   echo_cyan "[+] Create postgres service..."
 
   echo "[Unit]
-Description=PostgreSQL database server
-Documentation=man:postgres(1)
-After=network-online.target
-Wants=network-online.target
 
-[Service]
-Type=notify
-User=postgres
-Group=postgres
-RuntimeDirectory=postgres
-RuntimeDirectoryMode=0750
-ExecStart=/server/postgres/bin/postgres -D /server/pgData
-ExecReload=/bin/kill -HUP \$MAINPID
-KillMode=mixed
-KillSignal=SIGINT
-TimeoutSec=infinity
-
-[Install]
-WantedBy=multi-user.target
 " > /lib/systemd/system/postgres.service
 
   echo_cyan "[+] Create MySQL service..."
 
   echo "[Unit]
-Description=MySQL Server 8.4.x
-Documentation=man:mysqld(8)
-After=network-online.target
-Wants=network-online.target
-After=syslog.target
 
-[Service]
-Type=notify
-User=mysql
-Group=mysql
-RuntimeDirectory=mysql
-RuntimeDirectoryMode=0750
-ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
-Restart=on-failure
-PrivateTmp=false
-
-[Install]
-WantedBy=multi-user.target
 " > /lib/systemd/system/mysqld-84.service
 
-  echo_cyan "[+] Create redis service..."
+  echo_cyan "[+] Create php84-fpm service..."
 
   echo "[Unit]
-Description=redis-7.4.x
-After=network.target
 
-[Service]
-Type=forking
-User=redis
-Group=redis
-RuntimeDirectory=redis
-RuntimeDirectoryMode=0750
-ExecStart=/server/redis/bin/redis-server /server/redis/redis.conf
-ExecReload=/bin/kill -s HUP \$MAINPID
-ExecStop=/bin/kill -s QUIT \$MAINPID
-Restart=on-failure
-PrivateTmp=true
+" > /lib/systemd/system/php84-fpm.service
 
-[Install]
-WantedBy=multi-user.target
-" > /lib/systemd/system/redis.service
+  echo_cyan "[+] Create nginx service..."
+
+  echo "[Unit]
+
+" > /lib/systemd/system/nginx.service
+
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service
+  systemctl enable --now {redis,postgres,mysqld-84,php84-fpm,nginx}.service
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmpp.tar.xz"
