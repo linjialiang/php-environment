@@ -378,35 +378,122 @@ InstallSystemctlUnit(){
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
   echo_cyan "[+] Create redis service..."
-
   echo "[Unit]
+Description=redis-8.2.x
+After=network.target
 
-" > /lib/systemd/system/redis.service
+[Service]
+Type=forking
+User=redis
+Group=redis
+RuntimeDirectory=redis
+RuntimeDirectoryMode=0750
+ExecStart=/server/redis/bin/redis-server /server/redis/redis.conf
+ExecReload=/bin/kill -s HUP \$MAINPID
+ExecStop=/bin/kill -s QUIT \$MAINPID
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+" > /usr/lib/systemd/system/redis.service
 
   echo_cyan "[+] Create postgres service..."
-
   echo "[Unit]
+Description=PostgreSQL database server
+Documentation=man:postgres(1)
+After=network-online.target
+Wants=network-online.target
 
+[Service]
+Type=notify
+User=postgres
+Group=postgres
+RuntimeDirectory=postgres
+RuntimeDirectoryMode=0750
+ExecStart=/server/postgres/bin/postgres -D /server/pgData
+ExecReload=/bin/kill -HUP \$MAINPID
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target
 " > /lib/systemd/system/postgres.service
 
   echo_cyan "[+] Create MySQL service..."
-
   echo "[Unit]
+Description=MySQL Server 8.4.x
+Documentation=man:mysqld(8)
+After=network-online.target
+Wants=network-online.target
+After=syslog.target
 
+[Service]
+User=mysql
+Group=mysql
+Type=notify
+TimeoutSec=0
+ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
+LimitNOFILE=10000
+Restart=on-failure
+RestartPreventExitStatus=1
+PrivateTmp=false
+RuntimeDirectory=mysql
+RuntimeDirectoryMode=0750
+
+[Install]
+WantedBy=multi-user.target
 " > /lib/systemd/system/mysqld-84.service
 
   echo_cyan "[+] Create php84-fpm service..."
-
   echo "[Unit]
+Description=The PHP 8.4 FastCGI Process Manager
+After=network.target
 
+[Service]
+Type=notify
+User=php-fpm
+Group=php-fpm
+RuntimeDirectory=php84-fpm
+RuntimeDirectoryMode=0750
+ExecStart=/server/php/84/sbin/php-fpm --nodaemonize --fpm-config /server/php/84/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 \$MAINPID
+PrivateTmp=true
+ProtectSystem=full
+PrivateDevices=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target
 " > /lib/systemd/system/php84-fpm.service
 
   echo_cyan "[+] Create nginx service..."
-
   echo "[Unit]
+Description=nginx-1.28.x
+After=network.target
 
+[Service]
+Type=forking
+User=nginx
+Group=nginx
+RuntimeDirectory=nginx
+RuntimeDirectoryMode=0750
+ExecStartPre=/server/nginx/sbin/nginx -t
+ExecStart=/server/nginx/sbin/nginx -c /server/nginx/conf/nginx.conf
+ExecReload=/server/nginx/sbin/nginx -s reload
+ExecStop=/server/nginx/sbin/nginx -s quit
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
 " > /lib/systemd/system/nginx.service
-
 
   echo_green "Registered Service..."
   systemctl daemon-reload
@@ -463,28 +550,10 @@ else
   echo ' '
   #安装systemctl单元
   InstallSystemctlUnit
-  echo ' '
-  echo_red "注：下面这些是手动操作哦！！！"
-  echo_yellow "=================================================================="
-  echo_green "针对 Postgres用户 修改操作系统打开最大文件句柄数"
-  echo_yellow "为防止重复插入，请在 /etc/security/limits.conf 文件的结尾手动添加\n如下2行代码："
-  echo_yellow " "
-  echo_cyan "postgres  soft  nofile  65535"
-  echo_cyan "postgres  hard  nofile  65535"
-  echo_yellow " "
-  echo_green "进行这一步操作的目的是防止linux操作系统内打开文件句柄数量的限制，\n避免不必要的故障"
-  echo_yellow "=================================================================="
-  echo ' '
-  echo_yellow "=================================================================="
-  echo_green "针对 redis 控制进程是否允许使用虚拟内存"
-  echo_yellow "为防止重复插入，请在 /etc/sysctl.conf 文件的结尾手动添加如下1行代码："
-  echo_yellow "   - 0：进程只能使用物理内存"
-  echo_yellow "   - 1：进程可以使用比物理内存更多的虚拟内存"
-  echo_yellow " "
-  echo_cyan "vm.overcommit_memory = 1"
-  echo_yellow " "
-  echo_green "进行这一步操作的目的是防止redis在内存不足时，造成数据丢失"
-  echo_yellow "=================================================================="
+  #日志管理
+  LogManagement
+  #系统级调优
+  SystemdOptimize
   echo ' '
   echo_yellow "=================================================================="
   echo_green "lnmpp安装完成！！！"
@@ -499,15 +568,15 @@ else
   echo_yellow "重载 systemctl"
   echo_yellow "systemctl daemon-reload"
   echo_yellow "启用并开启服务"
-  echo_yellow "systemctl enable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_yellow "systemctl enable --now {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "禁用并禁止服务"
-  echo_yellow "systemctl disable --now {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_yellow "systemctl disable --now {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "开启"
-  echo_yellow "systemctl start {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_yellow "systemctl start {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "停止"
-  echo_yellow "systemctl stop {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_yellow "systemctl stop {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "查看状态"
-  echo_yellow "systemctl status {redis,mysqld-84,postgres,php74-fpm,php84-fpm,nginx}.service"
+  echo_yellow "systemctl status {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
   echo_yellow "systemctl reload nginx"
   echo_yellow "=================================================================="
