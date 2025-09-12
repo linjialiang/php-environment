@@ -5,7 +5,7 @@ server
     server_name tp.io;
     root /www/tp/public;
 
-    access_log /server/logs/nginx/access/tp.log;
+    access_log /server/logs/nginx/access/tp.log json_log_common;
     index index.php;
 
     # 设置站点仅至允许 GET、POST 请求

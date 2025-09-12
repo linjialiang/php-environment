@@ -20,7 +20,7 @@ server
     # 站点单独指定错误日志路径及错误日志级别
     error_log /server/logs/nginx/access/example.log warn;
     # 站点单独指定访问日志路径
-    access_log /server/logs/nginx/access/example.log;
+    access_log /server/logs/nginx/access/example.log json_log_common;
 
     # 默认访问文件
     index index.html index.php;

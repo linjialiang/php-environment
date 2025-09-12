@@ -5,7 +5,7 @@ server
     server_name laravel.io;
     root /www/laravel/public;
 
-    access_log /server/logs/nginx/access/laravel.log;
+    access_log /server/logs/nginx/access/laravel.log json_log_common;
     index index.php;
 
     # 设置站点仅至允许 GET、POST 请求
