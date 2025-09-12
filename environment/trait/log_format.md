@@ -2,7 +2,9 @@
 
 nginx 的 `ngx_http_log_module` 模块中有个 `log_format` 指令，它可以自定义访问日志格式。
 
-#### 1. 指令语法：`log_format 日志模板名 [escape=default|json|none];`
+#### 1. 指令语法：
+
+`log_format 日志模板名 [escape=default|json|none];`
 
 | `escape`值 | 说明                                   |
 | ---------- | -------------------------------------- |
