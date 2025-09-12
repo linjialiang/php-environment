@@ -129,7 +129,12 @@ installPackage(){
   echo_red "注意1：该lnmpp包不兼容其他发行版，因为极有可能因为依赖问题，导致整个环境无法使用"
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
   echo_yellow "=================================================================="
-  apt install -y build-essential autoconf libtool pkg-config libssl-dev
+  apt install -y build-essential autoconf libtool pkg-config tcl libssl-dev \
+  clang libicu-dev liblz4-dev libzstd-dev libbison-dev bison flex \
+  libreadline-dev zlib1g-dev libpam0g-dev libxslt1-dev libxslt1-dev uuid-dev \
+  libsystemd-dev cmake libtirpc-dev libcurl4-openssl-dev libpng-dev \
+  libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libonig-dev \
+  libcapstone-dev libsodium-dev libzip-dev libyaml-dev libgd-dev libgeoip-dev
 }
 
 #安装预构建包
