@@ -67,6 +67,7 @@ log_format json_log_assets escape=json
 
 # API 网关/反向代理模板
 # 特点：核心是监控后端服务（Upstream）的健康状况、性能和处理状态。
+# $upstream_* 变量在请求未代理或失败时可能为空
 log_format json_log_api escape=json
   '{'
     '"timestamp": "$time_iso8601",'
@@ -105,6 +106,7 @@ log_format json_log_api escape=json
 
 # 负载均衡器模板
 # 特点：在 API 模板基础上，增加负载均衡相关的缓存和队列状态，关注流量分发效能。
+# $upstream_* 变量在请求未代理或失败时可能为空
 log_format json_log_lb escape=json
   '{'
     '"timestamp": "$time_iso8601",'
@@ -142,6 +144,7 @@ log_format json_log_lb escape=json
 
 # 详细调试模板
 # 特点：记录极其详尽的信息，用于深度排错和安全分析。性能开销较大，不建议在生产环境长期开启。
+# $http_cookie 可能泄露敏感信息，仅建议在调试时临时使用
 log_format json_log_debug escape=json
   '{'
     '"timestamp": "$time_iso8601",'
@@ -166,7 +169,7 @@ log_format json_log_debug escape=json
         '"user_agent": "$http_user_agent",'
         '"referer": "$http_referer",'
         '"x_forwarded_for": "$http_x_forwarded_for",'
-        '"cookie": "$http_cookie"' # 可能泄露敏感信息，仅建议在调试时临时使用
+        '"cookie": "$http_cookie"'
       '},'
       '"response": {'
         '"status": $status,'
