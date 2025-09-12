@@ -605,7 +605,7 @@ Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参�
 
 ::: code-group
 
-```bash{5-11} [1.1.1w编译选项]
+```bash {5-11} [1.1.1w编译选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-1.1.1w
 cd /root/openssl-1.1.1w/
@@ -616,7 +616,7 @@ no-shared \
 zlib
 ```
 
-```bash{5-11} [3.0.17编译选项]
+```bash {5-11} [3.0.17编译选项]
 # 作为公共依赖库，推荐以root用户安装它
 mkdir /server/openssl-3.0.17
 cd /root/openssl-3.0.17/
@@ -633,7 +633,7 @@ make test > make-test.log
 make install
 ```
 
-```bash{2,8-10} [1.1.1w配置]
+```bash {2,8-10} [1.1.1w配置]
 # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
 export PKG_CONFIG_PATH=/server/openssl-1.1.1w/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -651,7 +651,7 @@ pkg-config --path openssl,libssl,libcrypto
 /usr/lib/x86_64-linux-gnu/pkgconfig/libcrypto.pc
 ```
 
-```bash{2,8-10} [3.0.17配置]
+```bash {2,8-10} [3.0.17配置]
 # 设置新的 PKG_CONFIG_PATH，排除系统默认的 OpenSSL 库路径
 export PKG_CONFIG_PATH=/server/openssl-3.0.17/lib64/pkgconfig:$PKG_CONFIG_PATH
 

@@ -60,7 +60,7 @@ apt install -y libyaml-dev
 
 ::: code-group
 
-```bash{4} [编译安装sqlite3]
+```bash {4} [编译安装sqlite3]
 usermod -a -G sqlite php-fpm
 
 # 构建 PHP 需将 sqlite3 的 pkgconfig 目录加入到临时环境变量里
@@ -87,7 +87,7 @@ apt install libsqlite3-dev -y
 
 ::: code-group
 
-```bash{5,6} [编译安装Postgres]
+```bash {5-6} [编译安装Postgres]
 usermod -a -G postgres php-fpm
 
 # PHP 的构建选项需指定Postgres安装目录或其pkgconfig路径
@@ -501,7 +501,7 @@ usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 
 ::: code-group
 
-```bash{1} [代码开头]
+```bash {1} [代码开头]
 #!/usr/bin/env php
 <?php
 /*
