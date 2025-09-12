@@ -504,9 +504,8 @@ WantedBy=multi-user.target
 LogManagement(){
   echo_yellow "=================================================================="
   echo_green "Redis/Nginx 使用 Logrotate 来管理日志文件"
-  echo_yellow " "
   echo_yellow "=================================================================="
-  echo_cyan "[+] 创建 redis 的 Logrotate 脚本"
+  echo_cyan "[+] 创建 redis 的 Logrotate 脚本..."
   echo "/server/logs/redis/redis-server.log {
     monthly
     maxsize 100M
@@ -526,7 +525,7 @@ LogManagement(){
     endscript
 }" > /etc/logrotate.d/redis
 
-  echo_cyan "[+] 创建 nginx 的 Logrotate 脚本"
+  echo_cyan "[+] 创建 nginx 的 Logrotate 脚本..."
   echo "
 /server/logs/nginx/access/*.log {
     daily
@@ -566,7 +565,25 @@ LogManagement(){
     endscript
 }
 " > /etc/logrotate.d/nginx
+}
 
+#日志管理
+LogManagement(){
+  echo_yellow "=================================================================="
+  echo_green "系统级优化"
+  echo_yellow "=================================================================="
+  echo_cyan "[+] 内核管理..."
+  echo "vm.overcommit_memory = 1" > /etc/sysctl.d/overcommit_memory.conf
+  echo "net.core.somaxconn = 4096" > /etc/sysctl.d/somaxconn.conf
+  echo "net.ipv4.tcp_max_syn_backlog = 4096" > /etc/sysctl.d/tcp_max_syn_backlog.conf
+
+  echo_cyan "[+] postgres用户资源管理..."
+  echo "postgres  soft  nofile  65535
+postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
+
+  echo_cyan "[+] redis用户资源管理..."
+  echo "redis soft nofile 65535
+redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 }
 
 echo_cyan "解压脚本同级目录下需存在源码压缩包 lnmpp.tar.xz"
