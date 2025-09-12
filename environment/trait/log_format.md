@@ -20,11 +20,15 @@ log_format combined '$remote_addr - $remote_user [$time_local] '
                     '"$http_referer" "$http_user_agent"';
 ```
 
-#### 3. 指令位置：也叫配置上下文
+#### 3. 指令位置：
+
+也叫做配置上下文
 
 `log_format` 指令只能放置在 `http { ... }` 配置块中
 
-#### 4. 可用变量：有两类变量可用：
+#### 4. 可用变量：
+
+有两类变量可用：
 
 1. **Common variables**：nginx 通用变量，如：$uri，$args 等
 2. **Log-writing-only variables**：日志记录专用变量，如：$request_time, $bytes_sent 等
