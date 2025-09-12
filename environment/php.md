@@ -44,9 +44,9 @@ cd /home/php-fpm/php-8.4.12/build_php/
 ::: code-group
 
 ```bash [84]
-apt install libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
+apt install -y libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
 libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libcapstone-dev \
-libsodium-dev libzip-dev -y
+libsodium-dev libzip-dev
 
 # php 扩展所需额外依赖
 apt install -y libyaml-dev
