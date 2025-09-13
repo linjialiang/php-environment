@@ -546,7 +546,7 @@ LogManagement(){
     endscript
 }
 
-/server/logs/nginx/*.log {
+/server/logs/nginx/error/*.log {
     monthly
     maxsize 100M
     missingok
