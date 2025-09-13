@@ -48,7 +48,7 @@ server_array=(
     "/server/etc/nginx/custom"
 
     "/server/sites"
-    "/server/sites/ssl"
+    "/server/sites/tls"
     "/server/sites/available"
     "/server/sites/enabled"
 )

@@ -60,5 +60,5 @@ http
     include /server/etc/nginx/custom/limit_req_http;
 
     include /server/etc/nginx/custom/default.nginx;
-    include /server/sites/enable/*.nginx;
+    include /server/sites/enabled/*.nginx;
 }

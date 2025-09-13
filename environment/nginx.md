@@ -496,8 +496,8 @@ find /server/{nginx,sites} -type f -exec chmod 640 {} \;
 find /server/{nginx,sites} -type d -exec chmod 750 {} \;
 find /server/{etc,logs}/nginx -type f -exec chmod 640 {} \;
 find /server/{etc,logs}/nginx -type d -exec chmod 750 {} \;
-# SSL证书相关统一使用600权限
-find /server/sites/ssl -type f -exec chmod 600 {} \;
+# TLS证书相关统一使用600权限
+find /server/sites/tls -type f -exec chmod 600 {} \;
 # 可执行文件需要执行权限
 chmod 750 /server/nginx/sbin/nginx
 # 每次对 sbin/nginx 可执行文件修改权限后，都需要重新启用CAP_NET_BIND_SERVICE能力
