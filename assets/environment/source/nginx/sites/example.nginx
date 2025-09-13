@@ -18,7 +18,7 @@ server
 
     root /www/example/public;
     # 站点单独指定错误日志路径及错误日志级别
-    error_log /server/logs/nginx/access/example.log warn;
+    error_log /server/logs/nginx/error/example.log warn;
     # 站点单独指定访问日志路径
     access_log /server/logs/nginx/access/example.log json_log_common;
 
