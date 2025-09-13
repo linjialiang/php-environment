@@ -54,10 +54,10 @@ if [ "$num1" = "1" ]; then
   echo_green "开始清理php日志"
   find /server/logs/php/ -type f -exec rm {} \;
   echo_green "开始清理nginx错误日志"
-  find /server/logs/nginx/ -type f -exec rm {} \;
+  find /server/logs/nginx/error/ -type f -exec rm {} \;
   echo_green "开始清理nginx访问日志"
   find /server/logs/nginx/access/ -type f -exec rm {} \;
-  find /server/nginx/logs/ -type f -exec {} \;
+  find /server/nginx/logs/ -type f -exec rm {} \;
   echo_green "清理lnmpp日志完成"
 else
   echo_yellow "不清理lnmpp日志"
