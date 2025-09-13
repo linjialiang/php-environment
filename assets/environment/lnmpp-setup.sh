@@ -642,7 +642,7 @@ else
   SystemdOptimize
   echo ' '
   echo_yellow "=================================================================="
-  echo_green "lnmpp安装完成！！！"
+  echo_green "lnmpp安装完成"
   echo_yellow "   - Postgres 默认有个超级管理员用户 admin 密码 1"
   echo_yellow "   - MySQL 默认有个本地用户 admin@localhost 密码 1"
   echo_yellow "   - MySQL 默认有个局域网用户 admin@'192.168.%.%' 密码 1"
@@ -668,6 +668,6 @@ else
   echo_yellow "=================================================================="
   echo ' '
   echo_yellow "=================================================================="
-  echo_red "条件允许，建议重启系统"
+  echo_red "条件允许，建议重启系统！！！"
   echo_yellow "=================================================================="
 fi
