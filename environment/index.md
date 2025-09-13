@@ -152,4 +152,4 @@ source ~/.profile
 
 ## 附录三、PHP 探针
 
-<<< @/assets/environment/source/tz.php
+<<< @/assets/environment/source/php/tz.php
