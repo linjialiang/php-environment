@@ -663,7 +663,7 @@ try {
                     系统信息
                     <button class="toggle" onclick="toggleSection('system-info')">显示/隐藏</button>
                 </h2>
-                <div id="system-info">
+                <div id="system-info" style="display: none;">
                     <table>
                         <?php foreach ($systemInfo as $key => $value): ?>
                         <tr>
@@ -681,7 +681,7 @@ try {
                     PHP配置信息
                     <button class="toggle" onclick="toggleSection('php-info')">显示/隐藏</button>
                 </h2>
-                <div id="php-info">
+                <div id="php-info" style="display: none;">
                     <table>
                         <?php foreach ($phpInfo as $key => $value): ?>
                         <tr>
@@ -699,7 +699,7 @@ try {
                     性能信息
                     <button class="toggle" onclick="toggleSection('performance-info')">显示/隐藏</button>
                 </h2>
-                <div id="performance-info">
+                <div id="performance-info" style="display: none;">
                     <table>
                         <?php foreach ($performanceInfo as $key => $value): ?>
                         <tr>
@@ -750,7 +750,7 @@ try {
                     扩展支持检测
                     <button class="toggle" onclick="toggleSection('extensions-info')">显示/隐藏</button>
                 </h2>
-                <div id="extensions-info">
+                <div id="extensions-info" style="display: none;">
                     <div class="extensions-check-grid">
                         <?php foreach ($extensionsInfo as $key => $value): ?>
                         <div class="extension-check-item">
@@ -768,7 +768,7 @@ try {
                     已加载扩展 <span class="badge badge-info"><?= $totalExtensions ?></span>
                     <button class="toggle" onclick="toggleSection('loaded-extensions')">显示/隐藏</button>
                 </h2>
-                <div id="loaded-extensions">
+                <div id="loaded-extensions" style="display: none;">
                     <div class="extensions-grid">
                         <?php foreach ($loadedExtensions as $ext): ?>
                         <div class="extension-item"><?= $ext ?></div>
