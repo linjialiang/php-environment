@@ -4,6 +4,7 @@ worker_shutdown_timeout 30s;
 worker_rlimit_nofile 10240;
 working_directory /tmp/;
 pid /run/nginx/process.pid;
+error_log /server/logs/nginx/error/main.log error;
 
 events
 {
@@ -13,7 +14,7 @@ events
 
 http
 {
-    error_log /server/logs/nginx/error/all.log error;
+    error_log /server/logs/nginx/error/http.log error;
     include /server/etc/nginx/custom/log_format;
     access_log /server/logs/nginx/access/all.log json_log_common;
     include mime.types;
