@@ -873,6 +873,10 @@ else
   echo_yellow "systemctl status {redis,postgres,mysqld-84,php84-fpm,nginx}.service"
   echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
   echo_yellow "systemctl reload nginx"
+  echo_yellow "使用nginx站点管理工具"
+  echo_yellow "启用站点： nginxctl enable <site_name>"
+  echo_yellow "禁用站点： nginxctl disable <site_name>"
+  echo_yellow "获取帮助： nginxctl help"
   echo_yellow "=================================================================="
   echo ' '
   echo_yellow "=================================================================="
