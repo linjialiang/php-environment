@@ -12,8 +12,8 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```[debian13]
-系统 : `Debian GNU/Linux 13 (trixie)`
-内核 : `linux-image-6.12.41+deb13-amd64`
+系统 : Debian GNU/Linux 13 (trixie)
+内核 : linux-image-6.12.41+deb13-amd64
 ```
 
 <<< @/assets/environment/lnmpp-toc.txt [环境目录结构]
