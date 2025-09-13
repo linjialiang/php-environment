@@ -12,7 +12,7 @@ export default {
   setup() {
     const route = useRoute();
     // 使用插件，自动为图片添加预览功能[1](@ref)
-    imageViewer(route, '.vp-doc img', {
+    imageViewer(route, 'main', {
       rotatable: true, // 启用旋转功能
       // 详细配置工具栏，确保旋转按钮可见
       toolbar: {

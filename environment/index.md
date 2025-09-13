@@ -149,3 +149,7 @@ source ~/.profile
 
 <<< @/assets/environment/lnmpp-setup.sh [lnmpp]
 :::
+
+## 附录三、PHP 探针
+
+<<< @/assets/environment/source/tz.php
