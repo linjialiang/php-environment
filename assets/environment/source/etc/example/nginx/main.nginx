@@ -12,8 +12,6 @@ working_directory /tmp/;
 
 pid /run/nginx/process.pid;
 
-error_log /server/logs/nginx/error/main.log error;
-
 events
 {
     worker_connections 10240;
