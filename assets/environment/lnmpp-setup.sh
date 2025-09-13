@@ -846,6 +846,8 @@ else
   LogManagement
   #系统级调优
   SystemdOptimize
+  #安装nginx站点管理工具
+  InstallSiteManagement
   echo ' '
   echo_yellow "=================================================================="
   echo_green "lnmpp安装完成"
