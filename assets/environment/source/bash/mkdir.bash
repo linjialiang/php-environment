@@ -43,6 +43,7 @@ server_array=(
     "/server/nginx"
     "/server/logs/nginx"
     "/server/logs/nginx/access"
+    "/server/logs/nginx/error"
     "/server/etc/nginx"
     "/server/etc/nginx/custom"
 
