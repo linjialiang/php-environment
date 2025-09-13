@@ -318,6 +318,16 @@ systemctl enable nginx.service
 | systemctl reload nginx.service | 重新加载 nginx 服务配置 |
 | systemctl status nginx.service | 检查 nginx 状态         |
 
+## 站点管理工具
+
+站点管理工具是 1 个 bash 脚本：
+
+::: code-group
+
+<<< /assets/environment/source/nginx/nginxctl.bash [源码]
+
+:::
+
 ## 用户身份认证
 
 `nginx server` 通过 `ngx_http_auth_basic_module` 模块下的 `HTTP Basic Authentication (HTTP 基本身份验证)` 协议，可以设置客户端通过验证用户名和密码来访问网站资源
