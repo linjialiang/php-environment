@@ -49,6 +49,8 @@ server_array=(
 
     "/server/sites"
     "/server/sites/ssl"
+    "/server/sites/available"
+    "/server/sites/enabled"
 )
 
 echo "-----开始创建server目录-----"

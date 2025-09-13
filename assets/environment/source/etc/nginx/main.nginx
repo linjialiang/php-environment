@@ -33,5 +33,5 @@ http
     add_header X-Content-Type-Options nosniff always;
     include /server/etc/nginx/custom/limit_req_http;
     include /server/etc/nginx/custom/default.nginx;
-    include /server/sites/*.nginx;
+    include /server/sites/enable/*.nginx;
 }
