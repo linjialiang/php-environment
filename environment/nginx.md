@@ -327,13 +327,16 @@ systemctl enable nginx.service
 <<< @/assets/environment/source/nginx/nginxctl.bash [源码]
 <<< @/assets/environment/source/nginx/nginxctl-echo.bash [源码直写版]
 
+```bash [授权]
+chmod 755 /usr/local/bin/nginxctl
+```
+
 ```md [操作]
-| common                         | info                    |
-| ------------------------------ | ----------------------- |
-| start nginx.service            | 立即启动 nginx 服务     |
-| systemctl stop nginx.service   | 立即停止 nginx 服务     |
-| systemctl reload nginx.service | 重新加载 nginx 服务配置 |
-| systemctl status nginx.service | 检查 nginx 状态         |
+| common                       | info     |
+| ---------------------------- | -------- |
+| nginxctl enable <site_name>  | 启用站点 |
+| nginxctl disable <site_name> | 禁用站点 |
+| nginxctl help                | 获取帮助 |
 ```
 
 :::
