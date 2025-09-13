@@ -320,11 +320,21 @@ systemctl enable nginx.service
 
 ## 站点管理工具
 
-站点管理工具是 1 个 bash 脚本：
+站点管理工具源码是个 bash 脚本文件，内部的重载使用了 `systemdctl` 工具实现，所以使用他的前提是首先配置好 systemd。
 
 ::: code-group
 
-<<< /assets/environment/source/nginx/nginxctl.bash [源码]
+<<< @/assets/environment/source/nginx/nginxctl.bash [源码]
+<<< @/assets/environment/source/nginx/nginxctl-echo.bash [源码直写版]
+
+```md [操作]
+| common                         | info                    |
+| ------------------------------ | ----------------------- |
+| start nginx.service            | 立即启动 nginx 服务     |
+| systemctl stop nginx.service   | 立即停止 nginx 服务     |
+| systemctl reload nginx.service | 重新加载 nginx 服务配置 |
+| systemctl status nginx.service | 检查 nginx 状态         |
+```
 
 :::
 
