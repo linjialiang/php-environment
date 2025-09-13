@@ -586,6 +586,15 @@ postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
 redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 }
 
+#PHP工具软链接到 /usr/local/bin
+LogManagement(){
+  echo_yellow "=================================================================="
+  echo_green "PHP工具软链接到 /usr/local/bin"
+  echo_green "含：composer和php-cs-fixer"
+  echo_yellow "=================================================================="
+  ln -s /server/php/tools/composer.phar /usr/local/bin/composer
+  ln -s /server/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
+}
 
 #安装nginx站点管理工具
 InstallSiteManagement(){
