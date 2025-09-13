@@ -77,7 +77,7 @@ enable_site() {
     # 测试Nginx配置
     print_info "测试Nginx配置..."
     if ! nginx -t; then
-        print_error "Nginx配置测试失败，请检查配置"
+        print_error "Nginx 配置测试失败，请检查配置"
         exit 1
     fi
 
@@ -114,7 +114,7 @@ disable_site() {
     # 测试Nginx配置
     print_info "测试Nginx配置..."
     if ! nginx -t; then
-        print_error "Nginx配置测试失败，请检查配置"
+        print_error "Nginx 配置测试失败，请检查配置"
         exit 1
     fi
 
