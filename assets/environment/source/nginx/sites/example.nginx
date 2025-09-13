@@ -6,9 +6,9 @@ server
     # 请填写证书文件的相对路径或绝对路径
     server_name example.com;
     # 请填写证书文件的相对路径或绝对路径
-    ssl_certificate /server/ssl/example.com_bundle.crt;
+    ssl_certificate /server/tls/example.com_bundle.crt;
     # 请填写私钥文件的相对路径或绝对路径
-    ssl_certificate_key /server/ssl/example.com.key;
+    ssl_certificate_key /server/tls/example.com.key;
     ssl_session_timeout 5m;
     # 请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
