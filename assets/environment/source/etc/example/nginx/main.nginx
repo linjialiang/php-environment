@@ -12,6 +12,8 @@ working_directory /tmp/;
 
 pid /run/nginx/process.pid;
 
+error_log /server/logs/nginx/error/main.log error;
+
 events
 {
     worker_connections 10240;
@@ -21,7 +23,7 @@ events
 http
 {
     # debug info notice warn error crit alert emerg
-    error_log /server/logs/nginx/error/all.log error;
+    error_log /server/logs/nginx/error/http.log error;
     include /server/etc/nginx/custom/log_format;
     access_log /server/logs/nginx/access/all.log json_log_common;
 
