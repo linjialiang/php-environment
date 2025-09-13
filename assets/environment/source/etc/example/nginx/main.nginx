@@ -1,4 +1,4 @@
-# /server/nginx/conf/nginx.conf
+# /server/etc/nginx/main.nginx
 
 # user 指令是用于指定子进程(worker)用户和用户组
 # user 指令只有当主进程(master)用户是超级用户(root)是才有意义，否则会被忽略掉
