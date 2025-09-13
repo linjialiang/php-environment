@@ -192,4 +192,4 @@ main() {
 
 # 执行主程序
 main \"\$@\"
-" > /usr/local/nginxctl.bash
+" > /usr/local/bin/nginxctl.bash
