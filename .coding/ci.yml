@@ -1,0 +1,53 @@
+version: '1.0'
+name: Deploy VitePress site to Tencent Cloud Base
+displayName: 部署 VitePress 到云托管
+
+on:
+  push:
+    branches:
+      - main
+  manual: true
+
+env:
+  node_version: 20
+
+phases:
+  - name: setup
+    displayName: 环境设置
+    steps:
+      - name: Checkout code
+        action: checkout@v1
+      - name: Setup Node.js
+        action: setup_node@v1
+        with:
+          node_version: ${{ env.node_version }}
+          cache: pnpm
+      - name: Setup pnpm
+        action: setup_pnpm@v1
+        with:
+          version: 9
+
+  - name: install
+    displayName: 安装依赖
+    steps:
+      - name: Install dependencies
+        run: pnpm install
+
+  - name: build
+    displayName: 构建项目
+    steps:
+      - name: Build with VitePress
+        run: pnpm build
+
+  - name: deploy
+    displayName: 部署到云托管
+    steps:
+      - name: Deploy to Tencent Cloud Base
+        action: cloudbase_deploy@v1
+        with:
+          # 请替换为您的云开发环境ID
+          env_id: your-environment-id
+          # 构建输出目录
+          source_path: .vitepress/dist
+          # 部署触发方式，默认为静态托管
+          type: static

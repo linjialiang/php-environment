@@ -15,5 +15,8 @@
       "column": 120,
       "color": "rgba(255, 255, 255, .3)"
     }
-  ]
+  ],
+  "yaml.schemas": {
+    "https://ci.coding.net/docs/conf-schema.json": ".coding-ci.yml"
+  }
 }
