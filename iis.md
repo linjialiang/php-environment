@@ -68,8 +68,8 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
     | IIS 应用池用户 | 描述                         | 归属用户组                                            |
     | -------------- | ---------------------------- | ----------------------------------------------------- |
     | `iis`          | IIS 应用池用户[默认]         | `IIS_AppPool_Users`                                   |
-    | `iis_php74`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP84_CGI_Users` |
-    | `iis_php84`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP74_CGI_Users` |
+    | `iis_php74`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP74_CGI_Users` |
+    | `iis_php84`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP84_CGI_Users` |
 
 ::: details 截图
 ![创建用户和用户组](./assets/iis/create-user-and-group.gif)
