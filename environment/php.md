@@ -521,15 +521,15 @@ usermod -a -G sqlite,redis,postgres,mysql,php-fpm,nginx emad
 ```bash [使用php调用]
 php composer [options]
 php php-cs-fixer [options]
-/server/php/84/bin/php /server/php/tools/composer.phar [options]
-/server/php/84/bin/php /server/php/tools/php-cs-fixer.phar [options]
+/server/php/84/bin/php /usr/local/bin/composer [options]
+/server/php/84/bin/php /usr/local/bin/php-cs-fixer [options]
 ```
 
 ```bash [独立调用]
 composer [options]
 php-cs-fixer [options]
-/server/php/tools/composer.phar [options]
-/server/php/tools/php-cs-fixer.phar [options]
+/usr/local/bin/composer [options]
+/usr/local/bin/php-cs-fixer [options]
 ```
 
 ::: danger 独立调用的条件
