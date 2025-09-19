@@ -1,7 +1,7 @@
 // import flexSearchIndexOptions from "flexsearch";
 import { defineConfig } from 'vitepress';
 import environmentNav from './nav/environment.mts';
-import { environment, mysql } from './sidebar/main.mts';
+import { environment } from './sidebar/main.mts';
 
 export default defineConfig({
   base: '/',
@@ -85,15 +85,10 @@ export default defineConfig({
       { text: '主页', link: '/' },
       { text: '环境搭建', items: environmentNav },
       { text: 'IIS 篇', link: '/iis' },
-      {
-        text: 'MySQL 篇',
-        items: [{ text: '主从复制', link: '/mysql/master-slave-replication/' }],
-      },
     ],
     sidebar: {
       '/environment/': environment,
       '/environment-old/': environment,
-      '/mysql/': mysql,
     },
     footer: {
       message: '程序员系列教程-PHP 环境搭建',
