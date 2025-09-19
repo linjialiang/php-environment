@@ -23,33 +23,33 @@ features:
     - icon:
           dark: /static/svg/sqlite-dark.svg
           light: /static/svg/sqlite-light.svg
-      title: SQLite3 教程
+      title: SQLite3 安装
       details: 轻量级关系型数据库
       link: /environment/sqlite3
     - icon:
           src: /static/svg/redis.svg
-      title: Redis 教程
+      title: Redis 安装
       details: 最流行的键值型数据库(内存型)
       link: /environment/redis
     - icon:
           src: /static/svg/pgsql.svg
-      title: PostgreSQL 教程
+      title: PostgreSQL 安装
       details: 最强大的开源关系型数据库
       link: /environment/pgsql
     - icon:
           src: /static/svg/mysql.svg
-      title: MySQL 教程
+      title: MySQL 安装
       details: 最流行的开源关系型数据库
       link: /environment/mysql
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
-      title: PHP 教程
+      title: PHP 安装
       details: PHP语言解释器
       link: /environment/php
     - icon:
           src: /static/svg/nginx.svg
-      title: Nginx 教程
+      title: Nginx 安装
       details: Web服务器
       link: /environment/nginx
     - icon:
