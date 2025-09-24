@@ -1,6 +1,7 @@
 const path = {
   main: '/environment/',
   mainOld: '/environment-old/',
+  redisConfUrl: 'http://tutorial.e8so.com/nosql/redis/redis-conf.html',
 };
 
 const sidebar = [
@@ -11,7 +12,7 @@ const sidebar = [
     collapsed: true,
     items: [
       { text: '8.2', link: `${path.main}redis` },
-      { text: 'Redis配置文件', link: `${path.main}redis-conf` },
+      { text: 'Redis配置文件', link: `${path.redisConfUrl}` },
     ],
   },
   { text: 'PostgreSQL', link: `${path.main}pgsql` },
@@ -30,7 +31,7 @@ const sidebar = [
         items: [
           { text: '8.2', link: `${path.mainOld}redis` },
           { text: '7.4', link: `${path.mainOld}redis-74` },
-          { text: 'Redis配置文件', link: `${path.mainOld}redis-conf` },
+          { text: 'Redis配置文件', link: `${path.redisConfUrl}` },
         ],
       },
       { text: 'PostgreSQL', link: `${path.mainOld}pgsql_compile` },
