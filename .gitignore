@@ -5,3 +5,4 @@ node_modules
 .vitepress/.temp/
 .pnpm-debug.log
 *.swp
+pnpm-lock.yaml
