@@ -3,7 +3,7 @@ server
     # SSL 默认访问端口号为 443
     listen 443 ssl;
     # 请填写证书文件的相对路径或绝对路径
-    server_name webdev.e8so.com;
+    server_name example.com;
     # 请填写证书文件的相对路径或绝对路径
     ssl_certificate /server/webdav/tls/example.com_nginx/example.com_bundle.crt;
     # 请填写私钥文件的相对路径或绝对路径
