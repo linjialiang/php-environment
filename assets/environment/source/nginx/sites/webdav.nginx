@@ -59,18 +59,18 @@ server {
     auth_basic_user_file /server/auth/webdav.htpasswd;
 
     # 安全设置
-    autoindex off;  # 关闭目录列表
+    # autoindex off;  # 关闭目录列表
 
     # 隐藏敏感文件
     location ~ /\. {
-        deny all;
-        access_log off;
-        log_not_found off;
+        # deny all;
+        # access_log off;
+        # log_not_found off;
     }
 
     # 禁止访问特定文件类型
     location ~* \.(log|sql|db)$ {
-        deny all;
+        # deny all;
     }
 
     # 针对阅读器的优化配置
@@ -88,7 +88,7 @@ server {
 
         # WebDAV 方法支持
         limit_except GET POST PUT DELETE OPTIONS PROPFIND MKCOL COPY MOVE LOCK UNLOCK {
-            deny all;
+            # deny all;
         }
     }
 
