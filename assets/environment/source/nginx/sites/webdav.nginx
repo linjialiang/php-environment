@@ -87,6 +87,8 @@ server
 # HTTP 自动跳转 HTTPS
 server {
     listen 80;
+    #请填写绑定证书的域名
     server_name example.com;
+    #把http的域名请求转成https
     return 301 https://$host$request_uri;
 }
