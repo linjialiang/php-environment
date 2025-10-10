@@ -1,10 +1,19 @@
-server
-{
-    # ------ TLS 区块 START ------ #
-    # SSL 默认访问端口号为 443
-    listen 443 ssl;
-    # 请填写绑定证书的域名
+server {
+    listen 80;
+    listen [::]:80;
     server_name example.com;
+
+    # 重定向到 HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name example.com;
+
+    # 请填写绑定证书的域名
+    # ------ TLS 配置 START ------ #
     # 请填写证书文件的相对路径或绝对路径，需 nginx 主进程用户可读
     ssl_certificate /server/sites/tls/example.com_nginx/example.com_bundle.crt;
     # 请填写私钥文件的相对路径或绝对路径，需 nginx 主进程用户可读
@@ -15,82 +24,86 @@ server
     # 请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
     ssl_prefer_server_ciphers on;
-    # ------ TLS 区块 END ------ #
+    # ------ TLS 配置 END ------ #
 
+    # WebDAV 根目录
     root /www/example.com;
+    index index.html index.htm;
 
+    # 访问日志
     access_log      off;    # 关闭访问日志
     log_not_found   off;    # 关闭错误日志
+    # access_log /server/logs/nginx/access/example.com.log;
+    # error_log /server/logs/nginx/error/example.com.log;
 
-    # 统一入口
-    location /
-    {
-        # 默认访问文件
-        index index.html index.php;
+    # 客户端最大上传大小（重要：适配 anx 等阅读器的大文件）
+    client_max_body_size 1024M;
 
-        # 设置站点仅至允许 GET、POST 请求
-        if ($request_method !~* GET|POST|OPTIONS)
-        {
-            return 403;
-        }
-        # 静态资源启用缓存设置
-        include custom/cache;
+    # WebDAV 核心配置
+    dav_methods PUT DELETE MKCOL COPY MOVE;
+    dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
-        # 加载请求限制，server区域，需要结合http区块
-        include custom/limit_req_server;
+    # 文件权限设置
+    dav_access user:rw group:rw all:r;
 
-        # 隐藏入口文件，如果文件或目录不存在，则尝试使用入口文件解析
-        # try_files 解析效率比 rewrite 高
-        try_files $uri $uri/ /index.php?$query_string;
+    # 自动创建目录（重要：用于阅读器自动创建文件夹结构）
+    create_full_put_path on;
 
-        # 开启跨域请求处理，看自己的后端项目有否需要接受外部请求
-        # 内容见 cross_domain 配置
+    # 锁定配置（重要：支持文件同步锁）
+    client_body_temp_path /www/webdav/example.com/temp;
+    dav_lock_zone zone_name:10m;
+    dav_lock zone_name;
 
-        # 对文件类型为 .php 的url请求做转发处理
-        include custom/php_forward;
+    # 认证配置
+    auth_basic "WebDAV Server - Authentication Required";
+    auth_basic_user_file /server/sites/auth/webdav.users;
 
-        # 禁止访问的目录或文件
-        include custom/no_access;
+    # 安全设置
+    autoindex off;  # 关闭目录列表
+
+    # 隐藏敏感文件
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
     }
 
-    location /webdav {
-        # 设置默认用户子目录
-        set $user_subdir "public";
+    # 禁止访问特定文件类型
+    location ~* \.(log|sql|db)$ {
+        deny all;
+    }
 
-        # 根据用户动态指定子目录
-        if ($remote_user = "anx") {
-            set $user_subdir "anxReader";
+    # 针对阅读器的优化配置
+    location / {
+        # 允许跨域请求（如果阅读器需要）
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PROPFIND, MOVE, COPY, LOCK, UNLOCK" always;
+        add_header Access-Control-Allow-Headers "Authorization, Depth, Content-Type, Overwrite, Destination, Lock-Token, If-Modified-Since, User-Agent, X-Requested-With" always;
+        add_header Access-Control-Expose-Headers "ETag, Content-Length" always;
+
+        # OPTIONS 请求处理（预检请求）
+        if ($request_method = OPTIONS) {
+            return 204;
         }
-        if ($remote_user = "legado") {
-            set $user_subdir "legadoReader";
+
+        # WebDAV 方法支持
+        limit_except GET POST PUT DELETE OPTIONS PROPFIND MKCOL COPY MOVE LOCK UNLOCK {
+            deny all;
         }
+    }
 
-        root /www/webdav/$user_subdir;
-
-        client_body_temp_path /server/temp/$user_subdir;
-
-        # WebDAV 配置和认证配置放在这里
+    # 为不同阅读器创建专用目录（可选）
+    location /anx/ {
+        alias /www/webdav/example.com/data/anx/;
         dav_methods PUT DELETE MKCOL COPY MOVE;
-        create_full_put_path  on;
-        dav_access            user:rw group:r all:r;
-
-        auth_basic           "WebDAV Server";
-        # 权限需 nginx 主进程用户可读
-        auth_basic_user_file /server/htpasswd/webdav;
-
-        # 限制请求IP
-        # limit_except GET {
-        #     allow 192.168.1.0/32;
-        #     deny  all;
-        # }
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        create_full_put_path on;
     }
-}
 
-# HTTP 自动跳转 HTTPS
-server {
-    listen 80;
-    #请填写绑定证书的域名
-    server_name example.com;
-    #把http的域名请求转成https
-    return 301 https://$host$request_uri;
+    location /legado/ {
+        alias /www/webdav/example.com/data/legado/;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        create_full_put_path on;
+    }
 }
