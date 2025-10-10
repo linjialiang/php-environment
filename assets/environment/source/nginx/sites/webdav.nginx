@@ -7,6 +7,7 @@ server {
     return 301 https://$server_name$request_uri;
 }
 
+# 关于权限，暂时测试通过为：目录和文件全部设为nginx子进程用户具有读+写权限
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
