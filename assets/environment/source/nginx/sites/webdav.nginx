@@ -75,6 +75,12 @@ server
         auth_basic           "WebDAV Server";
         # 权限需 nginx 主进程用户可读
         auth_basic_user_file /server/htpasswd/webdav;
+
+        # 限制请求IP
+        # limit_except GET {
+        #     allow 192.168.1.0/32;
+        #     deny  all;
+        # }
     }
 }
 
