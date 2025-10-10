@@ -51,8 +51,8 @@ server {
 
     # 锁定配置（重要：支持文件同步锁）
     client_body_temp_path /www/webdav/example.com/temp;
-    dav_lock_zone zone_name:10m;
-    dav_lock zone_name;
+    # dav_lock_zone zone_name:10m;
+    # dav_lock zone_name;
 
     # 认证配置
     auth_basic "WebDAV Server - Authentication Required";
