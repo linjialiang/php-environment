@@ -67,6 +67,8 @@ server
 
         root /www/webdav/$user_subdir;
 
+        client_body_temp_path /server/temp/$user_subdir;
+
         # WebDAV 配置和认证配置放在这里
         dav_methods PUT DELETE MKCOL COPY MOVE;
         create_full_put_path  on;
