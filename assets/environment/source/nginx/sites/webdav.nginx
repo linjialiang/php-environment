@@ -15,9 +15,9 @@ server {
     # 请填写绑定证书的域名
     # ------ TLS 配置 START ------ #
     # 请填写证书文件的相对路径或绝对路径，需 nginx 主进程用户可读
-    ssl_certificate /server/sites/tls/example.com_nginx/example.com_bundle.crt;
+    ssl_certificate /server/tls/example.com_nginx/example.com_bundle.crt;
     # 请填写私钥文件的相对路径或绝对路径，需 nginx 主进程用户可读
-    ssl_certificate_key /server/sites/tls/example.com_nginx/example.com.key;
+    ssl_certificate_key /server/tls/example.com_nginx/example.com.key;
     ssl_session_timeout 5m;
     # 请按照以下协议配置
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -56,7 +56,7 @@ server {
 
     # 认证配置
     auth_basic "WebDAV Server - Authentication Required";
-    auth_basic_user_file /server/sites/auth/webdav.users;
+    auth_basic_user_file /server/auth/webdav.htpasswd;
 
     # 安全设置
     autoindex off;  # 关闭目录列表
