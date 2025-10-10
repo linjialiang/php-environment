@@ -6,9 +6,9 @@ server
     # 请填写绑定证书的域名
     server_name example.com;
     # 请填写证书文件的相对路径或绝对路径，需 nginx 主进程用户可读
-    ssl_certificate /server/sites/tls/example.com/example.com_bundle.crt;
+    ssl_certificate /server/sites/tls/example.com_nginx/example.com_bundle.crt;
     # 请填写私钥文件的相对路径或绝对路径，需 nginx 主进程用户可读
-    ssl_certificate_key /server/sites/tls/example.com/example.com.key;
+    ssl_certificate_key /server/sites/tls/example.com_nginx/example.com.key;
     ssl_session_timeout 5m;
     # 请按照以下协议配置
     ssl_protocols TLSv1.2 TLSv1.3;
