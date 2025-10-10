@@ -1,85 +1,80 @@
 server
 {
+    # ------ TLS 区块 START ------ #
     # SSL 默认访问端口号为 443
     listen 443 ssl;
-    # 请填写证书文件的相对路径或绝对路径
+    # 请填写绑定证书的域名
     server_name example.com;
-    # 请填写证书文件的相对路径或绝对路径
-    ssl_certificate /server/webdav/tls/example.com_nginx/example.com_bundle.crt;
-    # 请填写私钥文件的相对路径或绝对路径
-    ssl_certificate_key /server/webdav/tls/example.com_nginx/example.com.key;
+    # 请填写证书文件的相对路径或绝对路径，需 nginx 主进程用户可读
+    ssl_certificate /server/sites/tls/example.com/example.com_bundle.crt;
+    # 请填写私钥文件的相对路径或绝对路径，需 nginx 主进程用户可读
+    ssl_certificate_key /server/sites/tls/example.com/example.com.key;
     ssl_session_timeout 5m;
-    # 请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     # 请按照以下协议配置
     ssl_protocols TLSv1.2 TLSv1.3;
+    # 请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
     ssl_prefer_server_ciphers on;
+    # ------ TLS 区块 END ------ #
 
-    root /server/webdav/www/example_com;
+    root /www/example.com;
 
     access_log      off;    # 关闭访问日志
     log_not_found   off;    # 关闭错误日志
 
-    # 默认访问文件
-    index index.html index.php;
-
-    # 设置站点仅至允许 GET、POST 请求
-    # if ($request_method !~* GET|POST|OPTIONS)
-    # {
-    #     return 403;
-    # }
-
-    # 静态资源启用缓存设置
-    # include custom/cache;
-
-    # 加载请求限制，server区域，需要结合http区块
-    # include custom/limit_req_server;
-
     # 统一入口
-    # location /
-    # {
-    #     # 隐藏入口文件，如果文件或目录不存在，则尝试使用入口文件解析
-    #     # try_files 解析效率比 rewrite 高
-    #     try_files $uri $uri/ /index.php?$query_string;
-    #
-    #     # 开启跨域请求处理，看自己的后端项目有否需要接受外部请求
-    #     # 内容见 cross_domain 配置
-    # }
+    location /
+    {
+        # 默认访问文件
+        index index.html index.php;
 
-    # 对文件类型为 .php 的url请求做转发处理
-    # include custom/php_forward;
+        # 设置站点仅至允许 GET、POST 请求
+        if ($request_method !~* GET|POST|OPTIONS)
+        {
+            return 403;
+        }
+        # 静态资源启用缓存设置
+        include custom/cache;
 
-    # 禁止访问的目录或文件
-    # include custom/no_access;
+        # 加载请求限制，server区域，需要结合http区块
+        include custom/limit_req_server;
 
-    location /AnxReader {
-        root                  /server/webdav/www/anx;
-        client_body_temp_path /server/webdav/temp/anx;
-        dav_methods PUT DELETE MKCOL COPY MOVE;
-        create_full_put_path  on;
-        dav_access            group:rw  all:r;
-        # limit_except GET {
-        #     allow 192.168.1.0/32;
-        #     deny  all;
-        # }
+        # 隐藏入口文件，如果文件或目录不存在，则尝试使用入口文件解析
+        # try_files 解析效率比 rewrite 高
+        try_files $uri $uri/ /index.php?$query_string;
 
-        auth_basic           "anx webdav";
-        auth_basic_user_file /server/webdav/auth/anx;
+        # 开启跨域请求处理，看自己的后端项目有否需要接受外部请求
+        # 内容见 cross_domain 配置
+
+        # 对文件类型为 .php 的url请求做转发处理
+        include custom/php_forward;
+
+        # 禁止访问的目录或文件
+        include custom/no_access;
     }
 
-    location /legado {
-        root                  /server/webdav/www/legado;
-        client_body_temp_path /server/webdav/temp/legado;
+    location /webdav {
+        # 设置默认用户子目录
+        set $user_subdir "public";
+
+        # 根据用户动态指定子目录
+        if ($remote_user = "anx") {
+            set $user_subdir "anxReader";
+        }
+        if ($remote_user = "legado") {
+            set $user_subdir "legadoReader";
+        }
+
+        root /www/webdav/$user_subdir;
+
+        # WebDAV 配置和认证配置放在这里
         dav_methods PUT DELETE MKCOL COPY MOVE;
         create_full_put_path  on;
-        dav_access            group:rw  all:r;
-        # limit_except GET {
-        #     allow 192.168.1.0/32;
-        #     deny  all;
-        # }
+        dav_access            user:rw group:r all:r;
 
-        auth_basic           "legado webdav";
-        auth_basic_user_file /server/webdav/auth/legado;
+        auth_basic           "WebDAV Server";
+        # 权限需 nginx 主进程用户可读
+        auth_basic_user_file /server/htpasswd/webdav;
     }
 }
 
