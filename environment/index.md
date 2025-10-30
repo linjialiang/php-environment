@@ -137,7 +137,7 @@ source ~/.profile
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<< @/assets/environment/lnpp-setup.sh [lnmpp]
+<<< @/assets/environment/lnpp-setup.sh [lnpp]
 :::
 
 ## 附录三、PHP 探针
