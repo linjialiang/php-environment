@@ -1,24 +1,6 @@
 #!/usr/bin/env bash
-func_chown_sqlite(){
-    chown sqlite:sqlite -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
-func_chown_redis(){
-    chown redis:redis -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
 func_chown_postgres(){
     chown postgres:postgres -R $1
-    find $1 -type f -exec chmod 640 {} \;
-    find $1 -type d -exec chmod 750 {} \;
-}
-
-func_chown_mysql(){
-    chown mysql:mysql -R $1
     find $1 -type f -exec chmod 640 {} \;
     find $1 -type d -exec chmod 750 {} \;
 }
@@ -41,29 +23,11 @@ func_chown_www(){
     find $1 -type d -exec chmod 750 {} \;
 }
 
-chown_sqlite_array=(
-    "/server/sqlite"
-);
-
-chown_redis_array=(
-    "/server/redis"
-    "/server/redis/rdbData"
-    "/server/logs/redis"
-    "/server/etc/redis"
-);
-
 chown_postgres_array=(
     "/server/postgres"
     "/server/pgData"
     "/server/logs/postgres"
     "/server/etc/postgres"
-);
-
-chown_mysql_array=(
-    "/server/mysql"
-    "/server/data"
-    "/server/logs/mysql"
-    "/server/etc/mysql"
 );
 
 chown_phpFpm_array=(
@@ -82,22 +46,6 @@ chown_www_array=(
     "/www"
 );
 
-echo "-----开始设置 sqlite 用户权限目录-----"
-for((i=0;i<${#chown_sqlite_array[*]};i++));
-do
-   echo ${chown_sqlite_array[i]}
-   func_chown_sqlite ${chown_sqlite_array[i]}
-done
-echo "-----sqlite 用户权限目录设置结束-----"
-
-echo "-----开始设置 redis 用户权限目录-----"
-for((i=0;i<${#chown_redis_array[*]};i++));
-do
-   echo ${chown_redis_array[i]}
-   func_chown_redis ${chown_redis_array[i]}
-done
-echo "-----redis 用户权限目录设置结束-----"
-
 echo "-----开始设置 postgres 用户权限目录-----"
 for((i=0;i<${#chown_postgres_array[*]};i++));
 do
@@ -105,14 +53,6 @@ do
    func_chown_postgres ${chown_postgres_array[i]}
 done
 echo "-----postgres 用户权限目录设置结束-----"
-
-echo "-----开始设置 mysql 用户权限目录-----"
-for((i=0;i<${#chown_mysql_array[*]};i++));
-do
-   echo ${chown_mysql_array[i]}
-   func_chown_mysql ${chown_mysql_array[i]}
-done
-echo "-----mysql 用户权限目录设置结束-----"
 
 echo "-----开始设置 php-fpm 用户权限目录-----"
 for((i=0;i<${#chown_phpFpm_array[*]};i++));

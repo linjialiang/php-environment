@@ -16,7 +16,7 @@ titleTemplate: 环境搭建教程
 内核 : linux-image-6.12.41+deb13-amd64
 ```
 
-<<< @/assets/environment/lnmpp-toc.txt [环境目录结构]
+<<< @/assets/environment/lnpp-toc.txt [环境目录结构]
 :::
 
 ## 脚本文件
@@ -37,38 +37,28 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [包列表]
-1. sqlite-autoconf-3500400.tar.gz
-2. redis-8.2.1.tar.gz
-3. mysql-8.4.6.tar.gz
-4. postgresql-17.6.tar.bz2
-5. php-8.4.12.tar.xz
+1. postgresql-17.6.tar.bz2
+2. php-8.4.12.tar.xz
     - 动态扩展
         - xdebug-3.4.5.tgz
         - apcu-5.1.27.tgz
-        - mongodb-2.1.1.tgz
-        - redis-6.2.0.tgz
         - yaml-2.2.5.tgz
-6. nginx-1.28.0.tar.gz
+3. nginx-1.28.0.tar.gz
     - openssl-3.5.2.tar.gz
     - pcre2-10.45.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
 
 ```md [包下载]
-| package        | url                                                  |
-| -------------- | ---------------------------------------------------- |
-| SQLite3        | https://www.sqlite.org/                              |
-| Redis          | https://download.redis.io/redis-stable.tar.gz        |
-| PostgreSQL     | https://www.postgresql.org/                          |
-| MySQL          | https://www.mysql.com/                               |
-| PHP            | https://www.php.net/                                 |
-| PHP extend     | http://pecl.php.net/                                 |
-| Nginx          | http://nginx.org/                                    |
-| zlib           | http://www.zlib.net/                                 |
-| openssl        | https://openssl-library.org/                         |
-| openssl-1.1.1w | https://www.openssl.org/source/openssl-1.1.1w.tar.gz |
-| pcre2          | https://github.com/PCRE2Project/pcre2                |
-| icu4c          | https://github.com/unicode-org/icu/releases/         |
+| package    | url                                   |
+| ---------- | ------------------------------------- |
+| PostgreSQL | https://www.postgresql.org/           |
+| PHP        | https://www.php.net/                  |
+| PHP extend | http://pecl.php.net/                  |
+| Nginx      | http://nginx.org/                     |
+| zlib       | http://www.zlib.net/                  |
+| openssl    | https://openssl-library.org/          |
+| pcre2      | https://github.com/PCRE2Project/pcre2 |
 ```
 
 :::
@@ -147,7 +137,7 @@ source ~/.profile
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<< @/assets/environment/lnmpp-setup.sh [lnmpp]
+<<< @/assets/environment/lnpp-setup.sh [lnmpp]
 :::
 
 ## 附录三、PHP 探针
