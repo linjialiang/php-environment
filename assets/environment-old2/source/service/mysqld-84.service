@@ -1,0 +1,23 @@
+echo "[Unit]
+Description=MySQL Server 8.4.x
+Documentation=man:mysqld(8)
+After=network-online.target
+Wants=network-online.target
+After=syslog.target
+
+[Service]
+User=mysql
+Group=mysql
+Type=notify
+TimeoutSec=0
+ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
+LimitNOFILE=10000
+Restart=on-failure
+RestartPreventExitStatus=1
+PrivateTmp=false
+RuntimeDirectory=mysql
+RuntimeDirectoryMode=0750
+
+[Install]
+WantedBy=multi-user.target
+" > /lib/systemd/system/mysqld-84.service

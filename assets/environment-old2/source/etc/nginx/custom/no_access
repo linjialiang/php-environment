@@ -1,0 +1,11 @@
+location ~ /\.
+{
+    deny all;
+    return 404;
+}
+
+location ~* /(?:LICENSE|README\.md)
+{
+    deny all;
+    return 404;
+}

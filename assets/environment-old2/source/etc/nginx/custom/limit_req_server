@@ -1,0 +1,7 @@
+limit_req zone=with_ip burst=5 nodelay;
+limit_req zone=with_ip_request burst=5 delay=2;
+
+location ~* \.php$
+{
+    limit_req zone=with_ip_request_param burst=5;
+}

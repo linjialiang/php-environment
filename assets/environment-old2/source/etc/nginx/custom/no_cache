@@ -1,0 +1,4 @@
+location ~* \.(?:js|css|json|txt|xml|jpe?g|png|gif|ico|html?)$
+{
+    add_header Cache-Control no-store always;
+}

@@ -124,7 +124,7 @@ apt install libpq-dev -y
 ### 3. 构建选项
 
 ::: code-group
-<<< @/assets/environment/source/php/build/84.bash [84]
+<<< @/assets/environment-old2/source/php/build/84.bash [84]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -145,7 +145,7 @@ make install
 ./configure -h > configure.txt
 ```
 
-<<< @/assets/environment/source/php/configure/84.ini [8.4 选项]
+<<< @/assets/environment-old2/source/php/configure/84.ini [8.4 选项]
 :::
 
 ::: tip 构建指令区别：
@@ -285,7 +285,7 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 
 ::: details php 主配置文件案例
 ::: code-group
-<<< @/assets/environment/source/php/84/php-fpm.conf{ini} [8.4]
+<<< @/assets/environment-old2/source/php/84/php-fpm.conf{ini} [8.4]
 :::
 
 ### 3. 工作池配置文件
@@ -298,9 +298,9 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
     - 单独接收 ThinkPHP 站点，命名 `tp.conf`；
 
 ::: code-group
-<<< @/assets/environment/source/php/84/php-fpm.d/default.conf{ini} [84-default]
-<<< @/assets/environment/source/php/84/php-fpm.d/tp.conf{ini} [tp]
-<<< @/assets/environment/source/php/84/php-fpm.d/example/default.conf{ini} [案例说明]
+<<< @/assets/environment-old2/source/php/84/php-fpm.d/default.conf{ini} [84-default]
+<<< @/assets/environment-old2/source/php/84/php-fpm.d/tp.conf{ini} [tp]
+<<< @/assets/environment-old2/source/php/84/php-fpm.d/example/default.conf{ini} [案例说明]
 :::
 
 ::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
@@ -352,7 +352,7 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
 PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会在构建目录下生成 Systemd Unit 文件
 
 ::: code-group
-<<< @/assets/environment/source/service/php/php84-fpm.service{bash} [84]
+<<< @/assets/environment-old2/source/service/php/php84-fpm.service{bash} [84]
 
 ```bash [重载]
 # 重载Systemd
@@ -361,7 +361,7 @@ systemctl daemon-reload
 systemctl enable --now php84-fpm
 ```
 
-<<< @/assets/environment/source/service/php/source/84/php-fpm.service{ini} [84 默认]
+<<< @/assets/environment-old2/source/service/php/source/84/php-fpm.service{ini} [84 默认]
 
 :::
 
