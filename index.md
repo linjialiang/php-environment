@@ -21,26 +21,10 @@ hero:
 
 features:
     - icon:
-          dark: /static/svg/sqlite-dark.svg
-          light: /static/svg/sqlite-light.svg
-      title: SQLite3 安装[暂停维护]
-      details: 轻量级关系型数据库，已暂停维护
-      link: /environment/sqlite3
-    - icon:
-          src: /static/svg/redis.svg
-      title: Redis 安装[暂停维护]
-      details: 键值型数据库(内存型)，已暂停维护
-      link: /environment/redis
-    - icon:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 安装
       details: 最强开源关系型数据库
       link: /environment/pgsql
-    - icon:
-          src: /static/svg/mysql.svg
-      title: MySQL 安装[暂停维护]
-      details: 常用关系型数据库，已暂停维护
-      link: /environment/mysql
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg

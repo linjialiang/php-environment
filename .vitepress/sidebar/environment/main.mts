@@ -1,24 +1,35 @@
 const path = {
   main: '/environment/',
   mainOld: '/environment-old/',
+  mainOld2: '/environment-old2/',
   redisConfUrl: 'http://tutorial.e8so.com/nosql/redis/redis-conf.html',
 };
 
 const sidebar = [
   { text: '概述', link: `${path.main}` },
-  { text: 'SQLite3[暂停]', link: `${path.main}sqlite3` },
-  {
-    text: 'Redis[暂停]',
-    collapsed: true,
-    items: [
-      { text: '8.2', link: `${path.main}redis` },
-      { text: 'Redis配置文件', link: `${path.redisConfUrl}` },
-    ],
-  },
   { text: 'PostgreSQL', link: `${path.main}pgsql` },
-  { text: 'MySQL[暂停]', link: `${path.main}mysql` },
   { text: 'PHP', link: `${path.main}php` },
   { text: 'Nginx', link: `${path.main}nginx` },
+  {
+    text: '2025/10/30存档',
+    collapsed: true,
+    items: [
+      { text: '概述', link: `${path.mainOld2}` },
+      { text: 'SQLite3', link: `${path.mainOld2}sqlite3` },
+      {
+        text: 'Redis',
+        collapsed: true,
+        items: [
+          { text: '8.2', link: `${path.mainOld2}redis` },
+          { text: 'Redis配置文件', link: `${path.redisConfUrl}` },
+        ],
+      },
+      { text: 'PostgreSQL', link: `${path.mainOld2}pgsql` },
+      { text: 'MySQL', link: `${path.mainOld2}mysql` },
+      { text: 'PHP', link: `${path.mainOld2}php` },
+      { text: 'Nginx', link: `${path.mainOld2}nginx` },
+    ],
+  },
   {
     text: '2025/9/7存档',
     collapsed: true,
