@@ -148,3 +148,5 @@ pkg-config --path icu-i18n, icu-io, icu-uc
 /usr/lib/x86_64-linux-gnu/pkgconfig/icu-io.pc
 /usr/lib/x86_64-linux-gnu/pkgconfig/icu-uc.pc
 ```
+
+:::
