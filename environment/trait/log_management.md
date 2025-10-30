@@ -3,7 +3,6 @@
 Linux/Unix 系统使用 `Logrotate` 来管理日志文件。
 
 ::: code-group
-<<< @/assets/environment/source/logrotate.d/redis{bash} [redis]
 <<< @/assets/environment/source/logrotate.d/nginx{bash} [nginx]
 <<< @/assets/environment/source/logrotate.d/example{bash} [带备注]
 :::

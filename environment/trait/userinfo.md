@@ -8,10 +8,7 @@
 | 用户名   | 说明            |
 | -------- | --------------- |
 | emad     | 开发者用户      |
-| sqlite   | SQLite3 用户    |
-| redis    | Redis 用户      |
 | postgres | PostgreSQL 用户 |
-| mysql    | MySQL 用户      |
 | php-fpm  | PHP-FPM 用户    |
 | nginx    | Nginx 用户      |
 ```
