@@ -57,9 +57,8 @@ uuid-dev libsystemd-dev
 | --with-pgport=PortNum | 指定 pgsql 服务器监听的端口号                        |
 | --with-pam            | 允许 pgsql 使用系统的 PAM 认证机制进行用户身份验证   |
 | --with-systemd        | 确保 PostgreSQL 与 systemd 服务和日志系统集成        |
+| --with-liburing       | 启用 Linux io_uring 异步 I/O 接口                    |
 | --with-uuid=e2fs      | 构建 uuid-ossp 使用 e2fsprogs 库，用于生成唯一标识符 |
-| --with-libxml         | 支持 XML 数据类型                                    |
-| --with-libxslt        | 支持 XSLT 转换，扩展 XML 处理能力                    |
 | --with-lz4            | 启用 LZ4 压缩算法的支持                              |
 | --with-zstd           | 启用 Zstandard 压缩算法的支持                        |
 | --with-openssl        | 启用 OpenSSL 支持，用于加密通信                      |
@@ -79,9 +78,9 @@ uuid-dev libsystemd-dev
 
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
-tar -xjf postgresql-17.6.tar.bz2
-mkdir ~/postgresql-17.6/build_postgres
-cd ~/postgresql-17.6/build_postgres
+tar -xjf postgresql-18.0.tar.bz2
+mkdir ~/postgresql-18.0/build_postgres
+cd ~/postgresql-18.0/build_postgres
 ```
 
 ```bash [编译指令]
@@ -101,9 +100,7 @@ LLVM_CONFIG=/usr/lib/llvm-19/bin/llvm-config \
 --with-uuid=e2fs \
 --with-lz4 \
 --with-zstd \
---with-openssl \
---with-libxml \
---with-libxslt > stdout.log
+--with-openssl > stdout.log
 ```
 
 ```bash [安装指令]
@@ -112,7 +109,7 @@ make -j4 > make.log
 make check > makeTest.log
 make install
 # 编译安装完后记得移除源码包，节省空间
-rm -rf ~/postgresql-17.6 ~/postgresql-17.6.tar.bz2
+rm -rf ~/postgresql-18.0 ~/postgresql-18.0.tar.bz2
 ```
 
 ```bash [数据初始化]
