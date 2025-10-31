@@ -21,8 +21,7 @@ C 语言编译器主要有四种： `MSVC`/`GCC`/`MinGW`/`Clang+LLVM`
 
 ```bash
 apt install -y clang libicu-dev liblz4-dev libzstd-dev libbison-dev bison \
-flex libreadline-dev zlib1g-dev libpam0g-dev libxslt1-dev libxslt1-dev \
-uuid-dev libsystemd-dev
+flex libreadline-dev zlib1g-dev libpam0g-dev uuid-dev libsystemd-dev
 ```
 
 ### 依赖包说明
