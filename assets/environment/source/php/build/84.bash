@@ -23,9 +23,8 @@
 --with-freetype \
 --enable-mbstring \
 --with-capstone \
---enable-mysqlnd \
---with-mysqli=mysqlnd \
---with-pdo-mysql=mysqlnd \
+--without-sqlite3 \
+--without-pdo-sqlite \
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
 --enable-sockets \
