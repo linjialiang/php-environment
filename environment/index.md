@@ -42,7 +42,6 @@ titleTemplate: 环境搭建教程
     - 动态扩展
         - xdebug-3.4.7.tgz
         - apcu-5.1.27.tgz
-        - yaml-2.2.5.tgz
 3. nginx-1.28.0.tar.gz
     - openssl-3.5.4.tar.gz
     - pcre2-10.47.tar.bz2
