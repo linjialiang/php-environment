@@ -51,7 +51,7 @@ libsodium-dev libzip-dev
 
 :::
 
-#### SQLite3 依赖
+#### ~~SQLite3 依赖~~ <Badge type="info" text="已禁用" />
 
 想使用最新或指定版 sqlite3 ，需自己编译好 sqlite3 后，在 `PKG_CONFIG_PATH` 环境变量中追加 sqlite3 的 `pkgconfig` 配置文件路径
 
