@@ -30,16 +30,17 @@ flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 | --------------- | ------------------------------------------------------------------------- |
 | pkg-config      | 用于帮助编译时定位依赖库的工具，它是一个元数据管理工具，并不是实际的库 ​​ |
 | clang           | c/c++ 编译器，`llvm+clang` 是套组合                                       |
+| libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                      |
 | liblz4-dev      | 用于 LZ4 压缩算法的开发库                                                 |
 | libzstd-dev     | 用于 Zstandard 压缩算法的开发库                                           |
-| bison           | 一个广泛使用的语法分析器生成器，主要用于 Unix 和类 Unix 系统              |
+| libbison-dev    | 一个广泛使用的语法分析器生成器，主要用于 Unix 和类 Unix 系统              |
 | flex            | 一个词法分析器生成工具，通常与 Bison 结合使用，以创建完整的编译器前端     |
 | libreadline-dev | 提供命令行编辑功能的开发库                                                |
 | zlib1g-dev      | 用于 zlib 压缩和解压缩数据的开发库                                        |
+| libssl-dev      | 用于 openssl 支持的开发库                                                 |
 | libpam0g-dev    | 用于 PAM 支持的开发库                                                     |
 | uuid-dev        | 包含了用于生成和处理 UUID 的库和头文件                                    |
 | libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件         |
-| libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                      |
 
 ### 编译选项说明
 
