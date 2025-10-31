@@ -89,7 +89,7 @@ export default defineConfig({
     sidebar: {
       '/environment/': environment,
       '/environment-old/': environment,
-      '/environment-old2/': environment,
+      '/environment-lnmpp/': environment,
     },
     footer: {
       message: '程序员系列教程-PHP 环境搭建',

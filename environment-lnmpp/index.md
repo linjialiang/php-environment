@@ -16,7 +16,7 @@ titleTemplate: 环境搭建教程
 内核 : linux-image-6.12.41+deb13-amd64
 ```
 
-<<< @/assets/environment-old2/lnmpp-toc.txt [环境目录结构]
+<<< @/assets/environment-lnmpp/lnmpp-toc.txt [环境目录结构]
 :::
 
 ## 脚本文件
@@ -24,12 +24,12 @@ titleTemplate: 环境搭建教程
 我们准备了几个 bash 脚本文件：
 
 ::: code-group
-<<< @/assets/environment-old2/source/bash/user.bash [创建用户]
-<<< @/assets/environment-old2/source/bash/mkdir.bash [创建目录]
-<<< @/assets/environment-old2/source/bash/chown.bash [目录授权]
-<<< @/assets/environment-old2/source/bash/tar.bash [解压参考]
-<<< @/assets/environment-old2/source/bash/cleanLog.sh [一键清理]
-<<< @/assets/environment-old2/source/bash/clean.sh [简单清理]
+<<< @/assets/environment-lnmpp/source/bash/user.bash [创建用户]
+<<< @/assets/environment-lnmpp/source/bash/mkdir.bash [创建目录]
+<<< @/assets/environment-lnmpp/source/bash/chown.bash [目录授权]
+<<< @/assets/environment-lnmpp/source/bash/tar.bash [解压参考]
+<<< @/assets/environment-lnmpp/source/bash/cleanLog.sh [一键清理]
+<<< @/assets/environment-lnmpp/source/bash/clean.sh [简单清理]
 :::
 
 ## 包列表
@@ -147,9 +147,9 @@ source ~/.profile
 -   Redis 默认设置了全局密码 `1`
 ```
 
-<<< @/assets/environment-old2/lnmpp-setup.sh [lnmpp]
+<<< @/assets/environment-lnmpp/lnmpp-setup.sh [lnmpp]
 :::
 
 ## 附录三、PHP 探针
 
-<<< @/assets/environment-old2/source/php/tz.php
+<<< @/assets/environment-lnmpp/source/php/tz.php

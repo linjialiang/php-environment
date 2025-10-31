@@ -87,43 +87,43 @@ chmod 750 /server/redis/rdbData
 #### 基础配置
 
 ::: code-group
-<<< @/assets/environment-old2/source/redis/redis.conf{ini} [主配置]
-<<< @/assets/environment-old2/source/etc/redis/config/source.conf{ini} [原始配置]
+<<< @/assets/environment-lnmpp/source/redis/redis.conf{ini} [主配置]
+<<< @/assets/environment-lnmpp/source/etc/redis/config/source.conf{ini} [原始配置]
 :::
 
 #### 自定义配置
 
 ::: code-group
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/01-network.conf{ini} [01-network.conf]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/03-general.conf{ini} [03-general]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/04-rdb.conf{ini} [04-rdb]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/05-replication.conf{ini} [05-replication]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/07-acl.conf{ini} [07-acl]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/08-client.conf{ini} [08-client]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/09-memory-management.conf{ini} [09-memory-management]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/11-io.conf{ini} [11-io]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/12-oom.conf{ini} [12-oom]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/13-thp.conf{ini} [13-thp]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/14-aof.conf{ini} [14-aof]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/15-shutdown.conf{ini} [15-shutdown]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/19-slow-log.conf{ini} [19-slow-log]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/20-latency.conf{ini} [20-latency]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/21-event-notification.conf{ini} [21-event-notification]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
-<<< @/assets/environment-old2/source/etc/example/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/01-network.conf{ini} [01-network.conf]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/03-general.conf{ini} [03-general]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/04-rdb.conf{ini} [04-rdb]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/05-replication.conf{ini} [05-replication]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/07-acl.conf{ini} [07-acl]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/08-client.conf{ini} [08-client]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/09-memory-management.conf{ini} [09-memory-management]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/11-io.conf{ini} [11-io]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/12-oom.conf{ini} [12-oom]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/13-thp.conf{ini} [13-thp]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/14-aof.conf{ini} [14-aof]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/15-shutdown.conf{ini} [15-shutdown]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/19-slow-log.conf{ini} [19-slow-log]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/20-latency.conf{ini} [20-latency]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/21-event-notification.conf{ini} [21-event-notification]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
+<<< @/assets/environment-lnmpp/source/etc/example/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
 ### 日志分割
 
 Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明[[:point_right:点此查看]](index#Logrotate-common)
 
-<<< @/assets/environment-old2/source/logrotate.d/redis{bash}
+<<< @/assets/environment-lnmpp/source/logrotate.d/redis{bash}
 
 ## 配置系统单元
 
@@ -131,7 +131,7 @@ Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明[[:point_
 
 ::: code-group
 
-<<< @/assets/environment-old2/source/service/redis.service{ini} [系统单元配置]
+<<< @/assets/environment-lnmpp/source/service/redis.service{ini} [系统单元配置]
 
 ```bash [重载配置]
 # 重新载入 Systemd 配置
@@ -167,7 +167,7 @@ Redis 支持通过 SSL/TLS 协议进行加密通信，可以提供更高的安�
 redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TLS 相关证书和密钥：
 
 ::: code-group
-<<< @/assets/environment-old2/source/redis/gen-test-certs.sh [脚本]
+<<< @/assets/environment-lnmpp/source/redis/gen-test-certs.sh [脚本]
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh

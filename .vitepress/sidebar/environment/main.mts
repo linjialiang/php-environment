@@ -1,7 +1,7 @@
 const path = {
   main: '/environment/',
   mainOld: '/environment-old/',
-  mainOld2: '/environment-old2/',
+  mainOld2: '/environment-lnmpp/',
   redisConfUrl: 'http://tutorial.e8so.com/nosql/redis/redis-conf.html',
 };
 
@@ -11,7 +11,7 @@ const sidebar = [
   { text: 'PHP', link: `${path.main}php` },
   { text: 'Nginx', link: `${path.main}nginx` },
   {
-    text: '2025/10/30存档',
+    text: 'LNMPP存档',
     collapsed: true,
     items: [
       { text: '概述', link: `${path.mainOld2}` },
