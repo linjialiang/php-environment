@@ -37,15 +37,15 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [包列表]
-1. postgresql-17.6.tar.bz2
-2. php-8.4.12.tar.xz
+1. postgresql-18.0.tar.bz2
+2. php-8.4.14.tar.xz
     - 动态扩展
-        - xdebug-3.4.5.tgz
+        - xdebug-3.4.7.tgz
         - apcu-5.1.27.tgz
         - yaml-2.2.5.tgz
 3. nginx-1.28.0.tar.gz
-    - openssl-3.5.2.tar.gz
-    - pcre2-10.45.tar.bz2
+    - openssl-3.5.4.tar.gz
+    - pcre2-10.47.tar.bz2
     - zlib-1.3.1.tar.xz
 ```
 
