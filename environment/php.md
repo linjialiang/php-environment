@@ -47,9 +47,6 @@ cd /home/php-fpm/php-8.4.14/build_php/
 apt install -y libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
 libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libcapstone-dev \
 libsodium-dev libzip-dev
-
-# php 扩展所需额外依赖
-apt install -y libyaml-dev
 ```
 
 :::
