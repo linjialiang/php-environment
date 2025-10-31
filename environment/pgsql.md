@@ -20,8 +20,8 @@ C 语言编译器主要有四种： `MSVC`/`GCC`/`MinGW`/`Clang+LLVM`
 :::
 
 ```bash
-apt install -y clang libicu-dev liblz4-dev libzstd-dev libbison-dev bison \
-flex libreadline-dev zlib1g-dev libpam0g-dev uuid-dev libsystemd-dev
+apt install -y pkg-config clang libicu-dev liblz4-dev libzstd-dev libbison-dev \
+flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 ```
 
 ### 依赖包说明
@@ -36,7 +36,6 @@ flex libreadline-dev zlib1g-dev libpam0g-dev uuid-dev libsystemd-dev
 | libreadline-dev | 提供命令行编辑功能的开发库                                            |
 | zlib1g-dev      | 用于 zlib 压缩和解压缩数据的开发库                                    |
 | libpam0g-dev    | 用于 PAM 支持的开发库                                                 |
-| libxslt1-dev    | 包含用于开发 XSLT 应用程序的库和头文件                                |
 | uuid-dev        | 包含了用于生成和处理 UUID 的库和头文件                                |
 | libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件     |
 | libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                  |
