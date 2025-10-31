@@ -20,7 +20,8 @@ C 语言编译器主要有四种： `MSVC`/`GCC`/`MinGW`/`Clang+LLVM`
 :::
 
 ```bash
-apt install -y pkg-config clang libicu-dev liblz4-dev libzstd-dev libbison-dev \
+apt install -y make pkg-config
+apt install -y clang libicu-dev liblz4-dev libzstd-dev libbison-dev \
 flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 ```
 
@@ -28,6 +29,7 @@ flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 
 | package         | note                                                                      |
 | --------------- | ------------------------------------------------------------------------- |
+| make            | ​make 不是一个库，而是一个构建自动化工具 ​​                               |
 | pkg-config      | 用于帮助编译时定位依赖库的工具，它是一个元数据管理工具，并不是实际的库 ​​ |
 | clang           | c/c++ 编译器，`llvm+clang` 是套组合                                       |
 | libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                      |
@@ -37,7 +39,7 @@ flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 | flex            | 一个词法分析器生成工具，通常与 Bison 结合使用，以创建完整的编译器前端     |
 | libreadline-dev | 提供命令行编辑功能的开发库                                                |
 | zlib1g-dev      | 用于 zlib 压缩和解压缩数据的开发库                                        |
-| libssl-dev      | 用于 openssl 支持的开发库                                                 |
+| libssl-dev      | 用于 OpenSSL 支持的开发库                                                 |
 | libpam0g-dev    | 用于 PAM 支持的开发库                                                     |
 | uuid-dev        | 包含了用于生成和处理 UUID 的库和头文件                                    |
 | libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件         |
