@@ -43,8 +43,16 @@ cd /home/php-fpm/php-8.4.14/build_php/
 
 ::: code-group
 
+```bash [common]
+# 编译基础
+apt install -y gcc g++
+
+# 安装PECL扩展需要
+apt install -y autoconf
+```
+
 ```bash [84]
-apt install -y gcc g++ libcurl4-openssl-dev libpng-dev libavif-dev \
+apt install -y libcurl4-openssl-dev libpng-dev libavif-dev \
 libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libonig-dev \
 libcapstone-dev libsodium-dev libzip-dev
 ```
