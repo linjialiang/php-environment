@@ -236,11 +236,11 @@ modFilePower(){
 
   echo_green "postgres文件权限"
   chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres
-  find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
-  find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
+  find /server/postgres /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
+  find /server/postgres /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
   chmod 750 -R /server/postgres/bin
-  find /server/etc/postgres/tls -type f -exec chmod 600 {} \;
-  find /server/etc/postgres/tls -type d -exec chmod 700 {} \;
+  find /server/etc/postgres/tls /server/pgData -type f -exec chmod 600 {} \;
+  find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 
   echo_green "php文件权限"
   chown php-fpm:php-fpm -R /server/php /server/logs/php

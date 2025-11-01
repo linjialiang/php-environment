@@ -588,13 +588,13 @@ systemctl start postgres.service
 
 ```bash [部署]
 chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres
-find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
-find /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
+find /server/postgres /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
+find /server/postgres /server/logs/postgres /server/etc/postgres -type d -exec chmod 750 {} \;
 # bin目录二进制文件需执行权限
 chmod 750 -R /server/postgres/bin
-# postgres 要求证书最高权限是 600
-find /server/etc/postgres/tls -type f -exec chmod 600 {} \;
-find /server/etc/postgres/tls -type d -exec chmod 700 {} \;
+# postgres 要求证书最高权限是 600，pgData 生成是默认 600
+find /server/etc/postgres/tls /server/pgData -type f -exec chmod 600 {} \;
+find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 ```
 
 ```bash [开发]
