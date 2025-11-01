@@ -143,8 +143,8 @@ InstallBuild(){
 
 #重置PostgreSQL数字证书
 resetPgsqlCertificate(){
-  pgsqlTlsPath=/server/postgres/tls
-  pgsqlTlsScriptPath=/server/postgres/gen-test-certs.sh
+  pgsqlTlsPath=/server/etc/postgres/tls
+  pgsqlTlsScriptPath=/server/etc/postgres/gen-test-certs.sh
   rm -rf $pgsqlTlsPath
   echo_yellow "=================================================================="
   echo_green "创建一键生成PostgreSQL数字证书脚本"
