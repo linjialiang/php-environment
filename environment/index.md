@@ -131,9 +131,6 @@ source ~/.profile
 
 ```md [说明]
 -   Postgres 默认有个超级管理员用户 `admin` 密码 `1`
--   MySQL 默认有个本地用户 `admin@localhost` 密码 `1`
--   MySQL 默认有个局域网用户 `admin@'192.168.%.%'` 密码 `1`
--   Redis 默认设置了全局密码 `1`
 ```
 
 <<< @/assets/environment/lnpp-setup.sh [lnpp]
