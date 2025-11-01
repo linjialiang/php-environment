@@ -5,7 +5,10 @@ titleTemplate: 环境搭建教程
 
 # 环境搭建概述
 
-下面开始手工搭建 PHP 的开发环境、部署环境
+此版本代号为 `x.5.x`，主要软件包有：`Linux+Nginx+PostgreSQL+PHP`，简称 `LNPP`。
+宗旨是后端数据统一使用 PostgreSQL 数据库。
+
+下面开始手工搭建 `LNPP` 环境：
 
 ## 测试环境
 
