@@ -1,4 +1,4 @@
-# 在存在 clang 和 gcc 的情况，因为GCC优化更好，所以需专门指定 gcc 和 g++ 作为解释器
+# 同时存在 clang 和 gcc 时，需指定 gcc 和 g++  作为编译器，nginx与GCC更友好
 export CC=gcc
 export CXX=g++
 # 编译选项
