@@ -1,3 +1,7 @@
+# 在存在 clang 和 gcc 的情况，因为GCC优化更好，所以需专门指定 gcc 和 g++ 作为解释器
+export CC=gcc
+export CXX=g++
+# 编译选项
 ./configure --prefix=/server/nginx \
 --builddir=/home/nginx/nginx-1.28.0/build_nginx \
 
