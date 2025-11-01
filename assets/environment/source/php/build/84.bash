@@ -1,6 +1,6 @@
 # 同时存在 clang 和 gcc 时，需指定 gcc 和 g++  作为编译器，PHP与GCC更友好
-export CC=gcc
-export CXX=g++
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
 # 编译选项
 ../configure --prefix=/server/php/84/ \
 --enable-fpm \

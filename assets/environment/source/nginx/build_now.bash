@@ -1,7 +1,7 @@
 # 同时存在 clang 和 gcc 时，需指定 gcc 和 g++  作为编译器，nginx与GCC更友好
 # nginx 可能用不到 c++ 编译器，这个未测试
-export CC=gcc
-export CXX=g++
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
 # 编译选项
 ./configure --prefix=/server/nginx \
 --builddir=/home/nginx/nginx-1.28.0/build_nginx \
