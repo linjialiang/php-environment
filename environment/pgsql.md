@@ -86,19 +86,19 @@ cd ~/postgresql-18.0/build_postgres
 ```
 
 ```bash [编译指令]
+# 同时存在 clang 和 gcc 时，需指定 clang 和 clang++ 作为编译器，因为pgsql专门对clang进行了优化
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+export LLVM_CONFIG=/usr/bin/llvm-config-19
 # 使用postgres账户编译
 # 开发环境：建议一律启用 --enable-debug 和 --enable-cassert 选项
 # 部署环境：
 #   1. --enable-debug 选项本身不影响查询效率，但使用 llvm+clang 编译器套件时不能启用，因为该选项通常会禁用llvm编译器对pgsql的性能优化
 #   2. 一律不启用 --enable-cassert 选项 ，这会影响查询速度
-# LLVM_CONFIG 的路径在不同发行版有所区别，这里展示的是debian13下的路径
 ../configure --prefix=/server/postgres \
 --enable-debug \
 --enable-cassert \
-CC=clang \
-CXX=clang++ \
 --with-llvm \
-LLVM_CONFIG=/usr/lib/llvm-19/bin/llvm-config \
 --with-pam \
 --with-systemd \
 --with-uuid=e2fs \
