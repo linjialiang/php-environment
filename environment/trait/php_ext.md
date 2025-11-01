@@ -25,9 +25,21 @@ xdebug.client_port=9084
 
 [apcu]
 ; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
-apc.enabled=1
+apcu.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
+
+; 开发环境配置
+apcu.shm_size=64M
+apcu.stat=1        ; 开发时开启文件检查
+apcu.ttl=300       ; 短时间缓存，便于调试
+
+; 生产环境配置
+; apcu.shm_size=256M
+; apcu.stat=0         ; 关闭状态检查提升性能
+; apcu.ttl=7200       ; 长时间缓存
+; apcu.slam_defense=1 ; 防止缓存击穿
+
 ```
 
 ```bash [测试扩展]
@@ -70,18 +82,21 @@ make install
 ```
 
 ```ini [配置参考]
-; 开发环境配置
+; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
 apcu.enabled=1
+; 为 CLI 版本的PHP启用APC,主要用于测试和调试
+apc.enable_cli=1
+
+; 开发环境配置
 apcu.shm_size=64M
 apcu.stat=1        ; 开发时开启文件检查
 apcu.ttl=300       ; 短时间缓存，便于调试
 
 ; 生产环境配置
-apcu.enabled=1
-apcu.shm_size=256M
-apcu.stat=0         ; 关闭状态检查提升性能
-apcu.ttl=7200       ; 长时间缓存
-apcu.slam_defense=1 ; 防止缓存击穿
+; apcu.shm_size=256M
+; apcu.stat=0         ; 关闭状态检查提升性能
+; apcu.ttl=7200       ; 长时间缓存
+; apcu.slam_defense=1 ; 防止缓存击穿
 ```
 
 :::
