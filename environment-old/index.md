@@ -570,7 +570,7 @@ redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 
 ## 日志管理
 
-Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参考 [[Tutorial]](http://tutorial.e8so.com/) 项目
+Linux/Unix 系统使用 `Logrotate` 来管理日志文件。更多说明请参考 [[Tutorial]](https://tutorial.e8so.com/) 项目
 
 ::: code-group
 <<< @/assets/environment-old/source/logrotate.d/redis{bash} [redis]

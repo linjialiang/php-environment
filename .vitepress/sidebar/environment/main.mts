@@ -2,7 +2,7 @@ const path = {
   main: '/environment/',
   mainOld: '/environment-old/',
   mainOld2: '/environment-lnmpp/',
-  redisConfUrl: 'http://tutorial.e8so.com/nosql/redis/redis-conf.html',
+  redisConfUrl: 'https://tutorial.e8so.com/nosql/redis/redis-conf.html',
 };
 
 const sidebar = [
