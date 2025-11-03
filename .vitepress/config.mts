@@ -1,9 +1,98 @@
 // import flexSearchIndexOptions from "flexsearch";
+import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vitepress';
 import environmentNav from './nav/environment.mts';
 import { environment } from './sidebar/main.mts';
 
 export default defineConfig({
+  vite: {
+    plugins: [
+      // VitePWA 配置区
+      // - 官方中文手册：https://vite-pwa-org-zh.netlify.app/
+      // - 这里使用 vite 通用包
+      // - 你也可以使用 vitepress 框架包（@vite-pwa/vitepress）
+      VitePWA({
+        injectRegister: 'auto',
+        registerType: 'autoUpdate',
+        base: '/',
+        scope: '/',
+        includeAssets: ['static/**/*.{ico,png,jpg,svg}'],
+        devOptions: {
+          enabled: true,
+          suppressWarnings: true,
+          navigateFallback: '/',
+          type: 'module',
+        },
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,gif,svg,woff2}'],
+          cleanupOutdatedCaches: true,
+          sourcemap: true,
+          skipWaiting: true,
+          clientsClaim: true,
+          maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+          runtimeCaching: [
+            {
+              urlPattern: /\.(?:mp4)$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'media-cache',
+                expiration: {
+                  maxEntries: 300,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+              },
+            },
+            {
+              urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'images-cache',
+                expiration: {
+                  maxEntries: 30,
+                  maxAgeSeconds: 60 * 60 * 24 * 30,
+                },
+              },
+            },
+          ],
+        },
+        manifest: {
+          short_name: 'PHP 环境搭建',
+          name: 'PHP 环境搭建',
+          icons: [
+            {
+              src: '/static/logo.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: '/static/logo.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: '/static/logo.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any',
+            },
+            {
+              src: '/static/logo.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'maskable',
+            },
+          ],
+          description: '纯手工搭建一个完善的PHP环境',
+          theme_color: '#ffffff',
+          background_color: '#ffffff',
+          display: 'standalone',
+          orientation: 'any',
+          start_url: '/',
+          scope: '/',
+        },
+      }),
+    ],
+  },
   base: '/',
   ignoreDeadLinks: false, // 当设置为 true 时，VitePress 不会因为死链而导致构建失败。
   // 部分 markdown 文件不作为源内容输出的，需要排除
