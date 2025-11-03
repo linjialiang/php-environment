@@ -110,7 +110,7 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'http://php-environment.e8so.com',
+    hostname: 'https://php-environment.e8so.com',
     lastmodDateOnly: false,
   },
   themeConfig: {
