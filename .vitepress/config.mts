@@ -29,7 +29,7 @@ export default defineConfig({
           sourcemap: true,
           skipWaiting: true,
           clientsClaim: true,
-          maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+          maximumFileSizeToCacheInBytes: 25 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /\.(?:mp4)$/,
