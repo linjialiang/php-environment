@@ -3,6 +3,7 @@ import 'viewerjs/dist/viewer.min.css'; // 引入 viewerjs 的样式[1](@ref)
 import { useRoute } from 'vitepress';
 import imageViewer from 'vitepress-plugin-image-viewer';
 import Theme from 'vitepress/theme';
+import type { App } from 'vue';
 import Layout from './Layout.vue';
 import './style.css';
 import './styles/custom.css';
@@ -10,6 +11,35 @@ import './styles/custom.css';
 export default {
   extends: Theme,
   Layout,
+  enhanceApp({ app }: { app: App }) {
+    if (typeof window !== 'undefined') {
+      // 动态导入 registerSW 以避免服务端渲染错误
+      import('virtual:pwa-register')
+        .then(({ registerSW }) => {
+          registerSW({
+            immediate: true,
+            onRegistered(registration) {
+              console.log('Service Worker 已注册:', registration);
+              if (registration) {
+                console.log('SW Scope:', registration.scope);
+              }
+            },
+            onOfflineReady() {
+              console.log('应用已准备离线使用');
+            },
+            onNeedRefresh() {
+              console.log('有新内容可用，请刷新页面');
+              if (confirm('有新版本可用，是否立即刷新？')) {
+                window.location.reload();
+              }
+            },
+          });
+        })
+        .catch((error) => {
+          console.warn('PWA 注册失败:', error);
+        });
+    }
+  },
   setup() {
     const route = useRoute();
     // 使用插件，自动为图片添加预览功能[1](@ref)
