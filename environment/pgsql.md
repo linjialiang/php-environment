@@ -80,9 +80,9 @@ flex libreadline-dev zlib1g-dev libssl-dev libpam0g-dev uuid-dev libsystemd-dev
 
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
-tar -xjf postgresql-18.0.tar.bz2
-mkdir ~/postgresql-18.0/build_postgres
-cd ~/postgresql-18.0/build_postgres
+tar -xjf postgresql-18.1.tar.bz2
+mkdir ~/postgresql-18.1/build_postgres
+cd ~/postgresql-18.1/build_postgres
 ```
 
 ```bash [编译指令]
@@ -113,7 +113,7 @@ make -j4 > make.log
 make check > makeTest.log
 make install
 # 编译安装完后记得移除源码包，节省空间
-rm -rf ~/postgresql-18.0 ~/postgresql-18.0.tar.bz2
+rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 ```
 
 ```bash [数据初始化]

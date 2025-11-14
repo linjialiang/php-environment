@@ -40,7 +40,7 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [包列表]
-1. postgresql-18.0.tar.bz2
+1. postgresql-18.1.tar.bz2
 2. php-8.4.14.tar.xz
     - 动态扩展
         - xdebug-3.4.7.tgz
