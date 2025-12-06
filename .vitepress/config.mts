@@ -166,7 +166,7 @@ export default withPwa(
       nav: [
         { text: '主页', link: '/' },
         { text: '环境搭建', items: environmentNav },
-        { text: 'IIS 篇', link: '/iis' },
+        { text: 'IIS 篇', link: '/msdn/iis' },
       ],
       sidebar: {
         '/environment/': environment,
