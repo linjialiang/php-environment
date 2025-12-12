@@ -5,11 +5,9 @@ titleTemplate: 环境搭建教程
 
 # IIS 下搭建 PHP 环境
 
-IIS 是 Windows 上自带的 Web 服务器，经过多年的打磨(于 1995 年发布)，在功能上做的比较完善。
+IIS 是微软系统自带的 Web 服务器，经过多年的打磨(于 1995 年发布)，在功能上做的比较完善。
 
-::: tip 推荐
-如果环境部署在 Windows 上，并且对权限安全有更高要求，非常推荐使用 IIS ！
-:::
+使用 IIS 作为 Windows 下的 web 服务器，在权限控制方面比 Linux 的控制粒度更细。
 
 ::: tip vc 运行库
 PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依赖的 `vc++运行库`版本也不一样，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
