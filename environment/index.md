@@ -58,7 +58,7 @@ titleTemplate: 环境搭建教程
 
 ```md [包列表]
 1. postgresql-18.1.tar.bz2
-2. php-8.4.14.tar.xz
+2. php-8.5.14.tar.xz
     - 动态扩展
         - xdebug-3.4.7.tgz
         - apcu-5.1.27.tgz

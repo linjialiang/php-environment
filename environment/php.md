@@ -11,12 +11,13 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 开始之前我们需要先使用预先准备好的 bash 脚本，解压文件和授权目录，具体参考 [脚本文件](./index#脚本文件)
 
-编译安装 PHP 的方式，允许同时构建多个 php 版本，如: `php 8.4` + `php 8.5`
+编译安装 PHP 的方式，允许同时构建多个 php 版本，如: `php 8.5` + `php 8.5`
 
 ::: tip 变更说明
 
 -   `2025/09/09` : 正式移除 `php 7.4` 支持，因 `debian13` 编译安装该版本需要解决非常多的兼容性问题，其相关内容请阅读[[旧版]](../environment-old/php)；
 -   `2025/01/22` : 正式移除 `php 8.3` 支持，由 `php 8.4` 取代，其相关内容请阅读[[旧版]](../environment-old/archive/php_old)；
+-   `2025/12/13` : 正式移除 `php 8.4` 支持，由 `php 8.5` 取代；
 
 :::
 
@@ -28,9 +29,9 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ```bash [85]
 su - php-fpm -s /bin/zsh
-tar -xJf php-8.4.14.tar.xz
-mkdir /home/php-fpm/php-8.4.14/build_php
-cd /home/php-fpm/php-8.4.14/build_php/
+tar -xJf php-8.5.14.tar.xz
+mkdir /home/php-fpm/php-8.5.14/build_php
+cd /home/php-fpm/php-8.5.14/build_php/
 ```
 
 :::
@@ -150,7 +151,7 @@ make install
 ./configure -h > configure.txt
 ```
 
-<<< @/assets/environment/source/php/configure/85.ini [8.4 选项]
+<<< @/assets/environment/source/php/configure/85.ini [8.5 选项]
 :::
 
 ::: tip 构建指令区别：
@@ -161,7 +162,7 @@ make install
 
 3. `>=8.1.0` 对 `--with-mhash` 选项标记为已弃用，如果没有旧项目需要向后兼容，不要添加此选项
 
-4. `>=8.4.0` 增加 `--with-capstone` 选项
+4. `>=8.5.0` 增加 `--with-capstone` 选项
 
 :::
 
@@ -183,12 +184,12 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [使用 php 程序]
-# php8.4
+# php8.5
 /server/php/85/bin/php --ini
 ```
 
 ```bash [使用 php-config 程序]
-# php8.4
+# php8.5
 /server/php/85/bin/php-config --ini-path
 ```
 
@@ -199,7 +200,7 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [85]
-cp /home/php-fpm/php-8.4.14/php.ini-* /server/php/85/lib/
+cp /home/php-fpm/php-8.5.14/php.ini-* /server/php/85/lib/
 # 开发环境
 cp /server/php/85/lib/php.ini{-development,}
 # 部署环境
@@ -213,7 +214,7 @@ cp /server/php/85/lib/php.ini{-development,}
 使用 php 程序，快速检测配置文件使用加载成功
 
 ```bash
-# php8.4
+# php8.5
 /server/php/85/bin/php --ini
 ```
 
@@ -290,7 +291,7 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 
 ::: details php 主配置文件案例
 ::: code-group
-<<< @/assets/environment/source/php/85/php-fpm.conf{ini} [8.4]
+<<< @/assets/environment/source/php/85/php-fpm.conf{ini} [8.5]
 :::
 
 ### 3. 工作池配置文件
@@ -457,7 +458,7 @@ su - php-fpm -s /bin/zsh
    执行 `make install` 之前，先将 `sbin/php-fpm` 文件重命名，实现平滑升级
 
     ```bash
-    # php8.4
+    # php8.5
     mv /server/php/85/sbin/php-fpm{,.bak}
     ```
 
