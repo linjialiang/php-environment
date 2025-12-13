@@ -7,7 +7,7 @@ titleTemplate: 环境搭建教程
 
 IIS 是微软系统自带的 Web 服务器，经过多年的打磨(于 1995 年发布)，在功能上做的比较完善。
 
-使用 IIS 作为 Windows 下的 web 服务器，在权限控制方面比 Linux 的控制粒度更细。
+使用 IIS 作为 Windows 下的 web 服务器，在权限方面比 Linux 的控制粒度更细。
 
 ::: tip vc 运行库
 PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依赖的 `vc++运行库`版本也不一样，这里推荐使用 [[vcredist]](https://github.com/abbodi1406/vcredist) 一键安装
@@ -28,56 +28,54 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
 
 1. 用户组
 
-    | 用户组名            | 描述                      |
-    | ------------------- | ------------------------- |
-    | `IIS_AppPool_Users` | IIS 应用池用户组          |
-    | `PHP_CGI_Users`     | 多版本 PHP CGI 通用用户组 |
+    | 用户组名        | 描述                      |
+    | --------------- | ------------------------- |
+    | `PHP_CGI_Users` | 多版本 PHP CGI 通用用户组 |
 
-    ::: warning 可以更安全
-    你可以在 `PHP_CGI_Users` 用户组存在的情况下，再为每个版本的 PHP CGI 单独创建用户组，如：
+    ::: details 你可以为不同 PHP 版本单独创建用户组，如：
 
-    | PHP CGI 用户组名 | 描述                      |
-    | ---------------- | ------------------------- |
-    | PHP_CGI_Users    | 多版本 PHP CGI 通用用户组 |
-    | PHP84_CGI_Users  | PHP8.4 CGI 用户组         |
-    | PHP74_CGI_Users  | PHP7.4 CGI 用户组         |
+    | 站点用户名      | 描述                 |
+    | --------------- | -------------------- |
+    | PHP74_CGI_Users | PHP7.4 的 CGI 用户组 |
+    | PHP85_CGI_Users | PHP8.5 的 CGI 用户组 |
 
     :::
 
 2. IIS 站点用户
 
-    | IIS 站点用户 | 描述               |
-    | ------------ | ------------------ |
-    | `www`        | IIS 站点用户[通用] |
+    | IIS 站点用户 | 描述             |
+    | ------------ | ---------------- |
+    | `www`        | IIS 默认站点用户 |
 
-    ::: warning 可以更安全
-    你可以为每个站点单独创建用户，如：
+    ::: details 你可以为每个站点单独创建用户，如：
 
-    | 站点用户名  | 描述              |
-    | ----------- | ----------------- |
-    | www_tp      | ThinkPHP 站点用户 |
-    | www_fastphp | FastPHP 站点用户  |
-    | www_static  | 静态站点用户      |
+    | 站点用户名 | 描述              |
+    | ---------- | ----------------- |
+    | www_tp     | ThinkPHP 站点用户 |
+    | www_fp     | FastPHP 站点用户  |
+    | www_static | 静态站点用户      |
 
     :::
 
 3. IIS 应用池用户
 
-    | IIS 应用池用户 | 描述                         | 归属用户组                                            |
-    | -------------- | ---------------------------- | ----------------------------------------------------- |
-    | `iis`          | IIS 应用池用户[默认]         | `IIS_AppPool_Users`                                   |
-    | `iis_php74`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP74_CGI_Users` |
-    | `iis_php84`    | IIS 应用池用户[支持 PHP CGI] | `IIS_AppPool_Users` `PHP_CGI_Users` `PHP84_CGI_Users` |
+    | IIS 应用池用户  | 描述                                    | 归属用户组      |
+    | --------------- | --------------------------------------- | --------------- |
+    | `IISAppDefault` | 管理默认的 IIS 应用池的标识用户         |                 |
+    | `IISAppPHP74`   | 管理 php7.4 项目的 IIS 应用池的标识用户 | `PHP_CGI_Users` |
+    | `IISAppPHP85`   | 管理 php8.5 项目的 IIS 应用池的标识用户 | `PHP_CGI_Users` |
 
 ::: details 截图
-![创建用户和用户组](./assets/iis/create-user-and-group.gif)
+![创建用户组](/assets/iis/001.png)
+![创建用户](/assets/iis/002.png)
+![用户所属组](/assets/iis/003.png)
 :::
 
 ## 二、PHP 解释器
 
 案例使用了 2 个 PHP 版本的解释器：
 
-1. PHP 8.4.7
+1. PHP 8.5.0
 2. PHP 7.4.33
 
 ### 1. 目录结构
@@ -97,7 +95,7 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
 |   |  ├─ php-win.exe ------------ 用于命令行的执行文件(不显示输出内容)
 |   |  └─ ...
 |   |
-|   ├─ 84 ------------------------------------------ PHP 8.4.x 解释器根目录
+|   ├─ 85 ------------------------------------------ PHP 8.5.x 解释器根目录
 |   |  ├─ ext -------------------- PHP 扩展存放路径
 |   |  ├─ composer.bat ----------- Composer 执行脚本
 |   |  ├─ php-cs-fixer.bat ------- php-cs-fixer 执行脚本
@@ -136,12 +134,25 @@ PHP、MySQL、Redis、PostgreSQL 都依赖 `vc++运行库`，不同的版本依�
 
 :::
 
+| 路径          | 授权用户        | 授予权限              |
+| ------------- | --------------- | --------------------- |
+| `C:\php\`     | `PHP_CGI_Users` | 基本权限-`读取和执行` |
+| `C:\php\temp` | `PHP_CGI_Users` | 基本权限-`完全控制`   |
+
+::: details 可以更细粒度
+
 | 路径            | 授权用户          | 授予权限              |
 | --------------- | ----------------- | --------------------- |
-| `C:\php\74`     | `PHP74_CGI_Users` | 基本权限-`读取和执行` |
-| `C:\php\84`     | `PHP84_CGI_Users` | 基本权限-`读取和执行` |
+| `C:\php\`       | 无权限            | 无权限                |
+| `C:\php\temp`   | `PHP_CGI_Users`   | 基本权限-`完全控制`   |
 | `C:\php\config` | `PHP_CGI_Users`   | 基本权限-`读取和执行` |
 | `C:\php\tools`  | `PHP_CGI_Users`   | 基本权限-`读取和执行` |
+| `C:\php\74`     | `PHP74_CGI_Users` | 基本权限-`读取和执行` |
+| `C:\php\85`     | `PHP85_CGI_Users` | 基本权限-`读取和执行` |
+
+::: tip 提示
+PHP 解释器的权限，通常就算是正式部署环境，也没必要做的如此复杂
+:::
 
 ::: details 截图
 ![php安装包授权示意图](/assets/iis/php-authorization.gif)
