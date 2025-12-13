@@ -29,9 +29,9 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ```bash [85]
 su - php-fpm -s /bin/zsh
-tar -xJf php-8.5.14.tar.xz
-mkdir /home/php-fpm/php-8.5.14/build_php
-cd /home/php-fpm/php-8.5.14/build_php/
+tar -xJf php-8.5.0.tar.xz
+mkdir /home/php-fpm/php-8.5.0/build_php
+cd /home/php-fpm/php-8.5.0/build_php/
 ```
 
 :::
@@ -200,7 +200,7 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [85]
-cp /home/php-fpm/php-8.5.14/php.ini-* /server/php/85/lib/
+cp /home/php-fpm/php-8.5.0/php.ini-* /server/php/85/lib/
 # 开发环境
 cp /server/php/85/lib/php.ini{-development,}
 # 部署环境
