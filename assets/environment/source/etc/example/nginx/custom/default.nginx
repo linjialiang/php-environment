@@ -20,7 +20,7 @@ server
 server
 {
     listen 80;
-    server_name 84.php.io;
+    server_name 85.php.io;
     root /server/default;
     index index.php;
     access_log      off;    # 关闭访问日志
@@ -34,7 +34,7 @@ server
     # php-fpm 转发
     location ~* \.php$
     {
-        fastcgi_pass        127.0.0.1:9684;
+        fastcgi_pass        127.0.0.1:9685;
         include             fastcgi.conf;
     }
 }

@@ -212,9 +212,9 @@ final class PHPProbe {
     }
 
     // 获取PHP 8.4+ 特性支持信息
-    public static function getPHP84Features(): array {
-        if (!empty(self::$cache['php84_features'])) {
-            return self::$cache['php84_features'];
+    public static function getPHP85Features(): array {
+        if (!empty(self::$cache['php85_features'])) {
+            return self::$cache['php85_features'];
         }
 
         $features = [];
@@ -229,7 +229,7 @@ final class PHPProbe {
         $features['命名参数'] = PHP_VERSION_ID >= 80000 ? '支持' : '不支持';
         $features['联合类型'] = PHP_VERSION_ID >= 80000 ? '支持' : '不支持';
 
-        return self::$cache['php84_features'] = $features;
+        return self::$cache['php85_features'] = $features;
     }
 
     // 获取扩展支持信息
@@ -345,7 +345,7 @@ try {
     $phpInfo = PHPProbe::getPHPInfo();
     $performanceInfo = PHPProbe::getPerformanceInfo();
     $databaseInfo = PHPProbe::getDatabaseInfo();
-    $php84Features = PHPProbe::getPHP84Features();
+    $php85Features = PHPProbe::getPHP85Features();
     $extensionsInfo = PHPProbe::getExtensionsInfo();
     $loadedExtensions = PHPProbe::getLoadedExtensions();
     $extensionStats = PHPProbe::getExtensionStats();
@@ -729,7 +729,7 @@ try {
                 <div class="card">
                     <h2>PHP 8.4+ 特性</h2>
                     <table>
-                        <?php foreach ($php84Features as $key => $value): ?>
+                        <?php foreach ($php85Features as $key => $value): ?>
                         <tr>
                             <th><?= $key ?></th>
                             <td>

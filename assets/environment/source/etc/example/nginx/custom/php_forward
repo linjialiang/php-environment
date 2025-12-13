@@ -9,7 +9,7 @@ location ~* \.php$
   }
 
   # 转发的 php-fpm 版本
-  fastcgi_pass                127.0.0.1:9684;
+  fastcgi_pass                127.0.0.1:9685;
 
   # 根据文件名转发，完全不需要配置 fastcgi_index
   # fastcgi_index             index.php;

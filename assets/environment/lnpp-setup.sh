@@ -31,8 +31,8 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {postgres,php84-fpm,nginx}.service
-  rm /lib/systemd/system/{postgres,php84-fpm,nginx}.service
+  systemctl disable --now {postgres,php85-fpm,nginx}.service
+  rm /lib/systemd/system/{postgres,php85-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
@@ -245,8 +245,8 @@ modFilePower(){
   chown php-fpm:php-fpm -R /server/php /server/logs/php
   find /server/php /server/logs/php -type f -exec chmod 640 {} \;
   find /server/php /server/logs/php -type d -exec chmod 750 {} \;
-  chmod 640 /server/php/84/lib/php/extensions/no-debug-non-zts-*/*
-  chmod 750 -R /server/php/84/{bin,sbin}
+  chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
+  chmod 750 -R /server/php/85/{bin,sbin}
   chmod 750 /server/php/tools/{composer,php-cs-fixer-v3}.phar
 
   echo_green "nginx文件权限"
@@ -268,7 +268,7 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{postgres,php84-fpm,nginx}.service"
+  echo_cyan "/lib/systemd/system/{postgres,php85-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
@@ -295,7 +295,7 @@ TimeoutSec=infinity
 WantedBy=multi-user.target
 " > /lib/systemd/system/postgres.service
 
-  echo_cyan "[+] Create php84-fpm service..."
+  echo_cyan "[+] Create php85-fpm service..."
   echo "[Unit]
 Description=The PHP 8.4 FastCGI Process Manager
 After=network.target
@@ -304,9 +304,9 @@ After=network.target
 Type=notify
 User=php-fpm
 Group=php-fpm
-RuntimeDirectory=php84-fpm
+RuntimeDirectory=php85-fpm
 RuntimeDirectoryMode=0750
-ExecStart=/server/php/84/sbin/php-fpm --nodaemonize --fpm-config /server/php/84/etc/php-fpm.conf
+ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/php/85/etc/php-fpm.conf
 ExecReload=/bin/kill -USR2 \$MAINPID
 PrivateTmp=true
 ProtectSystem=full
@@ -320,7 +320,7 @@ RestrictNamespaces=true
 
 [Install]
 WantedBy=multi-user.target
-" > /lib/systemd/system/php84-fpm.service
+" > /lib/systemd/system/php85-fpm.service
 
   echo_cyan "[+] Create nginx service..."
   echo "[Unit]
@@ -346,7 +346,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {postgres,php84-fpm,nginx}.service
+  systemctl enable --now {postgres,php85-fpm,nginx}.service
 }
 
 #日志管理
@@ -692,15 +692,15 @@ else
   echo_yellow "重载 systemctl"
   echo_yellow "systemctl daemon-reload"
   echo_yellow "启用并开启服务"
-  echo_yellow "systemctl enable --now {postgres,php84-fpm,nginx}.service"
+  echo_yellow "systemctl enable --now {postgres,php85-fpm,nginx}.service"
   echo_yellow "禁用并禁止服务"
-  echo_yellow "systemctl disable --now {postgres,php84-fpm,nginx}.service"
+  echo_yellow "systemctl disable --now {postgres,php85-fpm,nginx}.service"
   echo_yellow "开启"
-  echo_yellow "systemctl start {postgres,php84-fpm,nginx}.service"
+  echo_yellow "systemctl start {postgres,php85-fpm,nginx}.service"
   echo_yellow "停止"
-  echo_yellow "systemctl stop {postgres,php84-fpm,nginx}.service"
+  echo_yellow "systemctl stop {postgres,php85-fpm,nginx}.service"
   echo_yellow "查看状态"
-  echo_yellow "systemctl status {postgres,php84-fpm,nginx}.service"
+  echo_yellow "systemctl status {postgres,php85-fpm,nginx}.service"
   echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
   echo_yellow "systemctl reload nginx"
   echo_yellow "使用nginx站点管理工具"

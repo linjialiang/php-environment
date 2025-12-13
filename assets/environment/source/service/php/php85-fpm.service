@@ -6,9 +6,9 @@ After=network.target
 Type=notify
 User=php-fpm
 Group=php-fpm
-RuntimeDirectory=php84-fpm
+RuntimeDirectory=php85-fpm
 RuntimeDirectoryMode=0750
-ExecStart=/server/php/84/sbin/php-fpm --nodaemonize --fpm-config /server/php/84/etc/php-fpm.conf
+ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/php/85/etc/php-fpm.conf
 ExecReload=/bin/kill -USR2 \$MAINPID
 PrivateTmp=true
 ProtectSystem=full
@@ -22,4 +22,4 @@ RestrictNamespaces=true
 
 [Install]
 WantedBy=multi-user.target
-" > /lib/systemd/system/php84-fpm.service
+" > /lib/systemd/system/php85-fpm.service

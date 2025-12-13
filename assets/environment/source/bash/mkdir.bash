@@ -20,7 +20,7 @@ server_array=(
     "/server/etc/postgres/tls"
 
     "/server/php"
-    "/server/php/84"
+    "/server/php/85"
     "/server/php/tools"
     "/server/logs/php"
 
