@@ -360,6 +360,23 @@ IIS 7+ 以后，应用池的托管管道模式统一推荐使用 `集成(Integra
 
 :::
 
-<!--@include: ./msdn/mysql.md-->
-<!--@include: ./msdn/redis.md-->
-<!--@include: ./msdn/pgsql.md-->
+::: IIS 用户权限说明
+
+IIS 用户权限主要包括两部分：
+
+1. 网站访问凭证：可以理解为 `谁来访问网站`
+
+    - 相当于 nginx 的配置里的 `user` 选项
+    - IIS 在读取静态文件（如 HTML、图片）时使用的身份
+
+2. 应用池标识：可以理解为 `网站代码以什么身份运行`
+
+    - 相当于 php-fpm 程序的子进程用户
+    - 应用池工作进程（w3wp.exe）运行时的 Windows 身份
+    - 动态内容（如 PHP、ASP.NET）执行时对系统资源（文件、注册表、网络等）的访问权限
+
+:::
+
+<!--@include: ./mysql.md-->
+<!--@include: ./redis.md-->
+<!--@include: ./pgsql.md-->
