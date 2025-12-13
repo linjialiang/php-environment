@@ -7,8 +7,8 @@ tar -xzf apcu-5.1.27.tgz
 tar -xzf xdebug-3.4.7.tgz
 ```
 
-```ini [84配置扩展]
-; path /server/php/84/lib/php.ini
+```ini [85配置扩展]
+; path /server/php/85/lib/php.ini
 extension=apcu
 
 ;zend_extension=opcache
@@ -21,7 +21,7 @@ zend_extension=xdebug
 xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.client_host=127.0.0.1
 ; xdebug.client_host=192.168.66.254
-xdebug.client_port=9084
+xdebug.client_port=9085
 
 [apcu]
 ; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
@@ -48,8 +48,8 @@ php --ri xdebug
 php --ri apcu
 
 # 测试指定PHP版本的扩展
-/server/php/84/bin/php --ri xdebug
-/server/php/84/bin/php --ri apcu
+/server/php/85/bin/php --ri xdebug
+/server/php/85/bin/php --ri apcu
 ```
 
 :::
@@ -58,10 +58,10 @@ php --ri apcu
 
 ::: code-group
 
-```bash [84编译]
+```bash [85编译]
 cd /home/php-fpm/php_ext/xdebug-3.4.7
-/server/php/84/bin/phpize
-./configure --with-php-config=/server/php/84/bin/php-config
+/server/php/85/bin/phpize
+./configure --with-php-config=/server/php/85/bin/php-config
 make -j4 > make.log
 make install
 ```
@@ -72,10 +72,10 @@ make install
 
 ::: code-group
 
-```bash [84]
+```bash [85]
 cd /home/php-fpm/php_ext/apcu-5.1.27
-/server/php/84/bin/phpize
-./configure --with-php-config=/server/php/84/bin/php-config
+/server/php/85/bin/phpize
+./configure --with-php-config=/server/php/85/bin/php-config
 make -j4 > make.log
 make test
 make install
