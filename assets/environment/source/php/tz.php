@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * 超高性能 PHP 探针 - 专为 PHP 8.4+ 深度优化
+ * 超高性能 PHP 探针 - 专为 PHP 8.5+ 深度优化
  */
 
 // 设置字符编码和时区
@@ -211,7 +211,7 @@ final class PHPProbe {
         return self::$cache['database_info'] = $info;
     }
 
-    // 获取PHP 8.4+ 特性支持信息
+    // 获取PHP 8.5+ 特性支持信息
     public static function getPHP85Features(): array {
         if (!empty(self::$cache['php85_features'])) {
             return self::$cache['php85_features'];
@@ -652,7 +652,7 @@ try {
     <div class="container">
         <header>
             <h1>高性能 PHP 探针</h1>
-            <div class="version">版本 v<?= PROBE_VERSION ?> - 专为 PHP 8.4+ 优化</div>
+            <div class="version">版本 v<?= PROBE_VERSION ?> - 专为 PHP 8.5+ 优化</div>
             <div class="php-version">PHP <?= PHP_VERSION ?></div>
         </header>
 
@@ -725,9 +725,9 @@ try {
                     </table>
                 </div>
 
-                <!-- PHP 8.4+ 特性 -->
+                <!-- PHP 8.5+ 特性 -->
                 <div class="card">
-                    <h2>PHP 8.4+ 特性</h2>
+                    <h2>PHP 8.5+ 特性</h2>
                     <table>
                         <?php foreach ($php85Features as $key => $value): ?>
                         <tr>

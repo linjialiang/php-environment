@@ -297,7 +297,7 @@ WantedBy=multi-user.target
 
   echo_cyan "[+] Create php85-fpm service..."
   echo "[Unit]
-Description=The PHP 8.4 FastCGI Process Manager
+Description=The PHP 8.5 FastCGI Process Manager
 After=network.target
 
 [Service]

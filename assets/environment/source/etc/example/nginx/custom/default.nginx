@@ -16,7 +16,7 @@ server
     }
 }
 
-## php8.4 默认站点
+## php8.5 默认站点
 server
 {
     listen 80;
