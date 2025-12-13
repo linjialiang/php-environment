@@ -222,14 +222,20 @@ PHP 解释器的权限，通常就算是正式部署环境，也没必要做的�
 
 ### 4. 新增应用池
 
-| 应用池  | 标识用户       | 描述                                                 |
-| ------- | -------------- | ---------------------------------------------------- |
-| default | `iis` 或 `www` | 静态站点使用，无需授予其他特殊权限                   |
-| php74   | iis_php74      | php7.4 站点使用，需授予 php7.4 CGI 应用程序相关权限  |
-| php84   | iis_php84      | php78.4 站点使用，需授予 php8.4 CGI 应用程序相关权限 |
+| 应用池   | 标识用户      | 描述                                                   |
+| -------- | ------------- | ------------------------------------------------------ |
+| default  | IISAppDefault | 静项目使用，无需授予其他特殊权限                       |
+| dexunweb | IISAppPHP74   | 德迅云安全项目使用，需授予 php7.4 CGI 应用程序相关权限 |
+| fastphp  | IISAppPHP85   | fastphp 项目使用，需授予 php8.5 CGI 相关权限           |
+| thinkphp | IISAppPHP85   | thinkphp 项目使用，需授予 php8.5 CGI 相关权限          |
+| laravel  | IISAppPHP85   | laravel 项目使用，需授予 php8.5 CGI 相关权限           |
 
 ::: details 截图
 ![新增应用池](/assets/iis/create-iis-app-pool.gif)
+:::
+
+::: warning 注意
+IIS 7+ 以后，应用池的托管管道模式统一推荐使用 `集成(Integrated)模式`，这样更加高效。
 :::
 
 ### 5. FastCGI 设置
