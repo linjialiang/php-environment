@@ -4,7 +4,7 @@
 
 ```bash [解压扩展包]
 tar -xzf apcu-5.1.27.tgz
-tar -xzf xdebug-3.4.7.tgz
+tar -xzf xdebug-3.5.0.tgz
 ```
 
 ```ini [85配置扩展]
@@ -59,7 +59,7 @@ php --ri apcu
 ::: code-group
 
 ```bash [85编译]
-cd /home/php-fpm/php_ext/xdebug-3.4.7
+cd /home/php-fpm/php_ext/xdebug-3.5.0
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
 make -j4 > make.log
