@@ -10,6 +10,7 @@ export CXX=/usr/bin/g++
 --with-openssl \
 --with-zlib \
 --with-curl \
+--with-ffi \
 --enable-gd \
 --with-avif \
 --with-webp \
@@ -18,12 +19,9 @@ export CXX=/usr/bin/g++
 --with-freetype \
 --enable-intl \
 --enable-mbstring \
---with-capstone \
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
 --enable-sockets \
---enable-sysvmsg \
---enable-sysvsem \
---enable-sysvshm \
+--with-zip \
 --without-sqlite3 \
 --without-pdo-sqlite > stdout.log
