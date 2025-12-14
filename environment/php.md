@@ -53,9 +53,8 @@ apt install -y autoconf
 ```
 
 ```bash [85]
-apt install -y libcurl4-openssl-dev libpng-dev libavif-dev \
-libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libonig-dev \
-libcapstone-dev libsodium-dev libzip-dev
+apt install -y libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
+libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libzip-dev
 ```
 
 :::
