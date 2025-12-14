@@ -9,9 +9,6 @@ export CXX=/usr/bin/g++
 --with-fpm-systemd \
 --with-openssl \
 --with-zlib \
---enable-bcmath \
---enable-calendar \
---enable-intl \
 --with-curl \
 --enable-gd \
 --with-avif \
@@ -19,13 +16,14 @@ export CXX=/usr/bin/g++
 --with-jpeg \
 --with-xpm \
 --with-freetype \
+--enable-intl \
 --enable-mbstring \
 --with-capstone \
---without-sqlite3 \
---without-pdo-sqlite \
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
 --enable-sockets \
 --enable-sysvmsg \
 --enable-sysvsem \
---enable-sysvshm > stdout.log
+--enable-sysvshm \
+--without-sqlite3 \
+--without-pdo-sqlite > stdout.log
