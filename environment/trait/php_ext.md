@@ -3,7 +3,7 @@
 ::: code-group
 
 ```bash [解压扩展包]
-tar -xzf apcu-5.1.27.tgz
+tar -xzf apcu-5.1.28.tgz
 tar -xzf xdebug-3.5.0.tgz
 ```
 
@@ -18,13 +18,14 @@ zend_extension=xdebug
 [xdebug]
 ;部署环境请关闭 xdebug
 ; xdebug.mode=off
-xdebug.mode=develop,coverage,debug,gcstats,profile,trace
+;xdebug.mode=develop,coverage,debug,gcstats,profile,trace
+xdebug.mode=develop,debug,trace
 xdebug.client_host=127.0.0.1
 ; xdebug.client_host=192.168.66.254
 xdebug.client_port=9085
 
 [apcu]
-; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
+; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.28 版本默认是禁用的
 apcu.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
@@ -73,7 +74,7 @@ make install
 ::: code-group
 
 ```bash [85]
-cd /home/php-fpm/php_ext/apcu-5.1.27
+cd /home/php-fpm/php_ext/apcu-5.1.28
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
 make -j4 > make.log
@@ -82,7 +83,7 @@ make install
 ```
 
 ```ini [配置参考]
-; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.27 版本默认是禁用的
+; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.28 版本默认是禁用的
 apcu.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
