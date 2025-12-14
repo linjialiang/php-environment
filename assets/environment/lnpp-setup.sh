@@ -124,7 +124,7 @@ installPackage(){
   libzstd-dev libbison-dev flex libreadline-dev zlib1g-dev libssl-dev \
   libpam0g-dev uuid-dev libsystemd-dev libcurl4-openssl-dev libpng-dev \
   libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libonig-dev \
-  libcapstone-dev libsodium-dev libzip-dev libxslt1-dev libgd-dev libgeoip-dev
+  libzip-dev libxslt1-dev libgd-dev libgeoip-dev
 }
 
 #安装预构建包
