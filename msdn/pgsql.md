@@ -14,7 +14,7 @@
 ```
 ├─ C:\mysql ==================================================== [PgSQL 根目录]
 |   ├─ data -------------------------------------------- 数据基目录
-|   |  ├─ 17 --------------------- pgsql 17 数据
+|   |  ├─ 18 --------------------- pgsql 18 数据
 |   |  |  ├─ pg_hba.conf ----- 客户端配置
 |   |  |  ├─ postgresql.conf - 服务端配置
 |   |  |  └─ ...
@@ -22,14 +22,14 @@
 |   |  └─ ...
 |   |
 |   ├─ product ------------------------------------------ 产品源码基目录
-|   |  ├─ 17 --------------------- postgresql-17.6-1
+|   |  ├─ 18 --------------------- postgresql-18.1
 |   |  |  ├─ bin/
 |   |  |  └─ ...
 |   |  |
 |   |  └─ ...
 |   |
 |   ├─ log ------------------------------------------ 产品源码基目录
-|   |  ├─ 17 --------------------- pgsql 17 日志
+|   |  ├─ 18 --------------------- pgsql 18 日志
 |   |  |  ├─ postgres.log -------- 操作日志文件
 |   |  |  ├─ wal_archive/ -------- WAL日志目录
 |   |  |  └─ ...
@@ -37,7 +37,7 @@
 |   |  └─ ...
 |   |
 |   ├─ temp ----------------------------------------- 临时目录
-|   |  ├─ 17 --------------------- pgsql 17 临时目录
+|   |  ├─ 18 --------------------- pgsql 18 临时目录
 |   |  |  ├─ process.pid -------- pid文件
 |   |  |  ├─ .s.PGSQL.5432 ------ 套接字文件
 |   |  |  ├─ .s.PGSQL.5432.lock - 套接字锁
@@ -77,15 +77,15 @@
 
 ::: code-group
 
-```ps1 [17]
+```ps1 [18]
 C:
-cd C:\pgsql\product\17\bin
-.\initdb.exe -D "C:\pgsql\data\17" -E UTF8 --locale=Chinese_China.936 -U postgres -W
+cd C:\pgsql\product\18\bin
+.\initdb.exe -D "C:\pgsql\data\18" -E UTF8 --locale=Chinese_China.936 -U postgres -W
 
 # 测试 开启服务
-.\pg_ctl.exe -D "C:\pgsql\data\17" -l "C:\pgsql\log\17\postgres.log" start
+.\pg_ctl.exe -D "C:\pgsql\data\18" -l "C:\pgsql\log\18\postgres.log" start
 # 测试 停止服务
-.\pg_ctl.exe -D "C:\pgsql\data\17" -l "C:\pgsql\log\17\postgres.log" start
+.\pg_ctl.exe -D "C:\pgsql\data\18" -l "C:\pgsql\log\18\postgres.log" start
 ```
 
 :::
@@ -108,25 +108,25 @@ Windows 版的 PgSQL 不支持 `Administrator` 账户作为服务所属账户，
 
 ::: code-group
 
-```ps1 [17]
+```ps1 [18]
 C:
-cd C:\pgsql\product\17\bin
+cd C:\pgsql\product\18\bin
 # Administrator 账户登录
-.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -U postgres -P "1" -S demand
+.\pg_ctl.exe register -D "C:\pgsql\data\18" -N "pgsql-18" -U postgres -P "1" -S demand
 # 非 Administrator 账户登录
-.\pg_ctl.exe register -D "C:\pgsql\data\17" -N "pgsql-17" -S demand
+.\pg_ctl.exe register -D "C:\pgsql\data\18" -N "pgsql-18" -S demand
 ```
 
 ```ps1 [服务启停]
 # 启动
-net start pgsql-17
+net start pgsql-18
 # 停止
-net stop pgsql-17
+net stop pgsql-18
 ```
 
 :::
 
-::: details pgsql 17.4 版本通过 pg_ctl 注册时的选项说明
+::: details pgsql 18.1 版本通过 pg_ctl 注册时的选项说明
 
 ```ps1
 pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] [-S 启动类型] [-e 源] [-W] [-t 秒数] [-s] [-o 选项]
@@ -142,7 +142,7 @@ pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] 
 -   示例：
 
     ```ps1
-    -D "C:\pgsql\data\17"
+    -D "C:\pgsql\data\18"
     ```
 ````
 
@@ -154,7 +154,7 @@ pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] 
 -   示例：
 
     ```ps1
-    -N "PostgreSQL_17"
+    -N "PostgreSQL_18"
     ```
 ````
 
@@ -213,7 +213,7 @@ pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] 
 -   示例：
 
     ```ps1
-    -e "PG_17_Events"
+    -e "PG_18_Events"
     ```
 ````
 
@@ -271,9 +271,9 @@ pg_ctl register  [-D 数据目录] [-N 服务名称] [-U 用户名] [-P 口令] 
 
 ```ps1 [登录]
 ➜ ~  c:
-➜ ~  cd C:\pgsql\product\17\bin
-➜ bin  .\psql.exe -h C:\pgsql\temp\17 -U postgres
-psql (17.4)
+➜ ~  cd C:\pgsql\product\18\bin
+➜ bin  .\psql.exe -h C:\pgsql\temp\18 -U postgres
+psql (18.1)
 输入 "help" 来获取帮助信息.
 
 postgres=#
@@ -284,8 +284,8 @@ CREATE USER admin SUPERUSER LOGIN PASSWORD '1';
 ```
 
 ```ps1 [测试登录]
-➜ bin  .\psql.exe -h C:\pgsql\temp\17 -U admin -d postgres
-psql (17.4)
+➜ bin  .\psql.exe -h C:\pgsql\temp\18 -U admin -d postgres
+psql (18.1)
 输入 "help" 来获取帮助信息.
 
 postgres=#
