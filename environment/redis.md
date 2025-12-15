@@ -21,11 +21,11 @@ apt install -y libssl-dev
 
 ```bash [构建指令]
 su - redis -s /bin/zsh
-tar -xzf redis-8.2.1.tar.gz
+tar -xzf redis-8.4.0.tar.gz
 # make 时需要通过 ../deps/** 来获取自带的依赖依赖
 # - 所以必须在子目录中构建
-mkdir ~/redis-8.2.1/build_redis
-cd ~/redis-8.2.1/build_redis
+mkdir ~/redis-8.4.0/build_redis
+cd ~/redis-8.4.0/build_redis
 make -C ../ BUILD_TLS=yes -j4 > make.log
 ```
 
@@ -38,7 +38,7 @@ Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} 
 ```
 
 ```bash [安装并指定目录]
-cd ~/redis-8.2.1/build_redis
+cd ~/redis-8.4.0/build_redis
 make -C ../ install PREFIX=/server/redis
 ```
 
@@ -70,7 +70,7 @@ redis 源码包中自带了参考配置文件，可以备份该参考配置，�
 ::: code-group
 
 ```bash [备份默认配置]
-cp -p -r ~/redis-8.2.1/redis.conf /server/etc/redis/config/source.conf
+cp -p -r ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 ```
 
 ```bash [RDB存储目录]
@@ -171,10 +171,10 @@ redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TL
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh
-cd ~/redis-8.2.1/utils
+cd ~/redis-8.4.0/utils
 chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
-cp -r ~/redis-8.2.1/utils/tests/tls/ /server/etc/redis/
+cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
 chmod 750 /server/etc/redis/tls
 find /server/etc/redis/tls -type f -exec chmod 640 {} \;
 chown redis:redis -R /server/etc/redis/tls
