@@ -12,7 +12,7 @@ titleTemplate: 环境搭建教程
 ## 安装依赖
 
 ```bash
-apt install -y libssl-dev
+apt install -y libssl-dev tcl
 ```
 
 ## 编译安装
