@@ -17,8 +17,6 @@ echo "/server/logs/redis/redis-server.log {
     # 可选：自定义日期格式，例如 -20250901.1714900000
     dateformat -%Y%m%d.%s
     # 可选：使用前一天的日期而非轮转执行日期
-    dateyesterday
-    # 可选：使用前一天的日期而非轮转执行日期
     # dateyesterday
     # 复制当前日志文件后清空原文件，避免需重启Redis或发送信号（与 create 二选一）
     # copytruncate
