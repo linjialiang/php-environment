@@ -1,4 +1,5 @@
-echo "/server/logs/redis/redis-server.log {
+echo "
+/server/logs/redis/redis-server.log {
     monthly
     maxsize 100M
     missingok
@@ -15,4 +16,5 @@ echo "/server/logs/redis/redis-server.log {
             /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
         fi
     endscript
-}" > /etc/logrotate.d/redis
+}
+" > /etc/logrotate.d/redis
