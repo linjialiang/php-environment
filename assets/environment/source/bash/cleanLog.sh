@@ -27,9 +27,9 @@ echo_cyan "是否清理zsh_history文件(1清理/默认不清理)："
 read num
 if [[ "$num" = "1" ]]; then
   echo_yellow "开始清理终端历史文件文件"
-  rm /home/{postgres,php-fpm,nginx,emad}/.{zsh,bash}_history
-  rm /home/{postgres,php-fpm,nginx,emad}/.{z,viminfo}
-  rm /home/{postgres,php-fpm,nginx,emad}/.zcompdump-*
+  rm /home/{redis,postgres,php-fpm,nginx,emad}/.{zsh,bash}_history
+  rm /home/{redis,postgres,php-fpm,nginx,emad}/.{z,viminfo}
+  rm /home/{redis,postgres,php-fpm,nginx,emad}/.zcompdump-*
   rm /root/.{zsh,bash}_history
   rm /root/.{z,viminfo}
   rm /root/.zcompdump-*
@@ -44,7 +44,7 @@ echo_cyan "是否清理lnpp日志(1清理/默认不清理)："
 read num1
 if [ "$num1" = "1" ]; then
   echo_green "先停止服务"
-  systemctl stop {postgres,php85-fpm,nginx}.service
+  systemctl stop {redis,postgres,php85-fpm,nginx}.service
   echo_green "开始清理redis日志"
   find /server/logs/redis/ -type f -exec rm {} \;
   echo_green "开始清理postgres日志"
@@ -66,7 +66,7 @@ echo_cyan "是否清理二进制日志(1清理/默认不清理)："
 read num2
 if [ "$num2" = "1" ]; then
   echo_green "先停止服务"
-  systemctl stop {postgres,php85-fpm,nginx}.service
+  systemctl stop {redis,postgres,php85-fpm,nginx}.service
   echo_green "开始清理PostgreSQL预写式日志"
   rm /server/logs/postgres/wal_archive/*
   echo_green "清理lnpp日志完成"
@@ -74,10 +74,21 @@ else
   echo_yellow "不清理数据库二进制日志"
 fi
 
+echo_cyan "是否清理Redis本地存储(1清理/默认不清理)："
+read num5
+if [[ "$num5" = "1" ]]; then
+  echo_yellow "开始清理Redis本地存储"
+  rm /server/redis/rdbData/dump.rdb
+  rm /server/redis/rdbData/appendonlydir/*
+  echo_yellow "清理Redis本地存储结束"
+else
+  echo_yellow "不清理Redis本地存储"
+fi
+
 echo_cyan "是否启动服务(1启动/默认不启动)："
 read num3
 if [ "$num3" = "1" ]; then
-  systemctl start {postgres,php85-fpm,nginx}.service
+  systemctl start {redis,postgres,php85-fpm,nginx}.service
   echo_green "服务已重新启动"
 else
   echo_yellow "未重启服务，请手动启动"
