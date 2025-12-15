@@ -7,6 +7,7 @@ const path = {
 
 const sidebar = [
   { text: '概述', link: `${path.main}` },
+  { text: 'Redis', link: `${path.main}redis` },
   { text: 'PostgreSQL', link: `${path.main}pgsql` },
   { text: 'PHP', link: `${path.main}php` },
   { text: 'Nginx', link: `${path.main}nginx` },
