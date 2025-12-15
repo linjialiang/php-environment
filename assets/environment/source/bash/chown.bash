@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+func_chown_redis(){
+    chown redis:redis -R $1
+    find $1 -type f -exec chmod 640 {} \;
+    find $1 -type d -exec chmod 750 {} \;
+}
+
 func_chown_postgres(){
     chown postgres:postgres -R $1
     find $1 -type f -exec chmod 640 {} \;
@@ -23,6 +29,12 @@ func_chown_www(){
     find $1 -type d -exec chmod 750 {} \;
 }
 
+chown_redis_array=(
+    "/server/redis"
+    "/server/redis/rdbData"
+    "/server/logs/redis"
+    "/server/etc/redis"
+);
 chown_postgres_array=(
     "/server/postgres"
     "/server/pgData"
@@ -45,6 +57,14 @@ chown_nginx_array=(
 chown_www_array=(
     "/www"
 );
+
+echo "-----开始设置 redis 用户权限目录-----"
+for((i=0;i<${#chown_redis_array[*]};i++));
+do
+   echo ${chown_redis_array[i]}
+   func_chown_redis ${chown_redis_array[i]}
+done
+echo "-----redis 用户权限目录设置结束-----"
 
 echo "-----开始设置 postgres 用户权限目录-----"
 for((i=0;i<${#chown_postgres_array[*]};i++));
