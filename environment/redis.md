@@ -90,6 +90,7 @@ chmod 750 /server/redis/rdbData
 ::: code-group
 <<< @/assets/environment/source/redis/redis.conf{ini} [主配置]
 <<< @/assets/environment/source/etc/redis/config/source.conf{ini} [原始配置]
+<<< @/assets/environment/source/etc/redis/config/source-full.conf{ini} [原始配置(完全)]
 :::
 
 #### 自定义配置
