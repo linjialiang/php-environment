@@ -10,6 +10,7 @@ titleTemplate: 环境搭建教程
 | package    | 说明                       |
 | ---------- | -------------------------- |
 | Debian13   | 系统发行版                 |
+| Redis      | 键值存储数据库             |
 | PostgreSQL | 关系型数据库               |
 | PHP        | 后端脚本语言               |
 | Nginx      | Web 服务器和反向代理服务器 |
@@ -18,7 +19,6 @@ titleTemplate: 环境搭建教程
 
 | package | 说明               |
 | ------- | ------------------ |
-| Redis   | 键值存储数据库     |
 | MongoDB | 文档数据库         |
 | Sqlite3 | 轻量级关系型数据库 |
 | MySQL   | 关系型数据库       |
