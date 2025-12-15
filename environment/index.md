@@ -57,12 +57,13 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```md [包列表]
-1. postgresql-18.1.tar.bz2
-2. php-8.5.0.tar.xz
+1. redis-8.4.0.tar.gz
+2. postgresql-18.1.tar.bz2
+3. php-8.5.0.tar.xz
     - 动态扩展
         - xdebug-3.5.0.tgz
         - apcu-5.1.28.tgz
-3. nginx-1.28.0.tar.gz
+4. nginx-1.28.0.tar.gz
     - openssl-3.5.4.tar.gz
     - pcre2-10.47.tar.bz2
     - zlib-1.3.1.tar.xz
@@ -71,6 +72,7 @@ titleTemplate: 环境搭建教程
 ```md [包下载]
 | package    | url                                   |
 | ---------- | ------------------------------------- |
+| Redis      | https://github.com/redis/redis-hashes |
 | PostgreSQL | https://www.postgresql.org/           |
 | PHP        | https://www.php.net/                  |
 | PHP extend | http://pecl.php.net/                  |
