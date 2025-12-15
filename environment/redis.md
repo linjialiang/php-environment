@@ -70,6 +70,7 @@ redis 源码包中自带了参考配置文件，可以备份该参考配置，�
 ::: code-group
 
 ```bash [备份默认配置]
+cp -p -r ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
 cp -p -r ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 ```
 
