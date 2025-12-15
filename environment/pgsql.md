@@ -600,7 +600,7 @@ find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入 lnpp包用户组
-usermod -a -G postgres,php-fpm,nginx emad
+usermod -a -G redis,postgres,php-fpm,nginx emad
 ```
 
 :::

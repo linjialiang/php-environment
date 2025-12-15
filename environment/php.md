@@ -496,7 +496,7 @@ ln -s /server/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 ```bash [开发]
 # 权限同部署环境
 # 开发用户 emad 加入 lnpp包用户组
-usermod -a -G postgres,php-fpm,nginx emad
+usermod -a -G redis,postgres,php-fpm,nginx emad
 ```
 
 :::

@@ -43,4 +43,4 @@ usermod -a -G postgres php-fpm
 # - 部署环境不需要开发用户，可直接使用 nginx 用户作为 ftp、ssh 等上传工具的用户
 usermod -a -G emad nginx
 usermod -a -G emad php-fpm
-usermod -a -G postgres,php-fpm,nginx emad
+usermod -a -G redis,postgres,php-fpm,nginx emad
