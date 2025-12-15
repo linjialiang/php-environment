@@ -21,6 +21,11 @@ hero:
 
 features:
     - icon:
+          src: /static/svg/redis.svg
+      title: Redis 安装
+      details: 键值对数据库
+      link: /environment/redis
+    - icon:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 安装
       details: 最强开源关系型数据库
