@@ -31,15 +31,17 @@ cleanOldData(){
   echo_green "清理旧数据"
   echo_yellow "=================================================================="
   echo_cyan "清理systemctl单元"
-  systemctl disable --now {postgres,php85-fpm,nginx}.service
-  rm /lib/systemd/system/{postgres,php85-fpm,nginx}.service
+  systemctl disable --now {redis,postgres,php85-fpm,nginx}.service
+  rm /lib/systemd/system/{redis,postgres,php85-fpm,nginx}.service
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
-  echo_cyan "删除旧用户 postgres,php-fpm,nginx 如果有重要数据请先备份"
+  echo_cyan "删除旧用户 redis,postgres,php-fpm,nginx 如果有重要数据请先备份"
+  userdel -r redis
   userdel -r postgres
   userdel -r php-fpm
   userdel -r nginx
+  groupdel redis
   groupdel postgres
   groupdel php-fpm
   groupdel nginx
@@ -61,12 +63,13 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建postgres,php-fpm,nginx的进程用户"
+  echo_green "创建redis,postgres,php-fpm,nginx的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
   echo_cyan "是否支持启用zsh(1支持，默认不支持)："
   read zshState
+  createSingleUser 'redis' $zshState
   createSingleUser 'postgres' $zshState
   createSingleUser 'php-fpm' $zshState
   createSingleUser 'nginx' $zshState
@@ -108,7 +111,7 @@ devUserPower(){
   echo_yellow "=================================================================="
   usermod -a -G $devUserName nginx
   usermod -a -G $devUserName php-fpm
-  usermod -a -G postgres,php-fpm,nginx $devUserName
+  usermod -a -G redis,postgres,php-fpm,nginx $devUserName
 }
 
 #安装依赖包
@@ -138,6 +141,80 @@ InstallBuild(){
   echo_green "预先编译成功的lnmpp解压到服务器目录下"
   echo_yellow "=================================================================="
   tar -xJf ./lnmpp.tar.xz -C /
+}
+
+#重置Redis数字证书
+resetRedisCertificate(){
+  redisTlsPath=/server/redis/tls
+  redisTlsScriptPath=/server/redis/gen-test-certs.sh
+  rm -rf $redisTlsPath
+  echo_yellow "=================================================================="
+  echo_green "创建一键生成redis数字证书脚本"
+  echo_yellow " "
+  echo_cyan "注意: 不能向其他用户开放权限"
+  echo_cyan "开发环境: 目录 750/ 文件 640"
+  echo_cyan "部署环境: 目录 700/ 文件 600"
+  echo_yellow " "
+  echo_yellow "=================================================================="
+  echo_cyan "[+] Create Redis certs script..."
+  echo "#\!/bin/bash
+generate_cert() {
+    local name=\$1
+    local cn=\"\$2\"
+    local opts=\"\$3\"
+
+    local keyfile=$redisTlsPath/\${name}.key
+    local certfile=$redisTlsPath/\${name}.crt
+
+    [ -f \$keyfile ] || openssl genrsa -out \$keyfile 2048
+    openssl req \\
+        -new -sha256 \\
+        -subj \"/O=Redis Test/CN=\$cn\" \\
+        -key \$keyfile | \\
+        openssl x509 \\
+            -req -sha256 \\
+            -CA $redisTlsPath/ca.crt \\
+            -CAkey $redisTlsPath/ca.key \\
+            -CAserial $redisTlsPath/ca.txt \\
+            -CAcreateserial \\
+            -days 365 \\
+            \$opts \\
+            -out \$certfile
+}
+
+mkdir $redisTlsPath
+[ -f $redisTlsPath/ca.key ] || openssl genrsa -out $redisTlsPath/ca.key 4096
+openssl req \\
+    -x509 -new -nodes -sha256 \\
+    -key $redisTlsPath/ca.key \\
+    -days 3650 \\
+    -subj '/O=Redis Test/CN=Certificate Authority' \\
+    -out $redisTlsPath/ca.crt
+
+cat > $redisTlsPath/openssl.cnf <<_END_
+[ server_cert ]
+keyUsage = digitalSignature, keyEncipherment
+nsCertType = server
+
+[ client_cert ]
+keyUsage = digitalSignature, keyEncipherment
+nsCertType = client
+_END_
+
+generate_cert server \"Server-only\" \"-extfile $redisTlsPath/openssl.cnf -extensions server_cert\"
+generate_cert client \"Client-only\" \"-extfile $redisTlsPath/openssl.cnf -extensions client_cert\"
+generate_cert redis \"Generic-cert\"
+
+[ -f $redisTlsPath/redis.dh ] || openssl dhparam -out $redisTlsPath/redis.dh 2048
+" > $redisTlsScriptPath
+  echo_cyan "[+] run Redis certs script..."
+  chmod +x $redisTlsScriptPath
+  $redisTlsScriptPath
+  echo_cyan "tls证书重置完成，是否删除一键生成Redis证书脚本(1删除/默认不删除)："
+  read isDeleteRedisTlsScript
+  if [[ "$isDeleteRedisTlsScript" == '1' ]]; then
+    rm $redisTlsScriptPath
+  fi
 }
 
 #重置PostgreSQL数字证书
@@ -233,6 +310,14 @@ modFilePower(){
   echo_red "部署环境通常是www用户（nginx/php-fpm 需加入 www用户组）"
   chmod 750 /www
 
+  echo_green "redis文件权限"
+  chown redis:redis -R /server/redis /server/logs/redis /server/etc/redis
+  find /server/redis /server/logs/redis /server/etc/redis -type f -exec chmod 640 {} \;
+  find /server/redis /server/logs/redis /server/etc/redis -type d -exec chmod 750 {} \;
+  chmod 750 -R /server/redis/bin
+  find /server/etc/redis/tls -type f -exec chmod 600 {} \;
+  find /server/etc/redis/tls -type d -exec chmod 700 {} \;
+
   echo_green "postgres文件权限"
   chown postgres:postgres -R /server/postgres /server/pgData /server/logs/postgres /server/etc/postgres
   find /server/postgres /server/logs/postgres /server/etc/postgres -type f -exec chmod 640 {} \;
@@ -268,10 +353,31 @@ InstallSystemctlUnit(){
   echo_yellow "=================================================================="
   echo_green "加入systemctl守护进程\n含systemctl unit文件"
   echo_yellow " "
-  echo_cyan "/lib/systemd/system/{postgres,php85-fpm,nginx}.service"
+  echo_cyan "/lib/systemd/system/{redis,postgres,php85-fpm,nginx}.service"
   echo_yellow " "
   echo_green "支持开启自动启动服务，非常规终止进程会自动启动服务"
   echo_yellow "=================================================================="
+  echo_cyan "[+] Create redis service..."
+  echo "[Unit]
+Description=redis-8.4.x
+After=network.target
+
+[Service]
+Type=forking
+User=redis
+Group=redis
+RuntimeDirectory=redis
+RuntimeDirectoryMode=0750
+ExecStart=/server/redis/bin/redis-server /server/redis/redis.conf
+ExecReload=/bin/kill -s HUP \$MAINPID
+ExecStop=/bin/kill -s QUIT \$MAINPID
+Restart=on-failure
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+" > /usr/lib/systemd/system/redis.service
+
   echo_cyan "[+] Create postgres service..."
   echo "[Unit]
 Description=PostgreSQL database server
@@ -346,7 +452,7 @@ WantedBy=multi-user.target
 
   echo_green "Registered Service..."
   systemctl daemon-reload
-  systemctl enable --now {postgres,php85-fpm,nginx}.service
+  systemctl enable --now {redis,postgres,php85-fpm,nginx}.service
 }
 
 #日志管理
@@ -354,6 +460,26 @@ LogManagement(){
   echo_yellow "=================================================================="
   echo_green "Nginx 使用 Logrotate 来管理日志文件"
   echo_yellow "=================================================================="
+  echo_cyan "[+] 创建 redis 的 Logrotate 脚本..."
+  echo "/server/logs/redis/redis-server.log {
+    monthly
+    maxsize 100M
+    missingok
+    rotate 12
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    dateyesterday
+    create 0640 redis redis
+    sharedscripts
+    postrotate
+        if [ -f /run/redis/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
+        fi
+    endscript
+}" > /etc/logrotate.d/redis
+
   echo_cyan "[+] 创建 nginx 的 Logrotate 脚本..."
   echo "
 /server/logs/nginx/access/*.log {
@@ -409,6 +535,10 @@ LogManagement(){
   echo_cyan "[+] postgres用户资源管理..."
   echo "postgres  soft  nofile  65535
 postgres  hard  nofile  65535" > /etc/security/limits.d/postgres.conf
+
+  echo_cyan "[+] redis用户资源管理..."
+  echo "redis soft nofile 65535
+redis hard nofile 65535" > /etc/security/limits.d/redis.conf
 }
 
 #PHP工具软链接到 /usr/local/bin
@@ -660,13 +790,14 @@ else
   #安装依赖包
   installPackage
   echo ' '
-  #解压lnmpp预构建包到指定目录
+  #解压lnpp预构建包到指定目录
   InstallBuild
   echo ' '
   #是否重新生成tls证书
   echo_cyan "是否重置数字证书(1重置/默认不重置)："
   read isResetCertificate
   if [[ "$isResetCertificate" == '1' ]]; then
+    resetRedisCertificate
     resetPgsqlCertificate
   fi
   echo ' '
@@ -692,15 +823,15 @@ else
   echo_yellow "重载 systemctl"
   echo_yellow "systemctl daemon-reload"
   echo_yellow "启用并开启服务"
-  echo_yellow "systemctl enable --now {postgres,php85-fpm,nginx}.service"
+  echo_yellow "systemctl enable --now {redis,postgres,php85-fpm,nginx}.service"
   echo_yellow "禁用并禁止服务"
-  echo_yellow "systemctl disable --now {postgres,php85-fpm,nginx}.service"
+  echo_yellow "systemctl disable --now {redis,postgres,php85-fpm,nginx}.service"
   echo_yellow "开启"
-  echo_yellow "systemctl start {postgres,php85-fpm,nginx}.service"
+  echo_yellow "systemctl start {redis,postgres,php85-fpm,nginx}.service"
   echo_yellow "停止"
-  echo_yellow "systemctl stop {postgres,php85-fpm,nginx}.service"
+  echo_yellow "systemctl stop {redis,postgres,php85-fpm,nginx}.service"
   echo_yellow "查看状态"
-  echo_yellow "systemctl status {postgres,php85-fpm,nginx}.service"
+  echo_yellow "systemctl status {redis,postgres,php85-fpm,nginx}.service"
   echo_yellow "重新加载配置(部分服务器不支持重载配置文件)"
   echo_yellow "systemctl reload nginx"
   echo_yellow "使用nginx站点管理工具"
