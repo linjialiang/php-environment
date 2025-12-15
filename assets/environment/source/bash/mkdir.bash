@@ -31,6 +31,14 @@ server_array=(
     "/server/etc/nginx"
     "/server/etc/nginx/custom"
 
+    "/server/redis"
+    "/server/redis/rdbData"
+    "/server/logs/redis"
+    "/server/etc/redis"
+    "/server/etc/redis/tls"
+    "/server/etc/redis/config"
+    "/server/etc/redis/config/custom"
+
     "/server/sites"
     "/server/sites/tls"
     "/server/sites/available"
