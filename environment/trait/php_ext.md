@@ -5,6 +5,7 @@
 ```bash [解压扩展包]
 tar -xzf apcu-5.1.28.tgz
 tar -xzf xdebug-3.5.0.tgz
+tar -xzf redis-6.3.0.tgz
 ```
 
 ```ini [85配置扩展]
@@ -100,6 +101,21 @@ apcu.ttl=300       ; 短时间缓存，便于调试
 ; apcu.stat=0         ; 关闭状态检查提升性能
 ; apcu.ttl=7200       ; 长时间缓存
 ; apcu.slam_defense=1 ; 防止缓存击穿
+```
+
+:::
+
+### 3. redis 扩展
+
+::: code-group
+
+```bash [85]
+cd /home/php-fpm/php_ext/redis-6.3.0
+/server/php/85/bin/phpize
+./configure --with-php-config=/server/php/85/bin/php-config
+make -j4 > make.log
+make test
+make install
 ```
 
 :::
