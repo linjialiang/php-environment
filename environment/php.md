@@ -226,14 +226,20 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建
 ::: code-group
 
 ```ini [开启方式]
-# 在 `php.ini` 第 953 行，将 `;` 去掉
-zend_extension=opcache
+; 新版PHP默认启用
+[opcache]
+;opcache.enable=1
+;opcache.enable_cli=0
+...
 ```
 
 ```ini [性能配置]
-# 在 `php.ini` 第 1796 行，加入以下内容，可获得较好性能
-# 检查脚本时间戳是否有更新的周期，以秒为单位
-opcache.revalidate_freq=60
+# 默认jit是未配置的，启用jit来提升性能
+[opcache]
+...
+opcache.jit=tracing
+opcache.jit_buffer_size=100M
+...
 ```
 
 :::
