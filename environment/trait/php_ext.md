@@ -43,7 +43,6 @@ apcu.ttl=300       ; 短时间缓存，便于调试
 ; apcu.stat=0         ; 关闭状态检查提升性能
 ; apcu.ttl=7200       ; 长时间缓存
 ; apcu.slam_defense=1 ; 防止缓存击穿
-
 ```
 
 ```bash [测试扩展]
@@ -86,7 +85,10 @@ make install
 ```
 
 ```ini [配置参考]
-; 虽然手册里写的默认开启[2025-09-10]，但实测时 apcu-5.1.28 版本默认是禁用的
+[apcu]
+; 手册里写的默认开启，实测情况如下：
+;   apcu-5.1.27 版本默认禁用
+;   apcu-5.1.28 版本默认启用
 apcu.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
