@@ -226,28 +226,34 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建
 ::: code-group
 
 ```ini [开启方式]
-; 新版PHP默认启用
+; 新版PHP默认启用，不需要额外开启
 [opcache]
 ;opcache.enable=1
+; cli 不用开启，因为都是临时使用，用不到 opcache
 ;opcache.enable_cli=0
 ...
 ```
 
 ```ini [性能配置]
-# 默认jit是未配置的，启用jit来提升性能
+; 通常生产和测试环境开启，开发环境不开启
 [opcache]
 ...
+; 默认jit是未配置的，启用jit来提升性能
 opcache.jit=tracing
 opcache.jit_buffer_size=100M
+...
+; 设 256M（适用于 90% 的 Web 应用）
+opcache.memory_consumption=256
+...
+; 关闭文件时间戳检查以提升性能（部署新代码后必须触发缓存更新！）
+opcache.validate_timestamps=0
 ...
 ```
 
 :::
 
 ::: danger 警告
-开启 `opcache` 扩展，会导致数据被缓存，可能无法获取到最新数据，所以线上环境必须经过严格测试
-
-如果你不明白自己在做什么，最好不要开启它
+官网强烈推荐，所有现代 PHP 生产环境都必须启用 `OPcache`，
 :::
 
 ## PHP-FPM 配置
