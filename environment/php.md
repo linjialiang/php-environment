@@ -252,7 +252,7 @@ opcache.validate_timestamps=0
 
 :::
 
-::: danger 警告
+::: tip
 官网强烈推荐，所有现代 PHP 生产环境都必须启用 `OPcache`，
 :::
 
