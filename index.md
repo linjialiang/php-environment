@@ -1,13 +1,13 @@
 ---
-title: 程序员系列教程-PHP 环境搭建
+title: PHP 环境搭建
 titleTemplate: PHP 环境搭建
 
 layout: home
 
 hero:
     name: PHP 环境搭建
-    text: 纯手工搭建一个完善的PHP环境
-    tagline: 程序员系列教程-PHP 环境搭建
+    text: 纯手工搭建PHP环境
+    tagline: PHP 环境搭建
     image:
         src: '/static/wechat-pay.png'
         alt: 'PHP 环境搭建'
@@ -21,10 +21,21 @@ hero:
 
 features:
     - icon:
+          dark: /static/svg/sqlite-dark.svg
+          light: /static/svg/sqlite-light.svg
+      title: SQLite3 安装
+      details: 轻量级关系型数据库
+      link: /environment/sqlite3
+    - icon:
           src: /static/svg/redis.svg
       title: Redis 安装
       details: 键值对数据库
       link: /environment/redis
+    - icon:
+          src: /static/svg/mysql.svg
+      title: MySQL 安装
+      details: 关系型数据库
+      link: /environment/mysql
     - icon:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 安装
