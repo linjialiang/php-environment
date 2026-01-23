@@ -44,7 +44,7 @@ echo_cyan "是否清理lnmpp日志(1清理/默认不清理)："
 read num1
 if [ "$num1" = "1" ]; then
   echo_green "先停止服务"
-  systemctl stop {redis,postgres,php85-fpm,nginx,mysqld-84}.service
+  systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理redis日志"
   find /server/logs/redis/ -type f -exec rm {} \;
   echo_green "开始清理postgres日志"
@@ -68,7 +68,7 @@ echo_cyan "是否清理二进制日志(1清理/默认不清理)："
 read num2
 if [ "$num2" = "1" ]; then
   echo_green "先停止服务"
-  systemctl stop {redis,postgres,php85-fpm,nginx,mysqld-84,emad}.service
+  systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理PostgreSQL预写式日志"
   rm /server/logs/postgres/wal_archive/*
   echo_green "开始清理MySQL二进制日志"
@@ -92,7 +92,7 @@ fi
 echo_cyan "是否启动服务(1启动/默认不启动)："
 read num2
 if [ "$num2" = "1" ]; then
-  systemctl start {redis,postgres,php85-fpm,nginx,mysqld-84}.service
+  systemctl start {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "服务已重新启动"
 else
   echo_yellow "未重启服务，请手动启动"
