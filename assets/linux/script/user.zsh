@@ -32,3 +32,7 @@ done
 # 用户与组的关系
 usermod -a -G postgres,sqlite3 php
 usermod -a -G sqlite3,redis,postgres,php,nginx,mysql emad
+
+# 开发者创建的文件 [nginx 工作进程用户] 和 [php 工作进程用户] 需要能读取
+usermod -a -G emad nginx
+usermod -a -G emad php
