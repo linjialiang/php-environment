@@ -18,48 +18,47 @@ FuncRunPower(){
 
 rootItems=(
     '/server'
-    '/server/default'
 );
 
 wwwItems=(
-    "/www"
+    '/www'
 );
 
 sqlite3Items=(
-    "/server/sqlite"
+    '/server/sqlite3'
 );
 
 redisItems=(
-    "/server/redis"
-    "/server/redis/rdbData"
-    "/server/logs/redis"
-    "/server/etc/redis"
+    '/server/redis'
+    '/server/logs/redis'
+    '/server/etc/redis'
 );
 
 postgresItems=(
-    "/server/postgres"
-    "/server/pgData"
-    "/server/logs/postgres"
-    "/server/etc/postgres"
+    '/server/postgres'
+    '/server/pgData'
+    '/server/logs/postgres'
+    '/server/etc/postgres'
 );
 
 phpItems=(
-    "/server/php"
-    "/server/logs/php"
+    '/server/php'
+    '/server/logs/php'
+    '/server/etc/php'
 );
 
 nginxItems=(
-    "/server/nginx"
-    "/server/logs/nginx"
-    "/server/etc/nginx"
-    "/server/sites"
+    '/server/nginx'
+    '/server/logs/nginx'
+    '/server/etc/nginx'
+    '/server/sites'
 );
 
 mysqlItems=(
-    "/server/mysql"
-    "/server/data"
-    "/server/logs/mysql"
-    "/server/etc/mysql"
+    '/server/mysql'
+    '/server/data'
+    '/server/logs/mysql'
+    '/server/etc/mysql'
 );
 
 # 循环
