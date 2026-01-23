@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 
 FuncRunPower(){
-    echo "----- 开始设置 $2 相关目录权限 -----"
-    chown $2:$2 -R $1
-    chmod 750 -R $1
-    find $1 -type f -exec chmod 640 {} \;
+    local DirPerm filePerm
+    # 判断权限
+    if [[ "$2" == "root" ]]; then
+        DirPerm=755
+        filePerm=644
+    else
+        DirPerm=750
+        filePerm=640
+    fi
+    chown "$2":"$2" -R "$1"
+    find "$1" -type d -exec chmod $DirPerm {} \;
+    find "$1" -type f -exec chmod $filePerm {} \;
+    echo "目录 '$1' 权限已设置为 目录:$DirPerm 文件:$filePerm"
 }
+
+rootItems=(
+    '/server'
+    '/server/default'
+);
 
 wwwItems=(
     "/www"
@@ -49,8 +63,11 @@ mysqlItems=(
 );
 
 # 循环
+for item in "${rootItems[@]}"; do
+    FuncRunPower "$item" 'root'
+done
 for item in "${wwwItems[@]}"; do
-    FuncRunPower "$item" 'www'
+    FuncRunPower "$item" 'emad'
 done
 for item in "${sqlite3Items[@]}"; do
     FuncRunPower "$item" 'sqlite3'
