@@ -13,8 +13,11 @@ hero:
         alt: 'PHP 环境搭建'
     actions:
         - theme: alt
-          text: 查看详情
-          link: /environment/
+          text: linux版
+          link: /linux/
+        - theme: alt
+          text: msdn版
+          link: /linux/
         - theme: brand
           text: 👉B站关注作者
           link: https://space.bilibili.com/473623415
@@ -25,33 +28,33 @@ features:
           light: /static/svg/sqlite-light.svg
       title: SQLite3 安装
       details: 轻量级关系型数据库
-      link: /environment/sqlite3
+      link: /linux/sqlite3
     - icon:
           src: /static/svg/redis.svg
       title: Redis 安装
       details: 键值对数据库
-      link: /environment/redis
-    - icon:
-          src: /static/svg/mysql.svg
-      title: MySQL 安装
-      details: 关系型数据库
-      link: /environment/mysql
+      link: /linux/redis
     - icon:
           src: /static/svg/pgsql.svg
       title: PostgreSQL 安装
       details: 最强开源关系型数据库
-      link: /environment/pgsql
+      link: /linux/pgsql
+    - icon:
+          src: /static/svg/mysql.svg
+      title: MySQL 安装
+      details: 关系型数据库
+      link: /linux/mysql
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
       title: PHP 安装
       details: PHP语言解释器
-      link: /environment/php
+      link: /linux/php
     - icon:
           src: /static/svg/nginx.svg
       title: Nginx 安装
       details: Web服务器
-      link: /environment/nginx
+      link: /linux/nginx
     - icon:
           dark: /static/svg/iis-dark.svg
           light: /static/svg/iis-light.svg
