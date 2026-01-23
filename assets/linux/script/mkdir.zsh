@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-# mkdir.bash
-func_create(){
-    mkdir $1
-}
-
-server_array=(
+items=(
     "/www"
     "/server"
 
@@ -42,6 +37,7 @@ server_array=(
     "/server/logs/php"
     "/server/etc/php"
     "/server/etc/php/85"
+    "/server/etc/php/85/php-fpm.d"
 
     "/server/nginx"
     "/server/logs/nginx"
@@ -56,10 +52,7 @@ server_array=(
     "/server/sites/enabled"
 )
 
-echo "-----开始创建server目录-----"
-for((i=0;i<${#server_array[*]};i++));
-do
-   echo ${server_array[i]}
-   func_create ${server_array[i]}
+# 主循环
+for item in "${items[@]}"; do
+    mkdir $item
 done
-echo "-----server目录创建结束 -----"
