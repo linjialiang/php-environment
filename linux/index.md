@@ -5,10 +5,21 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 
 # 概述
 
-Linux 下纯手工搭建 PHP 环境，主要涉及发行版和软件包如下：
+这是 `《Linux 下纯手工搭建 PHP 环境》` 2026 年重构版本！
+
+这几年我们不断迭代，文档存在遗留代码也存在错误的说明，本次重构主要涉及：
+
+1. 文档内容紧凑，提升阅读体验；
+2. 修复已知错误；
+3. 优化目录结构；
+4. 优化一键脚本；
+5. 升级一键构建包；
+
+## 包列表
+
+主要涉及发行版和软件包如下。
 
 ::: code-group
-
 <<<@/assets/linux/info/lsb_release.zsh[发行版]
 <<<@/assets/linux/info/package-list.md[包列表]
 <<<@/assets/linux/info/package-url.md[包下载地址]
@@ -17,7 +28,7 @@ Linux 下纯手工搭建 PHP 环境，主要涉及发行版和软件包如下：
 
 ## 一键脚本
 
-这几个脚本可以快速创建、授权目录，清理系统缓存
+这几个脚本可以快速创建、授权目录，清理系统缓存。
 
 ::: code-group
 <<< @/assets/linux/script/user.zsh [创建用户]
