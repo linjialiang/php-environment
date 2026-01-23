@@ -13,7 +13,7 @@ FuncRunPower(){
     chown "$2":"$2" -R "$1"
     find "$1" -type d -exec chmod $DirPerm {} \;
     find "$1" -type f -exec chmod $filePerm {} \;
-    echo "目录 '$1' 权限已设置为 目录:$DirPerm 文件:$filePerm"
+    echo "目录 $1 权限已设置为 目录:$DirPerm 文件:$filePerm"
 }
 
 rootItems=(
