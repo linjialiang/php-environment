@@ -5,7 +5,7 @@ users=(
   "2001:sqlite3"
   "2002:redis"
   "2003:postgres"
-  "2005:php"
+  "2005:php-fpm"
   "2006:nginx"
   "2007:mysql"
 );
