@@ -1,8 +1,8 @@
 // import flexSearchIndexOptions from "flexsearch";
 import { withPwa } from '@vite-pwa/vitepress';
 import { defineConfig } from 'vitepress';
-import environmentNav from './nav/environment.mts';
-import { environment } from './sidebar/main.mts';
+import linuxNav from './nav/linux.mts';
+import { environment, linux } from './sidebar/main.mts';
 
 export default withPwa(
   defineConfig({
@@ -165,10 +165,11 @@ export default withPwa(
       },
       nav: [
         { text: '主页', link: '/' },
-        { text: '环境搭建', items: environmentNav },
+        { text: '环境搭建', items: linuxNav },
         { text: 'IIS 篇', link: '/msdn/iis' },
       ],
       sidebar: {
+        '/linux/': linux,
         '/environment/': environment,
         '/environment-old/': environment,
         '/environment-lnmpp/': environment,
