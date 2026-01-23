@@ -1,0 +1,12 @@
+1. sqlite-autoconf-3510200.tar.gz
+2. redis-8.4.0.tar.gz
+3. postgresql-18.1.tar.bz2
+4. mysql-8.4.7.tar.gz
+5. php-8.5.2.tar.xz
+   - apcu-5.1.28.tgz
+   - redis-6.3.0.tgz
+   - xdebug-3.5.0.tgz
+6. nginx-1.28.1.tar.gz
+   - openssl-3.5.4.tar.gz
+   - pcre2-10.47.tar.bz2
+   - zlib-1.3.1.tar.xz
