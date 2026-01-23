@@ -13,7 +13,7 @@ server_array=(
     "/server/logs"
     "/server/etc"
 
-    "/server/sqlite"
+    "/server/sqlite3"
 
     "/server/redis"
     "/server/redis/rdbData"
@@ -37,9 +37,11 @@ server_array=(
     "/server/etc/mysql"
 
     "/server/php"
-    "/server/php/84"
+    "/server/php/85"
     "/server/php/tools"
     "/server/logs/php"
+    "/server/etc/php"
+    "/server/etc/php/85"
 
     "/server/nginx"
     "/server/logs/nginx"
