@@ -33,10 +33,10 @@ items=(
 
     "/server/php"
     "/server/php/85"
-    "/server/php/tools"
     "/server/logs/php"
     "/server/etc/php"
     "/server/etc/php/85"
+    "/server/etc/php/85/tools"
     "/server/etc/php/85/php-fpm.d"
 
     "/server/nginx"
