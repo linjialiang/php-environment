@@ -53,7 +53,7 @@ apt install --no-install-recommends tcl -y
 ```
 
 ```bash [Redis]
-apt install --no-install-recommends -y
+apt install --no-install-recommends libsystemd-dev libssl-dev -y
 ```
 
 ```bash [PostgreSQL]

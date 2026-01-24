@@ -42,7 +42,7 @@ Redis 初始目录结构
 
 :::
 
-::: warning 注意
+::: tip 提示
 
 -   Redis 编译内置依赖库时会用到 `C++`，如果没有安装会导致各种出错
 
@@ -52,6 +52,11 @@ Redis 初始目录结构
     *** [err]: Active defrag - AOF loading in tests/unit/memefficiency.tcl
     Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
     ```
+
+-   选项说明：
+
+    1. `USE_SYSTEMD=yes` 启用 systemd 支持
+    2. `BUILD_TLS=yes` 启用 tls 支持
 
 :::
 
