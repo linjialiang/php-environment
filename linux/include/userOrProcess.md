@@ -8,3 +8,11 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 这节主要让我们先了解服务进程的工作方式。
 
 为了使用真实案例说明，这节内容放在环境搭建完成后进行写作！
+
+::: tip 为开发用户授权
+
+```bash
+usermod -a -G sqlite,redis,postgres,php-fpm,nginx,mysql emad
+```
+
+:::

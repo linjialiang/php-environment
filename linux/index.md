@@ -37,14 +37,3 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 <<< @/assets/linux/script/cleanLog.zsh [一键清理]
 <<< @/assets/linux/script/clean.zsh [简单清理]
 :::
-
-## 用户与进程
-
-<!-- 引入用户与进程 -->
-<!--@include: ./include/userOrProcess.md-->
-
-### 开发者权限
-
-```bash
-usermod -a -G sqlite,redis,postgres,php-fpm,nginx,mysql emad
-```
