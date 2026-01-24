@@ -1,0 +1,25 @@
+echo "[Unit]
+Description=PostgreSQL database server
+Documentation=man:postgres(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+UMask=027
+User=postgres
+Group=postgres
+
+RuntimeDirectory=postgres
+RuntimeDirectoryMode=0750
+
+ExecStart=/server/postgres/bin/postgres -D /server/pgData
+ExecReload=/bin/kill -HUP \$MAINPID
+
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/postgres.service
