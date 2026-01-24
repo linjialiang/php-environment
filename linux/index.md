@@ -1,9 +1,9 @@
 ---
-title: 概述
+title: 准备工作
 titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
-# 概述
+# 准备工作
 
 这是 `《Linux 下纯手工搭建 PHP 环境》` 2026 年重构版本！
 
@@ -42,3 +42,9 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 
 <!-- 引入用户与进程 -->
 <!--@include: ./include/userOrProcess.md-->
+
+### 开发者权限
+
+```bash
+usermod -a -G sqlite,redis,postgres,php-fpm,nginx,mysql emad
+```

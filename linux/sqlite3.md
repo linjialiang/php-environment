@@ -23,10 +23,10 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```bash [依赖项]
-apt install tcl gcc make -y
+apt install gcc make tcl -y
 ```
 
-```bash [构建选项]
+```bash [编译安装]
 su - sqlite -s /bin/zsh
 tar -xzf sqlite-autoconf-3510200.tar.gz
 cd ~/sqlite-autoconf-3510200/
@@ -41,21 +41,11 @@ make install
 
 ## 权限
 
-::: code-group
-
-```bash [部署]
+```bash
 chown sqlite3:sqlite3 -R /server/sqlite3
 find /server/sqlite3 -type f -exec chmod 640 {} \;
 find /server/sqlite3 -type d -exec chmod 750 {} \;
-# 可执行文件需要执行权限
 chmod 750 -R /server/sqlite3/bin
 ```
 
-```bash [开发]
-# 权限同部署环境
-usermod -a -G sqlite,redis,postgres,php-fpm,nginx,mysql emad
-```
-
-:::
-
-到此，SQLite3 简单构建安装就完成了，不需要配置就可以使用
+到此，SQLite3 简单构建安装就完成了!
