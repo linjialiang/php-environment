@@ -23,7 +23,7 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```bash [依赖项]
-apt install gcc make tcl -y
+apt install --no-install-recommends -y gcc make tcl
 ```
 
 ```bash [编译安装]

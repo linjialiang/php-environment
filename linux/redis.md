@@ -10,7 +10,7 @@ Redis 是当下最热门的键值对(Key-Value)存储数据库
 ::: code-group
 
 ```bash [依赖]
-apt install -y libssl-dev tcl
+apt install --no-install-recommends -y libsystemd-dev libssl-dev pkg-config build-essential
 ```
 
 ```bash [构建指令]
@@ -21,7 +21,7 @@ mkdir ~/redis-8.4.0/build_redis
 cd ~/redis-8.4.0/build_redis
 
 # 必须在子目录中构建，因为构建时源码使用 ../deps/** 来获取自带的依赖
-make -C ../ BUILD_TLS=yes -j4 > make.log
+make -C ../ USE_SYSTEMD=yes BUILD_TLS=yes USE_JEMALLOC=deps -j4 > make.log
 
 # 检测编译结果
 make -C ../ test > makeTest.log
