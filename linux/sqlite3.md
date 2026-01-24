@@ -44,7 +44,7 @@ make install
 ::: code-group
 
 ```bash [部署]
-chown sqlite:sqlite -R /server/sqlite3
+chown sqlite3:sqlite3 -R /server/sqlite3
 find /server/sqlite3 -type f -exec chmod 640 {} \;
 find /server/sqlite3 -type d -exec chmod 750 {} \;
 # 可执行文件需要执行权限
