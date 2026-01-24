@@ -42,12 +42,16 @@ Redis 初始目录结构
 
 :::
 
-::: tip 低配虚拟机通常会因为 AOF 持久化的最大延迟（max_latency）> 40 发出异常报错
+::: warning 注意
 
-```bash
-*** [err]: Active defrag - AOF loading in tests/unit/memefficiency.tcl
-Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
-```
+-   Redis 编译内置依赖库时会用到 `C++`，如果没有安装会导致各种出错
+
+-   低配虚拟机通常会因为 AOF 持久化的最大延迟（max_latency）> 40 发出异常报错
+
+    ```bash
+    *** [err]: Active defrag - AOF loading in tests/unit/memefficiency.tcl
+    Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
+    ```
 
 :::
 
