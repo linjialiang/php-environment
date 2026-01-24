@@ -23,11 +23,12 @@ titleTemplate: 环境搭建教程
 ::: code-group
 
 ```bash [依赖项]
-apt install --no-install-recommends -y gcc make tcl
+apt install -y --no-install-recommends gcc make tcl libc6-dev
 ```
 
 ```bash [编译安装]
-su - sqlite -s /bin/zsh
+su - sqlite3 -s /bin/zsh
+
 tar -xzf sqlite-autoconf-3510200.tar.gz
 cd ~/sqlite-autoconf-3510200/
 
