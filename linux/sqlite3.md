@@ -22,8 +22,12 @@ titleTemplate: 环境搭建教程
 
 ::: code-group
 
+```bash [编译套件]
+apt install --no-install-recommends build-essential autoconf pkg-config tcl -y
+```
+
 ```bash [依赖项]
-apt install -y --no-install-recommends gcc make tcl libc6-dev
+# 编译套件已满足
 ```
 
 ```bash [编译安装]
