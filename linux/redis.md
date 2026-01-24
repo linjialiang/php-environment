@@ -9,27 +9,18 @@ Redis 是当下最热门的键值对(Key-Value)存储数据库
 
 ::: code-group
 
-```bash [依赖]
-apt install --no-install-recommends -y libsystemd-dev libssl-dev pkg-config build-essential
-```
-
 ```bash [构建指令]
-# 解压
 su - redis -s /bin/zsh
+
 tar -xzf redis-8.4.0.tar.gz
 mkdir ~/redis-8.4.0/build_redis
 cd ~/redis-8.4.0/build_redis
 
-# 必须在子目录中构建，因为构建时源码使用 ../deps/** 来获取自带的依赖
-make -C ../ USE_SYSTEMD=yes BUILD_TLS=yes USE_JEMALLOC=deps -j4 > make.log
-
-# 检测编译结果
+make USE_SYSTEMD=yes BUILD_TLS=yes -j4 > make.log
 make -C ../ test > makeTest.log
 # 当出现高亮信息 `\o/ All tests passed without errors!` 证明测试通过
 
-# 安装并指定目录
-cd ~/redis-8.4.0/build_redis
-make -C ../ install PREFIX=/server/redis
+make install PREFIX=/server/redis
 ```
 
 ```text [目录结构]
