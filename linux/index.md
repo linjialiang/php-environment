@@ -37,3 +37,35 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 <<< @/assets/linux/script/cleanLog.zsh [一键清理]
 <<< @/assets/linux/script/clean.zsh [简单清理]
 :::
+
+## 编译套件
+
+这些包是编译软件时最常用到的依赖项
+
+::: code-group
+
+```bash [编译套件]
+apt install --no-install-recommends build-essential autoconf pkg-config -y
+```
+
+```bash [SQLite3]
+apt install --no-install-recommends tcl -y
+```
+
+```bash [Redis]
+apt install --no-install-recommends -y
+```
+
+```bash [PostgreSQL]
+apt install --no-install-recommends -y
+```
+
+```bash [PHP8.5]
+apt install --no-install-recommends -y
+```
+
+```bash [Nginx]
+apt install --no-install-recommends -y
+```
+
+:::

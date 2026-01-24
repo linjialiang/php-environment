@@ -20,16 +20,6 @@ titleTemplate: 环境搭建教程
 
 ## 编译安装
 
-::: code-group
-
-```bash [编译套件]
-apt install --no-install-recommends build-essential autoconf pkg-config tcl -y
-```
-
-```bash [依赖项]
-# 编译套件已满足
-```
-
 ```bash [编译安装]
 su - sqlite3 -s /bin/zsh
 
@@ -41,8 +31,6 @@ cd ~/sqlite-autoconf-3510200/
 make -j4 > make.log
 make install
 ```
-
-:::
 
 ## 权限
 
