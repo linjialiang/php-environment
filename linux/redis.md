@@ -40,21 +40,46 @@ make install PREFIX=/server/redis
 
 ::: details 编译选项
 
-1. `USE_SYSTEMD=yes` 启用 systemd 支持
+1.  `USE_SYSTEMD=yes` 启用 systemd 支持
 
-    | 编译选项               | 配置文件        | systemd unit 类型 |
-    | ---------------------- | --------------- | ----------------- |
-    | 加入 `USE_SYSTEMD=yes` | `daemonize no`  | `Type=notify`     |
-    | 加入 `USE_SYSTEMD=no`  | `daemonize yes` | `Type=forking`    |
+    ::: code-group
 
-    ```md
+    ````md [启用systemd支持]
+    -   编译选项：加入 `USE_SYSTEMD=yes`
+    -   systemd unit 配置:
+        1. `Type=notify`
+        2. 不需要跟踪 PID 文件
+    -   配置文件：
+
+        ```
+        daemonize no
+        supervised systemd
+        ```
+    ````
+
+    ````md [禁用systemd支持]
+    -   编译选项：加入 `USE_SYSTEMD=no`
+    -   systemd unit 配置:
+        1. `Type=forking`
+        2. 需要跟踪 PID 文件
+    -   配置文件：
+
+        ```
+        daemonize yes
+        supervised auto
+        ```
+    ````
+
+    ```md [自动检测]
     如果编译时未加入 `USE_SYSTEMD` 选项，可能会自动检测：
 
     1. 如果找到 systemd 开发库，自动启用支持；
     2. 如果没找到，编译时不包含 systemd 代码。
     ```
 
-2. `BUILD_TLS=yes` 启用 tls 支持
+    :::
+
+2.  `BUILD_TLS=yes` 启用 tls 支持
 
 :::
 
