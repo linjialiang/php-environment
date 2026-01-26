@@ -13,11 +13,11 @@ Redis 是当下最热门的键值对(Key-Value)存储数据库
 su - redis -s /bin/zsh
 
 tar -xzf redis-8.4.0.tar.gz
-mkdir ~/redis-8.4.0/build_redis
-cd ~/redis-8.4.0/build_redis
+cd ~/redis-8.4.0
 
+make distclean
 make USE_SYSTEMD=yes BUILD_TLS=yes -j4 > make.log
-make -C ../ test > makeTest.log
+make test > makeTest.log
 # 当出现高亮信息 `\o/ All tests passed without errors!` 证明测试通过
 
 make install PREFIX=/server/redis
@@ -53,9 +53,15 @@ Redis 初始目录结构
     Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
     ```
 
--   选项说明：
+-   编译选项：
 
     1. `USE_SYSTEMD=yes` 启用 systemd 支持
+
+        | 编译选项                 | 配置文件        | systemd unit 类型 |
+        | ------------------------ | --------------- | ----------------- |
+        | 加入 `USE_SYSTEMD=yes`   | `daemonize no`  | `Type=notify`     |
+        | 未加入 `USE_SYSTEMD=yes` | `daemonize yes` | `Type=forking`    |
+
     2. `BUILD_TLS=yes` 启用 tls 支持
 
 :::
