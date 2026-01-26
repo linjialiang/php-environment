@@ -1,9 +1,7 @@
 cat > /etc/systemd/system/redis.service << 'EOF'
 [Unit]
 Description=Redis In-Memory Data Store
-Documentation=https://redis.io/docs/
 After=network.target
-Wants=network-online.target
 
 [Service]
 Type=notify
@@ -11,22 +9,19 @@ UMask=027
 User=redis
 Group=redis
 
+ExecStart=/server/redis/bin/redis-server /server/etc/redis/redis.conf --supervised systemd
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+LimitNOFILE=65535
+LimitNPROC=4096
+
 RuntimeDirectory=redis
 RuntimeDirectoryMode=0750
 
-ExecStart=/server/redis/bin/redis-server /server/etc/redis/redis.conf --supervised systemd
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s QUIT $MAINPID
-
 Restart=on-failure
-RestartSec=10s
-StartLimitInterval=5min
-StartLimitBurst=3
-
-PrivateTmp=true
-LimitNOFILE=10000
 NoNewPrivileges=yes
-PrivateDevices=yes
+PrivateTmp=true
 ProtectHome=yes
 
 [Install]
