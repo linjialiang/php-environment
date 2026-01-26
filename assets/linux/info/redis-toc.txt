@@ -1,0 +1,12 @@
+============================================================================
+Redis 初始目录结构
+============================================================================
+/server/redis/                              redis基目录
+├── bin/
+│   ├── redis-benchmark*                    Redis 压力测试工具
+│   ├── redis-check-aof -> redis-server*    redis-server软链接
+│   ├── redis-check-rdb -> redis-server*    redis-server软链接
+│   ├── redis-cli*                          Redis 客户端
+│   ├── redis-sentinel -> redis-server*     redis-server软链接
+│   └── redis-server*                       Redis 服务器
+└── rdbData/                                快照和持久化文件路径(手动创建)

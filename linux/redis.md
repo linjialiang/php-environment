@@ -23,22 +23,7 @@ make test > makeTest.log
 make install PREFIX=/server/redis
 ```
 
-```text [目录结构]
-============================================================================
-Redis 初始目录结构
-============================================================================
-├─ /server/redis                        redis基目录
-|   ├─ bin
-|   |  ├─ redis-benchmark               Redis 压力测试工具
-|   |  ├─ redis-cli                     Redis 客户端
-|   |  ├─ redis-server                  Redis 服务器
-|   |  ├─ redis-check-aof               redis-server软链接
-|   |  ├─ redis-check-rdb               redis-server软链接
-|   |  ├─ redis-sentinel                redis-server软链接
-|   |  └─ ...
-|   |
-└─  └─  rdbData                         手动创建，快照和本地持久化文件存放路径
-```
+<<<@/assets/linux/info/redis-toc.txt [目录结构]
 
 :::
 
