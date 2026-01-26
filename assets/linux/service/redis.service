@@ -1,9 +1,12 @@
-echo "[Unit]
-Description=redis-8.4.x
+cat > /etc/systemd/system/redis.service << 'EOF'
+[Unit]
+Description=Redis In-Memory Data Store
+Documentation=https://redis.io/docs/
 After=network.target
+Wants=network-online.target
 
 [Service]
-Type=forking
+Type=notify
 UMask=027
 User=redis
 Group=redis
@@ -11,13 +14,21 @@ Group=redis
 RuntimeDirectory=redis
 RuntimeDirectoryMode=0750
 
-ExecStart=/server/redis/bin/redis-server /server/redis/redis.conf
-ExecReload=/bin/kill -s HUP \$MAINPID
-ExecStop=/bin/kill -s QUIT \$MAINPID
+ExecStart=/server/redis/bin/redis-server /server/etc/redis/redis.conf --supervised systemd
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
 
 Restart=on-failure
+RestartSec=10s
+StartLimitInterval=5min
+StartLimitBurst=3
+
 PrivateTmp=true
+LimitNOFILE=65535
+NoNewPrivileges=yes
+PrivateDevices=yes
+ProtectHome=yes
 
 [Install]
 WantedBy=multi-user.target
-" > /etc/systemd/system/redis.service
+EOF
