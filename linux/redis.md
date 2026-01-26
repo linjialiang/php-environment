@@ -38,16 +38,23 @@ make install PREFIX=/server/redis
     Expected 46 <= 40 (context: type eval line 37 cmd {assert {$max_latency <= 40}} proc ::test)
     ```
 
--   编译选项：
+::: details 编译选项
 
-    1. `USE_SYSTEMD=yes` 启用 systemd 支持
+1. `USE_SYSTEMD=yes` 启用 systemd 支持
 
-        | 编译选项                 | 配置文件        | systemd unit 类型 |
-        | ------------------------ | --------------- | ----------------- |
-        | 加入 `USE_SYSTEMD=yes`   | `daemonize no`  | `Type=notify`     |
-        | 未加入 `USE_SYSTEMD=yes` | `daemonize yes` | `Type=forking`    |
+    | 编译选项               | 配置文件        | systemd unit 类型 |
+    | ---------------------- | --------------- | ----------------- |
+    | 加入 `USE_SYSTEMD=yes` | `daemonize no`  | `Type=notify`     |
+    | 加入 `USE_SYSTEMD=no`  | `daemonize yes` | `Type=forking`    |
 
-    2. `BUILD_TLS=yes` 启用 tls 支持
+    ```md
+    如果编译时未加入 `USE_SYSTEMD` 选项，可能会自动检测：
+
+    1. 如果找到 systemd 开发库，自动启用支持；
+    2. 如果没找到，编译时不包含 systemd 代码。
+    ```
+
+2. `BUILD_TLS=yes` 启用 tls 支持
 
 :::
 
