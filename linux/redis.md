@@ -23,7 +23,7 @@ make test > makeTest.log
 make install PREFIX=/server/redis
 ```
 
-<<<@/assets/linux/info/redis-toc.txt [目录结构]
+<<< @/assets/linux/info/redis-toc.txt [目录结构]
 
 :::
 
@@ -87,33 +87,18 @@ make install PREFIX=/server/redis
 
 redis 源码包中自带了参考配置文件，可以备份该参考配置，按需增减配置，最后清除不必要的注释行
 
-### 1. 配置参考
+### 1. 备份默认配置
 
-::: code-group
-
-```bash [备份默认配置]
-cp -p -r ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
-cp -p -r ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
+```bash
+cp ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
+cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 ```
-
-```bash [RDB存储目录]
-# 可忽略，mkdir.bash 脚本已处理
-mkdir /server/redis/rdbData
-chown redis:redis /server/redis/rdbData
-chmod 750 /server/redis/rdbData
-```
-
-:::
 
 ### 2. 配置案例
 
 #### 基础配置
 
-::: code-group
 <<< @/assets/environment/source/redis/redis.conf{ini} [主配置]
-<<< @/assets/environment/source/etc/redis/config/source.conf{ini} [原始配置]
-<<< @/assets/environment/source/etc/redis/config/source-full.conf{ini} [原始配置(完全)]
-:::
 
 #### 自定义配置
 
