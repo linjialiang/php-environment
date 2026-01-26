@@ -71,7 +71,7 @@ make install PREFIX=/server/redis
     ````
 
     ```md [自动检测]
-    如果编译时未加入 `USE_SYSTEMD` 选项，可能会自动检测：
+    如果编译时未加入 `USE_SYSTEMD` 选项，可能会自动检测(未测试)：
 
     1. 如果找到 systemd 开发库，自动启用支持；
     2. 如果没找到，编译时不包含 systemd 代码。
