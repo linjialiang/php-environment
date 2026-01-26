@@ -24,7 +24,7 @@ StartLimitInterval=5min
 StartLimitBurst=3
 
 PrivateTmp=true
-LimitNOFILE=65535
+LimitNOFILE=10000
 NoNewPrivileges=yes
 PrivateDevices=yes
 ProtectHome=yes
