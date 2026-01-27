@@ -87,20 +87,17 @@ make install PREFIX=/server/redis
 
 redis 源码包中自带了参考配置文件，可以备份该参考配置，按需增减配置，最后清除不必要的注释行
 
-### 1. 备份默认配置
+:::code-group
 
-```bash
+```bash [备份默认配置]
 cp ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
 cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 ```
 
-### 2. 配置案例
-
-#### 基础配置
-
 <<< @/assets/linux/etc/redis/redis.conf{ini} [主配置]
+:::
 
-#### 自定义配置
+### 自定义配置
 
 ::: code-group
 <<< @/assets/linux/etc/redis/custom/01-network.conf{ini} [01-network.conf]
