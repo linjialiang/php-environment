@@ -1,6 +1,8 @@
+import { siteConfig } from '@config/siteConfig.mts';
+
 const path = {
   main: '/linux/',
-  redisConfUrl: 'https://tutorial.e8so.com/nosql/redis/redis-conf.html',
+  redisConfUrl: `${siteConfig.tutorialApiUrl}nosql/redis/redis-conf.html`,
 };
 
 const sidebar = [

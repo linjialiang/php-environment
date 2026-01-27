@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "preserve", // 新增或修改这一行，值可以是 "esnext"、"commonjs"、"preserve" 等
+    // 1. 设置基础目录，配合 paths 使用
+    "baseUrl": ".",
+    // 2. 配置路径映射
+    "paths": {
+      // 左边是你的别名（代码里写的）
+      // 右边是相对于 baseUrl 的实际路径
+      "@config/*": [".vitepress/*"]
+    },
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+
+  // 3. 确保包含 .vitepress 目录下的文件，让 TS 去检查它们
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.mts", ".vitepress/**/*.js", ".vitepress/**/*.mjs"]
+}

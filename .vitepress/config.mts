@@ -1,19 +1,25 @@
 // import flexSearchIndexOptions from "flexsearch";
 import { withPwa } from '@vite-pwa/vitepress';
+import { resolve } from 'path';
 import { defineConfig } from 'vitepress';
 import linuxNav from './nav/linux.mts';
 import { environment, linux } from './sidebar/main.mts';
+import { siteConfig } from './siteConfig.mts';
 
 export default withPwa(
   defineConfig({
     vite: {
+      resolve: {
+        alias: {
+          // 这里配置你的别名
+          '@config': resolve(__dirname, './'), // 指向 .vitepress 的上一级目录（即你的配置文件所在处）
+          // 你也可以命名为 @config 或其他你喜欢的名字
+          // '@config': resolve(__dirname, '../'),
+        },
+        extensions: ['.mts', '.mjs', '.ts', '.js', '.json'],
+      },
       define: {
-        __SITE_CONFIG__: JSON.stringify({
-          sites: {
-            php: 'https://tutorial.e8so.com/',
-            tutorial: 'https://tutorial.e8so.com/',
-          },
-        }),
+        __SITE_CONFIG__: JSON.stringify(siteConfig),
       },
     },
     pwa: {
@@ -113,7 +119,7 @@ export default withPwa(
       },
     },
     sitemap: {
-      hostname: 'https://php-environment.e8so.com',
+      hostname: siteConfig.apiUrl,
       lastmodDateOnly: false,
     },
     themeConfig: {
@@ -129,17 +135,17 @@ export default withPwa(
       socialLinks: [
         {
           icon: 'github',
-          link: 'https://github.com/linjialiang/php-environment.git',
+          link: `${siteConfig.githubUrl}.git`,
         },
         {
           icon: {
             svg: '<svg t="1685882013964" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7153" width="600" height="600"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#d81e06" p-id="7154"></path></svg>',
           },
-          link: 'https://gitee.com/linjialiang/php-environment.git',
+          link: `${siteConfig.giteeUrl}.git`,
         },
       ],
       editLink: {
-        pattern: 'https://gitee.com/linjialiang/php-environment/blob/main/:path',
+        pattern: `${siteConfig.giteeUrl}/blob/main/:path`,
         text: '在 gitee 上编辑',
       },
       outline: 'deep',
