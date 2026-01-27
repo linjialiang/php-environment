@@ -31,11 +31,11 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 这几个脚本可以快速创建、授权目录，清理系统缓存。
 
 ::: code-group
-<<< @/assets/linux/script/user.zsh [创建用户]
-<<< @/assets/linux/script/mkdir.zsh [创建目录]
-<<< @/assets/linux/script/chown.zsh [目录授权]
-<<< @/assets/linux/script/cleanLog.zsh [一键清理]
-<<< @/assets/linux/script/clean.zsh [简单清理]
+<<< @/assets/linux/script/common/user.zsh [创建用户]
+<<< @/assets/linux/script/common/mkdir.zsh [创建目录]
+<<< @/assets/linux/script/common/chown.zsh [目录授权]
+<<< @/assets/linux/script/common/cleanLog.zsh [一键清理]
+<<< @/assets/linux/script/common/clean.zsh [简单清理]
 :::
 
 ## 编译套件
