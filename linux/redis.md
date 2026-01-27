@@ -174,14 +174,9 @@ redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TL
 <<< @/assets/linux/script/redis/gen-test-certs.sh [脚本]
 
 ```bash [执行脚本]
-su - redis -s /bin/zsh
-cd ~/redis-8.4.0/utils
-chmod +x ./gen-test-certs.sh
 ./gen-test-certs.sh
 cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
-chmod 750 /server/etc/redis/tls
-find /server/etc/redis/tls -type f -exec chmod 640 {} \;
-chown redis:redis -R /server/etc/redis/tls
+# 权限在最后统一配置
 ```
 
 ```bash [生成文件]
