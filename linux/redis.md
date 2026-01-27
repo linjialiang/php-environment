@@ -167,16 +167,16 @@ Redis 支持通过 SSL/TLS 协议进行加密通信，可以提供更高的安�
 
 生成 TLS 证书和密钥涉及到多个步骤，包括创建私钥、生成证书签名请求（CSR）、签署证书以及分发证书。
 
-::: details 源码包自带生成工具
+::: info 源码包自带生成工具
+
 redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TLS 相关证书和密钥：
 
 ::: code-group
-<<< @/assets/linux/script/redis/gen-test-certs.sh [脚本]
 
 ```bash [执行脚本]
 ./gen-test-certs.sh
 cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
-# 权限在最后统一配置
+# 文件权限在最后统一授权
 ```
 
 ```bash [生成文件]
@@ -187,15 +187,12 @@ cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
 #   tests/tls/redis.dh              DH参数文件，新版openssl已经不建议使用
 ```
 
+<<< @/assets/linux/script/redis/gen-test-certs.sh [脚本]
 :::
 
-::: tip 文件权限
-gen-test-certs.sh 脚本生成的 tls 文件，只需要 400 权限即可；
+### 2. 配置 TLS
 
-开发环境：为方便修改以及 emad 用户通过 redis-cli 登录，使用 640 权限。
-:::
-
-### 2. 配置 Redis 服务器
+[[:point_right:点此查看详情]]()
 
 ::: code-group
 

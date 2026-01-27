@@ -6,6 +6,16 @@ import { environment, linux } from './sidebar/main.mts';
 
 export default withPwa(
   defineConfig({
+    vite: {
+      define: {
+        __SITE_CONFIG__: JSON.stringify({
+          sites: {
+            php: 'https://tutorial.e8so.com/',
+            tutorial: 'https://tutorial.e8so.com/',
+          },
+        }),
+      },
+    },
     pwa: {
       registerType: 'autoUpdate',
       injectRegister: 'auto',
@@ -165,7 +175,7 @@ export default withPwa(
       },
       nav: [
         { text: '主页', link: '/' },
-        { text: '环境搭建', items: linuxNav },
+        { text: 'linux 篇', items: linuxNav },
         { text: 'IIS 篇', link: '/msdn/iis' },
       ],
       sidebar: {
