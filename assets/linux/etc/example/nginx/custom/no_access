@@ -1,0 +1,15 @@
+# /server/etc/nginx/custom/no_access
+
+# 拦截所有点文件（linux为隐藏文件）
+location ~ /\.
+{
+    deny all;
+    return 404; # 可选：返回404隐藏拒绝事实
+}
+
+# 禁止访问的文件，不区分大小写正则匹配
+location ~* /(?:LICENSE|README\.md)
+{
+    deny all;
+    return 404; # 可选：返回404隐藏拒绝事实
+}
