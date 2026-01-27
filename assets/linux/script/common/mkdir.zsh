@@ -11,8 +11,8 @@ items=(
     '/server/sqlite3'
 
     '/server/redis'
-    '/server/redis/rdbData'
     '/server/logs/redis'
+    '/server/logs/redis/rdbData'
     '/server/etc/redis'
     '/server/etc/redis/tls'
     '/server/etc/redis/config'
