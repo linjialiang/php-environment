@@ -1,5 +1,4 @@
-# /server/redis/redis.conf
-
+cat > /server/etc/redis/config/redis.conf << EOF
 # source config
 include /server/etc/redis/config/source.conf
 
@@ -27,3 +26,4 @@ include /server/etc/redis/config/custom/07-acl.conf
 # include /server/etc/redis/config/custom/21-event-notification.conf
 # include /server/etc/redis/config/custom/22-advanced-config.conf
 # include /server/etc/redis/config/custom/23-active-defragmentation.conf
+EOF
