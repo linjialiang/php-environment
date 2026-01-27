@@ -94,7 +94,7 @@ cp ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
 cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 ```
 
-<<< @/assets/linux/etc/redis/config/redis.bash [主配置]
+<<< @/assets/linux/script/redis/redis.bash [主配置]
 :::
 
 ### 自定义配置
