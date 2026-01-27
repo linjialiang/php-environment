@@ -103,29 +103,29 @@ cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 #### 自定义配置
 
 ::: code-group
-<<< @/assets/linux/etc/example/redis/config/custom/01-network.conf{ini} [01-network.conf]
-<<< @/assets/linux/etc/example/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
-<<< @/assets/linux/etc/example/redis/config/custom/03-general.conf{ini} [03-general]
-<<< @/assets/linux/etc/example/redis/config/custom/04-rdb.conf{ini} [04-rdb]
-<<< @/assets/linux/etc/example/redis/config/custom/05-replication.conf{ini} [05-replication]
-<<< @/assets/linux/etc/example/redis/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
-<<< @/assets/linux/etc/example/redis/config/custom/07-acl.conf{ini} [07-acl]
-<<< @/assets/linux/etc/example/redis/config/custom/08-client.conf{ini} [08-client]
-<<< @/assets/linux/etc/example/redis/config/custom/09-memory-management.conf{ini} [09-memory-management]
-<<< @/assets/linux/etc/example/redis/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
-<<< @/assets/linux/etc/example/redis/config/custom/11-io.conf{ini} [11-io]
-<<< @/assets/linux/etc/example/redis/config/custom/12-oom.conf{ini} [12-oom]
-<<< @/assets/linux/etc/example/redis/config/custom/13-thp.conf{ini} [13-thp]
-<<< @/assets/linux/etc/example/redis/config/custom/14-aof.conf{ini} [14-aof]
-<<< @/assets/linux/etc/example/redis/config/custom/15-shutdown.conf{ini} [15-shutdown]
-<<< @/assets/linux/etc/example/redis/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
-<<< @/assets/linux/etc/example/redis/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
-<<< @/assets/linux/etc/example/redis/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
-<<< @/assets/linux/etc/example/redis/config/custom/19-slow-log.conf{ini} [19-slow-log]
-<<< @/assets/linux/etc/example/redis/config/custom/20-latency.conf{ini} [20-latency]
-<<< @/assets/linux/etc/example/redis/config/custom/21-event-notification.conf{ini} [21-event-notification]
-<<< @/assets/linux/etc/example/redis/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
-<<< @/assets/linux/etc/example/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
+<<< @/assets/linux/etc/redis/config/custom/01-network.conf{ini} [01-network.conf]
+<<< @/assets/linux/etc/redis/config/custom/02-tls.conf{ini} [02-tls.conf]
+<<< @/assets/linux/etc/redis/config/custom/03-general.conf{ini} [03-general]
+<<< @/assets/linux/etc/redis/config/custom/04-rdb.conf{ini} [04-rdb]
+<<< @/assets/linux/etc/redis/config/custom/05-replication.conf{ini} [05-replication]
+<<< @/assets/linux/etc/redis/config/custom/06-keys-tracking.conf{ini} [06-keys-tracking]
+<<< @/assets/linux/etc/redis/config/custom/07-acl.conf{ini} [07-acl]
+<<< @/assets/linux/etc/redis/config/custom/08-client.conf{ini} [08-client]
+<<< @/assets/linux/etc/redis/config/custom/09-memory-management.conf{ini} [09-memory-management]
+<<< @/assets/linux/etc/redis/config/custom/10-lazy-freeing.conf{ini} [10-lazy-freeing]
+<<< @/assets/linux/etc/redis/config/custom/11-io.conf{ini} [11-io]
+<<< @/assets/linux/etc/redis/config/custom/12-oom.conf{ini} [12-oom]
+<<< @/assets/linux/etc/redis/config/custom/13-thp.conf{ini} [13-thp]
+<<< @/assets/linux/etc/redis/config/custom/14-aof.conf{ini} [14-aof]
+<<< @/assets/linux/etc/redis/config/custom/15-shutdown.conf{ini} [15-shutdown]
+<<< @/assets/linux/etc/redis/config/custom/16-long-blocking.conf{ini} [16-long-blocking]
+<<< @/assets/linux/etc/redis/config/custom/17-long-cluster.conf{ini} [17-long-cluster]
+<<< @/assets/linux/etc/redis/config/custom/18-long-cluster-support.conf{ini} [18-long-cluster-support]
+<<< @/assets/linux/etc/redis/config/custom/19-slow-log.conf{ini} [19-slow-log]
+<<< @/assets/linux/etc/redis/config/custom/20-latency.conf{ini} [20-latency]
+<<< @/assets/linux/etc/redis/config/custom/21-event-notification.conf{ini} [21-event-notification]
+<<< @/assets/linux/etc/redis/config/custom/22-advanced-config.conf{ini} [22-advanced-config]
+<<< @/assets/linux/etc/redis/config/custom/23-active-defragmentation.conf{ini} [23-active-defragmentation]
 :::
 
 ### 日志分割
@@ -176,7 +176,7 @@ Redis 支持通过 SSL/TLS 协议进行加密通信，可以提供更高的安�
 redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TLS 相关证书和密钥：
 
 ::: code-group
-<<< @/assets/linux/redis/gen-test-certs.sh [脚本]
+<<< @/assets/linux/script/redis/gen-test-certs.sh [脚本]
 
 ```bash [执行脚本]
 su - redis -s /bin/zsh
