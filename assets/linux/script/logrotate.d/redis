@@ -1,4 +1,4 @@
-echo "
+cat < /etc/logrotate.d/redis >> 'EOF'
 /server/logs/redis/redis-server.log {
     monthly
     maxsize 100M
@@ -13,8 +13,8 @@ echo "
     sharedscripts
     postrotate
         if [ -f /run/redis/process.pid ]; then
-            /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
+            /usr/bin/kill -USR1 $(/bin/cat /run/redis/process.pid)
         fi
     endscript
 }
-" > /etc/logrotate.d/redis
+EOF

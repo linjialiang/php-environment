@@ -125,9 +125,9 @@ cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
 
 ### 日志分割
 
-Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明[[:point_right:点此查看]](index#Logrotate-common)
+Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明[[:point_right:点此查看]](./include/logrotate)
 
-<<< @/assets/linux/logrotate.d/redis{bash}
+<<< @/assets/linux/script/logrotate.d/redis{bash}
 
 ## 配置系统单元
 
