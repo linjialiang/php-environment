@@ -1,25 +1,19 @@
 // import flexSearchIndexOptions from "flexsearch";
+import { siteConfig } from '@config/siteConfig.mts';
 import { withPwa } from '@vite-pwa/vitepress';
-import { resolve } from 'path';
+import path from 'node:path';
 import { defineConfig } from 'vitepress';
 import linuxNav from './nav/linux.mts';
 import { environment, linux } from './sidebar/main.mts';
-import { siteConfig } from './siteConfig.mts';
 
 export default withPwa(
   defineConfig({
     vite: {
       resolve: {
+        // 配置别名
         alias: {
-          // 这里配置你的别名
-          '@config': resolve(__dirname, './'), // 指向 .vitepress 的上一级目录（即你的配置文件所在处）
-          // 你也可以命名为 @config 或其他你喜欢的名字
-          // '@config': resolve(__dirname, '../'),
+          '@config': path.resolve(__dirname),
         },
-        extensions: ['.mts', '.mjs', '.ts', '.js', '.json'],
-      },
-      define: {
-        __SITE_CONFIG__: JSON.stringify(siteConfig),
       },
     },
     pwa: {
