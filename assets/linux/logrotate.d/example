@@ -1,0 +1,36 @@
+echo "/server/logs/redis/redis-server.log {
+    # 轮转周期 daily/weekly/monthly/yearly 对应 每天/每周/每月/每年
+    # 每天轮转(切割)一次
+    daily
+    # 若日志大小超过100M，即使未到周期也轮转
+    maxsize 100M
+    # 日志文件不存在时忽略错误，继续执行
+    missingok
+    # 保留30个备份
+    rotate 30
+    # 压缩旧日志以节省空间（使用gzip）
+    compress
+    # 延迟压缩：本次轮转的日志在下一次轮转时才压缩
+    delaycompress
+    # 使用日期作为轮转文件的后缀
+    dateext
+    # 可选：自定义日期格式，例如 -20250901.1714900000
+    dateformat -%Y%m%d.%s
+    # 可选：使用前一天的日期而非轮转执行日期
+    # dateyesterday
+    # 复制当前日志文件后清空原文件，避免需重启Redis或发送信号（与 create 二选一）
+    # copytruncate
+    # 轮转后创建的新日志文件权限和属主（用户和组请根据实际情况调整）
+    create 0640 redis redis
+    # 所有日志文件处理完后，只执行一次postrotate脚本
+    sharedscripts
+    # 轮转后执行的脚本
+    postrotate
+        # 如果使用 copytruncate 无须发送信号，但有可能丢失极小量的日志
+        # 通过pid文件向Redis进程发送USR1信号，使其重新打开日志文件
+        if [ -f /run/redis/process.pid ]; then
+            # 这里是写入文件，需注意“$”符号转义
+            /usr/bin/kill -USR1 \$(/bin/cat /run/redis/process.pid)
+        fi
+    endscript
+}" > /etc/logrotate.d/redis

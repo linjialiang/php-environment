@@ -1,0 +1,39 @@
+echo "
+/server/logs/nginx/access/*.log {
+    daily
+    maxsize 100M
+    missingok
+    rotate 30
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    notifempty
+    create 0640 nginx nginx
+    sharedscripts
+    postrotate
+        if [ -f /run/nginx/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+        fi
+    endscript
+}
+
+/server/logs/nginx/error/*.log {
+    monthly
+    maxsize 100M
+    missingok
+    rotate 12
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y%m%d.%s
+    notifempty
+    create 0640 nginx nginx
+    sharedscripts
+    postrotate
+        if [ -f /run/nginx/process.pid ]; then
+            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+        fi
+    endscript
+}
+" > /etc/logrotate.d/nginx
