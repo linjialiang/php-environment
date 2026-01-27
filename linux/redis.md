@@ -23,8 +23,6 @@ make test > makeTest.log
 make install PREFIX=/server/redis
 ```
 
-<<< @/assets/linux/info/redis-toc.txt [目录结构]
-
 :::
 
 ::: tip 提示
