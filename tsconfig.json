@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    // "module": "preserve", // 新增或修改这一行，值可以是 "esnext"、"commonjs"、"preserve" 等
+    "module": "preserve", // 新增或修改这一行，值可以是 "esnext"、"commonjs"、"preserve" 等
     // 1. 设置基础目录，配合 paths 使用
     "baseUrl": ".",
     // 2. 配置路径映射
