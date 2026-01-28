@@ -146,9 +146,7 @@ Redis 可以使用 Logrotate 自动轮转来分割日志，详细说明<a :href=
 <<< @/assets/linux/service/redis.service{ini} [系统单元配置]
 
 ```bash [重载配置]
-# 重新载入 Systemd 配置
 systemctl daemon-reload
-# redis.service 加入开机启动
 systemctl enable redis
 ```
 
