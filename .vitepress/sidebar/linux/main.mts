@@ -1,4 +1,4 @@
-import { siteConfig } from '@config/siteConfig.mts';
+import { siteConfig } from '../../siteConfig.mts';
 
 const path = {
   main: '/linux/',

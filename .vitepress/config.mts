@@ -1,21 +1,11 @@
-// import flexSearchIndexOptions from "flexsearch";
-import { siteConfig } from '@config/siteConfig.mts';
 import { withPwa } from '@vite-pwa/vitepress';
-import path from 'node:path';
 import { defineConfig } from 'vitepress';
 import linuxNav from './nav/linux.mts';
 import { environment, linux } from './sidebar/main.mts';
+import { siteConfig } from './siteConfig.mts';
 
 export default withPwa(
   defineConfig({
-    vite: {
-      resolve: {
-        // 配置别名
-        alias: {
-          '@config': path.resolve(__dirname),
-        },
-      },
-    },
     pwa: {
       registerType: 'autoUpdate',
       injectRegister: 'auto',
