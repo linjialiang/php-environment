@@ -57,7 +57,8 @@ apt install --no-install-recommends libsystemd-dev libssl-dev -y
 ```
 
 ```bash [PostgreSQL]
-apt install --no-install-recommends -y
+apt install --no-install-recommends llvm-dev libicu-dev liblz4-dev libzstd-dev \
+libbison-dev flex libreadline-dev zlib1g-dev libssl-dev uuid-dev -y
 ```
 
 ```bash [PHP8.5]
