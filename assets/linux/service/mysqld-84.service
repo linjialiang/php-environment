@@ -7,7 +7,7 @@ Wants=network-online.target
 After=syslog.target
 
 [Service]
-UMask=027
+UMask=0027
 User=mysql
 Group=mysql
 Type=notify

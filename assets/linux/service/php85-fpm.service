@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 Type=notify
-UMask=027
+UMask=0027
 User=php
 Group=php
 

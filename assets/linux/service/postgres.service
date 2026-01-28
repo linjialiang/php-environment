@@ -7,7 +7,7 @@ Wants=network-online.target
 
 [Service]
 Type=notify
-UMask=027
+UMask=0027
 User=postgres
 Group=postgres
 
