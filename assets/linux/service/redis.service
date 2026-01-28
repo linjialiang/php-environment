@@ -9,7 +9,7 @@ UMask=027
 User=redis
 Group=redis
 
-ExecStart=/server/redis/bin/redis-server /server/etc/redis/redis.conf --supervised systemd
+ExecStart=/server/redis/bin/redis-server /server/etc/redis/config/redis.conf --supervised systemd
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 
