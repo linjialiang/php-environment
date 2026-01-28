@@ -1,4 +1,4 @@
-echo "
+cat > /etc/logrotate.d/nginx << 'EOF'
 /server/logs/nginx/access/*.log {
     daily
     maxsize 100M
@@ -13,7 +13,7 @@ echo "
     sharedscripts
     postrotate
         if [ -f /run/nginx/process.pid ]; then
-            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+            /usr/bin/kill -USR1 $(/bin/cat /run/nginx/process.pid)
         fi
     endscript
 }
@@ -32,8 +32,8 @@ echo "
     sharedscripts
     postrotate
         if [ -f /run/nginx/process.pid ]; then
-            /usr/bin/kill -USR1 \$(/bin/cat /run/nginx/process.pid)
+            /usr/bin/kill -USR1 $(/bin/cat /run/nginx/process.pid)
         fi
     endscript
 }
-" > /etc/logrotate.d/nginx
+EOF
