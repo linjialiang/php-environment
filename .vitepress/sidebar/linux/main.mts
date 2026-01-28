@@ -11,6 +11,7 @@ const sidebar = [
     collapsed: true,
     items: [
       { text: '准备工作', link: `${path.main}` },
+      { text: '内核管理与优化', link: `${path.main}include/kernel` },
       { text: '用户与进程', link: `${path.main}include/userOrProcess` },
     ],
   },
