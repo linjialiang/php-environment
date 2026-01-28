@@ -6,6 +6,12 @@ import { siteConfig } from './siteConfig.mts';
 
 export default withPwa(
   defineConfig({
+    vite: {
+      define: {
+        // 定义全局常量
+        __SITE_CONFIG__: JSON.stringify(siteConfig),
+      },
+    },
     pwa: {
       registerType: 'autoUpdate',
       injectRegister: 'auto',

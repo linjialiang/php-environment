@@ -1,4 +1,5 @@
-echo "[Unit]
+cat > /etc/systemd/system/nginx.service << EOF
+[Unit]
 Description=nginx-1.28.x
 After=network.target
 
@@ -21,4 +22,4 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
-" > /etc/systemd/system/nginx.service
+EOF

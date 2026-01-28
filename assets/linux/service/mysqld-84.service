@@ -1,5 +1,6 @@
-echo "[Unit]
-Description=MySQL Server 8.4.x
+cat > /etc/systemd/system/mysqld-84.service << EOF
+[Unit]
+Description=MySQL Server
 Documentation=man:mysqld(8)
 After=network-online.target
 Wants=network-online.target
@@ -23,4 +24,4 @@ RuntimeDirectoryMode=0750
 
 [Install]
 WantedBy=multi-user.target
-" > /etc/systemd/system/mysqld-84.service
+EOF

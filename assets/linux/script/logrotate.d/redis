@@ -1,4 +1,4 @@
-cat < /etc/logrotate.d/redis >> 'EOF'
+cat > /etc/logrotate.d/redis << 'EOF'
 /server/logs/redis/redis-server.log {
     monthly
     maxsize 100M

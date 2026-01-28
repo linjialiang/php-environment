@@ -1,18 +1,19 @@
-echo "[Unit]
+cat > /etc/systemd/system/php85-fpm.service << 'EOF'
+[Unit]
 Description=The PHP 8.5 FastCGI Process Manager
 After=network.target
 
 [Service]
 Type=notify
 UMask=027
-User=php-fpm
-Group=php-fpm
+User=php
+Group=php
 
 RuntimeDirectory=php85-fpm
 RuntimeDirectoryMode=0750
 
 ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/php/85/etc/php-fpm.conf
-ExecReload=/bin/kill -USR2 \$MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
 
 PrivateTmp=true
 ProtectSystem=full
@@ -26,4 +27,4 @@ RestrictNamespaces=true
 
 [Install]
 WantedBy=multi-user.target
-" > /etc/systemd/system/php85-fpm.service
+EOF
