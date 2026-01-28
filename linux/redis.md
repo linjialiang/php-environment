@@ -202,7 +202,7 @@ cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
 
 ### 2. 配置 TLS
 
-<a :href="redisTlsLink" target="_blank">[:point_right:点此查看详情]</a>
+Redis 配置 TLS 相关<a :href="redisTlsLink" target="_blank">[:point_right:请点此查看详情]</a>
 
 ### 3. 分发证书
 
