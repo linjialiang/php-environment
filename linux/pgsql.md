@@ -34,7 +34,11 @@ export CLANG=/usr/bin/clang
 # export LLVM_CONFIG=/usr/bin/llvm-config
 ```
 
-```bash [编译指令]
+```bash [构建编译]
+# 清理 make
+make distclean
+
+# 构建选项
 ../configure --prefix=/server/postgres \
 --enable-debug \
 --enable-cassert \
@@ -45,10 +49,8 @@ export CLANG=/usr/bin/clang
 --with-lz4 \
 --with-zstd \
 --with-ssl=openssl > stdout.log
-```
 
-```bash [安装指令]
-# 使用postgres账户安装
+# 编译&安装
 make -j4 > make.log
 make check > makeTest.log
 make install

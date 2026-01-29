@@ -26,6 +26,9 @@ su - sqlite3 -s /bin/zsh
 tar -xzf sqlite-autoconf-3510200.tar.gz
 cd ~/sqlite-autoconf-3510200/
 
+# 清理 make
+make distclean
+
 ./configure --prefix=/server/sqlite3 > stdout.log
 
 make -j4 > make.log
