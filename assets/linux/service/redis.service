@@ -18,14 +18,14 @@ ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 KillSignal=SIGTERM
 TimeoutStopSec=90
-TimeoutSec=infinity
 
 Restart=on-failure
 RestartSec=10s
 
 LimitNOFILE=10000
-LimitNPROC=4096
+LimitNPROC=10000
 LimitMEMLOCK=infinity
+LimitAS=infinity
 
 NoNewPrivileges=yes
 PrivateTmp=true
