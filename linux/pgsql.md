@@ -18,29 +18,31 @@ mkdir ~/postgresql-18.1/build_postgres
 cd ~/postgresql-18.1/build_postgres
 ```
 
-```bash [编译指令]
-# 如同时存在 clang 和 gcc 时，需通过环境变量指定编译器
+```bash [设置环境变量]
+# 如果系统存在多个版本或多个类型的编译器时，就需要通过环境变量来指定编译器
+
+# 使用 gcc 编译器
 export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 export LLVM_CONFIG=/usr/bin/llvm-config-19
-# 使用postgres账户编译
-# 开发环境：建议一律启用 --enable-debug 和 --enable-cassert 选项
-# 部署环境：
-#   1. --enable-debug 选项本身不影响查询效率，但如果使用 llvm+clang 编译器套件时不能启用，因为该选项通常会禁用llvm编译器对pgsql的性能优化
-#   2. 一律不启用 --enable-cassert 选项 ，这会影响查询速度
+
+# 使用 clang 编译器
+# export CC=/usr/bin/clang
+# export CXX=/usr/bin/clang++
+# export LLVM_CONFIG=/usr/bin/llvm-config-19
+```
+
+```bash [编译指令]
 ../configure --prefix=/server/postgres \
-CC=/usr/bin/gcc \
-CXX=/usr/bin/g++ \
-LLVM_CONFIG=/usr/bin/llvm-config-19 \
 --enable-debug \
 --enable-cassert \
 --with-llvm \
---with-pam \
 --with-systemd \
+--with-liburing \
 --with-uuid=e2fs \
 --with-lz4 \
 --with-zstd \
---with-openssl > stdout.log
+--with-ssl=openssl > stdout.log
 ```
 
 ```bash [安装指令]
@@ -76,29 +78,39 @@ su - postgres -s /bin/zsh
 
 ::: details 编译选项说明
 
-| commom                | note                                                 |
-| --------------------- | ---------------------------------------------------- |
-| --prefix=PREFIX       | 指定安装路径                                         |
-| --datadir=DIR         | 指定数据目录路径                                     |
-| --enable-debug        | 启用调试模式                                         |
-| --enable-cassert      | 启用断言检查                                         |
-| CC=CMD                | 指定 C 编译器( gcc/clang 注意是区分大小写的)         |
-| CXX=CMD               | 指定 C++ 编译器( c++/clang++ 注意是区分大小写的)     |
-| --with-llvm           | 启用基于 LLVM 的 JIT 支持，优化适合 `OLTP/OLAP`      |
-| LLVM_CONFIG=PATH      | 用于定位 LLVM 安装的程序                             |
-| --with-pgport=PortNum | 指定 pgsql 服务器监听的端口号                        |
-| --with-pam            | 允许 pgsql 使用系统的 PAM 认证机制进行用户身份验证   |
-| --with-systemd        | 确保 PostgreSQL 与 systemd 服务和日志系统集成        |
-| --with-liburing       | 启用 Linux io_uring 异步 I/O 接口                    |
-| --with-uuid=e2fs      | 构建 uuid-ossp 使用 e2fsprogs 库，用于生成唯一标识符 |
-| --with-lz4            | 启用 LZ4 压缩算法的支持                              |
-| --with-zstd           | 启用 Zstandard 压缩算法的支持                        |
-| --with-openssl        | 启用 OpenSSL 支持，用于加密通信                      |
+::: code-group
 
--   `--enable-debug`：启用后，可以在调试器中运行程序来分析问题，这会大大增加已安装的可执行文件的大小，并且在非 GCC 编译器上它通常也会禁用编译器优化，生产环境中只建议在选择 GCC 编译器时添加此选项。
--   编译器：`llvm+clang` 跟 `gcc` 是两个编译器，是互斥的，如果要启用 `--with-llvm` 就要使用 `clang`
--   安装部分依赖包时，可能会自动安装 `gcc` 编译器包
--   `--with-ossp`: uuid 支持 3 种方式 `ossp-uuid(维护不积极)` `bsd(跨平台支持)` `e2fs(兼容linux，性能高)`
+```md [启用选项]
+| 启用选项         | note                                             |
+| ---------------- | ------------------------------------------------ |
+| --prefix=PREFIX  | 指定安装根路径                                   |
+| --with-llvm      | 启用基于 LLVM 的 JIT 支持                        |
+| --with-systemd   | 启用 systemd 支持                                |
+| --with-liburing  | 启用 io_uring 支持，用于异步 I/O                 |
+| --with-uuid=LIB  | 使用指定库构建 contrib/uuid-ossp (bsd,e2fs,ossp) |
+| --with-lz4       | 启用 LZ4 支持 `极致压缩`                         |
+| --with-zstd      | 启用 ZSTD 支持 `对比gzip：压缩比更高、速度更快`  |
+| --with-ssl=LIB   | 指定用于 SSL/TLS 支持的库 (openssl)              |
+| CC=CMD           | 指定 C 编译器( gcc/clang 注意是小写)             |
+| CXX=CMD          | 指定 C++ 编译器( c++/clang++ 注意是小写)         |
+| LLVM_CONFIG=PATH | 用于定位 LLVM 安装的程序                         |
+```
+
+```md [开发启用选项]
+| 开发启用选项     | note                   |
+| ---------------- | ---------------------- |
+| --enable-debug   | 启用调试符号编译（-g） |
+| --enable-cassert | 启用性能分析           |
+```
+
+```md [其他常见选项]
+| 常见选项              | note                                               |
+| --------------------- | -------------------------------------------------- |
+| --exec-prefix=EPREFIX | 指定架构相关文件安装根路径                         |
+| --datadir=DIR         | 指定数据目录路径                                   |
+| --with-pgport=PortNum | 设置默认端口号 [5432]                              |
+| --with-pam            | 启用 PAM 支持（允许 PAM 认证机制进行用户身份验证） |
+```
 
 :::
 
