@@ -24,12 +24,12 @@ cd ~/postgresql-18.1/build_postgres
 # 使用 gcc 编译器
 export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
-export LLVM_CONFIG=/usr/bin/llvm-config-19
+export LLVM_CONFIG=/usr/bin/llvm-config
 
 # 使用 clang 编译器
 # export CC=/usr/bin/clang
 # export CXX=/usr/bin/clang++
-# export LLVM_CONFIG=/usr/bin/llvm-config-19
+# export LLVM_CONFIG=/usr/bin/llvm-config
 ```
 
 ```bash [编译指令]
