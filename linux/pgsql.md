@@ -13,6 +13,7 @@ PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企
 
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
+
 tar -xjf postgresql-18.1.tar.bz2
 mkdir ~/postgresql-18.1/build_postgres
 cd ~/postgresql-18.1/build_postgres
@@ -114,6 +115,7 @@ rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 | --datadir=DIR         | 指定数据目录路径                                   |
 | --with-pgport=PortNum | 设置默认端口号 [5432]                              |
 | --with-pam            | 启用 PAM 支持（允许 PAM 认证机制进行用户身份验证） |
+| --without-readline    | 禁用后， psql 客户端将不支持补全功能               |
 ```
 
 :::
