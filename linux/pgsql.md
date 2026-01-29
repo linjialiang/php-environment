@@ -25,6 +25,7 @@ cd ~/postgresql-18.1/build_postgres
 export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 export LLVM_CONFIG=/usr/bin/llvm-config
+export CLANG=/usr/bin/clang
 
 # 使用 clang 编译器
 # export CC=/usr/bin/clang
