@@ -9,17 +9,24 @@ UMask=0027
 User=redis
 Group=redis
 
-ExecStart=/server/redis/bin/redis-server /server/etc/redis/config/redis.conf --supervised systemd
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s TERM $MAINPID
-
-LimitNOFILE=65535
-LimitNPROC=4096
-
 RuntimeDirectory=redis
 RuntimeDirectoryMode=0750
 
+ExecStart=/server/redis/bin/redis-server /server/etc/redis/config/redis.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=90
+TimeoutSec=infinity
+
 Restart=on-failure
+RestartSec=10s
+
+LimitNOFILE=10000
+LimitNPROC=4096
+LimitMEMLOCK=infinity
+
 NoNewPrivileges=yes
 PrivateTmp=true
 ProtectHome=yes

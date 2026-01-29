@@ -19,7 +19,19 @@ ExecReload=/bin/kill -HUP $MAINPID
 
 KillMode=mixed
 KillSignal=SIGINT
+TimeoutStopSec=300
 TimeoutSec=infinity
+
+Restart=on-failure
+RestartSec=10s
+
+LimitNOFILE=65536
+LimitNPROC=65536
+LimitMEMLOCK=infinity
+
+NoNewPrivileges=yes
+PrivateTmp=true
+ProtectHome=yes
 
 [Install]
 WantedBy=multi-user.target
