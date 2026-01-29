@@ -1,11 +1,11 @@
 ---
-title: 编译安装 pgsql
+title: 安装 PostgreSQL
 titleTemplate: 环境搭建教程
 ---
 
-# 编译安装 pgsql
+# 安装 PostgreSQL
 
-学习 PostgreSQL 从编译安装开始，从官网下载指定版本的[[源码包]](https://www.postgresql.org/ftp/source/)
+PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企业级应用、金融系统、电商平台、物联网（IoT）和大数据等场景。
 
 ## 编译前准备
 
