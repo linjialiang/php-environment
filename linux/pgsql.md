@@ -50,8 +50,6 @@ export LLVM_CONFIG=/usr/bin/llvm-config-19
 make -j4 > make.log
 make check > makeTest.log
 make install
-# 编译安装完后记得移除源码包，节省空间
-rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 ```
 
 ```bash [数据初始化]
@@ -72,6 +70,11 @@ su - postgres -s /bin/zsh
 # 这个命令用于启动 PostgreSQL 命令行客户端，并连接到名为 "test" 的数据库。
 # 执行该命令后，你将进入一个交互式的 PostgreSQL 命令行界面，可以执行 SQL 查询和操作。
 /server/postgres/bin/psql test
+```
+
+```bash [清理]
+# 编译安装完后记得移除源码包，节省空间
+rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 ```
 
 :::
