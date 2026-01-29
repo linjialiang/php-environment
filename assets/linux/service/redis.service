@@ -31,6 +31,7 @@ NoNewPrivileges=yes
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=strict
+ReadWritePaths=/server/logs/redis
 ProtectHome=yes
 ProtectHostname=yes
 ProtectClock=yes
@@ -39,8 +40,6 @@ ProtectKernelModules=yes
 ProtectKernelLogs=yes
 ProtectControlGroups=yes
 
-ReadWritePaths=/server/logs/redis /run/redis /var/run/redis
-ReadOnlyPaths=/server/redis /server/etc/redis
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
 [Install]
