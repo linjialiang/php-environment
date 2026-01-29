@@ -117,7 +117,7 @@ rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 
 :::
 
-## psql
+## psql 登录
 
 ::: code-group
 
