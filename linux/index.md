@@ -69,4 +69,8 @@ apt install --no-install-recommends -y
 apt install --no-install-recommends -y
 ```
 
+```bash [MySQL]
+apt install --no-install-recommends -y
+```
+
 :::
