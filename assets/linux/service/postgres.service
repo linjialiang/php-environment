@@ -41,12 +41,9 @@ ProtectKernelModules=yes
 ProtectKernelLogs=yes
 ProtectControlGroups=yes
 
-# 允许写入的必要路径
-ReadWritePaths=/server/pgData /server/logs/postgres
-# 允许只读路径
+ReadWritePaths=/server/pgData /server/logs/postgres /run/postgres /var/run/postgres
 ReadOnlyPaths=/server/postgres /server/etc/postgres
-# 允许的网络协议
-RestrictAddressFamilies=AF_INET AF_NETLINK AF_UNIX
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
 [Install]
 WantedBy=multi-user.target

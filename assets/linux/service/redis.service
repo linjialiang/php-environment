@@ -39,9 +39,9 @@ ProtectKernelModules=yes
 ProtectKernelLogs=yes
 ProtectControlGroups=yes
 
-ReadWritePaths=/server/logs/redis
+ReadWritePaths=/server/logs/redis /run/redis /var/run/redis
 ReadOnlyPaths=/server/redis /server/etc/redis
-RestrictAddressFamilies=AF_INET AF_NETLINK AF_UNIX
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
 [Install]
 WantedBy=multi-user.target
