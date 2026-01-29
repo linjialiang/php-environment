@@ -7,57 +7,6 @@ titleTemplate: 环境搭建教程
 
 PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企业级应用、金融系统、电商平台、物联网（IoT）和大数据等场景。
 
-## 编译前准备
-
-### 依赖包说明
-
-| package         | note                                                                      |
-| --------------- | ------------------------------------------------------------------------- |
-| make            | ​make 不是一个库，而是一个构建自动化工具 ​​                               |
-| pkg-config      | 用于帮助编译时定位依赖库的工具，它是一个元数据管理工具，并不是实际的库 ​​ |
-| clang           | c/c++ 编译器，`llvm+clang` 是套组合                                       |
-| libicu-dev      | icu 开发库包，支持国际化（i18n）和本地化（l10n）功能                      |
-| liblz4-dev      | 用于 LZ4 压缩算法的开发库                                                 |
-| libzstd-dev     | 用于 Zstandard 压缩算法的开发库                                           |
-| libbison-dev    | 一个广泛使用的语法分析器生成器，主要用于 Unix 和类 Unix 系统              |
-| flex            | 一个词法分析器生成工具，通常与 Bison 结合使用，以创建完整的编译器前端     |
-| libreadline-dev | 提供命令行编辑功能的开发库                                                |
-| zlib1g-dev      | 用于 zlib 压缩和解压缩数据的开发库                                        |
-| libssl-dev      | 用于 OpenSSL 支持的开发库                                                 |
-| libpam0g-dev    | 用于 PAM 支持的开发库                                                     |
-| uuid-dev        | 包含了用于生成和处理 UUID 的库和头文件                                    |
-| libsystemd-dev  | 用于开发与 systemd 相关的应用程序的包，它提供了一组头文件和库文件         |
-
-### 编译选项说明
-
-| commom                | note                                                 |
-| --------------------- | ---------------------------------------------------- |
-| --prefix=PREFIX       | 指定安装路径                                         |
-| --datadir=DIR         | 指定数据目录路径                                     |
-| --enable-debug        | 启用调试模式                                         |
-| --enable-cassert      | 启用断言检查                                         |
-| CC=CMD                | 指定 C 编译器( gcc/clang 注意是区分大小写的)         |
-| CXX=CMD               | 指定 C++ 编译器( c++/clang++ 注意是区分大小写的)     |
-| --with-llvm           | 启用基于 LLVM 的 JIT 支持，优化适合 `OLTP/OLAP`      |
-| LLVM_CONFIG=PATH      | 用于定位 LLVM 安装的程序                             |
-| --with-pgport=PortNum | 指定 pgsql 服务器监听的端口号                        |
-| --with-pam            | 允许 pgsql 使用系统的 PAM 认证机制进行用户身份验证   |
-| --with-systemd        | 确保 PostgreSQL 与 systemd 服务和日志系统集成        |
-| --with-liburing       | 启用 Linux io_uring 异步 I/O 接口                    |
-| --with-uuid=e2fs      | 构建 uuid-ossp 使用 e2fsprogs 库，用于生成唯一标识符 |
-| --with-lz4            | 启用 LZ4 压缩算法的支持                              |
-| --with-zstd           | 启用 Zstandard 压缩算法的支持                        |
-| --with-openssl        | 启用 OpenSSL 支持，用于加密通信                      |
-
--   `--enable-debug`：启用后，可以在调试器中运行程序来分析问题，这会大大增加已安装的可执行文件的大小，并且在非 GCC 编译器上它通常也会禁用编译器优化，生产环境中只建议在选择 GCC 编译器时添加此选项。
--   编译器：`llvm+clang` 跟 `gcc` 是两个编译器，是互斥的，如果要启用 `--with-llvm` 就要使用 `clang`
--   安装部分依赖包时，可能会自动安装 `gcc` 编译器包
--   `--with-ossp`: uuid 支持 3 种方式 `ossp-uuid(维护不积极)` `bsd(跨平台支持)` `e2fs(兼容linux，性能高)`
-
-### 资源限制
-
-修改操作系统打开最大文件句柄数，具体请参考[[系统级优化-资源管理]](./trait/kernel#resourc_management)
-
 ## 编译
 
 ::: code-group
@@ -70,16 +19,19 @@ cd ~/postgresql-18.1/build_postgres
 ```
 
 ```bash [编译指令]
-# 同时存在 clang 和 gcc 时，需指定 clang 和 clang++ 作为编译器，因为pgsql专门对clang进行了优化
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+# 如同时存在 clang 和 gcc 时，需通过环境变量指定编译器
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
 export LLVM_CONFIG=/usr/bin/llvm-config-19
 # 使用postgres账户编译
 # 开发环境：建议一律启用 --enable-debug 和 --enable-cassert 选项
 # 部署环境：
-#   1. --enable-debug 选项本身不影响查询效率，但使用 llvm+clang 编译器套件时不能启用，因为该选项通常会禁用llvm编译器对pgsql的性能优化
+#   1. --enable-debug 选项本身不影响查询效率，但如果使用 llvm+clang 编译器套件时不能启用，因为该选项通常会禁用llvm编译器对pgsql的性能优化
 #   2. 一律不启用 --enable-cassert 选项 ，这会影响查询速度
 ../configure --prefix=/server/postgres \
+CC=/usr/bin/gcc \
+CXX=/usr/bin/g++ \
+LLVM_CONFIG=/usr/bin/llvm-config-19 \
 --enable-debug \
 --enable-cassert \
 --with-llvm \
@@ -119,6 +71,34 @@ su - postgres -s /bin/zsh
 # 执行该命令后，你将进入一个交互式的 PostgreSQL 命令行界面，可以执行 SQL 查询和操作。
 /server/postgres/bin/psql test
 ```
+
+:::
+
+::: details 编译选项说明
+
+| commom                | note                                                 |
+| --------------------- | ---------------------------------------------------- |
+| --prefix=PREFIX       | 指定安装路径                                         |
+| --datadir=DIR         | 指定数据目录路径                                     |
+| --enable-debug        | 启用调试模式                                         |
+| --enable-cassert      | 启用断言检查                                         |
+| CC=CMD                | 指定 C 编译器( gcc/clang 注意是区分大小写的)         |
+| CXX=CMD               | 指定 C++ 编译器( c++/clang++ 注意是区分大小写的)     |
+| --with-llvm           | 启用基于 LLVM 的 JIT 支持，优化适合 `OLTP/OLAP`      |
+| LLVM_CONFIG=PATH      | 用于定位 LLVM 安装的程序                             |
+| --with-pgport=PortNum | 指定 pgsql 服务器监听的端口号                        |
+| --with-pam            | 允许 pgsql 使用系统的 PAM 认证机制进行用户身份验证   |
+| --with-systemd        | 确保 PostgreSQL 与 systemd 服务和日志系统集成        |
+| --with-liburing       | 启用 Linux io_uring 异步 I/O 接口                    |
+| --with-uuid=e2fs      | 构建 uuid-ossp 使用 e2fsprogs 库，用于生成唯一标识符 |
+| --with-lz4            | 启用 LZ4 压缩算法的支持                              |
+| --with-zstd           | 启用 Zstandard 压缩算法的支持                        |
+| --with-openssl        | 启用 OpenSSL 支持，用于加密通信                      |
+
+-   `--enable-debug`：启用后，可以在调试器中运行程序来分析问题，这会大大增加已安装的可执行文件的大小，并且在非 GCC 编译器上它通常也会禁用编译器优化，生产环境中只建议在选择 GCC 编译器时添加此选项。
+-   编译器：`llvm+clang` 跟 `gcc` 是两个编译器，是互斥的，如果要启用 `--with-llvm` 就要使用 `clang`
+-   安装部分依赖包时，可能会自动安装 `gcc` 编译器包
+-   `--with-ossp`: uuid 支持 3 种方式 `ossp-uuid(维护不积极)` `bsd(跨平台支持)` `e2fs(兼容linux，性能高)`
 
 :::
 
