@@ -154,7 +154,7 @@ psql -h 192.168.66.254 -U admin -d postgres -W
 
 ::: code-group
 
-<<< @/assets/environment/source/service/postgres.service{bash} [unit]
+<<< @/assets/linux/service/postgres.service{bash} [unit]
 
 ```bash [开机启动]
 systemctl enable postgres
@@ -179,8 +179,8 @@ PostgreSQL 主要有以下几个配置文件：
 ::: details 配置案例
 
 ::: code-group
-<<< @/assets/environment/source/postgres/postgresql.conf{ini} [服务端配置文件]
-<<< @/assets/environment/source/postgres/pg_hba.conf{ini} [客户访问限制配置文件]
+<<< @/assets/linux/etc/postgres/postgresql.conf.bash [服务端配置文件]
+<<< @/assets/linux/etc/postgres/pg_hba.conf.bash [客户访问限制配置文件]
 :::
 
 ### 1. 基本配置
