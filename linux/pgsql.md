@@ -202,15 +202,17 @@ PostgreSQL 主要有以下几个配置文件：
 ```
 
 ```md [身份验证方法]
-| `AUTH-METHOD`             | 常用身份验证方法                                 |
-| ------------------------- | ------------------------------------------------ |
-| `trust`                   | 允许无条件连接                                   |
-| `reject`                  | 无条件拒绝连接                                   |
-| `scram-sha-256`           | SCRAM-SHA-256 加密的密码进行身份验证             |
-| `password`                | 未加密的密码进行身份验证                         |
-| `peer`                    | 数据库用户名与系统登录用户相同的身份验证         |
-| `ident`(`local`连接类型)  | 数据库用户与映射后的系统登录用户做对等身份验证   |
-| `ident`(`TCP/IP`连接类型) | ~~数据库用户与客户端用户匹配的身份验证(不安全)~~ |
+| `AUTH-METHOD`           | 常用身份验证方法                                     |
+| ----------------------- | ---------------------------------------------------- |
+| `trust`                 | 允许无条件连接                                       |
+| `reject`                | 无条件拒绝连接                                       |
+| `cert`                  | SSL 客户端证书进行身份验证（无密码）                 |
+| `scram-sha-256`         | SCRAM-SHA-256 加密的密码进行身份验证（允许证书选项） |
+| `md5(过时的加密)`       | MD5 加密的密码进行身份验证（允许证书选项）           |
+| `password`              | 未加密的密码进行身份验证（允许证书选项）             |
+| `peer`                  | 数据库用户名与系统登录用户相同的身份验证             |
+| `ident(local连接类型)`  | 数据库用户与映射后的系统登录用户做对等身份验证       |
+| `ident(TCP/IP连接类型)` | ~~数据库用户与客户端用户匹配的身份验证(不安全)~~     |
 ```
 
 :::
@@ -225,8 +227,6 @@ psql
 # 修改 Unix域套接字文件路径后，需要指定 Unix域套接字文件所在目录才能正常登录
 psql -h /run/postgres
 ```
-
-````
 
 ```bash [系统用户[emad]]
 # 需在 pg_ident.conf 配置文件设置用户映射
@@ -245,11 +245,17 @@ psql -h /run/postgres -U admin -d postgres
 psql -h 127.0.0.1 -U admin -d postgres -W
 
 # 使用 TLS 协议登录 admin
-psql -h 192.168.66.254 -U admin -d postgres \
-sslmode verify-full \
-sslrootcert /server/etc/postgres/tls/root.crt \
-sslcert /server/etc/postgres/tls/client-admin.crt \
-sslkey /server/etc/postgres/tls/client-admin.key
+psql "host=192.168.66.254 \
+dbname=postgres \
+user=admin \
+sslmode=require \
+sslrootcert=./tls/root.crt \
+sslcert=./tls/client-admin.crt \
+sslkey=./tls/client-admin.key" \
+-W
+
+# 注意 sslmode=<require|verify-ca|verify-full> 这是客户端的认证模式
+# 服务端的认证模式在 pg_hba.conf 文件里单独指定的
 ```
 
 ```md [指令说明]
@@ -630,4 +636,7 @@ find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 ```
 
 ```
-````
+
+```
+
+```
