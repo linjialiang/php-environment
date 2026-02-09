@@ -126,14 +126,14 @@ rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 
 ::: code-group
 
-```bash [系统用户postgres]
+```bash [系统用户[postgres]]
 # 最简单登录指令（套接字文件路径为默认时）
 psql
 # 修改 sock 文件路径后，需要指定 sock 文件所在目录才能正常登录
 psql -h /run/postgres
 ```
 
-```bash [系统用户emad]
+```bash [系统用户[emad]]
 # 需在 pg_ident.conf 配置文件设置用户映射
 # ===========================================
 # 最简单登录指令（套接字文件路径为默认时）
@@ -145,12 +145,12 @@ psql -U admin -d postgres
 psql -h /run/postgres -U admin -d postgres
 ```
 
-```bash [TCP/IP登录]
+```bash [TCP/IP协议]
 psql -h 127.0.0.1 -U admin -d postgres -W
 psql -h 192.168.66.254 -U admin -d postgres -W
 ```
 
-```md [psql使用说明]
+```md [指令说明]
 > 使用 psql 与 PostgreSQL 服务建立连接的命令说明：
 
 1.  `psql`：PostgreSQL 命令行工具；
