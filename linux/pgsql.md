@@ -308,7 +308,7 @@ SSL 登录验证通常分为 `单向验证` 和 `双向验证` 两种方式：
 ```bash [自签名证书]
 su postgres -s /bin/zsh
 mkdir /server/postgres/tls
-cd /server/postgres/tls/
+cd /server/etc/postgres/tls/
 # 要为服务器创建一个简单的自签名证书，有效期为365天，
 # - 请使用以下OpenSSL命令，将 [debian12-lnpp] 替换为服务器的主机名：
 openssl req -new -x509 -days 365 -nodes -text -out server.crt \
@@ -320,8 +320,8 @@ chmod 600 server.key
 ```bash [配置]
 # /server/pgData/postgresql.conf
 ssl = on
-ssl_cert_file = '/server/postgres/tls/server.crt'
-ssl_key_file = '/server/postgres/tls/server.key'
+ssl_cert_file = '/server/etc/postgres/tls/server.crt'
+ssl_key_file = '/server/etc/postgres/tls/server.key'
 ```
 
 :::
@@ -345,7 +345,7 @@ ssl_key_file = '/server/postgres/tls/server.key'
 ```bash [CA根证书]
 su postgres -s /bin/zsh
 mkdir /server/postgres/tls
-cd /server/postgres/tls/
+cd /server/etc/postgres/tls/
 
 # 1. 首先创建 [颁发机构CA根证书]
 # - 1.1 创建证书签名请求（CSR）和证书私钥文件：
@@ -408,14 +408,14 @@ chmod 600 client-*  # 客户端证书是提供给特定客户的，安全起见�
 ```bash [配置]
 # /server/pgData/postgresql.conf
 ssl = on
-ssl_ca_file = '/server/postgres/tls/root.crt'
-ssl_cert_file = '/server/postgres/tls/server.crt'
+ssl_ca_file = '/server/etc/postgres/tls/root.crt'
+ssl_cert_file = '/server/etc/postgres/tls/server.crt'
 #ssl_crl_file = ''
 #ssl_crl_dir = ''
-ssl_key_file = '/server/postgres/tls/server.key'
+ssl_key_file = '/server/etc/postgres/tls/server.key'
 #openssl>=3.0以后，安全性得到提升，通常不配置此项
 # 如果需要更高的安全性或特定的兼容性要求，并且服务器资源允许，那么可以配置此项
-#ssl_dh_params_file = '/server/postgres/tls/pgsql.dh'
+#ssl_dh_params_file = '/server/etc/postgres/tls/pgsql.dh'
 ```
 
 ```bash [pg_hba说明]
@@ -631,12 +631,4 @@ find /server/postgres /server/logs/postgres /server/etc/postgres -type d -exec c
 chmod 750 -R /server/postgres/bin
 find /server/etc/postgres/tls /server/pgData -type f -exec chmod 600 {} \;
 find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
-```
-
-```
-
-```
-
-```
-
 ```
