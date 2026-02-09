@@ -8,7 +8,7 @@ cat > /server/pgData/pg_hba.conf << 'EOF'
 local      all          postgres                         ident          map=emadMapPostgres
 local      all          admin                            ident          map=emadMapAdmin
 local      all          all                              reject
-hostssl    replication  replication 192.168.66.253/32    scram-sha-256  clientcert=verify-full
+hostssl    replication  repl_user   192.168.66.253/32    scram-sha-256  clientcert=verify-full
 hostssl    all          admin       192.168.0.0/16       scram-sha-256  clientcert=verify-full
 hostnossl  all          admin       127.0.0.1/32         scram-sha-256
 EOF

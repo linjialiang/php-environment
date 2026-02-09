@@ -531,6 +531,8 @@ SET ROLE user_c;
 ```sql [案例]
 -- 创建超级管理员 admin
 CREATE USER admin WITH SUPERUSER PASSWORD '1';
+-- 创建允许复制的用户
+CREATE USER repl_user WITH REPLICATION ENCRYPTED PASSWORD '1';
 ```
 
 :::
