@@ -156,7 +156,7 @@ PostgreSQL 主要有以下几个配置文件：
 <<< @/assets/linux/etc/postgres/pg_ident.conf.bash [用户名映射配置]
 :::
 
-#### psql 登录说明
+#### psql 登录说明{#psql-login}
 
 ::: code-group
 
@@ -539,7 +539,7 @@ CREATE USER repl_user WITH REPLICATION ENCRYPTED PASSWORD '1';
 
 ## 客户端权限
 
-见上述[基本配置](#basic_config)
+见上述[[psql 登录说明]](#psql-login)
 
 ## 升级
 
