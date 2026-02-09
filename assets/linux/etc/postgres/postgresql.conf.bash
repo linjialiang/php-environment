@@ -1,7 +1,7 @@
 cp /server/pgData/postgresql.conf{,.bak}
 # 追加
 cat >> /server/pgData/postgresql.conf << 'EOF'
-
+#
 # - basic
 listen_addresses = '127.0.0.1,192.168.66.254'
 #port = 5432

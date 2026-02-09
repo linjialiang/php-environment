@@ -1,7 +1,9 @@
 cp /server/pgData/pg_hba.conf{,.bak}
 # 覆盖
 cat > /server/pgData/pg_hba.conf << 'EOF'
-
+# PostgreSQL Client Authentication Configuration File
+# ===================================================
+#
 # TYPE     DATABASE     USER      IP-ADDRESS(IP-mask)  AUTH-METHOD    AUTH-OPTIONS
 local      all          postgres                       ident          map=emadMapPostgres
 local      all          all                            reject
