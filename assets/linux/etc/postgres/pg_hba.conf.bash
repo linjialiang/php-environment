@@ -10,6 +10,6 @@ local      all          postgres                         ident          map=emad
 local      all          admin                            ident          map=emadMapAdmin
 local      all          all                              reject
 hostssl    replication  repl_user   192.168.66.253/32    scram-sha-256  clientcert=verify-full
+host       all          admin       127.0.0.1/32         scram-sha-256
 hostssl    all          admin       192.168.0.0/16       scram-sha-256  clientcert=verify-full
-hostnossl  all          admin       127.0.0.1/32         scram-sha-256
 EOF

@@ -156,7 +156,19 @@ PostgreSQL 主要有以下几个配置文件：
 <<< @/assets/linux/etc/postgres/pg_ident.conf.bash [用户名映射配置]
 :::
 
-#### psql 登录说明{#psql-login}
+#### 客户端身份验证
+
+::: details 客户端身份验证简单说明
+
+| `TYPE`    | 常用的连接类型               |
+| --------- | ---------------------------- |
+| `local`   | Unix 域套接字连接            |
+| `host`    | `TCP/IP 协议` 连接           |
+| `hostssl` | `TCP/IP协议使用SSL加密` 连接 |
+
+:::
+
+#### psql 登录{#psql-login}
 
 ::: code-group
 
