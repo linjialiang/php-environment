@@ -40,11 +40,6 @@ features:
       details: 最强开源关系型数据库
       link: /linux/pgsql
     - icon:
-          src: /static/svg/mysql.svg
-      title: MySQL 安装
-      details: 关系型数据库
-      link: /linux/mysql
-    - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
       title: PHP 安装
@@ -55,6 +50,11 @@ features:
       title: Nginx 安装
       details: Web服务器
       link: /linux/nginx
+    - icon:
+          src: /static/svg/mysql.svg
+      title: MySQL 安装
+      details: 关系型数据库
+      link: /linux/mysql
     - icon:
           dark: /static/svg/iis-dark.svg
           light: /static/svg/iis-light.svg

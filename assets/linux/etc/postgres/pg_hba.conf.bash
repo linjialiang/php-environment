@@ -2,20 +2,17 @@ cp /server/pgData/pg_hba.conf{,.bak}
 # 覆盖
 cat > /server/pgData/pg_hba.conf << 'EOF'
 
-# TYPE  DATABASE        USER            ADDRESS                 METHOD
-
 # "local" is for Unix domain socket connections only
-local   all             all                                     trust
-# IPv4 local connections:
-# host    all             all             127.0.0.1/32            trust
-# IPv6 local connections:
-# host    all             all             ::1/128                 trust
+# 套接字连接部署环境推荐使用 指定用户+scram-sha-256 密码认证
 # Allow replication connections from localhost, by a user with the
 # replication privilege.
-local   replication     all                                     trust
-
 # 局域网和外网需要使用 ssl认证+密码认证 建立连接
-hostssl   all   admin   192.168.0.0/16    scram-sha-256   clientcert=verify-full
 # 本地仅需要通过 密码认证 建立连接
-hostnossl all   admin   127.0.0.1/32      scram-sha-256
+
+# TYPE     DATABASE     USER      IP-ADDRESS(IP-mask)  AUTH-METHOD    AUTH-OPTIONS
+local      all          postgres                       ident
+local      all          all                            reject
+host       replication  repl_user 192.168.66.253/32    scram-sha-256
+hostssl    all          admin     192.168.0.0/16       scram-sha-256  clientcert=verify-full
+hostnossl  all          admin     127.0.0.1/32         scram-sha-256
 EOF
