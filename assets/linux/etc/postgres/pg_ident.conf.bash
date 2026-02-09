@@ -6,4 +6,5 @@ cat > /server/pgData/pg_ident.conf << 'EOF'
 #
 # MAPNAME        SYSTEM-USERNAME  DATABASE-USERNAME
 emadMapPostgres  emad             postgres
+emadMapAdmin     emad             admin
 EOF

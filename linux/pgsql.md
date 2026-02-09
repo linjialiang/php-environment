@@ -180,7 +180,8 @@ PostgreSQL 主要有以下几个配置文件：
 
 ::: code-group
 <<< @/assets/linux/etc/postgres/postgresql.conf.bash [服务端配置文件]
-<<< @/assets/linux/etc/postgres/pg_hba.conf.bash [客户访问限制配置文件]
+<<< @/assets/linux/etc/postgres/pg_hba.conf.bash [客户端身份验证配置文件]
+<<< @/assets/linux/etc/postgres/pg_ident.conf.bash [用户名映射配置文件]
 :::
 
 ### 1. 基本配置
