@@ -126,15 +126,26 @@ rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 
 ::: code-group
 
-```bash [postgres用户登录]
-# 最简单登录指令
+```bash [系统用户postgres登录]
+# 最简单登录指令（套接字文件路径为默认时）
 psql
 # 修改 sock 文件路径后，需要指定 sock 文件所在目录才能正常登录
 psql -h /run/postgres
 ```
 
-```bash [admin用户登录]
-# 注意：如果没有跟用户同名的数据库就必须使用 -d 指定数据库名
+```bash [系统用户emad登录]
+# 需在 pg_ident.conf 配置文件设置用户映射
+# ===========================================
+# 最简单登录指令（套接字文件路径为默认时）
+psql -U postgres
+# 修改 sock 文件路径后，需要指定 sock 文件所在目录才能正常登录
+psql -h /run/postgres -U postgres
+# 用户同名的数据库不存在时，必须使用 -d 选项指定数据库名
+psql -U admin -d postgres
+psql -h /run/postgres -U admin -d postgres
+```
+
+```bash [TCP/IP登录]
 psql -h 127.0.0.1 -U admin -d postgres -W
 psql -h 192.168.66.254 -U admin -d postgres -W
 ```
