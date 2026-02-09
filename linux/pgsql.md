@@ -122,7 +122,41 @@ rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
 
 :::
 
-## psql 登录
+## systemd 单元
+
+::: code-group
+
+<<< @/assets/linux/service/postgres.service{bash} [unit]
+
+```bash [开机启动]
+systemctl enable postgres
+systemctl daemon-reload
+```
+
+:::
+
+::: tip 注意
+使用 `Type=notify` 需要在编译构建阶段 configure 时，使用 `--with-systemd` 选项
+:::
+
+## 配置
+
+PostgreSQL 主要有以下几个配置文件：
+
+1. `postgresql.conf`：这是主要的配置文件，用于设置数据库的各种参数和选项。它包含了许多可配置的参数，例如内存分配、连接数限制、日志记录等。通过编辑该文件，可以自定义数据库的行为。
+2. `postgresql.auto.conf`： 该文件自动生成的，每当 postgresql.conf 被读取时，这个文件会被自动读取。 postgresql.auto.conf 中的设置会覆盖 postgresql.conf 中的设置。
+3. `pg_hba.conf`：这个文件用于配置数据库的身份验证方式。它定义了不同类型连接（如本地连接、TCP/IP 连接）的认证方法。你可以根据需要设置不同的认证方式，例如信任所有用户、使用密码加密等。
+4. `pg_ident.conf`：这个文件用于配置数据库的用户映射。它允许将外部系统（如操作系统用户）映射到数据库用户。通过配置该文件，可以实现对外部系统的用户进行身份验证和授权。
+
+### 1. 配置示例
+
+::: code-group
+<<< @/assets/linux/etc/postgres/postgresql.conf.bash [服务端配置]
+<<< @/assets/linux/etc/postgres/pg_hba.conf.bash [客户端身份验证配置]
+<<< @/assets/linux/etc/postgres/pg_ident.conf.bash [用户名映射配置]
+:::
+
+#### psql 登录说明
 
 ::: code-group
 
@@ -146,8 +180,15 @@ psql -h /run/postgres -U admin -d postgres
 ```
 
 ```bash [TCP/IP协议]
+# 本机客户端登录 admin
 psql -h 127.0.0.1 -U admin -d postgres -W
-psql -h 192.168.66.254 -U admin -d postgres -W
+
+# 使用 TLS 协议登录 admin
+psql -h 192.168.66.254 -U admin -d postgres \
+sslmode verify-full \
+sslrootcert /server/etc/postgres/tls/root.crt \
+sslcert /server/etc/postgres/tls/client-admin.crt \
+sslkey /server/etc/postgres/tls/client-admin.key
 ```
 
 ```md [指令说明]
@@ -166,41 +207,9 @@ psql -h 192.168.66.254 -U admin -d postgres -W
 
 :::
 
-## systemd 单元
+### 2. 配置说明
 
-::: code-group
-
-<<< @/assets/linux/service/postgres.service{bash} [unit]
-
-```bash [开机启动]
-systemctl enable postgres
-systemctl daemon-reload
-```
-
-:::
-
-::: tip 注意
-使用 `Type=notify` 需要在编译构建阶段 configure 时，使用 `--with-systemd` 选项
-:::
-
-## 配置文件
-
-PostgreSQL 主要有以下几个配置文件：
-
-1. `postgresql.conf`：这是主要的配置文件，用于设置数据库的各种参数和选项。它包含了许多可配置的参数，例如内存分配、连接数限制、日志记录等。通过编辑该文件，可以自定义数据库的行为。
-2. `postgresql.auto.conf`： 该文件自动生成的，每当 postgresql.conf 被读取时，这个文件会被自动读取。 postgresql.auto.conf 中的设置会覆盖 postgresql.conf 中的设置。
-3. `pg_hba.conf`：这个文件用于配置数据库的身份验证方式。它定义了不同类型连接（如本地连接、TCP/IP 连接）的认证方法。你可以根据需要设置不同的认证方式，例如信任所有用户、使用密码加密等。
-4. `pg_ident.conf`：这个文件用于配置数据库的用户映射。它允许将外部系统（如操作系统用户）映射到数据库用户。通过配置该文件，可以实现对外部系统的用户进行身份验证和授权。
-
-::: details 配置案例
-
-::: code-group
-<<< @/assets/linux/etc/postgres/postgresql.conf.bash [服务端配置文件]
-<<< @/assets/linux/etc/postgres/pg_hba.conf.bash [客户端身份验证配置文件]
-<<< @/assets/linux/etc/postgres/pg_ident.conf.bash [用户名映射配置文件]
-:::
-
-### 1. 基本配置
+#### 基本配置
 
 ```bash [基本]
 # /server/pgData/postgresql.conf
@@ -211,7 +220,7 @@ external_pid_file = '/run/postgres/process.pid'
 unix_socket_directories = '/run/postgres'
 ```
 
-### 2. 启用 TLS
+#### 启用 TLS
 
 PostgreSQL 本身支持使用 ssl 连接来加密客户端/服务器通信，以提高安全性。这需要在客户端和服务器系统上都安装 OpenSSL，并且在 PostgreSQL 构建时启用 ssl 支持
 
@@ -323,7 +332,7 @@ openssl x509 -req -in client-admin.csr -text -days 365 \
 chmod 600 client-*  # 客户端证书是提供给特定客户的，安全起见，全部设为仅属主可见
 ```
 
-<<< @/assets/environment/source/postgres/gen-test-certs.sh [一键脚本]
+<<< @/assets/linux/script/postgres/gen-test-certs.sh [一键脚本]
 
 ```bash [吊销证书]
 # 证书吊销比较复杂，放到后面再处理
@@ -347,19 +356,19 @@ ssl_key_file = '/server/postgres/tls/server.key'
 
 # hostssl 指 tcp/ip 一定是 ssl 传输的，这个跟客户端是否勾选 [使用ssl] 没有关系
 
-# 仅支持ssl/all全部数据库/emad用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器不验证客户端
+# 仅支持ssl/all全部数据库/admin用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器不验证客户端
 # - 客户端不需要勾选 [使用ssl]
-hostssl    all      emad            192.168.0.0/16          scram-sha-256
+hostssl    all      admin            192.168.0.0/16          scram-sha-256
 
-# 仅支持ssl/all全部数据库/emad用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器验证客户端
+# 仅支持ssl/all全部数据库/admin用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器验证客户端
 # - 这是双向验证，客户端必须勾选 [使用ssl]，表示客户端也是ssl传输
 # - 认证选项verify-ca：服务器将验证客户端的证书是否由一个受信任的证书颁发机构签署
-hostssl    all      emad            192.168.0.0/16          scram-sha-256   clientcert=verify-ca
+hostssl    all      admin            192.168.0.0/16          scram-sha-256   clientcert=verify-ca
 
-# 仅支持ssl/all全部数据库/emad用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器验证客户端
+# 仅支持ssl/all全部数据库/admin用户/允许连接的客户端IP段/密码使用scram-sha-256加密方式/服务器验证客户端
 # - 这是双向验证，客户端必须勾选 [使用ssl]，表示客户端也是ssl传输
 # - 认证选项verify-full：服务器不仅验证证书链，还将检查用户名或其映射是否与所提供的证书的 cn（通用名称）相匹配
-hostssl    all      emad            192.168.0.0/16          scram-sha-256   clientcert=verify-full
+hostssl    all      admin            192.168.0.0/16          scram-sha-256   clientcert=verify-full
 ```
 
 :::
@@ -376,7 +385,7 @@ hostssl    all      emad            192.168.0.0/16          scram-sha-256   clie
 
 :::
 
-### 3. 预写式日志
+#### 预写式日志
 
 预写式日志(WAL) 即 Write-Ahead Logging，是一种实现事务日志的标准方法。
 
@@ -399,15 +408,15 @@ chown postgres /server/logs/postgres/wal_archive/
 
 :::
 
-### 4. 复制
+#### 复制
 
 复制(REPLICATION)，这里只介绍基于 WAL 通信的流复制
 
-### 5. 查询调优
+#### 查询调优
 
 后面实现
 
-### 6. 日志配置
+#### 日志配置
 
 ::: code-group
 
@@ -528,45 +537,7 @@ CREATE USER admin WITH SUPERUSER PASSWORD '1';
 
 ## 客户端权限
 
-::: code-group
-
-```bash [禁用客户端连接规则]
-# pg_hba.conf
-# 除了 local 外，其它类型的【无条件地允许客户端连接(trust)】都应该禁用
-# "local" is for Unix domain socket connections only
-local   all             all                                     trust
-# 通过TCP/IP连接的本地客户端，无条件建立连接【需要禁用】
-# host    all             all             127.0.0.1/32            trust
-# host    all             all             ::1/128                 trust
-# Allow replication connections from localhost, by a user with the
-# replication privilege.
-local   replication     all
-# 对于replication权限的用户，通过TCP/IP无条件建立连接 【需要禁用】
-# host    replication     all             127.0.0.1/32            trust
-# host    replication     all             ::1/128                 trust
-
-# 自定义
-# 局域网和外网需要使用 ssl认证+密码认证 建立连接
-hostssl   all   admin,qyphp   192.168.0.0/16    scram-sha-256   clientcert=verify-full
-# 本地仅需要通过 密码认证 建立连接
-hostnossl all   admin,qyphp   127.0.0.1/32      scram-sha-256
-```
-
-```bash [psql]
-# pg_hba.conf
-hostssl     all      admin          192.168.0.0/16          scram-sha-256   clientcert=verify-full
-hostssl     all      user_c         192.168.0.0/16          scram-sha-256   clientcert=verify-ca
-hostnossl   all      user_a         192.168.0.0/16          scram-sha-256
-
-# psql 登录 emad
-psql "dbname=postgres user=admin host=192.168.66.254 sslmode=verify-full sslrootcert=/server/postgres/tls/root.crt sslcert=/server/postgres/tls/client-admin.crt sslkey=/server/postgres/tls/client-admin.key"
-# psql 登录 user_c
-psql "dbname=postgres user=user_c host=192.168.66.254 sslmode=verify-ca sslrootcert=/server/postgres/tls/root.crt sslcert=/server/postgres/tls/client-emad.crt sslkey=/server/postgres/tls/client-emad.key"
-# psql 登录 user_a
-psql "dbname=postgres user=user_a host=192.168.66.254"
-```
-
-:::
+见上述[基本配置](#basic_config)
 
 ## 升级
 
