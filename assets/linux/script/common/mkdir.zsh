@@ -25,12 +25,6 @@ items=(
     '/server/etc/postgres'
     '/server/etc/postgres/tls'
 
-    '/server/mysql'
-    '/server/data'
-    '/server/logs/mysql'
-    '/server/logs/mysql/binlog'
-    '/server/etc/mysql'
-
     '/server/php'
     '/server/php/85'
     '/server/logs/php'
@@ -45,6 +39,12 @@ items=(
     '/server/logs/nginx/error'
     '/server/etc/nginx'
     '/server/etc/nginx/custom'
+
+    '/server/mysql'
+    '/server/data'
+    '/server/logs/mysql'
+    '/server/logs/mysql/binlog'
+    '/server/etc/mysql'
 
     '/server/sites'
     '/server/sites/tls'
