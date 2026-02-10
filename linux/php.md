@@ -26,13 +26,13 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ```bash {2} [使用最新开发库]
 # 需要将 sqlite3 的 pkgconfig 路径手动加入到临时环境变量里
-export PKG_CONFIG_PATH=/server/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/server/sqlite3/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # 使用下面指令检查 sqlite3 是否正确
 pkg-config --path sqlite3
 
 # 成功展示：
-/server/sqlite/lib/pkgconfig/sqlite3.pc
+/server/sqlite3/lib/pkgconfig/sqlite3.pc
 ```
 
 ```bash [使用系统依赖]
@@ -85,8 +85,8 @@ apt install --no-install-recommends libpq-dev -y
 su - php-fpm -s /bin/zsh
 
 tar -xJf php-8.5.2.tar.xz
-mkdir /home/php-fpm/php-8.5.2/build_php
-cd /home/php-fpm/php-8.5.2/build_php/
+mkdir /home/php/php-8.5.2/build_php
+cd /home/php/php-8.5.2/build_php/
 ```
 
 ```bash [设置环境变量]
@@ -95,7 +95,7 @@ export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 ```
 
-<<< @/assets/linux/php/build/85.bash [编译选项]
+<<< @/assets/linux/script/php/build-85.bash [构建选项]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -165,7 +165,7 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [85]
-cp /home/php-fpm/php-8.5.2/php.ini-* /server/php/85/lib/
+cp /home/php/php-8.5.2/php.ini-* /server/php/85/lib/
 # 开发环境
 cp /server/php/85/lib/php.ini{-development,}
 # 部署环境
