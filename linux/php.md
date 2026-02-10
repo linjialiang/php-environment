@@ -98,7 +98,6 @@ export CXX=/usr/bin/g++
 <<< @/assets/linux/script/php/build-85.bash [构建选项]
 
 ```bash [编译&安装]
-# nohup make -j4 &
 make -j4 > make.log
 make test > makeTest.log
 make install
@@ -107,11 +106,9 @@ make install
 ```bash [查看帮助]
 # 全部构建选项
 ./configure -h
-
 # 扩展构建选项
 ./configure -h | grep pgsql
 ./configure -h | grep sqlite
-
 # 导出构建选项
 ./configure -h > php-85.help
 ```
@@ -119,14 +116,42 @@ make install
 <<< @/assets/linux/help/php-85.help{ini} [8.5 帮助]
 :::
 
-::: tip 构建指令区别：
+::: details 构建选项说明
+
+| 选项                                | 作用                                        |
+| ----------------------------------- | ------------------------------------------- |
+| `--prefix=/server/php/85/`          | 设置安装目录                                |
+| `--enable-fpm`                      | 启用 PHP-FPM 服务                           |
+| `--with-fpm-user=php`               | 设置运行用户（降权运行）                    |
+| `--with-fpm-group=php`              | 设置运行组（降权运行）                      |
+| `--with-fpm-systemd`                | 支持 Systemd 管理                           |
+| `--with-openssl`                    | 支持 HTTPS/SSL                              |
+| `--with-openssl-legacy-provider`    | 为 OpenSSL 3.0+ 启用旧版算法提供者          |
+| `--with-openssl-argon2`             | 启用 OpenSSL 内置的 Argon2 密码哈希算法支持 |
+| `--with-zlib`                       | 启用 zlib 压缩                              |
+| `--with-curl`                       | 启用 cURL 支持                              |
+| `--enable-exif`                     | 启用图像元数据                              |
+| `--enable-gd`                       | 启用 GD 图像库                              |
+| `--with-jpeg`                       | GD 图像库启用 JPEG 支持                     |
+| `--with-freetype`                   | GD 图像库启用字体渲染                       |
+| `--enable-intl`                     | 启用国际化支持                              |
+| `--enable-mbstring`                 | 启用多字节字符串                            |
+| `--with-mysqli=mysqlnd`             | MySQLi 扩展                                 |
+| `--with-pdo-mysql=mysqlnd`          | PDO MySQL 驱动                              |
+| `--with-pdo-pgsql=/server/postgres` | PDO PostgreSQL 驱动                         |
+| `--with-pgsql=/server/postgres`     | PostgreSQL 扩展                             |
+| `--with-sodium`                     | 现代加密算法库                              |
+| `--enable-sockets`                  | 启用 Socket 通信                            |
+| `--with-password-argon2`            | 密码散列算法启用 Argon2 密码哈希            |
+| `--enable-mysqlnd`                  | PHP 针对 MySQL 的原生驱动                   |
+
+:::
+
+::: tip 构建选项区别：
 
 1. `>=8.1.0` 默认已经对 OpenSSL 启用 `pcre-jit` 实现正则即时编译
-
-2. `>=8.1.0` 的 gd2 扩展增加的 `--with-avif` 选项
-
+2. `>=8.1.0` 的 gd2 扩展增加的 `--with-avif` 选项，现实场景用不到
 3. `>=8.1.0` 对 `--with-mhash` 选项标记为已弃用，如果没有旧项目需要向后兼容，不要添加此选项
-
 4. `>=8.5.2` 增加 `--with-capstone` 选项(生产环境不建议启用)，主要用于调试分析，对性能没有影响但增加依赖
 
 :::
