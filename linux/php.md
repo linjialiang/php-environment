@@ -42,7 +42,7 @@ apt install --no-install-recommends libsqlite3-dev -y
 
 ::: warning :warning: 要想使用最新版的 SQLite3 库编译
 
-1. 需要自己先安装 `最新的 SQLite3 开发库`，环境中编译安装最新的[[SQLite3 库]](./sqlite3)，已经自带最新开发库。
+1. 需要自己先安装 `最新的 SQLite3 开发库`，环境中编译安装最新的[[SQLite3 库和工具]](./sqlite3)，已经自带最新开发库。
 2. 确保 php 用户对 SQLite3 开发库有 `读取+执行` 权限。
 
 :::
@@ -75,17 +75,6 @@ apt install --no-install-recommends libpq-dev -y
 
 :::
 
-::: tip 提示
-
-1. ## 本次已编译 SQLite3，无需额外使用依赖库
-2. ## 本次已编译 Postgres，无需额外使用依赖库
-3. 不同版本所需依赖项可能不同
-4. 使用更多外部扩展，所需依赖项也会更多
-5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
-
-通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
-:::
-
 ::: code-group
 
 ```bash [85]
@@ -97,7 +86,7 @@ cd /home/php-fpm/php-8.5.0/build_php/
 
 :::
 
-### 3. 构建选项
+## 编译流程
 
 ::: code-group
 <<< @/assets/environment/source/php/build/85.bash [85]
