@@ -26,33 +26,33 @@ features:
     - icon:
           dark: /static/svg/sqlite-dark.svg
           light: /static/svg/sqlite-light.svg
-      title: SQLite3 安装
+      title: 安装 SQLite3 库和工具
       details: 轻量级关系型数据库
       link: /linux/sqlite3
     - icon:
           src: /static/svg/redis.svg
-      title: Redis 安装
-      details: 键值对数据库
+      title: 安装 Redis 服务器
+      details: 内存型键值对数据库
       link: /linux/redis
     - icon:
           src: /static/svg/pgsql.svg
-      title: PostgreSQL 安装
+      title: 安装 PostgreSQL 数据库管理系统
       details: 最强开源关系型数据库
       link: /linux/pgsql
     - icon:
           dark: /static/svg/php-dark.svg
           light: /static/svg/php.svg
-      title: PHP 安装
+      title: 安装 PHP 解释器
       details: PHP语言解释器
       link: /linux/php
     - icon:
           src: /static/svg/nginx.svg
-      title: Nginx 安装
+      title: 安装 Nginx 服务器
       details: Web服务器
       link: /linux/nginx
     - icon:
           src: /static/svg/mysql.svg
-      title: MySQL 安装
+      title: 安装 MySQL 数据库管理系统
       details: 关系型数据库
       link: /linux/mysql
     - icon:
