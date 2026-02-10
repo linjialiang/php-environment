@@ -18,9 +18,7 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 :::
 
-## 编译
-
-### 依赖项说明
+## 依赖项说明
 
 ::: details SQLite3 开发库依赖
 
@@ -64,7 +62,6 @@ apt install --no-install-recommends libsqlite3-dev -y
 ```
 
 ```bash [使用依赖库]
-# 未安装 PostgreSQL 则需安装 libpq-dev 依赖库
 # 该方式不需要指定postgres安装目录
 apt install --no-install-recommends libpq-dev -y
 ```
