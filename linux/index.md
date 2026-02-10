@@ -35,7 +35,6 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 <<< @/assets/linux/script/common/mkdir.zsh [创建目录]
 <<< @/assets/linux/script/common/chown.zsh [目录授权]
 <<< @/assets/linux/script/common/cleanLog.zsh [一键清理]
-<<< @/assets/linux/script/common/clean.zsh [简单清理]
 :::
 
 ## 编译套件
