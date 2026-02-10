@@ -17,7 +17,7 @@ hero:
           link: /linux/
         - theme: alt
           text: msdn版
-          link: /msdn/
+          link: /msdn/iis
         - theme: brand
           text: 👉B站关注作者
           link: https://space.bilibili.com/473623415
