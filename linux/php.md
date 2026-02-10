@@ -24,7 +24,7 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 ::: code-group
 
-```bash {2} [使用编译的最新库]
+```bash {2} [使用最新开发库]
 # 需要将 sqlite3 的 pkgconfig 路径手动加入到临时环境变量里
 export PKG_CONFIG_PATH=/server/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -35,7 +35,7 @@ pkg-config --path sqlite3
 /server/sqlite/lib/pkgconfig/sqlite3.pc
 ```
 
-```bash [使用系统依赖库]
+```bash [使用系统依赖]
 # 此方式系统可以自动获取 pkgconfig 路径，无需额外操作
 apt install --no-install-recommends libsqlite3-dev -y
 ```
@@ -49,7 +49,7 @@ apt install --no-install-recommends libsqlite3-dev -y
 
 ::: code-group
 
-```bash [编译安装PostgreSQL]
+```bash [使用最新开发库]
 # PHP 的构建选项需指定 Postgres 安装根目录 或者 pkgconfig 路径
 ../configure --prefix=/server/php/85/ \
 # [!code error:2]
@@ -61,7 +61,7 @@ apt install --no-install-recommends libsqlite3-dev -y
 ...
 ```
 
-```bash [使用依赖库]
+```bash [使用系统依赖]
 # 该方式不需要指定postgres安装目录
 apt install --no-install-recommends libpq-dev -y
 ```
