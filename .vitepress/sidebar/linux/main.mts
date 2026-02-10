@@ -25,9 +25,9 @@ const sidebar = [
     ],
   },
   { text: 'PostgreSQL', link: `${path.main}pgsql` },
-  { text: 'MySQL', link: `${path.main}mysql` },
   { text: 'PHP', link: `${path.main}php` },
   { text: 'Nginx', link: `${path.main}nginx` },
+  { text: 'MySQL', link: `${path.main}mysql` },
 ];
 
 export { sidebar as linux };
