@@ -54,5 +54,7 @@ items=(
 
 # 主循环
 for item in "${items[@]}"; do
-    mkdir $item
+    if [ ! -d "$item" ]; then
+        mkdir -p "$item"
+    fi
 done

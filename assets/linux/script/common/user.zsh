@@ -20,8 +20,9 @@ funcCreateUser() {
   groupadd -g $uid $username
   useradd -c "$username related process user" \
   -g $username -u $uid -s /sbin/nologin -m $username
-  cp -r /root/{.oh-my-zsh,.zshrc} /home/$username
-  chown $username:$username -R /home/$username/{.oh-my-zsh,.zshrc}
+  cp -r /root/.zshrc /home/$username
+  chown $username:$username -R /home/$username/.zshrc
+  ln -s /server/ohmyzsh /home/$username/.oh-my-zsh
 }
 
 # 主循环
