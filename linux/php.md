@@ -51,7 +51,7 @@ apt install --no-install-recommends libsqlite3-dev -y
 
 ::: code-group
 
-```bash [编译安装Postgres]
+```bash [编译安装PostgreSQL]
 # PHP 的构建选项需指定 Postgres 安装根目录 或者 pkgconfig 路径
 ../configure --prefix=/server/php/85/ \
 # [!code error:2]
