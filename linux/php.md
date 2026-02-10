@@ -1,9 +1,9 @@
 ---
-title: 安装 PHP 服务
+title: 安装 PHP 解释器
 titleTemplate: 环境搭建教程
 ---
 
-# 安装 PHP 服务
+# 安装 PHP 解释器
 
 PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是一种被广泛应用的开放源代码的多用途脚本语言，它可嵌入到 HTML 中，尤其适合 web 开发。
 
@@ -40,9 +40,11 @@ pkg-config --path sqlite3
 apt install --no-install-recommends libsqlite3-dev -y
 ```
 
-::: warning :warning: 注意
-要想使用最新版的 SQLite3 库编译就需要自己先安装 `最新的SQLite3开发库`，
-项目中已经[[编译安装最新的 SQLite3 库]](./sqlite3)自带最新开发库。
+::: warning :warning: 要想使用最新版的 SQLite3 库编译
+
+1. 需要自己先安装 `最新的 SQLite3 开发库`，环境中编译安装最新的[[SQLite3 库]](./sqlite3)，已经自带最新开发库。
+2. 确保 php 用户对 SQLite3 开发库有 `读取+执行` 权限。
+
 :::
 
 ::: details PostgreSQL 客户端编程接口依赖
@@ -66,17 +68,17 @@ apt install --no-install-recommends libsqlite3-dev -y
 apt install --no-install-recommends libpq-dev -y
 ```
 
-::: warning :warning: 注意
-要想使用最新的 PostgreSQL 客户端编程接口需要先安装 `最新的 PostgreSQL 客户端开发库`，
-项目中已经[[编译安装最新的 PostgreSQL 服务器]](./pgsql)自带最新的客户端开发库。
+::: warning :warning: 要想使用最新的 PostgreSQL 客户端编程接口
+
+1. 需要先安装 `最新的 PostgreSQL 客户端开发库`，项目中编译安装最新的[[PostgreSQL 数据库管理系统]](./pgsql)，已经自带最新的客户端开发库。
+2. 确保 php 用户对 PostgreSQL 客户端开发库有 `读取+执行` 权限。
+
 :::
 
 ::: tip 提示
 
-1. 本次已编译 SQLite3，无需额外使用依赖库
-    - 确保 php 用户对 SQLite3 的 pkgconfig 目录有 `读取` 和 `执行` 权限
-2. 本次已编译 Postgres，无需额外使用依赖库
-    - 确保 php 用户对 Postgres 安装目录要有 `读取` 和 `执行` 权限
+1. ## 本次已编译 SQLite3，无需额外使用依赖库
+2. ## 本次已编译 Postgres，无需额外使用依赖库
 3. 不同版本所需依赖项可能不同
 4. 使用更多外部扩展，所需依赖项也会更多
 5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新

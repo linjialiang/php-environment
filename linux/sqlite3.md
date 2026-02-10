@@ -1,9 +1,9 @@
 ---
-title: 安装 SQLite3 库
+title: 安装 SQLite3 库和工具
 titleTemplate: 环境搭建教程
 ---
 
-# 安装 SQLite3 库
+# 安装 SQLite3 库和工具
 
 [SQLite3](https://www.sqlite.org) 是一个轻量级的嵌入式关系数据库管理系统
 
