@@ -75,21 +75,27 @@ apt install --no-install-recommends libpq-dev -y
 
 :::
 
-::: code-group
-
-```bash [85]
-su - php-fpm -s /bin/zsh
-tar -xJf php-8.5.0.tar.xz
-mkdir /home/php-fpm/php-8.5.0/build_php
-cd /home/php-fpm/php-8.5.0/build_php/
-```
-
-:::
-
 ## 编译流程
 
+这里以 PHP 8.5 为例
+
 ::: code-group
-<<< @/assets/environment/source/php/build/85.bash [85]
+
+```bash [进入编译目录]
+su - php-fpm -s /bin/zsh
+
+tar -xJf php-8.5.2.tar.xz
+mkdir /home/php-fpm/php-8.5.2/build_php
+cd /home/php-fpm/php-8.5.2/build_php/
+```
+
+```bash [设置环境变量]
+# 同时存在 clang 和 gcc 时，推荐指定 gcc 和 g++ 作为编译器
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+```
+
+<<< @/assets/linux/php/build/85.bash [编译选项]
 
 ```bash [编译&安装]
 # nohup make -j4 &
@@ -121,7 +127,7 @@ make install
 
 3. `>=8.1.0` 对 `--with-mhash` 选项标记为已弃用，如果没有旧项目需要向后兼容，不要添加此选项
 
-4. `>=8.5.0` 增加 `--with-capstone` 选项(生产环境不建议启用)，主要用于调试分析，对性能没有影响但增加依赖
+4. `>=8.5.2` 增加 `--with-capstone` 选项(生产环境不建议启用)，主要用于调试分析，对性能没有影响但增加依赖
 
 :::
 
@@ -159,7 +165,7 @@ php 编译完成后，在源码包根目录下会自动生成两个推荐的配�
 ::: code-group
 
 ```bash [85]
-cp /home/php-fpm/php-8.5.0/php.ini-* /server/php/85/lib/
+cp /home/php-fpm/php-8.5.2/php.ini-* /server/php/85/lib/
 # 开发环境
 cp /server/php/85/lib/php.ini{-development,}
 # 部署环境

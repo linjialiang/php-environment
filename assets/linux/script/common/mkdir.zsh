@@ -35,8 +35,8 @@ items=(
     '/server/php/85'
     '/server/logs/php'
     '/server/etc/php'
+    '/server/etc/php/tools'
     '/server/etc/php/85'
-    '/server/etc/php/85/tools'
     '/server/etc/php/85/php-fpm.d'
 
     '/server/nginx'
