@@ -1,9 +1,9 @@
 ---
-title: 安装 PostgreSQL
+title: 安装 PostgreSQL 服务
 titleTemplate: 环境搭建教程
 ---
 
-# 安装 PostgreSQL
+# 安装 PostgreSQL 服务
 
 PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企业级应用、金融系统、电商平台、物联网（IoT）和大数据等场景。
 

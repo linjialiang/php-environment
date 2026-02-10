@@ -1,5 +1,5 @@
 ---
-title: 安装 Redis
+title: 安装 Redis 服务
 titleTemplate: 环境搭建教程
 ---
 
@@ -15,7 +15,7 @@ const redisTlsLink = computed(() => {
 })
 </script>
 
-# 安装 Redis
+# 安装 Redis 服务
 
 Redis 是当下最热门的键值对(Key-Value)存储数据库
 
