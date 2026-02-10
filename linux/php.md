@@ -39,27 +39,26 @@ pkg-config --path sqlite3
 
 ```bash [使用系统依赖库]
 # 此方式系统可以自动获取 pkgconfig 路径，无需额外操作
-apt install libsqlite3-dev -y
+apt install --no-install-recommends libsqlite3-dev -y
 ```
 
-::: warning :warning: 要想使用最新版的 SQLite3 库编译 `php_sqlite3` 就需要自己先[[编译安装最新的 SQLite3 库]](./sqlite3)
+::: warning :warning: 注意
+要想使用最新版的 SQLite3 库编译就需要自己先安装 `最新的SQLite3开发库`，
+项目中已经[[编译安装最新的 SQLite3 库]](./sqlite3)自带最新开发库。
 :::
 
 ::: details PostgreSQL 客户端编程接口依赖
 
-想使用最新或指定版 pgsql，需自己编译好 libpq 库后，在 php 构建选项里指定目录路径
-
 ::: code-group
 
 ```bash [编译安装Postgres]
-usermod -a -G postgres php-fpm
-
-# PHP 的构建选项需指定Postgres安装目录或其pkgconfig路径
+# PHP 的构建选项需指定 Postgres 安装根目录 或者 pkgconfig 路径
 ../configure --prefix=/server/php/85/ \
 # [!code error:2]
 # [!code focus:2]
 --with-pgsql=/server/postgres \
 --with-pdo-pgsql=/server/postgres \
+# --with-pgsql=/server/postgres/lib/pkgconfig \
 # --with-pdo-pgsql=/server/postgres/lib/pkgconfig \
 ...
 ```
@@ -67,9 +66,12 @@ usermod -a -G postgres php-fpm
 ```bash [使用依赖库]
 # 未安装 PostgreSQL 则需安装 libpq-dev 依赖库
 # 该方式不需要指定postgres安装目录
-apt install libpq-dev -y
+apt install --no-install-recommends libpq-dev -y
 ```
 
+::: warning :warning: 注意
+要想使用最新的 PostgreSQL 客户端编程接口需要先安装 `最新的 PostgreSQL 客户端开发库`，
+项目中已经[[编译安装最新的 PostgreSQL 服务器]](./pgsql)自带最新的客户端开发库。
 :::
 
 ::: tip 提示
