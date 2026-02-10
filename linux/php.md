@@ -113,10 +113,10 @@ make install
 ./configure -h | grep sqlite
 
 # 导出构建选项
-./configure -h > configure.txt
+./configure -h > php-85.help
 ```
 
-<<< @/assets/environment/source/php/configure/85.ini [8.5 选项]
+<<< @/assets/linux/help/php-85.help{ini} [8.5 帮助]
 :::
 
 ::: tip 构建指令区别：
