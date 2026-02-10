@@ -66,8 +66,7 @@ bison flex libreadline-dev zlib1g-dev uuid-dev -y
 
 ```bash [PHP8.5]
 apt install --no-install-recommends \
-libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
-libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libzip-dev -y
+libcurl4-openssl-dev libpng-dev libjpeg-dev libfreetype-dev libonig-dev -y
 ```
 
 ```bash [Nginx]
