@@ -46,7 +46,7 @@ if [ "$num1" = "1" ]; then
   echo_green "先停止服务"
   systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理redis日志"
-  find /server/logs/redis/ -type f -exec rm {} \;
+  find /server/logs/redis/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理postgres日志"
   find /server/logs/postgres/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理php日志"
@@ -85,7 +85,8 @@ read num3
 if [[ "$num3" = "1" ]]; then
   echo_yellow "开始清理Redis本地存储"
   find /server/logs/redis/rdbData/ -type f -exec rm {} \;
-  find /server/logs/redis/rdbData/appendonlydir/ -type f -exec rm {} \;
+  # find /server/logs/redis/rdbData/ -maxdepth 1 -type f -exec rm {} \;
+  # find /server/logs/redis/rdbData/appendonlydir/ -maxdepth 1 -type f -exec rm {} \;
   echo_yellow "清理Redis本地存储结束"
 else
   echo_yellow "不清理Redis本地存储"
