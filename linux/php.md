@@ -18,54 +18,16 @@ PHP（`PHP: Hypertext Preprocessor`，超文本预处理器的字母缩写）是
 
 :::
 
-## 构建 PHP
+## 编译
 
-### 1. 解压源码包
+### 依赖项说明
 
-::: code-group
-
-```bash [85]
-su - php-fpm -s /bin/zsh
-tar -xJf php-8.5.0.tar.xz
-mkdir /home/php-fpm/php-8.5.0/build_php
-cd /home/php-fpm/php-8.5.0/build_php/
-```
-
-:::
-
-### 2. 安装依赖项
-
-本次 PHP 编译过程中，在系统原有扩展存在下，还需安装如下依赖项：
-
-#### apt 自带依赖库安装
+::: details SQLite3 开发库依赖
 
 ::: code-group
 
-```bash [common]
-# 编译基础
-apt install -y gcc g++
-
-# 安装PECL扩展需要
-apt install -y autoconf
-```
-
-```bash [85]
-apt install -y libcurl4-openssl-dev libpng-dev libavif-dev libwebp-dev \
-libjpeg-dev libxpm-dev libfreetype-dev libonig-dev libzip-dev
-```
-
-:::
-
-#### ~~SQLite3 依赖~~ <Badge type="info" text="已禁用" />
-
-想使用最新或指定版 sqlite3 ，需自己编译好 sqlite3 后，在 `PKG_CONFIG_PATH` 环境变量中追加 sqlite3 的 `pkgconfig` 配置文件路径
-
-::: code-group
-
-```bash {4} [编译安装sqlite3]
-usermod -a -G sqlite php-fpm
-
-# 构建 PHP 需将 sqlite3 的 pkgconfig 目录加入到临时环境变量里
+```bash {2} [使用编译的最新库]
+# 需要将 sqlite3 的 pkgconfig 路径手动加入到临时环境变量里
 export PKG_CONFIG_PATH=/server/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # 使用下面指令检查 sqlite3 是否正确
@@ -75,15 +37,15 @@ pkg-config --path sqlite3
 /server/sqlite/lib/pkgconfig/sqlite3.pc
 ```
 
-```bash [使用依赖库]
-# 未安装 sqlite3，则需安装 libsqlite3-dev 依赖库
-# 这中方式不用将 pkgconfig 加入到 PKG_CONFIG_PATH 环境变量中
+```bash [使用系统依赖库]
+# 此方式系统可以自动获取 pkgconfig 路径，无需额外操作
 apt install libsqlite3-dev -y
 ```
 
+::: warning :warning: 要想使用最新版的 SQLite3 库编译 `php_sqlite3` 就需要自己先[[编译安装最新的 SQLite3 库]](./sqlite3)
 :::
 
-#### pgsql 依赖
+::: details PostgreSQL 客户端编程接口依赖
 
 想使用最新或指定版 pgsql，需自己编译好 libpq 库后，在 php 构建选项里指定目录路径
 
@@ -121,6 +83,17 @@ apt install libpq-dev -y
 5. php 较低版本如果要在新版的 linux 系统上安装，很多依赖可能都需要自己重新
 
 通常你需要自己去阅读 `configure` 的错误提示，以及掌握 linux 软件包的编译安装。
+:::
+
+::: code-group
+
+```bash [85]
+su - php-fpm -s /bin/zsh
+tar -xJf php-8.5.0.tar.xz
+mkdir /home/php-fpm/php-8.5.0/build_php
+cd /home/php-fpm/php-8.5.0/build_php/
+```
+
 :::
 
 ### 3. 构建选项
