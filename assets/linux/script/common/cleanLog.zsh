@@ -47,10 +47,10 @@ if [ "$num1" = "1" ]; then
   systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理redis日志"
   find /server/logs/redis/ -type f -exec rm {} \;
-  echo_green "开始清理postgres日志"
+  echo_green "开始清理postgres归档日志"
   find /server/logs/postgres/ -type f -exec rm {} \;
-  echo_green "开始清理mysql错误日志"
-  find /server/logs/mysql/ -type f -exec rm {} \;
+  echo_green "开始清理postgres当前日志"
+  find /server/postgres/pg_wal/ -type f -exec rm {} \;
   echo_green "开始清理php日志"
   find /server/logs/php/ -type f -exec rm {} \;
   echo_green "开始清理nginx错误日志"
@@ -58,6 +58,8 @@ if [ "$num1" = "1" ]; then
   echo_green "开始清理nginx访问日志"
   find /server/logs/nginx/access/ -type f -exec rm {} \;
   find /server/nginx/logs/ -type f -exec rm {} \;
+  echo_green "开始清理mysql错误日志"
+  find /server/logs/mysql/ -type f -exec rm {} \;
   echo_green "清理lnmpp日志完成"
 else
   echo_yellow "不清理lnmpp日志"
