@@ -47,10 +47,8 @@ if [ "$num1" = "1" ]; then
   systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理redis日志"
   find /server/logs/redis/ -type f -exec rm {} \;
-  echo_green "开始清理postgres归档日志"
-  find /server/logs/postgres/ -type f -exec rm {} \;
-  echo_green "开始清理postgres当前日志"
-  find /server/postgres/pg_wal/ -type f -exec rm {} \;
+  echo_green "开始清理postgres日志"
+  find /server/logs/postgres/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理php日志"
   find /server/logs/php/ -type f -exec rm {} \;
   echo_green "开始清理nginx错误日志"
@@ -71,8 +69,10 @@ read num2
 if [ "$num2" = "1" ]; then
   echo_green "先停止服务"
   systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
-  echo_green "开始清理PostgreSQL预写式日志"
+  echo_green "开始清理PostgreSQL预写式日志（已归档）"
   rm /server/logs/postgres/wal_archive/*
+  echo_green "开始清理PostgreSQL预写式日志（当前）"
+  find /server/postgres/pg_wal/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理MySQL二进制日志"
   rm /server/logs/mysql/binlog/*
   echo_green "清理lnpp日志完成"
