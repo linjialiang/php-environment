@@ -15,6 +15,15 @@ RuntimeDirectoryMode=0750
 ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/etc/php/85/php-fpm.conf
 ExecReload=/bin/kill -USR2 $MAINPID
 
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=90
+
+Restart=on-failure
+RestartSec=10s
+
+LimitNOFILE=65536
+
 ProcessMax=1024
 NoNewPrivileges=true
 PrivateTmp=true
