@@ -63,7 +63,7 @@ php --ri apcu
 
 :::
 
-### 1. xdebug 扩展
+## 1. xdebug 扩展
 
 ::: code-group
 
@@ -77,7 +77,7 @@ make install
 
 :::
 
-### 2. apcu 扩展
+## 2. apcu 扩展
 
 ::: code-group
 
@@ -113,12 +113,27 @@ apcu.ttl=300       ; 短时间缓存，便于调试
 
 :::
 
-### 3. redis 扩展
+## 3. redis 扩展
 
 ::: code-group
 
 ```bash [85]
 cd /home/php/php_ext/redis-6.3.0
+/server/php/85/bin/phpize
+./configure --with-php-config=/server/php/85/bin/php-config
+make -j4
+make test
+make install
+```
+
+:::
+
+## 4. mongodb 扩展
+
+::: code-group
+
+```bash [85]
+cd /home/php/php_ext/mongodb-2.1.8
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
 make -j4
