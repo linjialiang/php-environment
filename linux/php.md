@@ -218,8 +218,8 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建�
 PHP 8.5 默认启用 OPcache 扩展，对于不清楚的用户保持默认配置即可。
 
 :::code-group
-<<<@/assets/linux/etc/php/opcache-85-dev.ini[开发环境]
-<<<@/assets/linux/etc/php/opcache-85.ini[生产环境]
+<<<@/assets/linux/etc/php/opcache-85-dev.ini [开发环境]
+<<<@/assets/linux/etc/php/opcache-85.ini [生产环境]
 :::
 
 ## PHP-FPM 配置
