@@ -68,10 +68,10 @@ php --ri apcu
 ::: code-group
 
 ```bash [85编译]
-cd /home/php-fpm/php_ext/xdebug-3.5.0
+cd /home/php/php_ext/xdebug-3.5.0
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
-make -j4 > make.log
+make -j4
 make install
 ```
 
@@ -82,10 +82,10 @@ make install
 ::: code-group
 
 ```bash [85]
-cd /home/php-fpm/php_ext/apcu-5.1.28
+cd /home/php/php_ext/apcu-5.1.28
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
-make -j4 > make.log
+make -j4
 make test
 make install
 ```
@@ -118,10 +118,10 @@ apcu.ttl=300       ; 短时间缓存，便于调试
 ::: code-group
 
 ```bash [85]
-cd /home/php-fpm/php_ext/redis-6.3.0
+cd /home/php/php_ext/redis-6.3.0
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
-make -j4 > make.log
+make -j4
 make test
 make install
 ```
