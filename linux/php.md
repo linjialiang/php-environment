@@ -224,8 +224,17 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建�
 ::: danger :warning: 警告
 生产环境配置案例中：
 
-1. `opcache.validate_timestamps=0` 关闭文件时间戳检查
-2. `opcache.enable_file_override=1` 启用文件函数覆盖
+1. `opcache.validate_timestamps=0`
+
+    - 关闭文件时间戳检查，即：缓存文件从不更新
+
+2. `opcache.enable_file_override=1`
+
+    - 启用检查操作码缓存，即：优先读取作码缓存文件，不管文件是否更新或删除
+
+3. `opcache.save_comments=0`
+
+    - 禁用注释缓存，即：操作码缓存文件不包含任何注释和注解，依赖注释和注解的框架将无法正常工作
 
 :::
 
