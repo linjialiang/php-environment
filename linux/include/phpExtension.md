@@ -18,6 +18,7 @@ echo apcu-5.1.28.tgz xdebug-3.5.0.tgz redis-6.3.0.tgz mongodb-2.1.8.tgz | xargs 
 extension=apcu
 extension=redis
 extension=mongodb
+
 zend_extension=xdebug
 
 [xdebug]
