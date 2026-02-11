@@ -7,6 +7,8 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 
 项目运行过程中，可能需要额外的扩展支持，这时我们不可避免要去安装共享扩展
 
+## 配置
+
 ::: code-group
 
 ```bash [解压扩展包]

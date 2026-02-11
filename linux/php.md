@@ -503,7 +503,7 @@ ln -s /server/etc/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 
 :::
 
-## 附录：什么是独立调用？
+## 附录一：什么是独立调用？
 
 像 `{composer,php-cs-fixer}.phar` 等 phar 工具包本质上都是 php 脚本文件，
 只要终端支持 php 脚本，`php 脚本文件` 就可以象 `sh 脚本文件` 一样独立调用
@@ -541,4 +541,11 @@ php-cs-fixer [options]
 
 ::: danger 独立调用的条件
 php 可执行程序必须加入到对应终端的环境变量中，终端才能通过代码开头的 `#!/usr/bin/env php` 识别到。
+:::
+
+## 附录二：改版后的 php.ini
+
+::: code-group
+<<< @/assets/linux/etc/php/85/php.ini-development [85 开发环境]
+<<< @/assets/linux/etc/php/85/php.ini-production [85 生产环境]
 :::
