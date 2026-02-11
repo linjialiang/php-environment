@@ -251,7 +251,8 @@ curl https://site.com/opcache-reset.php
 
 ```bash [CLI执行清空]
 # 只清空OPcache共享内存，其他一切不变
-# OPcache内存空间与网站可能不同（如果CLI与FPM用不同php.ini）
+# OPcache内存空间与网站通常不一致
+# 这个不推荐
 php -r "opcache_reset();"
 ```
 
