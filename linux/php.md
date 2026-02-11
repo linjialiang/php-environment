@@ -503,7 +503,7 @@ ln -s /server/etc/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 
 :::
 
-::: details 什么是独立调用
+## 附录：什么是独立调用？
 
 像 `{composer,php-cs-fixer}.phar` 等 phar 工具包本质上都是 php 脚本文件，
 只要终端支持 php 脚本，`php 脚本文件` 就可以象 `sh 脚本文件` 一样独立调用
