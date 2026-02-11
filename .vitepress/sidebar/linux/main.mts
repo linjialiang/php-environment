@@ -25,7 +25,14 @@ const sidebar = [
     ],
   },
   { text: 'PostgreSQL', link: `${path.main}pgsql` },
-  { text: 'PHP', link: `${path.main}php` },
+  {
+    text: 'PHP',
+    collapsed: true,
+    items: [
+      { text: 'PHP 8.5', link: `${path.main}php` },
+      { text: '安装和配置共享扩展', link: `${path.main}include/phpExtension` },
+    ],
+  },
   { text: 'Nginx', link: `${path.main}nginx` },
   { text: 'MySQL', link: `${path.main}mysql` },
 ];
