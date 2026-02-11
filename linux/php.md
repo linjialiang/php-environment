@@ -478,9 +478,9 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 服务器升级 PHP 乃至任何软件升级前，都应该先存快照，备份一份
 :::
 
-## 动态安装 PECL 扩展
+## 安装动态扩展
 
-<!--@include: ./trait/php_ext.md-->
+见 :point_right: [[安装动态扩展]](./include/phpExtension)
 
 ## 权限
 
