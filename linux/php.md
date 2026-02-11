@@ -208,18 +208,25 @@ cp /server/php/85/lib/php.ini{-development,}
 /server/php/85/bin/php --ini
 ```
 
-### 5. 开启 OPcache
+### 5. 配置 OPcache
 
 PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建，使用 `--disable-opcache` 选项可以禁止构建。
 
 ::: tip PHP 官网强烈推荐
 所有现代 PHP 生产环境都必须启用 `OPcache`；
-
-PHP 8.5 默认启用 OPcache 扩展，对于不清楚的用户保持默认配置即可。
+:::
 
 :::code-group
 <<<@/assets/linux/etc/php/opcache-85-dev.ini [开发环境]
 <<<@/assets/linux/etc/php/opcache-85.ini [生产环境]
+:::
+
+::: danger :warning: 警告
+生产环境配置案例中：
+
+1. `opcache.validate_timestamps=0` 关闭文件时间戳检查
+2. `opcache.enable_file_override=1` 启用文件函数覆盖
+
 :::
 
 ## PHP-FPM 配置
