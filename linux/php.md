@@ -546,6 +546,6 @@ php 可执行程序必须加入到对应终端的环境变量中，终端才能�
 ## 附录二：改版后的 php.ini
 
 ::: code-group
-<<< @/assets/linux/etc/php/85/php.ini-development [85 开发环境]
-<<< @/assets/linux/etc/php/85/php.ini-production [85 生产环境]
+<<< @/assets/linux/etc/php/85/php.ini-development{ini:line-numbers} [85 开发环境]
+<<< @/assets/linux/etc/php/85/php.ini-production{ini:line-numbers} [85 生产环境]
 :::
