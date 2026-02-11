@@ -306,7 +306,7 @@ PHP-FPM 的主配置文件选项基本上都是使用默认，所以案例选项
 
 ::: details php 主配置文件案例
 ::: code-group
-<<< @/assets/environment/source/php/85/php-fpm.conf{ini} [8.5]
+<<< @/assets/linux/etc/php/85/php-fpm.conf{ini} [8.5]
 :::
 
 ### 3. 工作池配置文件
@@ -319,9 +319,9 @@ PHP-FPM 工作池进程配置文件有多个，并且支持随意命名，但为
     - 单独接收 ThinkPHP 站点，命名 `tp.conf`；
 
 ::: code-group
-<<< @/assets/environment/source/php/85/php-fpm.d/default.conf{ini} [85-default]
-<<< @/assets/environment/source/php/85/php-fpm.d/tp.conf{ini} [tp]
-<<< @/assets/environment/source/php/85/php-fpm.d/example/default.conf{ini} [案例说明]
+<<< @/assets/linux/etc/php/85/php-fpm.d/default.conf{ini} [85-default]
+<<< @/assets/linux/etc/php/85/php-fpm.d/tp.conf{ini} [tp]
+<<< @/assets/linux/etc/php/85/php-fpm.d/example/default.conf{ini} [案例说明]
 :::
 
 ::: tip 更多参数说明，请阅读 [PHP 手册](https://www.php.net/manual/zh/install.fpm.configuration.php)
@@ -376,9 +376,7 @@ PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会
 <<< @/assets/environment/source/service/php/php85-fpm.service{bash} [85]
 
 ```bash [重载]
-# 重载Systemd
 systemctl daemon-reload
-# 加入systemctl服务，并立即开启
 systemctl enable --now php85-fpm
 ```
 
