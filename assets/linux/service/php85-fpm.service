@@ -12,9 +12,11 @@ Group=php
 RuntimeDirectory=php85-fpm
 RuntimeDirectoryMode=0750
 
-ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/php/85/etc/php-fpm.conf
+ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/etc/php/85/php-fpm.conf
 ExecReload=/bin/kill -USR2 $MAINPID
 
+ProcessMax=1024
+NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=full
 PrivateDevices=true
