@@ -14,41 +14,39 @@ cd /home/php/php_ext
 echo apcu-5.1.28.tgz xdebug-3.5.0.tgz redis-6.3.0.tgz mongodb-2.1.8.tgz | xargs -n1 tar -xzf
 ```
 
-```ini [85配置扩展]
+```ini [85开发环境]
 ; path /server/php/85/lib/php.ini
 extension=apcu
-
-;zend_extension=opcache
-;部署环境请关闭 xdebug
+extension=redis
+extension=mongodb
 zend_extension=xdebug
 
 [xdebug]
-;部署环境请关闭 xdebug
-; xdebug.mode=off
-;xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.mode=develop,debug,trace
 xdebug.client_host=127.0.0.1
-; xdebug.client_host=192.168.66.254
 xdebug.client_port=9085
 
 [apcu]
-; 手册里写的默认开启，实测情况如下：
-;   apcu-5.1.27 版本默认禁用
-;   apcu-5.1.28 版本默认启用
 apcu.enabled=1
-; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
-
-; 开发环境配置
 apcu.shm_size=64M
-apcu.stat=1        ; 开发时开启文件检查
-apcu.ttl=300       ; 短时间缓存，便于调试
+apcu.stat=1
+apcu.ttl=300
+```
 
-; 生产环境配置
-; apcu.shm_size=256M
-; apcu.stat=0         ; 关闭状态检查提升性能
-; apcu.ttl=7200       ; 长时间缓存
-; apcu.slam_defense=1 ; 防止缓存击穿
+```ini [85生产环境]
+; path /server/php/85/lib/php.ini
+extension=apcu
+extension=redis
+extension=mongodb
+
+[apcu]
+apcu.enabled=1
+apc.enable_cli=0
+apcu.shm_size=256M
+apcu.stat=0
+apcu.ttl=7200
+apcu.slam_defense=1
 ```
 
 ```bash [测试扩展]
@@ -90,11 +88,9 @@ make test
 make install
 ```
 
-```ini [配置参考]
+```ini [开发环境]
 [apcu]
 ; 手册里写的默认开启，实测情况如下：
-;   apcu-5.1.27 版本默认禁用
-;   apcu-5.1.28 版本默认启用
 apcu.enabled=1
 ; 为 CLI 版本的PHP启用APC,主要用于测试和调试
 apc.enable_cli=1
@@ -103,12 +99,20 @@ apc.enable_cli=1
 apcu.shm_size=64M
 apcu.stat=1        ; 开发时开启文件检查
 apcu.ttl=300       ; 短时间缓存，便于调试
+```
+
+```ini [生产环境]
+[apcu]
+; 手册里写的默认开启，实测情况如下：
+apcu.enabled=1
+; 为 CLI 版本的PHP启用APC,主要用于测试和调试
+;apc.enable_cli=0
 
 ; 生产环境配置
-; apcu.shm_size=256M
-; apcu.stat=0         ; 关闭状态检查提升性能
-; apcu.ttl=7200       ; 长时间缓存
-; apcu.slam_defense=1 ; 防止缓存击穿
+apcu.shm_size=256M
+apcu.stat=0         ; 关闭状态检查提升性能
+apcu.ttl=7200       ; 长时间缓存
+apcu.slam_defense=1 ; 防止缓存击穿
 ```
 
 :::
