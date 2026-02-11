@@ -219,8 +219,8 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建�
 :::
 
 :::code-group
-<<<@/assets/linux/etc/php/opcache-85-dev.ini [开发环境]
-<<<@/assets/linux/etc/php/opcache-85.ini [生产环境]
+<<< @/assets/linux/etc/php/opcache-85-dev.ini [开发环境]
+<<< @/assets/linux/etc/php/opcache-85.ini [生产环境]
 :::
 
 ::: danger :warning: 生产环境配置案例警告
@@ -381,7 +381,6 @@ systemctl enable --now php85-fpm
 ```
 
 <<< @/assets/environment/source/service/php/source/85/php-fpm.service{ini} [85 默认]
-
 :::
 
 ::: tip 注意事项：
