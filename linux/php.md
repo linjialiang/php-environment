@@ -485,12 +485,13 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ## 权限
 
 ```bash [部署]
-chown php:php -R /server/php /server/logs/php
-find /server/php /server/logs/php -type f -exec chmod 640 {} \;
-find /server/php /server/logs/php -type d -exec chmod 750 {} \;
-chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
-chmod 750 -R /server/php/85/{bin,sbin}
+chown php:php -R /server/php /server/logs/php /server/etc/php
+find /server/php /server/logs/php /server/etc/php -type f -exec chmod 640 {} \;
+find /server/php /server/logs/php /server/etc/php -type d -exec chmod 750 {} \;
 chmod 750 /server/etc/php/tools/{composer,php-cs-fixer-v3}.phar
+chmod 750 -R /server/php/85/{bin,sbin}
+
+chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
 
 ln -s /server/etc/php/tools/composer.phar /usr/local/bin/composer
 ln -s /server/etc/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
