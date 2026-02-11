@@ -213,7 +213,9 @@ cp /server/php/85/lib/php.ini{-development,}
 PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建，使用 `--disable-opcache` 选项可以禁止构建。
 
 ::: tip PHP 官网强烈推荐：
-所有现代 PHP 生产环境都必须启用 `OPcache` !
+所有现代 PHP 生产环境都必须启用 `OPcache` (默认开启)!
+
+题外话：对于 Windows 环境，`OPcache` 性能优化有限，保持默认配置即可。
 :::
 
 :::code-group
