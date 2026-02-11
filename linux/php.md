@@ -82,7 +82,7 @@ apt install --no-install-recommends libpq-dev -y
 ::: code-group
 
 ```bash [进入编译目录]
-su - php-fpm -s /bin/zsh
+su - php -s /bin/zsh
 
 tar -xJf php-8.5.2.tar.xz
 mkdir /home/php/php-8.5.2/build_php
@@ -485,7 +485,7 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ## 权限
 
 ```bash [部署]
-chown php-fpm:php-fpm -R /server/php /server/logs/php
+chown php:php -R /server/php /server/logs/php
 find /server/php /server/logs/php -type f -exec chmod 640 {} \;
 find /server/php /server/logs/php -type d -exec chmod 750 {} \;
 chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
