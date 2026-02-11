@@ -409,15 +409,14 @@ Composer 是一个 PHP 依赖管理工具，开发环境必备
 推荐直接使用阿里云镜像下载 [composer](https://mirrors.aliyun.com/composer/composer.phar)
 
 ```bash
-su - php-fpm -s /bin/zsh
-cd /server/php/tools
+cd /server/etc/php/tools
 ./php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ./php composer-setup.php
 ./php -r "unlink('composer-setup.php');"
 chmod 750 composer.phar
 
 # 软链接到可用的环境变量路径，如: /usr/local/bin/ 路径下
-ln -s /server/php/tools/composer.phar /usr/local/bin/composer
+ln -s /server/etc/php/tools/composer.phar /usr/local/bin/composer
 ```
 
 ### 2. 全量镜像
@@ -425,8 +424,6 @@ ln -s /server/php/tools/composer.phar /usr/local/bin/composer
 Composer 国内全量镜像推荐 `华为云>腾讯云>阿里云`
 
 ```bash
-# 切换到开发用户或php-fpm用户
-su - php-fpm -s /bin/zsh
 # 使用国内 Composer 全量镜像
 composer config -g repo.packagist composer https://mirrors.huaweicloud.com/repository/php/
 # 取消使用国内 Composer 全量镜像
@@ -451,8 +448,6 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 升级 composer 也非常简单，建议使用国内全量镜像后再升级
 
 ```bash
-# 切换到php-fpm用户，只能从root进入
-su - php-fpm -s /bin/zsh
 /server/php/85/bin/php /usr/local/bin/composer self-update
 ```
 
@@ -489,30 +484,17 @@ su - php-fpm -s /bin/zsh
 
 ## 权限
 
-::: code-group
-
 ```bash [部署]
 chown php-fpm:php-fpm -R /server/php /server/logs/php
 find /server/php /server/logs/php -type f -exec chmod 640 {} \;
 find /server/php /server/logs/php -type d -exec chmod 750 {} \;
 chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
-# 可执行文件需要执行权限
 chmod 750 -R /server/php/85/{bin,sbin}
-# composer,phpCsFixer等工具包，在独立调用时也需要执行权限
-chmod 750 /server/php/tools/{composer,php-cs-fixer-v3}.phar
+chmod 750 /server/etc/php/tools/{composer,php-cs-fixer-v3}.phar
 
-# 创建快捷方式
-ln -s /server/php/tools/composer.phar /usr/local/bin/composer
-ln -s /server/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
+ln -s /server/etc/php/tools/composer.phar /usr/local/bin/composer
+ln -s /server/etc/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 ```
-
-```bash [开发]
-# 权限同部署环境
-# 开发用户 emad 加入 lnpp包用户组
-usermod -a -G redis,postgres,php-fpm,nginx emad
-```
-
-:::
 
 ::: details 什么是独立调用
 
