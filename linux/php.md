@@ -244,15 +244,15 @@ systemctl restart php85-fpm
 ```
 
 ```bash [Web环境执行清空]
-# 只清空OPcache共享内存，其他一切不变
+# 只清空OPcache共享内存
 # OPcache内存空间与网站完全一致
 curl https://site.com/opcache-reset.php
 ```
 
 ```bash [CLI执行清空]
-# 只清空OPcache共享内存，其他一切不变
+# 只清空OPcache共享内存
 # OPcache内存空间与网站通常不一致
-# 这个不推荐
+# 不建议使用此方式
 php -r "opcache_reset();"
 ```
 
