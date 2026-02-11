@@ -210,41 +210,16 @@ cp /server/php/85/lib/php.ini{-development,}
 
 ### 5. 开启 OPcache
 
-PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建
+PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建，使用 `--disable-opcache` 选项可以禁止构建。
 
-使用 `--disable-opcache` 选项可以禁止构建
+::: tip PHP 官网强烈推荐
+所有现代 PHP 生产环境都必须启用 `OPcache`；
 
-::: code-group
+PHP 8.5 默认启用 OPcache 扩展，对于不清楚的用户保持默认配置即可。
 
-```ini [开启方式]
-; 新版PHP默认启用，不需要额外开启
-[opcache]
-;opcache.enable=1
-; cli 不用开启，因为都是临时使用，用不到 opcache
-;opcache.enable_cli=0
-...
-```
-
-```ini [性能配置]
-; 通常生产和测试环境开启，开发环境不开启
-[opcache]
-...
-; 默认jit是未配置的，启用jit来提升性能
-opcache.jit=tracing
-opcache.jit_buffer_size=100M
-...
-; 设 256M（适用于 90% 的 Web 应用）
-opcache.memory_consumption=256
-...
-; 关闭文件时间戳检查以提升性能（部署新代码后必须触发缓存更新！）
-opcache.validate_timestamps=0
-...
-```
-
-:::
-
-::: tip
-官网强烈推荐，所有现代 PHP 生产环境都必须启用 `OPcache`，
+:::code-group
+<<<@/assets/linux/etc/php/opcache-85-dev.ini[开发环境]
+<<<@/assets/linux/etc/php/opcache-85.ini[生产环境]
 :::
 
 ## PHP-FPM 配置
