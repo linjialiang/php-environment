@@ -77,7 +77,6 @@ make install
 zend_extension=xdebug
 
 [xdebug]
-;xdebug.mode=off
 ;xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.mode=develop,debug,trace
 xdebug.client_host=127.0.0.1
