@@ -231,9 +231,29 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建�
 
     - 启用检查操作码缓存，即：优先读取作码缓存文件，不管文件是否更新或删除
 
-3. `opcache.save_comments=0`
+由于生产环境设置了这两个选项，所以每次修改文件后，必须使用下面任意方式清空 OPcache 缓存：
 
-    -
+::: code-grop
+
+```bash [重启PHP-FPM服务]
+# 1. 清空所有OPcache
+# 2. 清空所有APCu
+# 3. 终止所有用户会话
+# 4. 中断正在处理的请求
+systemctl restart php85-fpm
+```
+
+```bash [Web环境执行清空]
+# 只清空OPcache共享内存，其他一切不变
+# OPcache内存空间与网站完全一致
+curl https://site.com/opcache-reset.php
+```
+
+```bash [CLI执行清空]
+# 只清空OPcache共享内存，其他一切不变
+# OPcache内存空间与网站可能不同（如果CLI与FPM用不同php.ini）
+php -r "opcache_reset();"
+```
 
 :::
 
