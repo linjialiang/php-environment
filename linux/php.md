@@ -226,7 +226,8 @@ PHP 官方明确说明 OPcache 只允许编译为共享扩展，并默认构建�
 
 1. `opcache.validate_timestamps=0`
 
-    - 关闭文件时间戳检查，即：缓存文件从不更新
+    - 关闭文件时间戳检查，即：操作码缓存文件从不更新
+    -
 
 2. `opcache.enable_file_override=1`
 
