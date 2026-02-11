@@ -15,13 +15,13 @@ echo apcu-5.1.28.tgz xdebug-3.5.0.tgz redis-6.3.0.tgz mongodb-2.1.8.tgz | xargs 
 ```
 
 ```ini [85开发环境]
-; path /server/php/85/lib/php.ini
 extension=apcu
 extension=redis
 extension=mongodb
 zend_extension=xdebug
 
 [xdebug]
+;xdebug.mode=develop,coverage,debug,gcstats,profile,trace
 xdebug.mode=develop,debug,trace
 xdebug.client_host=127.0.0.1
 xdebug.client_port=9085
@@ -35,7 +35,6 @@ apcu.ttl=300
 ```
 
 ```ini [85生产环境]
-; path /server/php/85/lib/php.ini
 extension=apcu
 extension=redis
 extension=mongodb
