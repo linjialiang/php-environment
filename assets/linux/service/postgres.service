@@ -17,6 +17,7 @@ RuntimeDirectoryMode=0750
 ExecStart=/server/postgres/bin/postgres -D /server/pgData
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStop=/server/postgres/bin/pg_ctl -D /server/pgData stop -m smart
+# ExecStop=/bin/kill -SIGTERM $MAINPID
 
 KillMode=control-group
 KillSignal=SIGTERM

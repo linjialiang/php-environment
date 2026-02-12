@@ -20,6 +20,7 @@ ExecReload=/server/nginx/sbin/nginx -s reload
 ExecStop=/server/nginx/sbin/nginx -s quit
 
 KillMode=mixed
+KillSignal=SIGTERM
 TimeoutStopSec=90
 
 Restart=on-failure
