@@ -6,8 +6,7 @@ cat > /server/pgData/pg_hba.conf << 'EOF'
 #
 # TYPE   DATABASE     USER       ADDRESS            AUTH-METHOD    AUTH-OPTIONS
 local    all          postgres                      peer
-local    all          postgres                      ident          map=emadMapPostgres
-local    all          admin                         ident          map=emadMapAdmin
+local    all          admin                         ident          map=adminMap
 local    all          all                           reject
 hostssl  replication  repl_user  192.168.66.253/32  scram-sha-256  clientcert=verify-full
 host     all          admin      127.0.0.1/32       scram-sha-256
