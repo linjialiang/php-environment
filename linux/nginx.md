@@ -193,23 +193,23 @@ nginx+php-fpm 不论如何配置，PATH_INFO 始终为空，暂无法解决，�
 
 站点不经常变动的静态文件，可以让客户端缓存，以减轻服务器压力
 ::: code-group
-<<< @/assets/environment/source/etc/example/nginx/custom/cache{nginx} [统一缓存模板案例]
-<<< @/assets/environment/source/etc/example/nginx/custom/no_cache{nginx} [禁用缓存模板案例]
+<<< @/assets/linux/etc/example/nginx/custom/cache{nginx} [统一缓存模板案例]
+<<< @/assets/linux/etc/example/nginx/custom/no_cache{nginx} [禁用缓存模板案例]
 :::
 
 ### 4. 开启压缩
 
 nginx 支持对文件开启 gzip 压缩，以加快网络传输速度，下面是 html 缓存模板案例：
 
-<<< @/assets/environment/source/etc/example/nginx/custom/gzip{nginx}
+<<< @/assets/linux/etc/example/nginx/custom/gzip{nginx}
 
 ### 5. 限制请求数量
 
 nginx 通过 `http 区块` 和 `server 区块` 结合可以限制请求数量
 
 ::: code-group
-<<< @/assets/environment/source/etc/example/nginx/custom/limit_req_http{nginx} [http 区块]
-<<< @/assets/environment/source/etc/example/nginx/custom/limit_req_server{nginx} [server 区块]
+<<< @/assets/linux/etc/example/nginx/custom/limit_req_http{nginx} [http 区块]
+<<< @/assets/linux/etc/example/nginx/custom/limit_req_server{nginx} [server 区块]
 
 ::: tip 提示
 server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr` ，可以直接限制同 ip 地址的访问频率
@@ -221,22 +221,22 @@ server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr
 
 `nginx server` 可以对特定文件和目录进行访问限制
 
-<<< @/assets/environment/source/etc/example/nginx/custom/no_access{nginx}
+<<< @/assets/linux/etc/example/nginx/custom/no_access{nginx}
 
 ### 7. 跨域请求
 
 `nginx server` 可以配置跨域请求，跨域请求没有单独文件，按需写入对应站点的 `location 区块`
 
-<<< @/assets/environment/source/etc/example/nginx/custom/cross_domain{nginx}
+<<< @/assets/linux/etc/example/nginx/custom/cross_domain{nginx}
 
 ### 8. 站点配置案例
 
 ::: code-group
-<<< @/assets/environment/source/nginx/sites/example.nginx [配置说明]
-<<< @/assets/environment/source/nginx/sites/static.nginx [静态站点]
-<<< @/assets/environment/source/nginx/sites/tp.nginx [tp 站点]
-<<< @/assets/environment/source/nginx/sites/laravel.nginx [laravel 站点]
-<<< @/assets/environment/source/nginx/sites/webdav.nginx [webdav 站点]
+<<< @/assetslinux/nginx/sites/example.nginx [配置说明]
+<<< @/assetslinux/nginx/sites/static.nginx [静态站点]
+<<< @/assetslinux/nginx/sites/tp.nginx [tp 站点]
+<<< @/assetslinux/nginx/sites/laravel.nginx [laravel 站点]
+<<< @/assetslinux/nginx/sites/webdav.nginx [webdav 站点]
 :::
 
 ### 9. SSL 证书权限

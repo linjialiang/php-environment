@@ -1,0 +1,110 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name example.com;
+
+    # 重定向到 HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# 关于权限，暂时测试通过为：目录和文件全部设为nginx子进程用户具有读+写权限
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name example.com;
+
+    # 请填写绑定证书的域名
+    # ------ TLS 配置 START ------ #
+    # 请填写证书文件的相对路径或绝对路径，需 nginx 主进程用户可读
+    ssl_certificate /server/tls/example.com_nginx/example.com_bundle.crt;
+    # 请填写私钥文件的相对路径或绝对路径，需 nginx 主进程用户可读
+    ssl_certificate_key /server/tls/example.com_nginx/example.com.key;
+    ssl_session_timeout 5m;
+    # 请按照以下协议配置
+    ssl_protocols TLSv1.2 TLSv1.3;
+    # 请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
+    # ------ TLS 配置 END ------ #
+
+    # WebDAV 根目录
+    root /www/example.com;
+    index index.html index.htm;
+
+    # 访问日志
+    access_log      off;    # 关闭访问日志
+    log_not_found   off;    # 关闭错误日志
+    # access_log /server/logs/nginx/access/example.com.log;
+    # error_log /server/logs/nginx/error/example.com.log;
+
+    # 客户端最大上传大小（重要：适配 anx 等阅读器的大文件）
+    client_max_body_size 1024M;
+
+    # WebDAV 核心配置
+    dav_methods PUT DELETE MKCOL COPY MOVE;
+    dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+
+    # 文件权限设置
+    dav_access user:rw group:rw all:r;
+
+    # 自动创建目录（重要：用于阅读器自动创建文件夹结构）
+    create_full_put_path on;
+
+    # 锁定配置（重要：支持文件同步锁）
+    client_body_temp_path /www/webdav/example.com/temp;
+    # dav_lock_zone zone_name:10m;
+    # dav_lock zone_name;
+
+    # 认证配置
+    auth_basic "WebDAV Server - Authentication Required";
+    auth_basic_user_file /server/auth/webdav.htpasswd;
+
+    # 安全设置
+    # autoindex off;  # 关闭目录列表
+
+    # 隐藏敏感文件
+    location ~ /\. {
+        # deny all;
+        # access_log off;
+        # log_not_found off;
+    }
+
+    # 禁止访问特定文件类型
+    location ~* \.(log|sql|db)$ {
+        # deny all;
+    }
+
+    # 针对阅读器的优化配置
+    location / {
+        # 允许跨域请求（如果阅读器需要）
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PROPFIND, MOVE, COPY, LOCK, UNLOCK" always;
+        add_header Access-Control-Allow-Headers "Authorization, Depth, Content-Type, Overwrite, Destination, Lock-Token, If-Modified-Since, User-Agent, X-Requested-With" always;
+        add_header Access-Control-Expose-Headers "ETag, Content-Length" always;
+
+        # OPTIONS 请求处理（预检请求）
+        if ($request_method = OPTIONS) {
+            return 204;
+        }
+
+        # WebDAV 方法支持
+        limit_except GET POST PUT DELETE OPTIONS PROPFIND MKCOL COPY MOVE LOCK UNLOCK {
+            # deny all;
+        }
+    }
+
+    # 为不同阅读器创建专用目录（可选）
+    location /anx/ {
+        alias /www/webdav/example.com/data/anx/;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        create_full_put_path on;
+    }
+
+    location /legado/ {
+        alias /www/webdav/example.com/data/legado/;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        create_full_put_path on;
+    }
+}

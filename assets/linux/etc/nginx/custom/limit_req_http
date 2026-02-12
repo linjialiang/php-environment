@@ -1,0 +1,3 @@
+limit_req_zone $binary_remote_addr zone=with_ip:10m rate=5r/s;
+limit_req_zone $binary_remote_addr$uri zone=with_ip_request:5m rate=1r/s;
+limit_req_zone $binary_remote_addr$request_uri zone=with_ip_request_param:5m rate=1r/s;

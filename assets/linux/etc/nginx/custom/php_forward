@@ -1,0 +1,11 @@
+
+location ~* \.php$
+{
+  location ~* ^(?!/index\.php$)
+  {
+    deny all;
+  }
+
+  fastcgi_pass                127.0.0.1:9685;
+  include                     fastcgi.conf;
+}
