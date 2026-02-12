@@ -71,7 +71,8 @@ libonig-dev libsodium-dev libargon2-dev -y
 ```
 
 ```bash [Nginx]
-apt install --no-install-recommends -y
+apt install --no-install-recommends \
+libxslt1-dev libgd-dev libgeoip-dev -y
 ```
 
 ```bash [MySQL]
