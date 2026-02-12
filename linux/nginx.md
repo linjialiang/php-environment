@@ -44,7 +44,7 @@ setcap -r /server/nginx/sbin/nginx
 
 :::
 
-## 编译流程
+## 编译流程{#build-flow}
 
 ::: code-group
 
@@ -118,9 +118,9 @@ curl: (7) Failed to connect to 127.0.0.1 port 80: 拒绝连接
 
 Nginx 可实现平滑升级，具体操作如下：
 
-### 1. 构建指令
+### 1. 编译流程
 
-构建指令参考 [开始构建](#开始构建) 基本一样
+构建流程参考 [上述编译流程](#build-flow) 基本一样
 
 ::: warning 注意
 平滑升级时，新版 nginx 只需要执行编译，不要执行安装
