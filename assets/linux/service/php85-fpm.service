@@ -15,7 +15,7 @@ RuntimeDirectoryMode=0750
 ExecStart=/server/php/85/sbin/php-fpm --nodaemonize --fpm-config /server/etc/php/85/php-fpm.conf
 ExecReload=/bin/kill -USR2 $MAINPID
 
-KillMode=mixed
+KillMode=control-group
 KillSignal=SIGTERM
 TimeoutStopSec=90
 
@@ -25,16 +25,23 @@ RestartSec=10s
 LimitNOFILE=65536
 
 ProcessMax=1024
+
 NoNewPrivileges=true
 PrivateTmp=true
-ProtectSystem=full
 PrivateDevices=true
-ProtectKernelModules=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectHostname=true
+ProtectClock=true
 ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
 ProtectControlGroups=true
 RestrictRealtime=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 RestrictNamespaces=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+
+ReadWritePaths=/server/www /server/logs/php
 
 [Install]
 WantedBy=multi-user.target

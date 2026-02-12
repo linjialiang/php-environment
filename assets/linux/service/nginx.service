@@ -4,7 +4,7 @@ Description=nginx-1.28.x
 After=network.target
 
 [Service]
-Type=forking
+Type=notify
 UMask=0027
 User=nginx
 Group=nginx
@@ -14,13 +14,12 @@ AmbientCapabilities=CAP_NET_BIND_SERVICE
 RuntimeDirectory=nginx
 RuntimeDirectoryMode=0750
 
-ExecStartPre=/server/nginx/sbin/nginx -t
-ExecStart=/server/nginx/sbin/nginx -c /server/nginx/conf/nginx.conf
+ExecStartPre=/server/nginx/sbin/nginx -t -c /server/etc/nginx/nginx.conf
+ExecStart=/server/nginx/sbin/nginx -g 'daemon off;' -c /server/etc/nginx/nginx.conf
 ExecReload=/server/nginx/sbin/nginx -s reload
 ExecStop=/server/nginx/sbin/nginx -s quit
 
 KillMode=mixed
-KillSignal=SIGTERM
 TimeoutStopSec=90
 
 Restart=on-failure
@@ -30,14 +29,20 @@ LimitNOFILE=65536
 
 NoNewPrivileges=true
 PrivateTmp=true
-ProtectSystem=full
 PrivateDevices=true
-ProtectKernelModules=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectHostname=true
+ProtectClock=true
 ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
 ProtectControlGroups=true
 RestrictRealtime=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 RestrictNamespaces=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+
+ReadWritePaths=/server/logs/nginx
 
 [Install]
 WantedBy=multi-user.target

@@ -87,8 +87,13 @@ cd /home/nginx/nginx-1.28.0
 ::: code-group
 
 ```bash [common]
+# 授予 指定特权 能力
+setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 /server/nginx/sbin/nginx
 curl -I 127.0.0.1
+
+# 测试完成，移除 指定特权 能力
+setcap 'cap_net_bind_service=-ep' /server/nginx/sbin/nginx
 ```
 
 ```bash [成功信号]
@@ -169,10 +174,10 @@ nginx 配置仅有一个入口文件，统一称做 `主配置文件`
 ### 1. 主配置文件 {#main-conf}
 
 ::: code-group
-<<< @/assets/environment/source/nginx/nginx.conf{nginx} [配置文件]
-<<< @/assets/environment/source/etc/example/nginx/main.nginx{nginx} [主配置]
-<<< @/assets/environment/source/etc/example/nginx/custom/default.nginx [默认站点]
-<<< @/assets/environment/source/etc/example/nginx/custom/php_forward{nginx} [php 文件转发]
+<<< @/assets/linux/etc/nginx/nginx.conf{nginx} [配置文件]
+<<< @/assets/linux/etc/example/nginx/main.nginx{nginx} [主配置]
+<<< @/assets/linux/etc/example/nginx/custom/default.nginx [默认站点]
+<<< @/assets/linux/etc/example/nginx/custom/php_forward{nginx} [php 文件转发]
 :::
 
 ### 2. fastcgi 参数模版

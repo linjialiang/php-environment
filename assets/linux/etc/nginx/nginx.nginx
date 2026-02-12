@@ -1,0 +1,37 @@
+worker_processes auto;
+worker_rlimit_core 50M;
+worker_shutdown_timeout 30s;
+worker_rlimit_nofile 10240;
+working_directory /tmp/;
+pid /run/nginx/process.pid;
+
+events
+{
+    worker_connections 10240;
+    worker_aio_requests 1024;
+}
+
+http
+{
+    error_log /server/logs/nginx/error/http.log error;
+    include /server/etc/nginx/custom/log_format;
+    access_log /server/logs/nginx/access/all.log json_log_common;
+    include mime.types;
+    default_type application/octet-stream;
+    charset utf-8;
+    autoindex off;
+    autoindex_exact_size on;
+    autoindex_localtime on;
+    include /server/etc/nginx/custom/gzip;
+    sendfile on;
+    server_tokens off;
+    fastcgi_hide_header X-Powered-By;
+    proxy_hide_header X-Powered-By;
+    ssl_protocols TLSv1.3;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header X-Content-Type-Options nosniff always;
+    include /server/etc/nginx/custom/limit_req_http;
+    include /server/etc/nginx/custom/default.nginx;
+    include /server/sites/enabled/*.nginx;
+}

@@ -16,11 +16,12 @@ RuntimeDirectoryMode=0750
 
 ExecStart=/server/postgres/bin/postgres -D /server/pgData
 ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/server/postgres/bin/pg_ctl -D /server/pgData stop -m smart
 
-KillMode=mixed
-KillSignal=SIGINT
+KillMode=control-group
+KillSignal=SIGTERM
 TimeoutStopSec=300
-TimeoutSec=infinity
+TimeoutStartSec=infinity
 
 Restart=on-failure
 RestartSec=10s
@@ -29,20 +30,22 @@ LimitNOFILE=65536
 LimitNPROC=65536
 LimitMEMLOCK=infinity
 
-NoNewPrivileges=yes
+NoNewPrivileges=true
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=strict
-ReadWritePaths=/server/pgData /server/logs/postgres
-ProtectHome=yes
-ProtectHostname=yes
-ProtectClock=yes
-ProtectKernelTunables=yes
-ProtectKernelModules=yes
-ProtectKernelLogs=yes
-ProtectControlGroups=yes
-
+ProtectHome=true
+ProtectHostname=true
+ProtectClock=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+
+ReadWritePaths=/server/pgData /server/logs/postgres
 
 [Install]
 WantedBy=multi-user.target
