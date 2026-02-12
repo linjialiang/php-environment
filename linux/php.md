@@ -1,6 +1,6 @@
 ---
 title: 安装 PHP 解释器
-titleTemplate: 环境搭建教程
+titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
 # 安装 PHP 解释器

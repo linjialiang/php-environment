@@ -1,6 +1,6 @@
 ---
 title: 安装 Redis 服务器
-titleTemplate: 环境搭建教程
+titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
 <script setup>

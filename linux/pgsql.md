@@ -1,6 +1,6 @@
 ---
 title: 安装 PostgreSQL 数据库管理系统
-titleTemplate: 环境搭建教程
+titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
 # 安装 PostgreSQL 数据库管理系统

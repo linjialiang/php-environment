@@ -1,27 +1,27 @@
 ---
-title: 编译安装 nginx
-titleTemplate: 环境搭建教程
+title: 安装 Nginx 服务器
+titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
-# 编译安装 nginx
+# 安装 Nginx 服务器
 
 Nginx 是现如今性能最强劲的 Web 服务器及反向代理服务器
 
-## 构建前准备
+## 非 root 进程绑定特权端口
 
-### 1. 依赖项
+安全起见 Nginx 使用非特权用户进行安装和启动，而 Web 服务器监听的 `80+443` 端口，默认只有特权用户进程才能绑定。
 
-```bash
-apt install -y libxslt1-dev libgd-dev libgeoip-dev
-```
+解决方式是将 `CAP_NET_BIND_SERVICE` **能力**授予 Nignx 进程。
 
-### 2. CAP_NET_BIND_SERVICE
+### 1. 什么是 CAP_NET_BIND_SERVICE 呢？
 
-`CAP_NET_BIND_SERVICE` 是 Linux 内核中的一个能力（capability），它允许进程绑定低于 `1024` 的端口。这个能力通常用于网络服务程序，如 Web 服务器、邮件服务器等，以便它们能够监听系统保留的低端口。
+`CAP_NET_BIND_SERVICE` 是 Linux 内核中的一个**能力（capability）**，它允许**非 root 进程**绑定低于 `1024` 的特权端口。
 
-在 Linux 系统中，只有 root 用户和具有 `CAP_NET_BIND_SERVICE` 能力的进程才能绑定低于 `1024` 的端口。为了给一个应用程序设置这个能力，可以使用 setcap 命令。
+这个能力通常用于网络服务程序，如 Web 服务器、邮件服务器等，以便它们能够监听系统保留的低端口。
 
-本次 nginx 的 master 进程用户是 nginx 而非 root，所以需要为程序设置 `CAP_NET_BIND_SERVICE`
+### 2. 如何赋予 CAP_NET_BIND_SERVICE 能力呢？
+
+主要由两种方式，推荐使用 systemd 配置：
 
 ::: code-group
 
@@ -35,16 +35,14 @@ setcap -r /server/nginx/sbin/nginx
 
 :::
 
-## 开始构建
-
-### 编译安装
+## 编译流程
 
 ::: code-group
 
 ```bash [构建目录]
 su - nginx -s /bin/zsh
-tar -xzf nginx-1.28.0.tar.gz
-tar -xzf openssl-3.5.4.tar.gz
+
+echo nginx-1.28.0.tar.gz openssl-3.5.4.tar.gz | xargs -n1 tar -xzf
 tar -xjf pcre2-10.47.tar.bz2
 tar -xJf zlib-1.3.1.tar.xz
 mkdir ~/nginx-1.28.0/build_nginx
