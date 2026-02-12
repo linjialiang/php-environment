@@ -21,13 +21,13 @@ extension=apcu
 extension=redis
 extension=mongodb
 
-zend_extension=xdebug
+;zend_extension=xdebug
 
 [xdebug]
 ;xdebug.mode=develop,coverage,debug,gcstats,profile,trace
-xdebug.mode=develop,debug,trace
-xdebug.client_host=127.0.0.1
-xdebug.client_port=9085
+;xdebug.mode=develop,debug,trace
+;xdebug.client_host=127.0.0.1
+;xdebug.client_port=9085
 
 [apcu]
 apcu.enabled=1
