@@ -239,7 +239,7 @@ psql -h /run/postgres -U admin -d postgres
 
 ```
 
-```bash{wrap} [TCP/IP协议]
+```bash [TCP/IP协议]
 # 本机登录 admin
 # -------------------------------------------
 psql -h 127.0.0.1 -U admin -d postgres -W
@@ -248,9 +248,34 @@ psql -h 127.0.0.1 -U admin -d postgres -W
 # -------------------------------------------
 psql "host=127.0.0.1 dbname=postgres user=admin sslmode=require" -W
 
-# Windows 宿主机使用 TLS 协议登录 admin
+# linux 客户机使用 TLS 协议远程登录 admin
 # -------------------------------------------
-psql "host=192.168.66.254 dbname=postgres user=admin sslmode=require sslrootcert=C:/pgsql/tls/root.crt sslcert=C:/pgsql/tls/client-admin.crt sslkey=C:/pgsql/tls/client-admin.key" -W
+psql \
+"host=192.168.66.254 \
+dbname=postgres \
+user=admin \
+sslmode=require \
+sslrootcert=C:/pgsql/tls/root.crt \
+sslcert=C:/pgsql/tls/client-admin.crt \
+sslkey=C:/pgsql/tls/client-admin.key" \
+-W
+
+# 注意：sslmode=<require|verify-ca|verify-full> 这是客户端要求服务端的认证模式
+# 服务端的认证模式在 pg_hba.conf 文件里单独指定的
+```
+
+```ps1 [Windows登录]
+# Windows 宿主机使用 TLS 协议远程登录 admin
+# -------------------------------------------
+psql `
+"host=192.168.66.254 `
+dbname=postgres `
+user=admin `
+sslmode=require `
+sslrootcert=C:/pgsql/tls/root.crt `
+sslcert=C:/pgsql/tls/client-admin.crt `
+sslkey=C:/pgsql/tls/client-admin.key" `
+-W
 
 # 注意：sslmode=<require|verify-ca|verify-full> 这是客户端要求服务端的认证模式
 # 服务端的认证模式在 pg_hba.conf 文件里单独指定的
