@@ -15,21 +15,30 @@ Nginx 是现如今性能最强劲的 Web 服务器及反向代理服务器
 
 ### 1. 什么是 CAP_NET_BIND_SERVICE 呢？
 
-`CAP_NET_BIND_SERVICE` 是 Linux 内核中的一个**能力（capability）**，它允许**非 root 进程**绑定低于 `1024` 的特权端口。
+CAP_NET_BIND_SERVICE 是 Linux 内核中的一中**能力（capability）**，它允许**非 root 进程**绑定低于 `1024` 的特权端口。
 
-这个能力通常用于网络服务程序，如 Web 服务器、邮件服务器等，以便它们能够监听系统保留的低端口。
+::: info 简单说：
+它是 Linux 系统的“特权端口通行证”，允许普通程序使用 1024 以下的端口（如 80、443），而不需要 root 权限！
+:::
 
 ### 2. 如何赋予 CAP_NET_BIND_SERVICE 能力呢？
 
-主要由两种方式，推荐使用 systemd 配置：
+主要由两种方式，推荐使用 `systemd` 配置：
 
 ::: code-group
 
-```bash [启用CAP_NET_BIND_SERVICE能力]
-setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
+```bash [systemd配置]
+[Service]
+AmbientCapabilities=CAP_NET_BIND_SERVICE
 ```
 
-```bash [移除CAP_NET_BIND_SERVICE能力]
+```bash [使用 setcap 命令]
+# 启用CAP_NET_BIND_SERVICE能力
+setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
+
+# 移除CAP_NET_BIND_SERVICE能力
+setcap 'cap_net_bind_service=-ep' /server/nginx/sbin/nginx
+# 移除所有特权能力
 setcap -r /server/nginx/sbin/nginx
 ```
 
