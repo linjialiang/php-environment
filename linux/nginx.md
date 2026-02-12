@@ -174,8 +174,7 @@ nginx 配置仅有一个入口文件，统一称做 `主配置文件`
 ### 1. 主配置文件 {#main-conf}
 
 ::: code-group
-<<< @/assets/linux/etc/nginx/nginx.conf{nginx} [配置文件]
-<<< @/assets/linux/etc/example/nginx/main.nginx{nginx} [主配置]
+<<< @/assets/linux/etc/example/nginx/nginx.conf{nginx} [主配置]
 <<< @/assets/linux/etc/example/nginx/custom/default.nginx [默认站点]
 <<< @/assets/linux/etc/example/nginx/custom/php_forward{nginx} [php 文件转发]
 :::
@@ -232,11 +231,11 @@ server 区块里的 `zone=with_ip` 对应 http 区块里的 `$binary_remote_addr
 ### 8. 站点配置案例
 
 ::: code-group
-<<< @/assetslinux/nginx/sites/example.nginx [配置说明]
-<<< @/assetslinux/nginx/sites/static.nginx [静态站点]
-<<< @/assetslinux/nginx/sites/tp.nginx [tp 站点]
-<<< @/assetslinux/nginx/sites/laravel.nginx [laravel 站点]
-<<< @/assetslinux/nginx/sites/webdav.nginx [webdav 站点]
+<<< @/assets/linux/nginx/sites/example.nginx [配置说明]
+<<< @/assets/linux/nginx/sites/static.nginx [静态站点]
+<<< @/assets/linux/nginx/sites/tp.nginx [tp 站点]
+<<< @/assets/linux/nginx/sites/laravel.nginx [laravel 站点]
+<<< @/assets/linux/nginx/sites/webdav.nginx [webdav 站点]
 :::
 
 ### 9. SSL 证书权限
