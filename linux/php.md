@@ -377,7 +377,7 @@ PHP-FPM 自带了一套比较完善的进程管理指令，编译完成后还会
 
 ```bash [重载]
 systemctl daemon-reload
-systemctl enable --now php85-fpm
+systemctl enable php85-fpm
 ```
 
 <<< @/assets/linux/service/default/php85-fpm.service{ini} [85 默认]
