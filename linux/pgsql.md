@@ -219,42 +219,40 @@ PostgreSQL 主要有以下几个配置文件：
 
 #### psql 登录{#psql-login}
 
+登录需配置 `pg_hba.conf` 和 `pg_ident.conf` 文件，具体见上述案例
+
 ::: code-group
 
-```bash [系统用户[postgres]]
-# 最简单登录指令（套接字文件路径为默认时）
-psql
-# 修改 Unix域套接字文件路径后，需要指定 Unix域套接字文件所在目录才能正常登录
+```bash [系统用户]
+# 系统用户[postgres] 登录 数据库用户 postgres
+# -------------------------------------------
 psql -h /run/postgres
-```
+# 假如：套接字文件路径为默认时，可用最简单登录指令
+psql
 
-```bash [系统用户[emad]]
-# 需在 pg_ident.conf 配置文件设置用户映射
-# ===========================================
-# 最简单登录指令（套接字文件路径为默认时）
-psql -U postgres
-# 修改 Unix域套接字文件路径后，需要指定 Unix域套接字文件所在目录才能正常登录
-psql -h /run/postgres -U postgres
+# 系统用户[postgres] 登录 数据库用户 admin
+# 系统用户[emad] 登录 数据库用户 admin
+# 系统用户[php] 登录 数据库用户 admin
+# -------------------------------------------
 # 用户同名的数据库不存在时，必须使用 -d 选项指定数据库名
-psql -U admin -d postgres
 psql -h /run/postgres -U admin -d postgres
+
 ```
 
-```bash [TCP/IP协议]
-# 本机客户端登录 admin
+```bash{wrap} [TCP/IP协议]
+# 本机登录 admin
+# -------------------------------------------
 psql -h 127.0.0.1 -U admin -d postgres -W
 
-# 使用 TLS 协议登录 admin
-psql "host=192.168.66.254 \
-dbname=postgres \
-user=admin \
-sslmode=require \
-sslrootcert=./tls/root.crt \
-sslcert=./tls/client-admin.crt \
-sslkey=./tls/client-admin.key" \
--W
+# 本机以 TLS协议 登录 admin
+# -------------------------------------------
+psql "host=127.0.0.1 dbname=postgres user=admin sslmode=require" -W
 
-# 注意 sslmode=<require|verify-ca|verify-full> 这是客户端的认证模式
+# Windows 宿主机使用 TLS 协议登录 admin
+# -------------------------------------------
+psql "host=192.168.66.254 dbname=postgres user=admin sslmode=require sslrootcert=C:/pgsql/tls/root.crt sslcert=C:/pgsql/tls/client-admin.crt sslkey=C:/pgsql/tls/client-admin.key" -W
+
+# 注意：sslmode=<require|verify-ca|verify-full> 这是客户端要求服务端的认证模式
 # 服务端的认证模式在 pg_hba.conf 文件里单独指定的
 ```
 
