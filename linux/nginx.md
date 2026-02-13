@@ -64,6 +64,7 @@ cd /home/nginx/nginx-1.28.2
 ```
 
 ```bash [设置环境变量]
+# 同时存在 clang 和 gcc 时，推荐指定 gcc 和 g++ 作为编译器
 export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 ```
