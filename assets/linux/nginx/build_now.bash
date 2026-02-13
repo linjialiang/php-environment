@@ -4,7 +4,7 @@ export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 # 编译选项
 ./configure --prefix=/server/nginx \
---builddir=/home/nginx/nginx-1.28.0/build_nginx \
+--builddir=/home/nginx/nginx-1.28.2/build_nginx \
 --without-select_module \
 --without-poll_module \
 --with-threads \
@@ -32,5 +32,4 @@ export CXX=/usr/bin/g++
 --with-pcre=/home/nginx/pcre2-10.47 \
 --with-pcre-jit \
 --with-zlib=/home/nginx/zlib-1.3.1 \
---with-openssl=/home/nginx/openssl-3.5.4
-# 由于nginx错误和警告均使用正常输出结果，所以 nginx 不建议使用 > stdout.log
+--with-openssl=/home/nginx/openssl-3.5.5
