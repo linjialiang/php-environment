@@ -124,11 +124,16 @@ installPackage(){
   echo_red "注意1：该lnmpp包不兼容其他发行版，因为极有可能因为依赖问题，导致整个环境无法使用"
   echo_red "注意2：部分依赖包在部署阶段可能没用，但由于没对单个功能测试，只能选择安装全部依赖"
   echo_yellow "=================================================================="
-  apt install -y make gcc g++ clang pkg-config autoconf libicu-dev liblz4-dev \
-  libzstd-dev libbison-dev flex libreadline-dev zlib1g-dev libssl-dev \
-  libpam0g-dev uuid-dev libsystemd-dev libcurl4-openssl-dev libpng-dev \
-  libavif-dev libwebp-dev libjpeg-dev libxpm-dev libfreetype-dev libonig-dev \
-  libzip-dev libxslt1-dev libgd-dev libgeoip-dev tcl
+  apt install --no-install-recommends \
+  build-essential autoconf pkg-config \
+  tcl \
+  libsystemd-dev libssl-dev \
+  llvm-dev clang libicu-dev liblz4-dev libzstd-dev liburing-dev \
+  bison flex libreadline-dev zlib1g-dev uuid-dev \
+  libcurl4-openssl-dev libpng-dev libjpeg-dev libfreetype-dev \
+  libonig-dev libsodium-dev libargon2-dev \
+  libxslt1-dev libgd-dev libgeoip-dev \
+  -y
 }
 
 #安装预构建包
