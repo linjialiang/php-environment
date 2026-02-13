@@ -19,7 +19,7 @@ ExecReload=/bin/kill -HUP $MAINPID
 ExecReload=/server/postgres/bin/pg_ctl reload
 ExecStop=/server/postgres/bin/pg_ctl -D /server/pgData stop -m smart
 
-KillMode=process
+KillMode=mixed
 KillSignal=SIGTERM
 TimeoutStopSec=120s
 TimeoutStartSec=infinity

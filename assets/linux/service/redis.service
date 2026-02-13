@@ -16,7 +16,7 @@ ExecStart=/server/redis/bin/redis-server /server/etc/redis/config/redis.conf
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/server/redis/bin/redis-cli shutdown
 
-KillMode=control-group
+KillMode=mixed
 KillSignal=SIGTERM
 TimeoutStopSec=60s
 
