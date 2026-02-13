@@ -58,6 +58,16 @@ mkdir ~/nginx-1.28.2/build_nginx
 cd ~/nginx-1.28.2
 ```
 
+```bash [查看帮助]
+cd /home/nginx/nginx-1.28.2
+./configure --help > nginx.help
+```
+
+```bash [设置环境变量]
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+```
+
 <<< @/assets/linux/nginx/build_now.bash [构建选项]
 
 ```bash [编译安装]
@@ -70,12 +80,6 @@ make install
 ```
 
 <<< @/assets/linux/nginx/build_all.bash [全部构建选项]
-
-```bash [查看帮助]
-cd /home/nginx/nginx-1.28.2
-./configure --help > nginx.help
-```
-
 <<< @/assets/linux/help/nginx.help{ini} [全部参数]
 :::
 
