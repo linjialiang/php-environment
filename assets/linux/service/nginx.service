@@ -19,9 +19,9 @@ ExecStart=/server/nginx/sbin/nginx -g 'daemon off;' -c /server/etc/nginx/nginx.c
 ExecReload=/server/nginx/sbin/nginx -s reload
 ExecStop=/server/nginx/sbin/nginx -s quit
 
-KillMode=mixed
-KillSignal=SIGTERM
-TimeoutStopSec=90
+KillMode=process
+KillSignal=SIGQUIT
+TimeoutStopSec=30s
 
 Restart=on-failure
 RestartSec=10s

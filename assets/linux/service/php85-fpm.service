@@ -17,8 +17,8 @@ ExecReload=/bin/kill -USR2 $MAINPID
 ExecStop=/bin/kill -SIGQUIT $MAINPID
 
 KillMode=mixed
-KillSignal=SIGTERM
-TimeoutStopSec=90
+KillSignal=SIGQUIT
+TimeoutStopSec=60s
 
 Restart=on-failure
 RestartSec=10s
