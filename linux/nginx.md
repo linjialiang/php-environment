@@ -314,12 +314,10 @@ linux 服务器推荐使用 `Systemd 单元(Unit)` 来管理守护进程，下�
 
 ::: code-group
 
-<<< @/assets/environment/source/service/nginx.service{ini} [案例]
+<<< @/assets/linux/service/nginx.service{ini} [案例]
 
 ```bash [重载]
-# 重新载入 Systemd 配置
 systemctl daemon-reload
-# nginx.service 加入开机启动
 systemctl enable nginx.service
 ```
 
@@ -340,8 +338,7 @@ systemctl enable nginx.service
 
 ::: code-group
 
-<<< @/assets/environment/source/nginx/nginxctl.bash [源码]
-<<< @/assets/environment/source/nginx/nginxctl-echo.bash [源码直写版]
+<<< @/assets/linux/nginx/nginxctl.bash [源码]
 
 ```bash [授权]
 chmod 755 /usr/local/bin/nginxctl
@@ -526,27 +523,13 @@ server
 
 ## 权限
 
-::: code-group
-
-```bash [部署]
+```bash
 chown nginx:nginx -R /server/{nginx,sites}
 chown nginx:nginx -R /server/{etc,logs}/nginx
 find /server/{nginx,sites} -type f -exec chmod 640 {} \;
 find /server/{nginx,sites} -type d -exec chmod 750 {} \;
 find /server/{etc,logs}/nginx -type f -exec chmod 640 {} \;
 find /server/{etc,logs}/nginx -type d -exec chmod 750 {} \;
-# TLS证书相关统一使用600权限
 find /server/sites/tls -type f -exec chmod 600 {} \;
-# 可执行文件需要执行权限
 chmod 750 /server/nginx/sbin/nginx
-# 每次对 sbin/nginx 可执行文件修改权限后，都需要重新启用CAP_NET_BIND_SERVICE能力
-setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 ```
-
-```bash [开发]
-# 权限同部署环境
-# 开发用户 emad 加入lnpp包用户组
-usermod -a -G redis,postgres,php-fpm,nginx emad
-```
-
-:::
