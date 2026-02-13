@@ -77,7 +77,6 @@ cd /home/nginx/nginx-1.28.2
 ```
 
 <<< @/assets/linux/help/nginx.help{ini} [全部参数]
-
 :::
 
 ### 测试安装结果
