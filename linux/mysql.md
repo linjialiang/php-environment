@@ -44,7 +44,7 @@ cd ~/mysql-8.4.8/build
 cd /home/mysql/mysql-8.4.8/build
 cmake -LH ..
 # 选项写入文件
-cmake -LH .. > options.list
+cmake -LH .. > mysql.help
 ```
 
 ```bash [构建选项]
