@@ -1,46 +1,15 @@
 ---
-title: 编译安装 MySQL
-titleTemplate: 环境搭建教程
+title: 安装 MySQL 数据库管理系统
+titleTemplate: Linux 下纯手工搭建 PHP 环境
 ---
 
-# 编译安装 MySQL
+# 安装 MySQL 数据库管理系统
 
-MySQL 没有为 Debian12 做适配，所以最好的选择就是自己编译安装
+MySQL 是一个注重快速、可靠和易用的开源数据库，凭借其高性能和简单的运维特性，成为大多数 Web 应用和读密集型场景的首选。
 
-## 下载源码包
+::: tip :warning: Debian13+MySQL8.4.6 特定版本问题
 
-![Mysql 源码包](/assets/environment-lnmpp/images/mysql_compile-01.png)
-
-::: tip 提示
-
-对于 8.3.0 之前版本，如果没有特殊要求，建议下载 `mysql-boost-version.tar.gz` ，这是包含 `Boost(Includes Boost Headers)` 的源码包；
-
-Boost 是一个 C++标准库，因为 mysql 主要是用 C++写的，它依赖于 C++标准库(即 Boost)；
-
-如果下载的是不含`boost`的包，你还要自己去下载对应版本的 Boost，自己下载的 boost 版本未必能满足当前正在编译的 mysql 版本。
-:::
-
-## 编译前依赖准备
-
-1. cmake
-2. gcc
-3. g++
-4. openssl
-5. Boost(一个 C++标准库，`8.3.0` 以后已捆绑)；
-6. ncurses 库
-7. 充足的内存（最好有 2GB 以上的空闲内存，不够的话就添加虚拟内存）；
-8. perl(不做 test 就不需要)。
-9. bison 2.1 或更高版本
-
-```bash
-apt install -y cmake libtirpc-dev
-```
-
-## 特定版本问题
-
-### Debian13+MySQL8.4.8
-
-1. 问题 1：debian13 发行版的 pkg-config 的 pc 文件名为 libsystemd.pc，而 cmake 编译 MySQL 8.4.8 时只能正确识别 `systemd.pc` 的路径。
+1. 问题 1：debian13 发行版的 pkg-config 的 pc 文件名为 libsystemd.pc，而 cmake 编译 MySQL 8.4.6 时只能正确识别 `systemd.pc` 的路径。
 
     ::: details 解决方式：为 `libsystemd.pc` 文件建立软链接
 
@@ -51,17 +20,15 @@ apt install -y cmake libtirpc-dev
 
     :::
 
-2. 问题 2：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.8 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败。
+2. 问题 2：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败。
 
     ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
     <<< @/assets/environment-lnmpp/source/mysql/src/tls_client_context.cc{c:line-numbers=212}
     :::
 
-## 编译安装
+:::
 
-在不了解干什么的时候，尽量使用 MySQL 的默认值，并且 MySQL 很多参数都可以通过 my.ini 重新修改。
-
-### 编译指令
+## 编译流程
 
 ::: code-group
 

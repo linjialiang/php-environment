@@ -76,7 +76,8 @@ libxslt1-dev libgd-dev libgeoip-dev -y
 ```
 
 ```bash [MySQL]
-apt install --no-install-recommends -y
+apt install --no-install-recommends \
+cmake libtirpc-dev -y
 ```
 
 :::
