@@ -5,7 +5,7 @@
     - apcu-5.1.28.tgz
     - redis-6.3.0.tgz
     - xdebug-3.5.0.tgz
-5. nginx-1.28.1.tar.gz
+5. nginx-1.28.2.tar.gz
     - openssl-3.5.5.tar.gz
     - pcre2-10.47.tar.bz2
     - zlib-1.3.1.tar.xz
