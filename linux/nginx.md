@@ -51,11 +51,11 @@ setcap -r /server/nginx/sbin/nginx
 ```bash [构建目录]
 su - nginx -s /bin/zsh
 
-echo nginx-1.28.0.tar.gz openssl-3.5.4.tar.gz | xargs -n1 tar -xzf
+echo nginx-1.28.2.tar.gz openssl-3.5.4.tar.gz | xargs -n1 tar -xzf
 tar -xjf pcre2-10.47.tar.bz2
 tar -xJf zlib-1.3.1.tar.xz
-mkdir ~/nginx-1.28.0/build_nginx
-cd ~/nginx-1.28.0
+mkdir ~/nginx-1.28.2/build_nginx
+cd ~/nginx-1.28.2
 ```
 
 <<< @/assets/environment/source/nginx/build_now.bash [构建选项]
@@ -72,7 +72,7 @@ make install
 <<< @/assets/environment/source/nginx/build_all.bash [全部构建选项]
 
 ```bash [查看帮助]
-cd /home/nginx/nginx-1.28.0
+cd /home/nginx/nginx-1.28.2
 ./configure --help > help.ini
 ```
 
