@@ -535,4 +535,7 @@ find /server/{etc,logs}/nginx -type f -exec chmod 640 {} \;
 find /server/{etc,logs}/nginx -type d -exec chmod 750 {} \;
 find /server/sites/tls -type f -exec chmod 600 {} \;
 chmod 750 /server/nginx/sbin/nginx
+
+chown nginx:nginx /usr/local/bin/nginxctl
+chmod 750 /usr/local/bin/nginxctl
 ```
