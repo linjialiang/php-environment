@@ -51,7 +51,7 @@ setcap -r /server/nginx/sbin/nginx
 ```bash [构建目录]
 su - nginx -s /bin/zsh
 
-echo nginx-1.28.2.tar.gz openssl-3.5.4.tar.gz | xargs -n1 tar -xzf
+echo nginx-1.28.2.tar.gz openssl-3.5.5.tar.gz | xargs -n1 tar -xzf
 tar -xjf pcre2-10.47.tar.bz2
 tar -xJf zlib-1.3.1.tar.xz
 mkdir ~/nginx-1.28.2/build_nginx
