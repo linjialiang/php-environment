@@ -20,7 +20,7 @@ const sidebar = [
     text: 'Redis',
     collapsed: true,
     items: [
-      { text: '8.4', link: `${path.main}redis` },
+      { text: '8.6', link: `${path.main}redis` },
       { text: 'Redis配置文件', link: `${path.redisConfUrl}` },
     ],
   },
