@@ -46,7 +46,7 @@ RestrictRealtime=true
 RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
-ReadWritePaths=/server/pgData /server/logs/postgres
+ReadWritePaths=/server/postgres /run/postgres /server/pgData /server/logs/postgres
 
 [Install]
 WantedBy=multi-user.target

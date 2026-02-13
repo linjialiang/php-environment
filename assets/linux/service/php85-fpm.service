@@ -17,7 +17,7 @@ ExecReload=/bin/kill -USR2 $MAINPID
 ExecStop=/bin/kill -SIGQUIT $MAINPID
 
 KillMode=mixed
-KillSignal=SIGQUIT
+KillSignal=SIGTERM
 TimeoutStopSec=60s
 
 Restart=on-failure
@@ -42,7 +42,7 @@ RestrictRealtime=true
 RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
-ReadWritePaths=/server/www /server/logs/php
+ReadWritePaths=/server/php/85 /run/php85-fpm /server/www /server/logs/php
 
 [Install]
 WantedBy=multi-user.target

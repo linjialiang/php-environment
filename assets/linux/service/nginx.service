@@ -4,7 +4,7 @@ Description=nginx-1.28.x
 After=network.target
 
 [Service]
-Type=notify
+Type=forking
 UMask=0027
 User=nginx
 Group=nginx
@@ -15,12 +15,12 @@ RuntimeDirectory=nginx
 RuntimeDirectoryMode=0750
 
 ExecStartPre=/server/nginx/sbin/nginx -t -c /server/etc/nginx/nginx.conf
-ExecStart=/server/nginx/sbin/nginx -g 'daemon off;' -c /server/etc/nginx/nginx.conf
+ExecStart=/server/nginx/sbin/nginx -c /server/etc/nginx/nginx.conf
 ExecReload=/server/nginx/sbin/nginx -s reload
 ExecStop=/server/nginx/sbin/nginx -s quit
 
-KillMode=process
-KillSignal=SIGQUIT
+KillMode=mixed
+KillSignal=SIGTERM
 TimeoutStopSec=30s
 
 Restart=on-failure
@@ -43,7 +43,7 @@ RestrictRealtime=true
 RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
-ReadWritePaths=/server/logs/nginx
+ReadWritePaths=/server/nginx/ /run/nginx/ /server/logs/nginx
 
 [Install]
 WantedBy=multi-user.target

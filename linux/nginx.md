@@ -40,6 +40,9 @@ setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
 setcap 'cap_net_bind_service=-ep' /server/nginx/sbin/nginx
 # 移除所有特权能力
 setcap -r /server/nginx/sbin/nginx
+
+# 查看内核特权能力
+getcap /server/nginx/sbin/nginx
 ```
 
 :::

@@ -43,7 +43,7 @@ RestrictRealtime=true
 RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
 
-ReadWritePaths=/server/logs/redis
+ReadWritePaths=/server/redis /run/redis /server/logs/redis
 
 [Install]
 WantedBy=multi-user.target
