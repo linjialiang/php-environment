@@ -281,8 +281,8 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 ### mysql 配置文件
 
 ::: code-group
-<<< @/assets/environment-lnmpp/source/etc/example/mysql/init.sql [init.sql]
-<<< @/assets/environment-lnmpp/source/etc/example/mysql/my.cnf{ini} [my.cnf]
+<<< @/assets/linux/etc/example/mysql/init.sql [init.sql]
+<<< @/assets/linux/etc/example/mysql/my.cnf{ini} [my.cnf]
 :::
 
 ### 数据初始化
@@ -326,7 +326,7 @@ ALTER USER root@localhost IDENTIFIED WITH auth_socket AS 'mysql';
 ### systemd 单元
 
 ::: code-group
-<<< @/assets/environment-lnmpp/source/service/mysqld-84.service{bash} [mysqld-84.service]
+<<< @/assets/linux/service/mysqld-84.service{bash} [mysqld-84.service]
 
 ```bash [启用单元]
 systemctl enable mysqld-84.service
