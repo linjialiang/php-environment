@@ -7,5 +7,5 @@ location ~* \.php$
   }
 
   fastcgi_pass                127.0.0.1:9685;
-  include                     fastcgi.conf;
+  include                     /server/nginx/conf/fastcgi.conf;
 }
