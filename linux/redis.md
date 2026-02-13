@@ -24,8 +24,8 @@ Redis 是当下最热门的键值对(Key-Value)存储数据库
 ```bash [构建指令]
 su - redis -s /bin/zsh
 
-tar -xzf redis-8.4.0.tar.gz
-cd ~/redis-8.4.0
+tar -xzf redis-8.6.0.tar.gz
+cd ~/redis-8.6.0
 
 make distclean
 make USE_SYSTEMD=yes BUILD_TLS=yes -j4 > make.log
@@ -100,8 +100,8 @@ redis 源码包中自带了参考配置文件，可以备份该参考配置，�
 :::code-group
 
 ```bash [备份默认配置]
-cp ~/redis-8.4.0/redis-full.conf /server/etc/redis/config/source-full.conf
-cp ~/redis-8.4.0/redis.conf /server/etc/redis/config/source.conf
+cp ~/redis-8.6.0/redis-full.conf /server/etc/redis/config/source-full.conf
+cp ~/redis-8.6.0/redis.conf /server/etc/redis/config/source.conf
 ```
 
 <<< @/assets/linux/script/redis/redis.bash [主配置]
@@ -185,7 +185,7 @@ redis 源码包上的 `./utils/gen-test-certs.sh` 脚本，用于一键生成 TL
 
 ```bash [执行脚本]
 ./gen-test-certs.sh
-cp -r ~/redis-8.4.0/utils/tests/tls/ /server/etc/redis/
+cp -r ~/redis-8.6.0/utils/tests/tls/ /server/etc/redis/
 # 文件权限在最后统一授权
 ```
 
