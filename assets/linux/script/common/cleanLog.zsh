@@ -73,7 +73,7 @@ if [ "$num2" = "1" ]; then
   echo_green "开始清理PostgreSQL预写式日志（已归档）"
   rm /server/logs/postgres/wal_archive/*
   echo_green "开始清理PostgreSQL预写式日志（当前）"
-  find /server/postgres/pg_wal/ -maxdepth 1 -type f -exec rm {} \;
+  find /server/pgData/pg_wal/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理MySQL二进制日志"
   rm /server/logs/mysql/binlog/*
   echo_green "清理lnpp日志完成"
