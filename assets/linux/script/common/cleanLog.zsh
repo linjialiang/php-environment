@@ -51,11 +51,12 @@ if [ "$num1" = "1" ]; then
   find /server/logs/postgres/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理php日志"
   find /server/logs/php/ -type f -exec rm {} \;
+  echo_green "开始清理nginx默认日志目录"
+  find /server/nginx/logs/ -type f -exec rm {} \;
   echo_green "开始清理nginx错误日志"
   find /server/logs/nginx/error/ -type f -exec rm {} \;
   echo_green "开始清理nginx访问日志"
   find /server/logs/nginx/access/ -type f -exec rm {} \;
-  find /server/nginx/logs/ -type f -exec rm {} \;
   echo_green "开始清理mysql错误日志"
   find /server/logs/mysql/ -type f -exec rm {} \;
   echo_green "清理lnmpp日志完成"
