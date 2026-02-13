@@ -18,15 +18,19 @@ MySQL 是一个注重快速、可靠和易用的开源数据库，凭借其高�
     ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/libsystemd.pc /usr/lib/x86_64-linux-gnu/pkgconfig/systemd.pc
     ```
 
+    - `2026.02.13` 编译安装 `8.4.8` 时，依然存在这个问题
+
     :::
 
 2. 问题 2：debian13 发行版自带的 openssl 版本为 3.5.x，而 MySQL8.4.6 的源码文件 tls_client_context.cc 中包含了一个 openssl-3.5.x 已经废弃的函数 `SSL_SESSION_get_time()`，导致编译失败。
 
     ::: details 解决方式：将 `SSL_SESSION_get_time()` 改成 `SSL_SESSION_get_time_ex()`
-    <<< @/assets/environment-lnmpp/source/mysql/src/tls_client_context.cc{c:line-numbers=212}
+    <<< @/assets/linux/mysql/src/tls_client_context-8.4.6.cc{c:line-numbers=212}
     :::
 
--   `2026.02.13` 编译安装 `8.4.8` 时，依然存在这个问题，MySQL 真是不干活啊！
+    ::: details `2026.02.13` 编译安装 `8.4.8` 时，已经解决
+    <<< @/assets/linux/mysql/src/tls_client_context-8.4.8.cc{c:line-numbers=214}
+    :::
 
 :::
 
