@@ -1,9 +1,9 @@
 ---
 title: IIS 篇
-titleTemplate: 环境搭建教程
+titleTemplate: Windows 下搭建 PHP 环境
 ---
 
-# IIS 下搭建 PHP 环境
+# Windows 下搭建 PHP 环境
 
 IIS 是微软系统自带的 Web 服务器，经过多年的打磨(于 1995 年发布)，在功能上做的比较完善。
 
