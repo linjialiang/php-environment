@@ -1,26 +1,50 @@
 cat > /etc/systemd/system/mysqld-84.service << EOF
 [Unit]
-Description=MySQL Server
+Description=MySQL database server
 Documentation=man:mysqld(8)
 After=network-online.target
 Wants=network-online.target
 After=syslog.target
 
 [Service]
+Type=notify
 UMask=0027
 User=mysql
 Group=mysql
-Type=notify
-TimeoutSec=0
+
+RuntimeDirectory=mysql
+RuntimeDirectoryMode=0750
 
 ExecStart=/server/mysql/bin/mysqld --defaults-file=/server/etc/mysql/my.cnf
 
-LimitNOFILE=10000
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=120s
+TimeoutStartSec=infinity
+
 Restart=on-failure
-RestartPreventExitStatus=1
+RestartSec=10s
+
+LimitNOFILE=65536
+LimitNPROC=65536
+LimitMEMLOCK=infinity
+
+NoNewPrivileges=true
 PrivateTmp=true
-RuntimeDirectory=mysql
-RuntimeDirectoryMode=0750
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectHostname=true
+ProtectClock=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+
+ReadWritePaths=/server/mysql /run/mysql /server/data /server/logs/mysql
 
 [Install]
 WantedBy=multi-user.target
