@@ -333,25 +333,28 @@ modFilePower(){
   find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 
   echo_green "php文件权限"
-  chown php-fpm:php-fpm -R /server/php /server/logs/php
-  find /server/php /server/logs/php -type f -exec chmod 640 {} \;
-  find /server/php /server/logs/php -type d -exec chmod 750 {} \;
-  chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
+  chown php:php -R /server/php /server/logs/php /server/etc/php
+  find /server/php /server/logs/php /server/etc/php -type f -exec chmod 640 {} \;
+  find /server/php /server/logs/php /server/etc/php -type d -exec chmod 750 {} \;
+  chmod 750 /server/etc/php/tools/{composer,php-cs-fixer-v3}.phar
   chmod 750 -R /server/php/85/{bin,sbin}
-  chmod 750 /server/php/tools/{composer,php-cs-fixer-v3}.phar
+  chmod 640 /server/php/85/lib/php/extensions/no-debug-non-zts-*/*
+
+  echo_green "php创建快捷方式"
+  ln -s /server/etc/php/tools/composer.phar /usr/local/bin/composer
+  ln -s /server/etc/php/tools/php-cs-fixer-v3.phar /usr/local/bin/php-cs-fixer
 
   echo_green "nginx文件权限"
   chown nginx:nginx -R /server/{nginx,sites}
   chown nginx:nginx -R /server/{etc,logs}/nginx
   find /server/{nginx,sites} -type f -exec chmod 640 {} \;
   find /server/{nginx,sites} -type d -exec chmod 750 {} \;
-  find /server/etc/nginx -type f -exec chmod 640 {} \;
-  find /server/etc/nginx -type d -exec chmod 750 {} \;
-  chmod 750 /server/logs/nginx
-  chmod 750 -R /server/nginx/sbin
-  echo_green "为nginx启用CAP_NET_BIND_SERVICE能力"
-  echo_red "注：每次修改nginx执行文件权限，都需要重新启用该能力"
-  setcap cap_net_bind_service=+eip /server/nginx/sbin/nginx
+  find /server/{etc,logs}/nginx -type f -exec chmod 640 {} \;
+  find /server/{etc,logs}/nginx -type d -exec chmod 750 {} \;
+  find /server/sites/tls -type f -exec chmod 600 {} \;
+  chmod 750 /server/nginx/sbin/nginx
+  chown nginx:nginx /usr/local/bin/nginxctl
+  chmod 750 /usr/local/bin/nginxctl
 }
 
 #安装systemctl单元
