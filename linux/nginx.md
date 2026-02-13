@@ -58,7 +58,7 @@ mkdir ~/nginx-1.28.2/build_nginx
 cd ~/nginx-1.28.2
 ```
 
-<<< @/assets/environment/source/nginx/build_now.bash [构建选项]
+<<< @/assets/linux/nginx/build_now.bash [构建选项]
 
 ```bash [编译安装]
 # 4核以上可以使用 make -j4 编译
@@ -69,14 +69,14 @@ nohup make -j4 &
 make install
 ```
 
-<<< @/assets/environment/source/nginx/build_all.bash [全部构建选项]
+<<< @/assets/linux/nginx/build_all.bash [全部构建选项]
 
 ```bash [查看帮助]
 cd /home/nginx/nginx-1.28.2
-./configure --help > help.ini
+./configure --help > nginx.help
 ```
 
-<<< @/assets/environment/source/nginx/help.ini [全部参数]
+<<< @/assets/linux/help/nginx.help{ini} [全部参数]
 
 :::
 
