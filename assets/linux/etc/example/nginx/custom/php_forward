@@ -15,5 +15,5 @@ location ~* \.php$
   # fastcgi_index             index.php;
 
   # 载入官方最新版的 fastcgi_params
-  include                     fastcgi.conf;
+  include                     /server/nginx/conf/fastcgi.conf;
 }
