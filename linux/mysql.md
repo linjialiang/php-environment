@@ -26,6 +26,8 @@ MySQL 是一个注重快速、可靠和易用的开源数据库，凭借其高�
     <<< @/assets/environment-lnmpp/source/mysql/src/tls_client_context.cc{c:line-numbers=212}
     :::
 
+-   `2026.02.13` 编译安装 `8.4.8` 时，依然存在这个问题，MySQL 真是不干活啊！
+
 :::
 
 ## 编译流程
