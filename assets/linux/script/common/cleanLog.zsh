@@ -27,9 +27,9 @@ echo_cyan "是否清理zsh_history文件(1清理/默认不清理)："
 read num
 if [[ "$num" = "1" ]]; then
   echo_yellow "开始清理终端历史文件文件"
-  rm /home/{sqlite,redis,postgres,php,nginx,mysql,emad}/.{zsh,bash}_history
-  rm /home/{sqlite,redis,postgres,php,nginx,mysql,emad}/.{z,viminfo}
-  rm /home/{sqlite,redis,postgres,php,nginx,mysql,emad}/.zcompdump-*
+  rm /home/{sqlite3,redis,postgres,php,nginx,mysql,emad}/.{zsh,bash}_history
+  rm /home/{sqlite3,redis,postgres,php,nginx,mysql,emad}/.{z,viminfo}
+  rm /home/{sqlite3,redis,postgres,php,nginx,mysql,emad}/.zcompdump-*
   rm /root/.{zsh,bash}_history
   rm /root/.{z,viminfo}
   rm /root/.zcompdump-*
