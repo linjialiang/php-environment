@@ -12,7 +12,7 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 ::: tip 为开发用户授权
 
 ```bash
-usermod -a -G sqlite,redis,postgres,php-fpm,nginx,mysql emad
+usermod -a -G sqlite3,redis,postgres,php,nginx,mysql emad
 ```
 
 :::

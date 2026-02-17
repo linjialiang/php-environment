@@ -92,10 +92,10 @@ createUser(){
   echo_yellow "=================================================================="
   echo_green "php编译pgsql扩展，使用指定Postgres安装目录时，需要提供读取libpq相关权限："
   echo_green "php编译sqlite3扩展，使用指定sqlite3自带的pkgconfig时，需要提供读取对应目录的权限："
-  echo_cyan "usermod -a -G postgres,sqlite php-fpm"
+  echo_cyan "usermod -a -G postgres,sqlite3 php-fpm"
   echo_green "如果使用 apt install libpq-dev libsqlite3-dev -y 依赖包则不需要"
   echo_yellow " "
-  echo_green "此版本PHP使用指定Postgres安装目录并在编译时禁用了sqlite扩展"
+  echo_green "此版本PHP使用指定Postgres安装目录并在编译时禁用了sqlite3扩展"
   echo_yellow "=================================================================="
   usermod -a -G postgres php-fpm
 }
