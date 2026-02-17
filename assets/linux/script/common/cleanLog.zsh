@@ -72,8 +72,8 @@ if [ "$num2" = "1" ]; then
   systemctl stop {redis,postgres,php85-fpm,nginx,mysqld}.service
   echo_green "开始清理PostgreSQL预写式日志（已归档）"
   rm /server/logs/postgres/wal_archive/*
-  echo_green "开始清理PostgreSQL预写式日志（当前）"
-  find /server/pgData/pg_wal/ -maxdepth 1 -type f -exec rm {} \;
+  # echo_green "开始清理PostgreSQL预写式日志（当前不可删除）"
+  # find /server/pgData/pg_wal/ -maxdepth 1 -type f -exec rm {} \;
   echo_green "开始清理MySQL二进制日志"
   rm /server/logs/mysql/binlog/*
   echo_green "清理lnpp日志完成"

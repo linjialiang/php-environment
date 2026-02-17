@@ -658,3 +658,13 @@ chmod 750 -R /server/postgres/bin
 find /server/etc/postgres/tls /server/pgData -type f -exec chmod 600 {} \;
 find /server/etc/postgres/tls /server/pgData -type d -exec chmod 700 {} \;
 ```
+
+## 附录一：WAL (预写式日志) 文件或数据文件损坏
+
+`/server/pgData/pg_wal` 目录下的文件如果损坏就需要使用下面的指令手动修复：
+
+```bash
+su - postgres -s /bin/zsh
+
+pg_resetwal -f /server/pgData
+```
