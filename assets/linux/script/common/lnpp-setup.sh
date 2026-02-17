@@ -36,14 +36,14 @@ cleanOldData(){
   systemctl daemon-reload
   echo_cyan "清理旧目录 /server,/www 如果有重要数据请先备份"
   rm -rf /server /www
-  echo_cyan "删除旧用户 redis,postgres,php-fpm,nginx 如果有重要数据请先备份"
+  echo_cyan "删除旧用户 redis,postgres,php,nginx 如果有重要数据请先备份"
   userdel -r redis
   userdel -r postgres
-  userdel -r php-fpm
+  userdel -r php
   userdel -r nginx
   groupdel redis
   groupdel postgres
-  groupdel php-fpm
+  groupdel php
   groupdel nginx
 }
 
@@ -64,7 +64,7 @@ createSingleUser(){
 #创建用户
 createUser(){
   echo_yellow "=================================================================="
-  echo_green "创建redis,postgres,php-fpm,nginx的进程用户"
+  echo_green "创建redis,postgres,php,nginx的进程用户"
   echo_yellow "=================================================================="
   echo_red "必须root用户安装并配置成功zsh，才允许支持zsh"
   zshState=0
@@ -72,7 +72,7 @@ createUser(){
   read zshState
   createSingleUser 'redis' $zshState
   createSingleUser 'postgres' $zshState
-  createSingleUser 'php-fpm' $zshState
+  createSingleUser 'php' $zshState
   createSingleUser 'nginx' $zshState
   echo ' '
   echo_yellow "=================================================================="
@@ -80,11 +80,11 @@ createUser(){
   echo_yellow "当 php-fpm 主进程非特权用户时，需要考虑socket文件权限问题："
   echo_yellow "nginx 如果是通过 sock 文件代理转发给 php-fpm，php-fpm 主进程创建\n sock 文件时需要确保 nginx 子进程用户有读写 sock 文件的权限"
   echo_yellow " "
-  echo_yellow "方式1：采用 sock 文件权限 php-fpm:nginx 660 \n(nginx 权限较少，php-fpm 权限较多)"
-  echo_cyan "usermod -a -G nginx php-fpm"
+  echo_yellow "方式1：采用 sock 文件权限 php:nginx 660 \n(nginx 权限较少，php-fpm 权限较多)"
+  echo_cyan "usermod -a -G nginx php"
   echo_yellow " "
-  echo_yellow "方式2：采用 sock 文件权限 php-fpm:php-fpm 660 \n(nginx 权限较多，php-fpm 权限较少)"
-  echo_cyan "usermod -a -G php-fpm nginx"
+  echo_yellow "方式2：采用 sock 文件权限 php:php 660 \n(nginx 权限较多，php 权限较少)"
+  echo_cyan "usermod -a -G php nginx"
   echo_yellow " "
   echo_green "此版本使用的是tcp转发，并不需要考虑socket文件转发相关的权限问题"
   echo_yellow "=================================================================="
@@ -92,12 +92,12 @@ createUser(){
   echo_yellow "=================================================================="
   echo_green "php编译pgsql扩展，使用指定Postgres安装目录时，需要提供读取libpq相关权限："
   echo_green "php编译sqlite3扩展，使用指定sqlite3自带的pkgconfig时，需要提供读取对应目录的权限："
-  echo_cyan "usermod -a -G postgres,sqlite3 php-fpm"
+  echo_cyan "usermod -a -G postgres,sqlite3 php"
   echo_green "如果使用 apt install libpq-dev libsqlite3-dev -y 依赖包则不需要"
   echo_yellow " "
   echo_green "此版本PHP使用指定Postgres安装目录并在编译时禁用了sqlite3扩展"
   echo_yellow "=================================================================="
-  usermod -a -G postgres php-fpm
+  usermod -a -G postgres php
 }
 
 #开发用户追加权限
@@ -105,14 +105,14 @@ devUserPower(){
   devUserName=$1
   echo_yellow "=================================================================="
   echo_green "开发用户追加权限"
-  echo_yellow "web/php文件所属用户都是开发用户，所以nginx和php-fpm用户需要追加开发组"
+  echo_yellow "web/php文件所属用户都是开发用户，所以nginx和php用户需要追加开发组"
   echo_yellow " "
   echo_red "部署环境请注释此函数，开发环境需要开启"
   echo_red "部署环境不需要开发用户，可直接使用 nginx 用户作为 ftp、ssh 等上传工具的用户"
   echo_yellow "=================================================================="
   usermod -a -G $devUserName nginx
-  usermod -a -G $devUserName php-fpm
-  usermod -a -G redis,postgres,php-fpm,nginx $devUserName
+  usermod -a -G $devUserName php
+  usermod -a -G redis,postgres,php,nginx $devUserName
 }
 
 #安装依赖包
@@ -312,8 +312,8 @@ modFilePower(){
   find /server/default -type d -exec chmod 755 {} \;
 
   echo_green "/www 目录权限"
-  echo_red "开发环境使用emad用户（nginx/php-fpm 需加入 emad用户组）"
-  echo_red "部署环境通常是www用户（nginx/php-fpm 需加入 www用户组）"
+  echo_red "开发环境使用emad用户（nginx/php 需加入 emad用户组）"
+  echo_red "部署环境通常是www用户（nginx/php 需加入 www用户组）"
   chmod 750 /www
 
   echo_green "redis文件权限"
@@ -417,7 +417,7 @@ After=network.target
 
 [Service]
 Type=notify
-User=php-fpm
+User=php
 Group=php-fpm
 RuntimeDirectory=php85-fpm
 RuntimeDirectoryMode=0750
