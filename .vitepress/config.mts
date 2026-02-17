@@ -1,7 +1,7 @@
 import { withPwa } from '@vite-pwa/vitepress';
 import { defineConfig } from 'vitepress';
 import linuxNav from './nav/linux.mts';
-import { environment, linux } from './sidebar/main.mts';
+import { linux } from './sidebar/main.mts';
 import { siteConfig } from './siteConfig.mts';
 
 export default withPwa(
@@ -176,9 +176,6 @@ export default withPwa(
       ],
       sidebar: {
         '/linux/': linux,
-        '/environment/': environment,
-        '/environment-old/': environment,
-        '/environment-lnmpp/': environment,
       },
       footer: {
         message: '程序员系列教程-PHP 环境搭建',
