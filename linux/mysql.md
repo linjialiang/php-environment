@@ -166,7 +166,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 1. 无法在计算机上检测到 systemd 支持
 
--   版本：MySQL 8.4.8
+-   版本：MySQL 8.4.6~8.4.8
 
 -   报错分析：从 debian13 开始 systemd 的元数据的文本文件名从 `systemd.pc` 改成了 `libsystemd.pc`
 
@@ -194,7 +194,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 2. FIDO 认证功能被跳过
 
--   版本：MySQL 8.4.8
+-   版本：MySQL 8.4.6~8.4.8
 -   警告分析：FIDO 认证功能仅企业版才有
 -   告警信息：
 
@@ -212,7 +212,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 3. 无法使用 SASL 认证
 
--   版本：MySQL 8.4.8
+-   版本：MySQL 8.4.6~8.4.8
 -   警告分析：不用处理，通常只会用到 `​​密码认证` `SSL/TLS 证书认证​` `​PAM 认证|` 这 3 种认证方式
 -   告警信息：
 
@@ -225,7 +225,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 4. 无法使用 LDAP 认证
 
--   版本：MySQL 8.4.8
+-   版本：MySQL 8.4.6~8.4.8
 
 -   警告分析：不用处理，通常只会用到 `​​密码认证` `SSL/TLS 证书认证​` `​PAM 认证|` 这 3 种认证方式
 
@@ -240,7 +240,7 @@ MySQL X Plugin 是 MySQL 的一种插件，它可以在 MySQL 服务器中运行
 
 ### 5. CMake 策略警告(CMP0177)
 
--   版本：MySQL 8.4.8
+-   版本：MySQL 8.4.6~8.4.8
 
 -   警告分析：虽然不影响编译，但可以的 CMake 命令中加入 `-Wno-dev` 参数，以使输出日志更清晰。
 
