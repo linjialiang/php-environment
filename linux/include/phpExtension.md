@@ -13,7 +13,7 @@ titleTemplate: Linux 下纯手工搭建 PHP 环境
 
 ```bash [解压扩展包]
 cd /home/php/php_ext
-echo apcu-5.1.28.tgz xdebug-3.5.0.tgz redis-6.3.0.tgz mongodb-2.1.8.tgz | xargs -n1 tar -xzf
+echo apcu-5.1.28.tgz xdebug-3.5.0.tgz redis-6.3.0.tgz mongodb-2.2.1.tgz | xargs -n1 tar -xzf
 ```
 
 ```ini [85开发环境]
@@ -149,7 +149,7 @@ make install
 ::: code-group
 
 ```bash [85]
-cd /home/php/php_ext/mongodb-2.1.8
+cd /home/php/php_ext/mongodb-2.2.1
 /server/php/85/bin/phpize
 ./configure --with-php-config=/server/php/85/bin/php-config
 make -j4
