@@ -14,9 +14,9 @@ PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
 
-tar -xjf postgresql-18.1.tar.bz2
-mkdir ~/postgresql-18.1/build_postgres
-cd ~/postgresql-18.1/build_postgres
+tar -xjf postgresql-18.2.tar.bz2
+mkdir ~/postgresql-18.2/build_postgres
+cd ~/postgresql-18.2/build_postgres
 ```
 
 ```bash [设置环境变量]
@@ -78,7 +78,7 @@ su - postgres -s /bin/zsh
 
 ```bash [清理]
 # 编译安装完后记得移除源码包，节省空间
-rm -rf ~/postgresql-18.1 ~/postgresql-18.1.tar.bz2
+rm -rf ~/postgresql-18.2 ~/postgresql-18.2.tar.bz2
 ```
 
 :::
