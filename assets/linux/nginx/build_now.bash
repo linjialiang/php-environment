@@ -26,5 +26,5 @@
 --with-http_stub_status_module \
 --with-pcre=/home/nginx/pcre2-10.47 \
 --with-pcre-jit \
---with-zlib=/home/nginx/zlib-1.3.1 \
+--with-zlib=/home/nginx/zlib-1.3.2 \
 --with-openssl=/home/nginx/openssl-3.5.5

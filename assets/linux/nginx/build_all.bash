@@ -45,7 +45,7 @@
 # 外库路径
 --with-pcre=/home/nginx/pcre2-10.47 \
 --with-pcre-jit \
---with-zlib=/home/nginx/zlib-1.3.1 \
+--with-zlib=/home/nginx/zlib-1.3.2 \
 --with-openssl=/home/nginx/openssl-3.5.4
 
 # 开启调试，生产环境下建议禁用
