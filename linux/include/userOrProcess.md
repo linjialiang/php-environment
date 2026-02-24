@@ -28,7 +28,7 @@ usermod -a -G sqlite3,redis,postgres,php,nginx,mysql emad
 | redis        | Redis 进程用户，用于编译安装和服务进程         |
 | postgres     | PostgreSQL 进程用户，用于编译安装和服务进程    |
 | mysql        | MySQL 进程用户，用于编译安装和服务进程         |
-| **emad**     | 开发者用户，用于各种管理、网站                 |
+| **emad**     | 开发者用户，用于开发者各种管理                 |
 | **php**      | php-fpm 进程用户，用于编译安装、服务进程、网站 |
 | **nginx**    | nginx 进程用户，用于编译安装、服务进程、网站   |
 
