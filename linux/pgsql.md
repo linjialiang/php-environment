@@ -14,9 +14,9 @@ PostgreSQL 号称最强开源关系型数据库管理系统，主要应用于企
 ```bash [进入编译目录]
 su - postgres -s /bin/zsh
 
-tar -xjf postgresql-18.2.tar.bz2
-mkdir ~/postgresql-18.2/build_postgres
-cd ~/postgresql-18.2/build_postgres
+tar -xjf postgresql-18.3.tar.bz2
+mkdir ~/postgresql-18.3/build_postgres
+cd ~/postgresql-18.3/build_postgres
 ```
 
 ```bash [设置环境变量]
@@ -78,7 +78,7 @@ su - postgres -s /bin/zsh
 
 ```bash [清理]
 # 编译安装完后记得移除源码包，节省空间
-rm -rf ~/postgresql-18.2 ~/postgresql-18.2.tar.bz2
+rm -rf ~/postgresql-18.3 ~/postgresql-18.3.tar.bz2
 ```
 
 :::
@@ -289,12 +289,12 @@ sslkey=C:/pgsql/tls/client-admin.key" `
 
 1.  `psql`：PostgreSQL 命令行工具；
 2.  `-h /run/postgres`：连接到指定的 PostgreSQL 服务地址；
-    -   如：主机名、IP 地址、Unix 域套接字文件
-    -   案例：`/run/postgres`
+    - 如：主机名、IP 地址、Unix 域套接字文件
+    - 案例：`/run/postgres`
 3.  `-U admin`：指定建立连接的用户名；
-    -   案例：`admin`
+    - 案例：`admin`
 4.  `-d postgres`：指定建立连接的数据库名；
-    -   案例：`postgres`
+    - 案例：`postgres`
 5.  `-W`：表示在连接时需要输入密码。
 ```
 
