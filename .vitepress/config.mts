@@ -173,6 +173,7 @@ export default withPwa(
         { text: '主页', link: '/' },
         { text: 'linux 篇', items: linuxNav },
         { text: 'IIS 篇', link: '/msdn/iis' },
+        { text: '简历', link: '/about' },
       ],
       sidebar: {
         '/linux/': linux,
@@ -182,5 +183,5 @@ export default withPwa(
         copyright: 'Copyright © 2024-present 地上马',
       },
     },
-  })
+  }),
 );
